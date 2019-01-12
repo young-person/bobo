@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<task_list>
+    <group name="demo" >
+        <!-- status 调度状态 ：1 运行,2停止(disable=true时 状态必须为2,状态为2时不一定disable为true),3暂停 -->
+        <task_object disable="false" name="演示任务1" id="1" class="org.shou.scheduler.job.SchedulerTest" expression="*/5 * * * * ?" status="1"  >
+            <json_params></json_params>
+            <description>间隔5秒执行一次</description>
+        </task_object>
+    </group>
+</task_list>
