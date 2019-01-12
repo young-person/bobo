@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mybatis.mapper.SysLogMapper" >
+  <resultMap id="BaseResultMap" type="com.mybatis.pojo.SysLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="log_type" property="log_type" jdbcType="INTEGER" />
+    <result column="oper_object" property="oper_object" jdbcType="VARCHAR" />
+    <result column="oper_table" property="oper_table" jdbcType="VARCHAR" />
+    <result column="oper_id" property="oper_id" jdbcType="INTEGER" />
+    <result column="oper_type" property="oper_type" jdbcType="VARCHAR" />
+    <result column="oper_remark" property="oper_remark" jdbcType="VARCHAR" />
+    <result column="create_time" property="create_time" jdbcType="VARCHAR" />
+    <result column="create_id" property="create_id" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, log_type, oper_object, oper_table, oper_id, oper_type, oper_remark, create_time, 
+    create_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mybatis.pojo.SysLog" >
+    insert into sys_log (id, log_type, oper_object, 
+      oper_table, oper_id, oper_type, 
+      oper_remark, create_time, create_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{log_type,jdbcType=INTEGER}, #{oper_object,jdbcType=VARCHAR}, 
+      #{oper_table,jdbcType=VARCHAR}, #{oper_id,jdbcType=INTEGER}, #{oper_type,jdbcType=VARCHAR}, 
+      #{oper_remark,jdbcType=VARCHAR}, #{create_time,jdbcType=VARCHAR}, #{create_id,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mybatis.pojo.SysLog" >
+    insert into sys_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="log_type != null" >
+        log_type,
+      </if>
+      <if test="oper_object != null" >
+        oper_object,
+      </if>
+      <if test="oper_table != null" >
+        oper_table,
+      </if>
+      <if test="oper_id != null" >
+        oper_id,
+      </if>
+      <if test="oper_type != null" >
+        oper_type,
+      </if>
+      <if test="oper_remark != null" >
+        oper_remark,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="create_id != null" >
+        create_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="log_type != null" >
+        #{log_type,jdbcType=INTEGER},
+      </if>
+      <if test="oper_object != null" >
+        #{oper_object,jdbcType=VARCHAR},
+      </if>
+      <if test="oper_table != null" >
+        #{oper_table,jdbcType=VARCHAR},
+      </if>
+      <if test="oper_id != null" >
+        #{oper_id,jdbcType=INTEGER},
+      </if>
+      <if test="oper_type != null" >
+        #{oper_type,jdbcType=VARCHAR},
+      </if>
+      <if test="oper_remark != null" >
+        #{oper_remark,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=VARCHAR},
+      </if>
+      <if test="create_id != null" >
+        #{create_id,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mybatis.pojo.SysLog" >
+    update sys_log
+    <set >
+      <if test="log_type != null" >
+        log_type = #{log_type,jdbcType=INTEGER},
+      </if>
+      <if test="oper_object != null" >
+        oper_object = #{oper_object,jdbcType=VARCHAR},
+      </if>
+      <if test="oper_table != null" >
+        oper_table = #{oper_table,jdbcType=VARCHAR},
+      </if>
+      <if test="oper_id != null" >
+        oper_id = #{oper_id,jdbcType=INTEGER},
+      </if>
+      <if test="oper_type != null" >
+        oper_type = #{oper_type,jdbcType=VARCHAR},
+      </if>
+      <if test="oper_remark != null" >
+        oper_remark = #{oper_remark,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=VARCHAR},
+      </if>
+      <if test="create_id != null" >
+        create_id = #{create_id,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mybatis.pojo.SysLog" >
+    update sys_log
+    set log_type = #{log_type,jdbcType=INTEGER},
+      oper_object = #{oper_object,jdbcType=VARCHAR},
+      oper_table = #{oper_table,jdbcType=VARCHAR},
+      oper_id = #{oper_id,jdbcType=INTEGER},
+      oper_type = #{oper_type,jdbcType=VARCHAR},
+      oper_remark = #{oper_remark,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=VARCHAR},
+      create_id = #{create_id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

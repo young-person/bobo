@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mybatis.mapper.SysDictMapper" >
+  <resultMap id="BaseResultMap" type="com.mybatis.pojo.SysDict" >
+    <id column="dict_id" property="dict_id" jdbcType="INTEGER" />
+    <result column="dict_name" property="dict_name" jdbcType="VARCHAR" />
+    <result column="dict_type" property="dict_type" jdbcType="VARCHAR" />
+    <result column="dict_remark" property="dict_remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dict_id, dict_name, dict_type, dict_remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_dict
+    where dict_id = #{dict_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_dict
+    where dict_id = #{dict_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mybatis.pojo.SysDict" >
+    insert into sys_dict (dict_id, dict_name, dict_type, 
+      dict_remark)
+    values (#{dict_id,jdbcType=INTEGER}, #{dict_name,jdbcType=VARCHAR}, #{dict_type,jdbcType=VARCHAR}, 
+      #{dict_remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mybatis.pojo.SysDict" >
+    insert into sys_dict
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dict_id != null" >
+        dict_id,
+      </if>
+      <if test="dict_name != null" >
+        dict_name,
+      </if>
+      <if test="dict_type != null" >
+        dict_type,
+      </if>
+      <if test="dict_remark != null" >
+        dict_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dict_id != null" >
+        #{dict_id,jdbcType=INTEGER},
+      </if>
+      <if test="dict_name != null" >
+        #{dict_name,jdbcType=VARCHAR},
+      </if>
+      <if test="dict_type != null" >
+        #{dict_type,jdbcType=VARCHAR},
+      </if>
+      <if test="dict_remark != null" >
+        #{dict_remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mybatis.pojo.SysDict" >
+    update sys_dict
+    <set >
+      <if test="dict_name != null" >
+        dict_name = #{dict_name,jdbcType=VARCHAR},
+      </if>
+      <if test="dict_type != null" >
+        dict_type = #{dict_type,jdbcType=VARCHAR},
+      </if>
+      <if test="dict_remark != null" >
+        dict_remark = #{dict_remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dict_id = #{dict_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mybatis.pojo.SysDict" >
+    update sys_dict
+    set dict_name = #{dict_name,jdbcType=VARCHAR},
+      dict_type = #{dict_type,jdbcType=VARCHAR},
+      dict_remark = #{dict_remark,jdbcType=VARCHAR}
+    where dict_id = #{dict_id,jdbcType=INTEGER}
+  </update>
+</mapper>

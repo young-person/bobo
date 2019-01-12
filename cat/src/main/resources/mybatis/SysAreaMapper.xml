@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.SysAreaMapper">
+  <resultMap id="BaseResultMap" type="com.mybatis.pojo.SysArea">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parent_id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="simple_name" jdbcType="VARCHAR" property="simple_name" />
+    <result column="zip_code" jdbcType="VARCHAR" property="zip_code" />
+    <result column="area_number" jdbcType="VARCHAR" property="area_number" />
+    <result column="level" jdbcType="TINYINT" property="level" />
+    <result column="path_ids" jdbcType="VARCHAR" property="path_ids" />
+    <result column="path_names" jdbcType="VARCHAR" property="path_names" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="del_flag" jdbcType="CHAR" property="del_flag" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="create_date" />
+    <result column="create_by" jdbcType="VARCHAR" property="create_by" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="update_date" />
+    <result column="update_by" jdbcType="VARCHAR" property="update_by" />
+    <result column="parent_ids" jdbcType="VARCHAR" property="parent_ids" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="shipping_group" jdbcType="CHAR" property="shipping_group" />
+    <result column="store_id" jdbcType="VARCHAR" property="store_id" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, parent_id, code, name, simple_name, zip_code, area_number, level, path_ids, path_names, 
+    remarks, del_flag, create_date, create_by, update_date, update_by, parent_ids, type, 
+    sort, shipping_group, store_id
+  </sql>
+  <select id="selectByExample" parameterType="com.mybatis.pojo.SysAreaExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_area
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_area
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_area
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mybatis.pojo.SysAreaExample">
+    delete from sys_area
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mybatis.pojo.SysArea">
+    insert into sys_area (id, parent_id, code, 
+      name, simple_name, zip_code, 
+      area_number, level, path_ids, 
+      path_names, remarks, del_flag, 
+      create_date, create_by, update_date, 
+      update_by, parent_ids, type, 
+      sort, shipping_group, store_id
+      )
+    values (#{id,jdbcType=VARCHAR}, #{parent_id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{simple_name,jdbcType=VARCHAR}, #{zip_code,jdbcType=VARCHAR}, 
+      #{area_number,jdbcType=VARCHAR}, #{level,jdbcType=TINYINT}, #{path_ids,jdbcType=VARCHAR}, 
+      #{path_names,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{del_flag,jdbcType=CHAR}, 
+      #{create_date,jdbcType=TIMESTAMP}, #{create_by,jdbcType=VARCHAR}, #{update_date,jdbcType=TIMESTAMP}, 
+      #{update_by,jdbcType=VARCHAR}, #{parent_ids,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, 
+      #{sort,jdbcType=INTEGER}, #{shipping_group,jdbcType=CHAR}, #{store_id,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mybatis.pojo.SysArea">
+    insert into sys_area
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="parent_id != null">
+        parent_id,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="simple_name != null">
+        simple_name,
+      </if>
+      <if test="zip_code != null">
+        zip_code,
+      </if>
+      <if test="area_number != null">
+        area_number,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="path_ids != null">
+        path_ids,
+      </if>
+      <if test="path_names != null">
+        path_names,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="del_flag != null">
+        del_flag,
+      </if>
+      <if test="create_date != null">
+        create_date,
+      </if>
+      <if test="create_by != null">
+        create_by,
+      </if>
+      <if test="update_date != null">
+        update_date,
+      </if>
+      <if test="update_by != null">
+        update_by,
+      </if>
+      <if test="parent_ids != null">
+        parent_ids,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="shipping_group != null">
+        shipping_group,
+      </if>
+      <if test="store_id != null">
+        store_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="parent_id != null">
+        #{parent_id,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="simple_name != null">
+        #{simple_name,jdbcType=VARCHAR},
+      </if>
+      <if test="zip_code != null">
+        #{zip_code,jdbcType=VARCHAR},
+      </if>
+      <if test="area_number != null">
+        #{area_number,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=TINYINT},
+      </if>
+      <if test="path_ids != null">
+        #{path_ids,jdbcType=VARCHAR},
+      </if>
+      <if test="path_names != null">
+        #{path_names,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="del_flag != null">
+        #{del_flag,jdbcType=CHAR},
+      </if>
+      <if test="create_date != null">
+        #{create_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_by != null">
+        #{create_by,jdbcType=VARCHAR},
+      </if>
+      <if test="update_date != null">
+        #{update_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_by != null">
+        #{update_by,jdbcType=VARCHAR},
+      </if>
+      <if test="parent_ids != null">
+        #{parent_ids,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="shipping_group != null">
+        #{shipping_group,jdbcType=CHAR},
+      </if>
+      <if test="store_id != null">
+        #{store_id,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mybatis.pojo.SysAreaExample" resultType="java.lang.Long">
+    select count(*) from sys_area
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_area
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parent_id != null">
+        parent_id = #{record.parent_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.simple_name != null">
+        simple_name = #{record.simple_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zip_code != null">
+        zip_code = #{record.zip_code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area_number != null">
+        area_number = #{record.area_number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null">
+        level = #{record.level,jdbcType=TINYINT},
+      </if>
+      <if test="record.path_ids != null">
+        path_ids = #{record.path_ids,jdbcType=VARCHAR},
+      </if>
+      <if test="record.path_names != null">
+        path_names = #{record.path_names,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.del_flag != null">
+        del_flag = #{record.del_flag,jdbcType=CHAR},
+      </if>
+      <if test="record.create_date != null">
+        create_date = #{record.create_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.create_by != null">
+        create_by = #{record.create_by,jdbcType=VARCHAR},
+      </if>
+      <if test="record.update_date != null">
+        update_date = #{record.update_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.update_by != null">
+        update_by = #{record.update_by,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parent_ids != null">
+        parent_ids = #{record.parent_ids,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.shipping_group != null">
+        shipping_group = #{record.shipping_group,jdbcType=CHAR},
+      </if>
+      <if test="record.store_id != null">
+        store_id = #{record.store_id,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_area
+    set id = #{record.id,jdbcType=VARCHAR},
+      parent_id = #{record.parent_id,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      simple_name = #{record.simple_name,jdbcType=VARCHAR},
+      zip_code = #{record.zip_code,jdbcType=VARCHAR},
+      area_number = #{record.area_number,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=TINYINT},
+      path_ids = #{record.path_ids,jdbcType=VARCHAR},
+      path_names = #{record.path_names,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      del_flag = #{record.del_flag,jdbcType=CHAR},
+      create_date = #{record.create_date,jdbcType=TIMESTAMP},
+      create_by = #{record.create_by,jdbcType=VARCHAR},
+      update_date = #{record.update_date,jdbcType=TIMESTAMP},
+      update_by = #{record.update_by,jdbcType=VARCHAR},
+      parent_ids = #{record.parent_ids,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=CHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      shipping_group = #{record.shipping_group,jdbcType=CHAR},
+      store_id = #{record.store_id,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mybatis.pojo.SysArea">
+    update sys_area
+    <set>
+      <if test="parent_id != null">
+        parent_id = #{parent_id,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="simple_name != null">
+        simple_name = #{simple_name,jdbcType=VARCHAR},
+      </if>
+      <if test="zip_code != null">
+        zip_code = #{zip_code,jdbcType=VARCHAR},
+      </if>
+      <if test="area_number != null">
+        area_number = #{area_number,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=TINYINT},
+      </if>
+      <if test="path_ids != null">
+        path_ids = #{path_ids,jdbcType=VARCHAR},
+      </if>
+      <if test="path_names != null">
+        path_names = #{path_names,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="del_flag != null">
+        del_flag = #{del_flag,jdbcType=CHAR},
+      </if>
+      <if test="create_date != null">
+        create_date = #{create_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_by != null">
+        create_by = #{create_by,jdbcType=VARCHAR},
+      </if>
+      <if test="update_date != null">
+        update_date = #{update_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_by != null">
+        update_by = #{update_by,jdbcType=VARCHAR},
+      </if>
+      <if test="parent_ids != null">
+        parent_ids = #{parent_ids,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="shipping_group != null">
+        shipping_group = #{shipping_group,jdbcType=CHAR},
+      </if>
+      <if test="store_id != null">
+        store_id = #{store_id,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mybatis.pojo.SysArea">
+    update sys_area
+    set parent_id = #{parent_id,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      simple_name = #{simple_name,jdbcType=VARCHAR},
+      zip_code = #{zip_code,jdbcType=VARCHAR},
+      area_number = #{area_number,jdbcType=VARCHAR},
+      level = #{level,jdbcType=TINYINT},
+      path_ids = #{path_ids,jdbcType=VARCHAR},
+      path_names = #{path_names,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      del_flag = #{del_flag,jdbcType=CHAR},
+      create_date = #{create_date,jdbcType=TIMESTAMP},
+      create_by = #{create_by,jdbcType=VARCHAR},
+      update_date = #{update_date,jdbcType=TIMESTAMP},
+      update_by = #{update_by,jdbcType=VARCHAR},
+      parent_ids = #{parent_ids,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      shipping_group = #{shipping_group,jdbcType=CHAR},
+      store_id = #{store_id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

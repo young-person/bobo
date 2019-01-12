@@ -1,0 +1,343 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<#assign BASEPATH=request.contextPath />
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0"> 
+	<title>登录界面</title>
+    <link href="../static/css/default.css" rel="stylesheet" type="text/css" />
+	<!--必要样式-->
+    <link href="../static/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/demo.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/loaders.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+	<div class='login'>
+		<div class='login_title'>
+			<span>管理员登录</span>
+		</div>
+		<div class='login_fields'>
+			<div class='login_fields__user'>
+				<div class='icon'>
+					<img alt="" src='static/images/user_icon_copy.png'>
+				</div>
+				<input name="login" placeholder='用户名' maxlength="16" type='text' autocomplete="off" value=""/>
+				<div class='validation'>
+					<img alt="" src='static/images/tick.png'>
+				</div>
+			</div>
+			<div class='login_fields__password'>
+				<div class='icon'>
+					<img alt="" src='static/images/lock_icon_copy.png'>
+				</div>
+				<input name="pwd" placeholder='密码' maxlength="16" type='text' autocomplete="off">
+				<div class='validation'>
+					<img alt="" src='static/images/tick.png'>
+				</div>
+			</div>
+			<div class='login_fields__password'>
+				<div class='icon'>
+					<img alt="" src='static/images/key.png'>
+				</div>
+				<input name="code" placeholder='验证码' maxlength="4" type='text' name="ValidateNum" autocomplete="off">
+				<div class='validation' style="opacity: 1; right: -5px;top: -3px;">
+					<canvas class="J_codeimg" id="myCanvas" onclick="Code();">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
+				</div>
+			</div>
+			<div class='login_fields__submit'>
+				<input type='button' value='登录'>
+			</div>
+		</div>
+		<div class='success'>
+		</div>
+		<div class='disclaimer'>
+			<p>欢迎登录后台管理系统</p>
+		</div>
+	</div>
+	<div class='authent'>
+		<div class="loader" style="height: 44px;width: 44px;margin-left: 28px;">
+			<div class="loader-inner ball-clip-rotate-multiple">
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+		<p>认证中...</p>
+	</div>
+	<div class="OverWindows"></div>
+	
+    <link href="static/lib/layui/css/layui.css" rel="stylesheet" type="text/css" />
+	
+	<script type="text/javascript" src="static/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="static/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src='static/js/stopExecutionOnTimeout.js?t=1'></script>
+    <script type="text/javascript" src="static/lib/layui/layui.js"></script>
+    <script type="text/javascript" src="static/lib/Particleground.js"></script>
+    <script type="text/javascript" src="static/js/Treatment.js"></script>
+    <script type="text/javascript" src="static/lib/jquery.mockjax.js"></script>
+	<script type="text/javascript">
+		var BASEPATH = "${BASEPATH}";
+		var canGetCookie = 0;//是否支持存储Cookie 0 不支持 1 支持
+		var ajaxmockjax = 1;//是否启用虚拟Ajax的请求响 0 不启用  1 启用
+		//默认账号密码
+		var CodeVal = 0;
+	    Code();
+	    function Code() {
+			if(canGetCookie == 1){
+				createCode("AdminCode");
+				var AdminCode = getCookieValue("AdminCode");
+				showCheck(AdminCode);
+			}else{
+				showCheck(createCode(""));
+			}
+	    }
+	    function showCheck(a) {
+			CodeVal = a;
+	        var c = document.getElementById("myCanvas");
+	        var ctx = c.getContext("2d");
+	        ctx.clearRect(0, 0, 1000, 1000);
+	        ctx.font = "80px 'Hiragino Sans GB'";
+	        ctx.fillStyle = "#E8DFE8";
+	        ctx.fillText(a, 0, 100);
+	    }
+	    $(document).keypress(function (e) {
+	        // 回车键事件  
+	        if (e.which == 13) {
+	            $('input[type="button"]').click();
+	        }
+	    });
+	    //粒子背景特效
+	    $('body').particleground({
+	        dotColor: '#E8DFE8',
+	        lineColor: '#133b88'
+	    });
+	    $('input[name="pwd"]').focus(function () {
+	        $(this).attr('type', 'password');
+	    });
+	    $('input[type="text"]').focus(function () {
+	        $(this).prev().animate({ 'opacity': '1' }, 200);
+	    });
+	    $('input[type="text"],input[type="password"]').blur(function () {
+	        $(this).prev().animate({ 'opacity': '.5' }, 200);
+	    });
+	    $('input[name="login"],input[name="pwd"]').keyup(function () {
+	        var Len = $(this).val().length;
+	        if (!$(this).val() == '' && Len >= 5) {
+	            $(this).next().animate({
+	                'opacity': '1',
+	                'right': '30'
+	            }, 200);
+	        } else {
+	            $(this).next().animate({
+	                'opacity': '0',
+	                'right': '20'
+	            }, 200);
+	        }
+	    });
+	    var open = 0;
+	    layui.use('layer', function () {
+			layer.style('login', {
+				color: '#777'
+			}); 
+	        //非空验证
+	        $('input[type="button"]').click(function () {
+	            debugger
+	            var login = $('input[name="login"]').val();
+	            var pwd = $('input[name="pwd"]').val();
+	            var code = $('input[name="code"]').val();
+	            if (login == '') {
+	                ErroAlert('请输入您的账号');
+	            } else if (pwd == '') {
+	                ErroAlert('请输入密码');
+	            } else if (code == '' || code.length != 4) {
+	                ErroAlert('输入验证码');
+	            } else {
+	                //认证中..
+	                fullscreen();
+	                $('.login').addClass('test'); //倾斜特效
+	                setTimeout(function () {
+	                    $('.login').addClass('testtwo'); //平移特效
+	                }, 300);
+	                setTimeout(function () {
+	                    $('.authent').show().animate({ right: -320 }, {
+	                        easing: 'easeOutQuint',
+	                        duration: 600,
+	                        queue: false
+	                    });
+	                    $('.authent').animate({ opacity: 1 }, {
+	                        duration: 200,
+	                        queue: false
+	                    }).addClass('visible');
+	                }, 500);
+
+	                //登录
+	                var JsonData = { username: login, password: pwd, code: code };
+					//此处做为ajax内部判断
+					var url = "";
+					if(JsonData.code.toUpperCase() == CodeVal.toUpperCase()){
+						url = "Ajax/Login";
+					}else{
+                        url = "Ajax/LoginFalse";
+					}
+
+					
+	                AjaxPost(url, JsonData,
+	                                function () {
+	                                    //ajax加载中
+	                                },
+	                                function (data) {
+	                                    //ajax返回 
+	                                    //认证完成
+	                                    setTimeout(function () {
+	                                        $('.authent').show().animate({ right: 90 }, {
+	                                            easing: 'easeOutQuint',
+	                                            duration: 600,
+	                                            queue: false
+	                                        });
+	                                        $('.authent').animate({ opacity: 0 }, {
+	                                            duration: 200,
+	                                            queue: false
+	                                        }).addClass('visible');
+	                                        $('.login').removeClass('testtwo'); //平移特效
+	                                    }, 2000);
+	                                    setTimeout(function () {
+	                                        $('.authent').hide();
+	                                        $('.login').removeClass('test');
+	                                        if (data.Status == 'ok') {
+	                                            //登录成功
+	                                            $('.login div').fadeOut(100);
+	                                            $('.success').fadeIn(1000);
+	                                            $('.success').html(data.Text);
+												//跳转操作
+												
+	                                        } else {
+	                                            AjaxErro(data);
+	                                        }
+	                                    }, 2400);
+	                                })
+	            }
+	        })
+	    })
+	    var fullscreen = function () {
+	        elem = document.body;
+	        if (elem.webkitRequestFullScreen) {
+	            elem.webkitRequestFullScreen();
+	        } else if (elem.mozRequestFullScreen) {
+	            elem.mozRequestFullScreen();
+	        } else if (elem.requestFullScreen) {
+	            elem.requestFullscreen();
+	        } else {
+	            //浏览器不支持全屏API或已被禁用  
+	        }
+	    }  
+		if(ajaxmockjax == 1){
+			$.mockjax({  
+				url: 'Ajax/Login',  
+				status: 200,  
+				responseTime: 50,          
+				responseText: {"Status":"ok","Text":"登录成功<br /><br />欢迎回来"}  
+			}); 
+			$.mockjax({  
+				url: 'Ajax/LoginFalse',  
+				status: 200,  
+				responseTime: 50,          
+				responseText: {"Status":"Erro","Erro":"账号名或密码或验证码有误"}
+			});   
+		}
+    </script>
+
+</body>
+<script type="text/javascript">
+    //宇宙特效
+    "use strict";
+    var canvas = document.getElementById('canvas'),
+        ctx = canvas.getContext('2d'),
+        w = canvas.width = window.innerWidth,//1536
+        h = canvas.height = window.innerHeight,//316
+        hue = 217,
+        stars = [],
+        count = 0,
+        maxStars = 1300;//星星数量
+
+    var canvas2 = document.createElement('canvas'),
+        ctx2 = canvas2.getContext('2d');
+    canvas2.width = 100;
+    canvas2.height = 100;
+    var half = canvas2.width / 2,
+        gradient2 = ctx2.createRadialGradient(half, half, 0, half, half, half);
+    gradient2.addColorStop(0.025, '#CCC');
+    gradient2.addColorStop(0.1, 'hsl(' + hue + ', 61%, 33%)');
+    gradient2.addColorStop(0.25, 'hsl(' + hue + ', 64%, 6%)');
+    gradient2.addColorStop(1, 'transparent');
+    ctx2.fillStyle = gradient2;
+    ctx2.beginPath();
+    ctx2.arc(half, half, half, 0, Math.PI * 2);
+    ctx2.fill();
+    // End cache
+    function random(min, max) {
+        if (arguments.length < 2) {
+            max = min;
+            min = 0;
+        }
+        if (min > max) {
+            var hold = max;
+            max = min;
+            min = hold;
+        }
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    //轨道
+    function maxOrbit(x, y) {
+        var max = Math.max(x, y),//1536,316
+            diameter = Math.round(Math.sqrt(max * max + max * max));//2172,Math.round:四舍五入; Math.sqrt:开根号
+        return diameter / 2;//1086
+        //星星移动范围，值越大范围越小，
+    }
+    var Star = function() {
+        this.orbitRadius = random(maxOrbit(w, h));//orbit:轨道,0~1086
+        this.radius = random(60, this.orbitRadius) / 8;
+        //星星大小
+        this.orbitX = w / 2;//768
+        this.orbitY = h / 2;//158
+        this.timePassed = random(0, maxStars);//0~1300
+        this.speed = random(this.orbitRadius) / 50000;
+        //星星移动速度
+        this.alpha = random(2, 10) / 10;
+        count++;
+        stars[count] = this;
+    }
+    Star.prototype.draw = function() {
+        var x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX,
+            y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY,
+            twinkle = random(10);
+        if (twinkle === 1 && this.alpha > 0) {
+            this.alpha -= 0.05;
+        } else if (twinkle === 2 && this.alpha < 1) {
+            this.alpha += 0.05;
+        }
+        ctx.globalAlpha = this.alpha;
+        ctx.drawImage(canvas2, x - this.radius / 2, y - this.radius / 2, this.radius, this.radius);
+        this.timePassed += this.speed;
+    }
+    for (var i = 0; i < maxStars; i++) {
+        new Star();
+    }
+    function animation() {
+        ctx.globalCompositeOperation = 'source-over';//后绘制的图形位于先绘制的图形上方
+        ctx.globalAlpha = 0.5; //尾巴,透明度
+        ctx.fillStyle = 'hsla(' + hue + ', 64%, 6%, 2)';//H:色相,S:饱和度,L:明度;
+        ctx.fillRect(0, 0, w, h)
+        ctx.globalCompositeOperation = 'lighter';//后绘制的图形与先绘制的图形重叠部分的值相加,使该部分变亮。
+        for (var i = 1, l = stars.length; i < l; i++) {
+            stars[i].draw();//star原型上的方法
+        };
+        window.requestAnimationFrame(animation);
+    }
+    animation();
+</script>
+</html>

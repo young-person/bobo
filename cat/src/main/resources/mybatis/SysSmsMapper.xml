@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mybatis.mapper.SysSmsMapper" >
+  <resultMap id="BaseResultMap" type="com.mybatis.pojo.SysSms" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="CHAR" />
+    <result column="msg" property="msg" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="expired_date" property="expired_date" jdbcType="TIMESTAMP" />
+    <result column="create_date" property="create_date" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="create_by" jdbcType="VARCHAR" />
+    <result column="update_date" property="update_date" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="update_by" jdbcType="VARCHAR" />
+    <result column="del_flag" property="del_flag" jdbcType="CHAR" />
+    <result column="is_received" property="is_received" jdbcType="CHAR" />
+    <result column="sync_return_result" property="sync_return_result" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="CHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.mybatis.pojo.SysSms" >
+    insert into sys_sms (id, mobile, msg, 
+      type, expired_date, create_date, 
+      create_by, update_date, update_by, 
+      del_flag, is_received, sync_return_result, 
+      code)
+    values (#{id,jdbcType=VARCHAR}, #{mobile,jdbcType=CHAR}, #{msg,jdbcType=VARCHAR}, 
+      #{type,jdbcType=CHAR}, #{expired_date,jdbcType=TIMESTAMP}, #{create_date,jdbcType=TIMESTAMP}, 
+      #{create_by,jdbcType=VARCHAR}, #{update_date,jdbcType=TIMESTAMP}, #{update_by,jdbcType=VARCHAR}, 
+      #{del_flag,jdbcType=CHAR}, #{is_received,jdbcType=CHAR}, #{sync_return_result,jdbcType=VARCHAR}, 
+      #{code,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mybatis.pojo.SysSms" >
+    insert into sys_sms
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="msg != null" >
+        msg,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="expired_date != null" >
+        expired_date,
+      </if>
+      <if test="create_date != null" >
+        create_date,
+      </if>
+      <if test="create_by != null" >
+        create_by,
+      </if>
+      <if test="update_date != null" >
+        update_date,
+      </if>
+      <if test="update_by != null" >
+        update_by,
+      </if>
+      <if test="del_flag != null" >
+        del_flag,
+      </if>
+      <if test="is_received != null" >
+        is_received,
+      </if>
+      <if test="sync_return_result != null" >
+        sync_return_result,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=CHAR},
+      </if>
+      <if test="msg != null" >
+        #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="expired_date != null" >
+        #{expired_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_date != null" >
+        #{create_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_by != null" >
+        #{create_by,jdbcType=VARCHAR},
+      </if>
+      <if test="update_date != null" >
+        #{update_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_by != null" >
+        #{update_by,jdbcType=VARCHAR},
+      </if>
+      <if test="del_flag != null" >
+        #{del_flag,jdbcType=CHAR},
+      </if>
+      <if test="is_received != null" >
+        #{is_received,jdbcType=CHAR},
+      </if>
+      <if test="sync_return_result != null" >
+        #{sync_return_result,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

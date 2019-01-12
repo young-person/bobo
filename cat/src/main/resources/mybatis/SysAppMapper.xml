@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mybatis.mapper.SysAppMapper" >
+  <resultMap id="BaseResultMap" type="com.mybatis.pojo.SysApp" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="name" property="name" jdbcType="VARCHAR" />
+    <result column="aliasname" property="aliasname" jdbcType="VARCHAR" />
+    <result column="urlFunctionName" property="urlFunctionName" jdbcType="VARCHAR" />
+    <result column="urlName" property="urlName" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, aliasname, urlFunctionName, urlName, createtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.mybatis.pojo.SysAppKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_app
+    where id = #{id,jdbcType=INTEGER}
+      and name = #{name,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.mybatis.pojo.SysAppKey" >
+    delete from sys_app
+    where id = #{id,jdbcType=INTEGER}
+      and name = #{name,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.mybatis.pojo.SysApp" >
+    insert into sys_app (id, name, aliasname, 
+      urlFunctionName, urlName, createtime
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{aliasname,jdbcType=VARCHAR}, 
+      #{urlFunctionName,jdbcType=VARCHAR}, #{urlName,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mybatis.pojo.SysApp" >
+    insert into sys_app
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="aliasname != null" >
+        aliasname,
+      </if>
+      <if test="urlFunctionName != null" >
+        urlFunctionName,
+      </if>
+      <if test="urlName != null" >
+        urlName,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="aliasname != null" >
+        #{aliasname,jdbcType=VARCHAR},
+      </if>
+      <if test="urlFunctionName != null" >
+        #{urlFunctionName,jdbcType=VARCHAR},
+      </if>
+      <if test="urlName != null" >
+        #{urlName,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mybatis.pojo.SysApp" >
+    update sys_app
+    <set >
+      <if test="aliasname != null" >
+        aliasname = #{aliasname,jdbcType=VARCHAR},
+      </if>
+      <if test="urlFunctionName != null" >
+        urlFunctionName = #{urlFunctionName,jdbcType=VARCHAR},
+      </if>
+      <if test="urlName != null" >
+        urlName = #{urlName,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and name = #{name,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mybatis.pojo.SysApp" >
+    update sys_app
+    set aliasname = #{aliasname,jdbcType=VARCHAR},
+      urlFunctionName = #{urlFunctionName,jdbcType=VARCHAR},
+      urlName = #{urlName,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+      and name = #{name,jdbcType=VARCHAR}
+  </update>
+</mapper>
