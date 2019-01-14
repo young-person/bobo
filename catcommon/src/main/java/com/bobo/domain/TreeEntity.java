@@ -2,7 +2,6 @@ package com.bobo.domain;
 
 import com.bobo.annotation.Tree;
 import com.bobo.utils.CReflectUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -19,7 +18,6 @@ import java.util.*;
 
 public class TreeEntity<T> {
     private static Logger logger = LoggerFactory.getLogger(TreeEntity.class);
-    private static ObjectMapper objectMapper = new ObjectMapper();
 
     public List<Bean> buildListTree(List<T> datas){
         if(null == datas || 0 == datas.size()){
@@ -39,6 +37,7 @@ public class TreeEntity<T> {
         for(Field f : fields) {
             f.setAccessible(true);
             Tree tree = f.getAnnotation(Tree.class);
+            if (null == tree) continue;
             if(StringUtils.isNoneBlank(tree.id())){
                 id = tree.id();
             }
@@ -89,13 +88,6 @@ public class TreeEntity<T> {
             }
         }
 
-/*        List<Bean> notChildren = new ArrayList<Bean>();
-        for(int index = 0; index < notRoots.size(); index ++){
-            if (!children.contains(notRoots.get(index))){
-                notChildren.add(notRoots.get(index));
-            }
-        }
-        notRoots = notChildren;*/
         Iterator<Bean> iterable = notRoots.iterator();
         while(iterable.hasNext()){
             Bean b=iterable.next();
@@ -129,7 +121,8 @@ public class TreeEntity<T> {
         //父节点为空或者null的父节点
         Set<Bean> pNodes1 = new HashSet<Bean>();
         //完整的父节点
-        Map<String,Bean> pNodes2 = new HashMap<String, Bean>();
+        //Map<String,Bean> pNodes2 = new HashMap<String, Bean>();
+        List<Bean> pNodes2 = new ArrayList<Bean>();
         //错误节点进行数据 过滤
         Set<Bean> errorNodes = new HashSet<Bean>();
         for(Bean map : list){//如果pid我最上层节点
@@ -140,16 +133,39 @@ public class TreeEntity<T> {
             }else if(StringUtils.isBlank(pValue) && StringUtils.isNotBlank(idValue)){
                 pNodes1.add(map);
             }else{
-                m.put(idValue,pValue);
-                has.put(pValue,null != has.get(pValue));//false
-
-                if (null == pNodes2.get(pValue)){
-                    if(!has.get(pValue) || null == has.get(pValue)){//一直是false
-                        pNodes2.put(pValue,map);
-                    }
+                if (m.isEmpty()){
+                    m.put(idValue,pValue);
+                    has.put(idValue,false);
+                    has.put(pValue,true);
                 }else{
-                    if(has.get(pValue)){//如果里面有pid
-                        pNodes2.remove(pValue);
+                    boolean is = false;
+                    int last = 0;
+                    for(String key : m.keySet()){
+                        String val = m.get(key);
+                        if(pValue.equals(val)){
+                            m.put(idValue,pValue);
+                            has.put(idValue,false);
+                            break;
+                        }else if (idValue.equals(val)){
+                            m.put(idValue,pValue);
+                            has.put(pValue,true);
+                            has.put(idValue,false);
+                            break;
+                        }else if(pValue.equals(key)){
+                            m.put(idValue,pValue);
+                            has.put(idValue,false);
+                            has.put(pValue,false);
+                            break;
+                        }else{
+                            if(last == (m.keySet().size() - 1)){
+                                is = true;
+                            }
+                        }
+                        if(is){
+                            m.put(idValue,pValue);
+                            has.put(pValue,true);
+                            break;
+                        }
                     }
                 }
             }
@@ -160,20 +176,24 @@ public class TreeEntity<T> {
         Iterator<Map.Entry<String, Boolean>> it = has.entrySet().iterator();
         while(it.hasNext()){
             Map.Entry<String, Boolean> entry = it.next();
-            if(has.get(entry.getKey()) || null != m.get(entry.getKey())){//处理父节点为子节点的
-                it.remove();
-                if(null != pNodes2.get(entry.getKey())){
-                    pNodes2.remove(entry.getKey());
+            if(entry.getValue()){
+                for(Bean map : list){
+                    String pValue = BeanUtils.getProperty(map, pid);
+                    String idValue = BeanUtils.getProperty(map, id);
+                    if (entry.getKey().equals(pValue)){
+                        pNodes2.add(map);
+                    }
                 }
             }
         }
         List<Bean> results = new ArrayList<Bean>();
+        /**
+         * 如父节点为空 还需做进一步父节点处理
+         */
         pNodes1.forEach(node->{
             results.add(node);
         });
-        pNodes2.forEach((K,V)->{
-            results.add(V);
-        });
+        results.addAll(pNodes2);
         errorNodes.forEach(node->{
             results.add(node);
         });
@@ -194,6 +214,7 @@ public class TreeEntity<T> {
         for(Field f : fields){
             f.setAccessible(true);
             Tree tree = f.getAnnotation(Tree.class);
+            if (null == tree) continue;
             String id =   tree.id();
             String pid =  tree.pid();
             String text = tree.text();
