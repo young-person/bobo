@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ace-admin" />
+        <module name="ace-admin-interface" />
+        <module name="ace-auth-client" />
+        <module name="ace-auth-server" />
+        <module name="ace-cache" />
+        <module name="ace-center" />
+        <module name="ace-common" />
+        <module name="ace-config" />
+        <module name="ace-core" />
+        <module name="ace-demo-depart-data" />
+        <module name="ace-dict" />
+        <module name="ace-gate-ratelimit" />
+        <module name="ace-gate-server" />
+        <module name="ace-generator" />
+        <module name="ace-interface" />
+        <module name="ace-merge" />
+        <module name="ace-monitor" />
+        <module name="ace-tool" />
+        <module name="ace-tool-interface" />
+        <module name="ace-trace" />
+        <module name="cat" />
+        <module name="catcommon" />
+        <module name="catmodules" />
+        <module name="cattask" />
+        <module name="catupload" />
+        <module name="catwebservice" />
+        <module name="file-converter-core" />
+        <module name="file-converter-web" />
+        <module name="ft-consult-interface" />
+        <module name="ft-consult-srv" />
+        <module name="ft-cost-interface" />
+        <module name="ft-cost-srv" />
+        <module name="ft-customer-interface" />
+        <module name="ft-customer-srv" />
+        <module name="ft-data-srv" />
+        <module name="ft-data-sync" />
+        <module name="ft-event-srv" />
+        <module name="ft-feedback-interface" />
+        <module name="ft-feedback-srv" />
+        <module name="ft-fintech-interface" />
+        <module name="ft-fintech-srv" />
+        <module name="ft-notify-interface" />
+        <module name="ft-notify-srv" />
+        <module name="ft-redmine-srv" />
+        <module name="ft-share-srv" />
+        <module name="ft-sns-interface" />
+        <module name="ft-sns-srv" />
+        <module name="ft-yst-auth" />
+        <module name="ft-yst-lib" />
+        <module name="ft-yst-mobile" />
+        <module name="xxl-job-admin" />
+        <module name="xxl-job-core" />
+        <module name="xxl-job-executor-sample-spring" />
+        <module name="xxl-job-executor-sample-springboot" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cat-modules" target="1.8" />
+      <module name="catgateway" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
