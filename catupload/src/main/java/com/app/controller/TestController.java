@@ -24,17 +24,5 @@ public class TestController extends BaseController {
         doRemotePutFile(fileInfo);
         return "9001";
     }
-//
-//    @GetMapping(value = "xxx")
-//    public ModelAndView list(Model model) {
-//        List<Map<String,String>> list = new ArrayList<Map<String,String>>();
-//        Map<String,String> m = new HashMap<String,String>();
-//        m.put("id","1");
-//        m.put("name","name");
-//        m.put("age","10");
-//        list.add(m);
-//        model.addAttribute("userList", list);
-//        model.addAttribute("title", "用户管理");
-//        return new ModelAndView("footer", "userModel", model);
-//    }
+
 }

@@ -5,6 +5,7 @@ import com.app.pojo.WeatherResponse;
 import com.app.service.WeatherDataService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -17,6 +18,7 @@ import java.util.zip.GZIPInputStream;
 @Service
 public class WeatherDataServiceImpl implements WeatherDataService {
     @Autowired
+    @Qualifier("netRestTemplate")
     private RestTemplate restTemplate;
 
     @Override
@@ -42,7 +44,6 @@ public class WeatherDataServiceImpl implements WeatherDataService {
         if (respString.getStatusCodeValue() == 200) {
             strBody = respString.getBody();
         }
-        System.out.println(strBody);
         try {
             resp = mapper.readValue(strBody, WeatherResponse.class);
         } catch (IOException e) {
