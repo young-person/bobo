@@ -16,10 +16,13 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-public class TreeEntity<T> {
-    private static Logger logger = LoggerFactory.getLogger(TreeEntity.class);
+/**
+ * 树转换生成类
+ */
+public class TreeUtils {
+    private static Logger logger = LoggerFactory.getLogger(TreeUtils.class);
 
-    public List<Bean> buildListTree(List<T> datas){
+    public static  <T> List<Bean> buildListTree(List<T> datas){
         if(null == datas || 0 == datas.size()){
             logger.error("转换数据长度错误");
             return null;
@@ -28,7 +31,7 @@ public class TreeEntity<T> {
         return findRootList(datas);
     }
 
-    private List<Bean> findRootList(List<T> datas){
+    private static <T> List<Bean> findRootList(List<T> datas){
         List<Bean> list = changeBeanToDynamicBean(datas);
 
         String id = null,pid = null,text = null,icon = null,url = null;
@@ -77,7 +80,7 @@ public class TreeEntity<T> {
         return new ArrayList<Bean>();
     }
 
-    private List<Bean> findChildrenNodes(Bean rNode,List<Bean> notRoots,String pid,String id) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+    private static List<Bean> findChildrenNodes(Bean rNode,List<Bean> notRoots,String pid,String id) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         String root_id = BeanUtils.getProperty(rNode, id);
         List<Bean> children = new ArrayList<Bean>();
 
@@ -114,7 +117,8 @@ public class TreeEntity<T> {
      * @throws NoSuchMethodException
      * @throws InvocationTargetException
      */
-    private List<Bean> findRootBean(List<Bean> list,String pid,String id) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+    private static List<Bean> findRootBean(List<Bean> list,String pid,String id) throws IllegalAccessException,
+            NoSuchMethodException, InvocationTargetException {
         //节点状态
         Map<String,Boolean> has = new HashMap<String,Boolean>();
         Map<String,String> m = new HashMap<String, String>();
@@ -209,7 +213,7 @@ public class TreeEntity<T> {
      * @param fields
      * @return
      */
-    private Map<String,String> getFiledValues(T t,Field[] fields){
+    private static <T> Map<String,String> getFiledValues(T t,Field[] fields){
         Map<String,String> map = new HashMap<String, String>();
         for(Field f : fields){
             f.setAccessible(true);
@@ -257,7 +261,7 @@ public class TreeEntity<T> {
      * @param datas
      * @return
      */
-    private List<Bean> changeBeanToDynamicBean(List<T> datas){
+    private static <T> List<Bean> changeBeanToDynamicBean(List<T> datas){
         List<Bean> beans = new ArrayList<Bean>();
         for(T t: datas){
             Field[] fields = t.getClass().getDeclaredFields();
@@ -270,7 +274,7 @@ public class TreeEntity<T> {
     }
 
     public static void main(String[] args) {
-        TreeEntity entity =  new TreeEntity();
+        TreeUtils entity =  new TreeUtils();
         InputStream stream = entity.getClass().getResourceAsStream("/tree.json");
 
         String path = entity.getClass().getResource("/tree.json").getPath();

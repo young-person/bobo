@@ -1,12 +1,12 @@
 package com.bobo.domain;
 
 public class AuthUser {
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -17,13 +17,13 @@ public class AuthUser {
         this.password = password;
     }
 
-    private String userName;
+    private String username;
     private String password;
 
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        s.append(userName).append("|").append(password).append("|").append(System.currentTimeMillis());
+        s.append(username).append("|").append(password).append("|").append(System.currentTimeMillis());
         return s.toString();
     }
     @Override
@@ -36,12 +36,12 @@ public class AuthUser {
         }
         if (obj instanceof AuthUser) {
             AuthUser user = (AuthUser)obj;
-            return user.getUserName().equals(this.getUserName()) && user.getPassword().equals(this.getPassword());
+            return user.getUsername().equals(this.getUsername()) && user.getPassword().equals(this.getPassword());
         }
         return false;
     }
     @Override
     public int hashCode() {
-        return userName.hashCode() * password.hashCode();
+        return username.hashCode() * password.hashCode();
     }
 }

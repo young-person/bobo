@@ -35,8 +35,8 @@ public class CTokenUtil {
             Long l2 = System.currentTimeMillis();
             Long l1 = Long.valueOf(ss[2]);
 
-            user.setUserName(ss[0]);
-            user.setUserName(ss[1]);
+            user.setUsername(ss[0]);
+            user.setPassword(ss[1]);
 
             return user;
         } catch (Exception e) {
@@ -51,10 +51,10 @@ public class CTokenUtil {
 
     }
 
-    private static class DESUtil{
-        //算法名称
-        private static final String KEY_ALGORITHM =  "chengzhanbo_des";
-        //算法名称 加密模式 填充模式
+    private static class DESUtil {
+        // 算法名称
+        public static final String KEY_ALGORITHM = "DESede";
+        // 算法名称/加密模式/填充方式
         // DES共有四种工作模式-->>ECB：电子密码本模式、CBC：加密分组链接模式、CFB：加密反馈模式、OFB：输出反馈模式
         public static final String CIPHER_ALGORITHM = "DESede/ECB/PKCS5Padding";//NoPadding
 
@@ -64,11 +64,16 @@ public class CTokenUtil {
 
                 throw new Exception("key is null or empty!");
 
-            java.security.MessageDigest alg = java.security.MessageDigest.getInstance("MD5");
+            java.security.MessageDigest alg = java.security.MessageDigest
+                    .getInstance("MD5");
 
             alg.update(strKey.getBytes());
 
             byte[] bkey = alg.digest();
+
+            // System.out.println("md5key.length=" + bkey.length);
+
+            // System.out.println("md5key=" + bytes2Hex(bkey));
 
             int start = bkey.length;
 
@@ -86,6 +91,10 @@ public class CTokenUtil {
 
             }
 
+            // System.out.println("byte24key.length=" + bkey24.length);
+
+            // System.out.println("byte24key=" + bytes2Hex(bkey24));
+
             return bkey24;
 
         }
@@ -95,14 +104,18 @@ public class CTokenUtil {
          *
          * 生成密钥key对象
          *
-         *  密钥字符串
-         * @return 密钥对象
+         * @param keyStr
+         *            密钥字符串
          * @throws Exception
          */
         private static SecretKey keyGenerator(String keyStr) throws Exception {
-            byte input[] = GetKeyBytes(keyStr);
+            byte input[] = GetKeyBytes(keyStr);// keyStr.getBytes();//HexString2Bytes(keyStr);
+            // DESKeySpec desKey = new DESKeySpec(input);
             // 创建一个密匙工厂，然后用它把DESKeySpec转换成
+
             SecretKey securekey = new SecretKeySpec(input, KEY_ALGORITHM);
+            // SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DESede");
+            // SecretKey securekey = keyFactory.generateSecret(desKey);
             return securekey;
         }
 
@@ -164,6 +177,7 @@ public class CTokenUtil {
          * @return 加密后的数据
          */
         public static String encrypt(String data, Key key) throws Exception {
+            // Key deskey = keyGenerator(key);
             // 实例化Cipher对象，它用于完成实际的加密操作
             Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
             SecureRandom random = new SecureRandom();
@@ -171,6 +185,10 @@ public class CTokenUtil {
             cipher.init(Cipher.ENCRYPT_MODE, key, random);
             byte[] results = cipher.doFinal(data.getBytes("utf-8"));
             // 该部分是为了与加解密在线测试网站（http://tripledes.online-domain-tools.com/）的十六进制结果进行核对
+            // for (int i = 0; i < results.length; i++) {
+            // System.out.print(results[i] + " ");
+            // }
+            // System.out.println();
             // 执行加密操作。加密后的结果通常都会用Base64编码进行传输
             return bytes2Hex(results);
         }
@@ -187,6 +205,8 @@ public class CTokenUtil {
          */
         public static String decrypt(String data, String key) throws Exception {
             Key deskey = keyGenerator(key);
+
+            // 执行解密操作
             return decrypt(data, deskey);
         }
 
