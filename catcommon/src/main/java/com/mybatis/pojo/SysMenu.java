@@ -1,14 +1,17 @@
 package com.mybatis.pojo;
 
+import com.bobo.annotation.Tree;
+
 public class SysMenu {
+    @Tree(id="id")
     private Integer id;
-
+    @Tree(pid="pid")
     private Integer parentid;
-
+    @Tree(text="name")
     private String name;
 
     private String urlkey;
-
+    @Tree(url="url")
     private String url;
 
     private Integer status;
@@ -16,8 +19,8 @@ public class SysMenu {
     private Integer type;
 
     private Integer sort;
-
-    private Integer level;
+    @Tree(icon = "icon")
+    private String icon;
 
     private String create_time;
 
@@ -87,13 +90,6 @@ public class SysMenu {
         this.sort = sort;
     }
 
-    public Integer getLevel() {
-        return level;
-    }
-
-    public void setLevel(Integer level) {
-        this.level = level;
-    }
 
     public String getCreate_time() {
         return create_time;
@@ -109,5 +105,13 @@ public class SysMenu {
 
     public void setCreate_id(Integer create_id) {
         this.create_id = create_id;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 }

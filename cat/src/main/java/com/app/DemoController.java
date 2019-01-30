@@ -1,9 +1,10 @@
 package com.app;
 
 import com.alibaba.fastjson.JSONObject;
-import com.app.service.LoginService;
+import com.app.service.impl.LoginServiceImpl;
 import com.bobo.base.BaseClass;
 import com.bobo.domain.Bean;
+import com.bobo.domain.TreeUtils;
 import com.mybatis.pojo.China;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,23 +20,19 @@ public class DemoController extends BaseClass {
         return "1";
     }
     @Autowired
-    private LoginService loginService;
+    private LoginServiceImpl loginService;
     @GetMapping(value = "chinas/xml",produces = MediaType.APPLICATION_XML_VALUE)
     public List<China> queryChinas_xml(){
         List<China> list = loginService.queryAllChinas();
-        China china = new China();
-        china.buildListTree(list);
+        TreeUtils.buildListTree(list);
         return loginService.queryAllChinas();
     }
 
     @GetMapping(value = "chinas/json",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String queryChinas_json(){
         List<China> list = loginService.queryAllChinas();
-        China china = new China();
-        List<Bean> beans = china.buildListTree(list);
-        JSONObject object = new JSONObject();
-        object.put("list",beans);
-        System.out.println(object.toJSONString());
-        return object.toJSONString();
+        List<Bean> beans = TreeUtils.buildListTree(list);
+        return JSONObject.toJSONString(beans);
     }
+
 }

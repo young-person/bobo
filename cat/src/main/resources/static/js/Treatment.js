@@ -4,10 +4,11 @@ function AjaxPost(Url,JsonData,LodingFun,ReturnFun) {
         type: "post",
         url: Url,
         data: JsonData,
+        contentType: "application/json;charset=utf-8",
         dataType: 'json',
         async: 'false',
         beforeSend: LodingFun,
-        error: function () { AjaxErro({ "Status": "Erro", "Erro": "500" }); },
+        error: function () { /*AjaxErro({ "Status": "Erro", "Erro": "500" }); */},
         success: ReturnFun
     });
 }

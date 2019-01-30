@@ -1,9 +1,8 @@
 package com.mybatis.pojo;
 
 import com.bobo.annotation.Tree;
-import com.bobo.domain.TreeEntity;
 
-public class China extends TreeEntity<China> {
+public class China {
 	@Tree(text="text")
 	private String name;
 	@Tree(id="id")

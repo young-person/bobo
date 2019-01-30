@@ -1,4 +1,4 @@
-package com.app.service;
+package com.app.service.impl;
 
 import com.bobo.utils.CTokenUtil;
 import com.mybatis.mapper.ChinaMapper;
@@ -6,18 +6,20 @@ import com.mybatis.mapper.SysMenuMapper;
 import com.mybatis.mapper.SysUserMapper;
 import com.mybatis.pojo.China;
 import com.mybatis.pojo.SysMenu;
-import com.mybatis.pojo.SysUser;
 import com.bobo.domain.AuthUser;
+import com.mybatis.pojo.SysMenuExample;
 import com.security.fegin.CustomerLoginService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class LoginService {
+public class LoginServiceImpl {
     @Autowired
     private SysMenuMapper sysMenuMapper;
     @Autowired
@@ -27,30 +29,44 @@ public class LoginService {
 
     private CustomerLoginService customerLoginService;
 
-    public List<SysMenu> queryListMenu(){
+    /**
+     * 获取程序目录
+     * @param id
+     * @return
+     */
+    public List<SysMenu> queryListMenu(String id){
         List<SysMenu> list = sysMenuMapper.selectByExample(null);
+        if (StringUtils.isNotBlank(id)){
+
+        }
         return list;
     }
 
-    public SysUser querySelectOneUser(){
-        SysUser sysUser =sysUserMapper.selectByPrimaryKey(1);
-        return sysUser;
-    }
+    /**
+     * 获取中国区域信息
+     * @return
+     */
     public List<China> queryAllChinas(){
         return chinaMapper.selectByExample(null);
     }
 
+    /**
+     * 用户获取token
+     * @param user
+     * @return
+     */
     public String queryUserToToken(AuthUser user) {
-        Map<String,String> result = customerLoginService.validate(user.getUserName(),user.getPassword());
-        String token = "";
-        if (!StringUtils.isEmpty(result.get("id"))) {
-            //根据数据 生成token 将 唯一id写入到redis 存储里面
-        }else{
-            //使用本地生成token
-            token = CTokenUtil.generatorT_Token(user);
-        }
-        return token;
+        //使用本地生成token
+        return CTokenUtil.generatorT_Token(user);
     }
 
-
+    public List<SysMenu> contSysMenu(List<SysMenu> menus,Integer id){
+        List<SysMenu> roots = new ArrayList<SysMenu>();
+        for(SysMenu menu : menus){
+            if (id.equals(menu.getId())){
+                roots.add(menu);
+            }
+        }
+        return null;
+    }
 }
