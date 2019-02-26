@@ -25,21 +25,9 @@ public enum MessageTypeEnum {
         this.desc = desc;
     }
 
-    /**
-     * Gets code.
-     *
-     * @return the code
-     */
     public Integer getCode() {
         return code;
     }
-
-
-    /**
-     * Gets desc.
-     *
-     * @return the desc
-     */
     public String getDesc() {
         return desc;
     }
