@@ -54,7 +54,7 @@ public class LoginController {
     @RequestMapping(value = "/system/file")
     public ModelAndView toFile(){
         ModelMap model = new ModelMap();
-        return new ModelAndView("file", model);
+        return new ModelAndView("file.ftl", model);
     }
 
     @PostMapping(value = "/system/login",produces="application/json;charset=UTF-8")

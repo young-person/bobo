@@ -19,6 +19,7 @@
       <set>
         <option value="$PROJECT_DIR$/cat-modules/pom.xml" />
         <option value="$PROJECT_DIR$/catgateway/pom.xml" />
+        <option value="$PROJECT_DIR$/catmodules/catclient/pom.xml" />
         <option value="$PROJECT_DIR$/ssoupload/pom.xml" />
       </set>
     </option>

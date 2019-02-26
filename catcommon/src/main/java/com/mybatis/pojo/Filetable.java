@@ -85,7 +85,8 @@ public class Filetable {
         return pid;
     }
 
-    public void setPid(String pid) {
+    public void
+    setPid(String pid) {
         this.pid = pid == null ? null : pid.trim();
     }
 
@@ -151,5 +152,26 @@ public class Filetable {
 
     public void setStr4(String str4) {
         this.str4 = str4 == null ? null : str4.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Filetable{" +
+                "uid=" + uid +
+                ", id='" + id + '\'' +
+                ", userid='" + userid + '\'' +
+                ", filename='" + filename + '\'' +
+                ", csend=" + csend +
+                ", hidden=" + hidden +
+                ", pid='" + pid + '\'' +
+                ", description='" + description + '\'' +
+                ", urlname='" + urlname + '\'' +
+                ", createtime=" + createtime +
+                ", filetype=" + filetype +
+                ", str1='" + str1 + '\'' +
+                ", str2='" + str2 + '\'' +
+                ", str3='" + str3 + '\'' +
+                ", str4='" + str4 + '\'' +
+                '}';
     }
 }

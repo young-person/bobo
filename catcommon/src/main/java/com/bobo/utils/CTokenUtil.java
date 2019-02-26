@@ -8,6 +8,7 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
+import java.security.MessageDigest;
 import java.security.SecureRandom;
 
 /**
@@ -61,42 +62,23 @@ public class CTokenUtil {
         public static byte[] GetKeyBytes(String strKey) throws Exception {
 
             if (null == strKey || strKey.length() < 1)
-
                 throw new Exception("key is null or empty!");
 
-            java.security.MessageDigest alg = java.security.MessageDigest
-                    .getInstance("MD5");
+            MessageDigest alg = MessageDigest.getInstance("MD5");
 
             alg.update(strKey.getBytes());
-
             byte[] bkey = alg.digest();
-
-            // System.out.println("md5key.length=" + bkey.length);
-
-            // System.out.println("md5key=" + bytes2Hex(bkey));
-
             int start = bkey.length;
-
             byte[] bkey24 = new byte[24];
 
             for (int i = 0; i < start; i++) {
-
                 bkey24[i] = bkey[i];
-
             }
 
             for (int i = start; i < 24; i++) {// 为了与.net16位key兼容
-
                 bkey24[i] = bkey[i - start];
-
             }
-
-            // System.out.println("byte24key.length=" + bkey24.length);
-
-            // System.out.println("byte24key=" + bytes2Hex(bkey24));
-
             return bkey24;
-
         }
 
         /** */
@@ -162,7 +144,6 @@ public class CTokenUtil {
          */
         public static String encrypt(String data, String key) throws Exception {
             Key deskey = keyGenerator(key);
-
             return encrypt(data, deskey);
         }
 
@@ -205,7 +186,6 @@ public class CTokenUtil {
          */
         public static String decrypt(String data, String key) throws Exception {
             Key deskey = keyGenerator(key);
-
             // 执行解密操作
             return decrypt(data, deskey);
         }

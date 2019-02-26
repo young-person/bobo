@@ -1,18 +1,19 @@
 package com.app.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.model.OSSObject;
+import com.aliyun.oss.model.PutObjectResult;
 import com.app.common.BaseController;
 import com.app.pojo.FileInfo;
-import org.springframework.stereotype.Controller;
+import com.app.service.impl.AliyunOssService;
+import com.bobo.constant.CProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
 
 @RestController
 public class TestController extends BaseController {
@@ -24,5 +25,54 @@ public class TestController extends BaseController {
         doRemotePutFile(fileInfo);
         return "9001";
     }
+    @Autowired
+    private AliyunOssService aliyunOssService;
 
+    @Autowired
+    private OSSClient aliyunOssClient;
+
+    @GetMapping("/aliyun/upload1")
+    public String upload1() {
+        PutObjectResult putObjectResult = aliyunOssClient.putObject(CProperties.ALIYUN_OSS_BUCKET_NAME, "text.txt",
+                new ByteArrayInputStream("Hello OSS".getBytes()));
+        return "success";
+    }
+
+    @GetMapping("/aliyun/upload2")
+    public String upload2() throws FileNotFoundException {
+        File file = new File("d:\\zheng.png");
+        PutObjectResult putObjectResult = aliyunOssClient.putObject(CProperties.ALIYUN_OSS_BUCKET_NAME, "file.png", file);
+        return "success";
+    }
+
+    @GetMapping("/aliyun/download1")
+    public String download1() throws IOException {
+        StringBuffer result = new StringBuffer();
+        OSSObject ossObject = aliyunOssClient.getObject(CProperties.ALIYUN_OSS_BUCKET_NAME, "text.txt");
+        InputStream content = ossObject.getObjectContent();
+        if (content != null) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+            while (true) {
+                String line = reader.readLine();
+                if (line == null) {
+                    break;
+                }
+                result.append("\n" + line);
+            }
+            content.close();
+        }
+        return result.toString();
+    }
+
+    @GetMapping("/aliyun/download2")
+    public String download2() throws IOException {
+        return "http://" + CProperties.ALIYUN_OSS_BUCKET_NAME + "." + CProperties.ALIYUN_OSS_ENDPOINT + "/file.png";
+    }
+
+    @GetMapping("/aliyun/upload")
+    public String upload(Model model) {
+        JSONObject policy = aliyunOssService.policy();
+        model.addAttribute("policy", policy);
+        return "/aliyun/upload";
+    }
 }

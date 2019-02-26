@@ -1,10 +1,12 @@
 package com.bobo.base;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BaseClass {
     protected static ObjectMapper objectMapper = new ObjectMapper();
-
+    protected static final Logger logger = LoggerFactory.getLogger(BaseClass.class);
 
     /**
      * 将 图片插入到现有的Excel里面

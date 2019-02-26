@@ -12,6 +12,8 @@ public interface FiletableMapper {
 
     int deleteByPrimaryKey(Integer uid);
 
+    int deleteArrayByPrimaryKey(List<Filetable> list);
+
     int insert(Filetable record);
 
     int insertSelective(Filetable record);
@@ -27,4 +29,6 @@ public interface FiletableMapper {
     int updateByPrimaryKeySelective(Filetable record);
 
     int updateByPrimaryKey(Filetable record);
+
+    int updateByUuidKeySelective(Filetable record);
 }

@@ -111,6 +111,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+  <delete id="deleteArrayByPrimaryKey">
+    delete from filetable
+    where uid = in
+    <foreach collection="list" item="e" index="no" open="(" separator="," close=")">
+      #{e.uid,jdbcType=INTEGER}
+    </foreach>
+  </delete>
   <insert id="insert" parameterType="com.mybatis.pojo.Filetable">
     insert into filetable (uid, id, userid, 
       filename, csend, hidden, 
@@ -365,5 +372,50 @@
       str3 = #{str3,jdbcType=VARCHAR},
       str4 = #{str4,jdbcType=VARCHAR}
     where uid = #{uid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByUuidKeySelective" parameterType="com.mybatis.pojo.Filetable">
+    update filetable
+    <set>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null">
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="csend != null">
+        csend = #{csend,jdbcType=TINYINT},
+      </if>
+      <if test="hidden != null">
+        hidden = #{hidden,jdbcType=TINYINT},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="urlname != null">
+        urlname = #{urlname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="filetype != null">
+        filetype = #{filetype,jdbcType=TINYINT},
+      </if>
+      <if test="str1 != null">
+        str1 = #{str1,jdbcType=VARCHAR},
+      </if>
+      <if test="str2 != null">
+        str2 = #{str2,jdbcType=VARCHAR},
+      </if>
+      <if test="str3 != null">
+        str3 = #{str3,jdbcType=VARCHAR},
+      </if>
+      <if test="str4 != null">
+        str4 = #{str4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

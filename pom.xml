@@ -57,6 +57,11 @@
         <thymeleaf-layout-dialect.version>2.1.2</thymeleaf-layout-dialect.version>
         <httpclient.version>4.5.6</httpclient.version>
         <jaxb.version>2.3.0</jaxb.version>
+        <dubbo-spring-boot>1.0.0</dubbo-spring-boot>
+        <alipay.version>1.1.3</alipay.version>
+        <velocity.version>1.7</velocity.version>
+        <netty-all.version>4.1.6.Final</netty-all.version>
+        <disruptor.version>3.4.0</disruptor.version>
     </properties>
 
     <dependencies>
@@ -71,6 +76,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector-java.version}</version>
@@ -80,28 +91,22 @@
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>${druid-java.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commons-lang3.version}</version>
-        </dependency>
+
         <dependency>
             <groupId>bobo</groupId>
             <artifactId>catcommon</artifactId>
             <version>${catcommon.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>${commons-io.version}</version>
         </dependency>
-
-
     </dependencies>
 
     <!-- maven 依赖管理-->
@@ -115,20 +120,33 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis</artifactId>
-                <version>${mybatis.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis-spring-boot.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-websocket</artifactId>
+                <version>${spring-websocket.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper</artifactId>
                 <version>${mybatis-pagehelper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-core</artifactId>
+                <version>${mybatis.generator.version}</version>
             </dependency>
 
             <dependency>
@@ -145,21 +163,6 @@
                 <groupId>commons-httpclient</groupId>
                 <artifactId>commons-httpclient</artifactId>
                 <version>${commons-httpclient.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-websocket</artifactId>
-                <version>${spring-websocket.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.quartz-scheduler</groupId>
-                <artifactId>quartz</artifactId>
-                <version>${quartz.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.quartz-scheduler</groupId>
-                <artifactId>quartz-jobs</artifactId>
-                <version>${quartz.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -181,6 +184,23 @@
                 <artifactId>commons-beanutils</artifactId>
                 <version>${commons-beanutils.version}</version>
             </dependency>
+            <dependency>
+                <groupId>commons-net</groupId>
+                <artifactId>commons-net</artifactId>
+                <version>${commons-net.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz-jobs</artifactId>
+                <version>${quartz.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>dom4j</groupId>
@@ -235,11 +255,6 @@
                 <version>${cglib.version}</version>
             </dependency>
             <dependency>
-                <groupId>commons-net</groupId>
-                <artifactId>commons-net</artifactId>
-                <version>${commons-net.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.fusesource</groupId>
                 <artifactId>sigar</artifactId>
                 <version>${fusesource.version}</version>
@@ -249,12 +264,6 @@
                 <artifactId>sigar</artifactId>
                 <version>${hyperic.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-core</artifactId>
-                <version>${mybatis.generator.version}</version>
-            </dependency>
-
 
             <dependency>
                 <groupId>nz.net.ultraq.thymeleaf</groupId>
@@ -292,6 +301,33 @@
                 <groupId>org.apache.curator</groupId>
                 <artifactId>curator-recipes</artifactId>
                 <version>${curator.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dubbo.springboot</groupId>
+                <artifactId>spring-boot-starter-dubbo</artifactId>
+                <version>${dubbo-spring-boot}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.featherfly</groupId>
+                <artifactId>alipay-sdk</artifactId>
+                <version>${alipay.version}</version>
+            </dependency>
+
+            <dependency>
+                <artifactId>velocity</artifactId>
+                <groupId>org.apache.velocity</groupId>
+                <version>${velocity.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty-all.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lmax</groupId>
+                <artifactId>disruptor</artifactId>
+                <version>${disruptor.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

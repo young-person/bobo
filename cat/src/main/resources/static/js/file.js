@@ -1,192 +1,160 @@
-var filetable = function(){
 
-    var bean = function(){
-        return {id:'',userid:'',filename:'',level:0,ishidden:false,parentid:'',description:'',urlname:'',createtime:''};
-    }
-    var _caches = [];
-    var _cache = new Object();
-    _cache['id'] = bean.id;
-    _cache[bean.id] = bean;
-    _cache[children] = [];
-    _caches.push(_cache);
-    /*
-     * 创建文件夹
-     */
-    function createFile(){
-        $("#hotleinfo").bind('contextmenu',function(e){
+(function(w,$, undefined){
+    'use strict';
+    $('#filePanel').contextmenu({
+        target: '#context-menu',
+        before: function (e) {
             e.preventDefault();
-            $('#createPanle').menu('show', {
-                left: e.pageX,
-                top: e.pageY
-            });
-        });
-    }
-
-    /*
-     * 绑定事件
-     */
-    function bindEvent(){
-        $(".fileDiv,.ui-widget-content").on('mouseover',showDel);
-        $(".fileDiv,.ui-widget-content").on('mouseout',hideDel);
-        $('.fileinput').on("focus",function(e){
-            //debugger
-            inputValue = $(this).val();
-        });
-        $('.fileinput').on("blur",function(e){
-            if(inputValue!==$(this).val()){
-                //编辑文件名保存
-                editSave($(this).attr('uuid'),$(this).val());
+            if (e.target.tagName == 'SPAN') {
+                e.preventDefault();
+                this.closemenu();
+                return false;
             }
-        });
-    }
-    /*
-     * 编辑文件名称
-     */
-    function editSave(id,name){
-        if($('.fileinput').length>0){
-            for(var ind = 0; ind < $('.fileinput').length;ind ++){
-                if($($('.fileinput')[ind]).val() == name){
-                    $($('.fileinput')[ind]).val(inputValue);
-                    return;
-                }
-            }
+            return true;
         }
-        $.ajax({type: "POST",url: CONTEXTPATH+"/savename.do",data: {'id':id,'name':name},cache:false,async:false,dataType:"json",
-             success: function (data,textStatus,jqXHR)
-             {
+    });
 
-             },
-            error:function (XMLHttpRequest,textStatus,errorThrown) {
-            }
-        });
-    }
+    var version = {
+        folder:"<div class='folder-container'><span class='folder-del'></span><div class='folder-icon'></div><input title='%s' type='text' value='' class='folder-input'/></div>",
+        a:"<a>%s</a>",
+        li:"<li class='active'></li>",
+        container:"folder-container",
+        dataType:"json",
+        post:"POST",
+        put:"PUT",
+        firstName:"文件首页",
+        update_url:"file/sys/put"
+    };
 
-    function showDel(){
-        $(this).find("span.gzv8Pv").css("visibility","visible");
-    }
-    function hideDel(){
-        $(this).find("span.gzv8Pv").css("visibility","hidden");
-    }
-    /*
-     * 删除文件
-     */
-    function delThisFile(){
-        var parent = $(this).parent();
-        var _func = parent.attr('ondblclick');
-        var param = _func.match(/\(([^)]*)\)/);
-        if(param){
-            $(this).parent().parent().remove();
-            var relDo = _func.replace('initFile','delFile');
-            eval(relDo);
+    var paper = function(config) {
+        var cfg = new Object();
+        cfg.id = config['id'];
+        cfg.nav = config['nav'];
+        var obj = getPaperObj();
+        obj['config'] = cfg;
+        return obj;
+    };
+
+    var doload = function (url,upid) {
+        paper['selectUrl'] = url;
+        var options = this.options;
+        var config = this.config;
+        realToLoad(url,upid,options,config);
+    };
+
+    var getInOptions = function(){
+        var options = new Object();
+        options.linked = new Array();
+        options.cache = {};
+        return options;
+    };
+
+    var getPaperObj = function(){
+        var obj = new Object();
+        obj['create'] = create;
+        obj['update'] = update;
+        obj['doNext'] = doNext;
+        obj['doHead'] = doHead;
+        obj['cutoff'] = cutoff;
+        obj['doload'] = doload;
+        obj['options'] = getInOptions();
+        return obj;
+    };
+
+    var freshenContain = function(data,config,options){
+        var array = [];
+        for(var index = 0; index < data.length;index ++){
+            var o = getFolder(data[index]);
+            array.push(o.content);
         }
-    }
-    /*
-     * 后台删除文件
-     */
-    function delFile(userid,level,parentid){
-        $.ajax({type: "POST",url: CONTEXTPATH+"/delfiles.do",data: {'parentid':parentid,'userid':userid,'level':level},cache: false,async : false,dataType: "json",
-             success: function (data ,textStatus, jqXHR)
-             {
+        $("#"+config.id).html(array.join(""));
+        bindForInput(config,options);
+    };
 
-             },
-            error:function (XMLHttpRequest, textStatus, errorThrown) {
-            }
-        });
-    }
-    var initFiles = function(bean){
-        var element = event.target||event.srcElement;
-        if(element.localName=='span'&&element.className=='gzv8Pv'){
-            return;
-        }
-        $.ajax({type: "POST",url: CONTEXTPATH+"/queryfiles.do",data: {bean},cache: false,async : false,dataType: "json",
-            success: function (data ,textStatus, jqXHR)
-            {
-                if(data||data.length>0){
-                    $(".portlet-body").html("");
-                    var fileDiv = "";
-                    $(data['list']).each(function(index,e){
-                        fileDiv += "<div class='filecontainer'>"+
-                            "<div class='fileDiv ui-widget-content' ondblclick=initFile('"+e+"')>" +
-                            "<span class='gzv8Pv'></span><img src='resources/images/file.gif'/></div>"+
-                            "<input uuid='"+e['id']+"' title='"+e['filename']+"' type='text' value='"+e['filename']+"' name='"+e['filename']+"' class='fileinput'/>"+
-                            "</div>";
-                    });
-                    $(".portlet-body").append(fileDiv);
-                    bindEvent();
-                }
-            },
-            error:function (XMLHttpRequest, textStatus, errorThrown) {
-            }
-        });
-    }
-
-    /**
-    文件夹 表结构设置
-    id 文件id
-    userid  文件对应用户 id
-    filename 文件名称
-    level  文件夹等级
-    ishidden  是否隐藏
-    parentid  父文件的id
-    description 文件描述
-    subName 拼接上层文件夹名称
-    */
-    function editHandle(){
-        var bean = bean();
-        bean.id = getUuid().replace(/-/g,"");
-        var parentid = _UUID;
-        var level = _LEVEL;
-        var fileIndex = 1;
-        var files = $(".filecontainer");
-        var fileDiv = "<div index='"+fileIndex+"' class='filecontainer'>"+
-        "<div class='fileDiv ui-widget-content' ondblclick=initFile('"+userid+"','"+level+"','"+uuid+"')>" +
-        "<span class='gzv8Pv'></span><img src='resources/images/file.gif'/></div>"+
-        "<input uuid='"+uuid+"' type='text' title='新建文件夹' value='新建文件夹' name='新建文件夹' class='fileinput'/>"+
-        "</div>";
-        if(typeof(files)=='undefined'&&files.length==0){
-            //直接进行保存
+    var changeActiveLi = function(options,config,data){
+        var len  = options.linked.length,bean, $a;
+        bean = options.linked[len-1];
+        if (len == 0){
+            throw new Error('没有初始化根节点');
+        } else if (len == 1) {
+            $("#"+config.nav).find("li.active").html(bean.filename);
         }else{
+            var last = options.linked[len-2];
+            $a = sprintf(version.a,last.filename);
+            var $li = $(version.li).html(bean.filename);
+
+            $("#"+config.nav).find("li.active").html('').append($a).removeClass('active');
+            $("#"+config.nav).append($li.prop("outerHTML"));
+        }
+        doHead(options,config,bean);
+    };
+
+    var getSubLinked = function(options,id){
+        var subIndex = 0;
+        for(var index = 0; index < options.linked.length; index ++){
+            if (options.linked[index].id == id) {
+                subIndex = index;
+                break;
+            }
+        }
+        options.linked = options.linked.slice(0,subIndex);
+    };
+
+    var getFolder = function(bean,pid){
+        var filename,uuid;
+        if (pid)pid = pid.id;
+        if (bean) {
+            filename = bean.filename;
+            uuid = bean.id;
+        }else{
+            var cName='新建文件夹',len = cName.length;
+            var files = $("."+version.container);
+            filename = getNewFileInfo(filename,cName,files);
+            uuid = guid();
+            if (!filename)filename=cName;
+        }
+        var folder = sprintf(version.folder,filename);
+        var $folder = $(folder);
+        $folder.attr('id',uuid);
+        $folder.find("input").attr('value',filename);
+
+        var result = new Object();
+        result.content = $folder[0].outerHTML;
+        result.bean = {'id':uuid,'pid':(pid || ''),'filename':filename};
+        return result;
+    };
+
+    var getNewFileInfo = function(name,cName,files){
+        if(typeof(files)!='undefined' && files.length > 0){
             var same = [];
             for(var i = 0; i < files.length; i++){
                 var $_f = $(files[i]);
-                 var input = $_f.find("input").eq(0);
-                 var name = input.val();
-                 if(name.indexOf('新建文件夹')>-1){
-                     same.push(input);
-                 }
+                var input = $_f.find("input").eq(0);
+                var old = input.val();
+                if(old.indexOf(cName)>-1){
+                    same.push(input);
+                }
             }
             if(same.length>0){
                 var temp = 0;
                 var len = same.length;
                 do{
                     if(len-1==0){
-                         var name = '新建文件夹1';
-                         fileDiv = "<div class='filecontainer'>"+
-                            "<div class='fileDiv ui-widget-content' ondblclick=initFile('"+userid+"','"+level+"','"+uuid+"')>" +
-                            "<span class='gzv8Pv'></span><img src='resources/images/file.gif' /></div>"+
-                            "<input uuid='"+uuid+"' title='"+name+"' type='text' value='"+name+"' name='"+name+"' class='fileinput'/>"+
-                            "</div>";
+                        name = cName+'1';
                     }else{
                         var pre = same[temp];
                         var lst = same[temp+1];
                         if(typeof(lst)=='undefined'){
-                             var name = '新建文件夹'+(len);
-                             fileDiv = "<div class='filecontainer'>"+
-                                "<div class='fileDiv ui-widget-content' ondblclick=initFile('"+userid+"','"+level+"','"+uuid+"')>" +
-                                "<span class='gzv8Pv'></span><img src='resources/images/file.gif'/></div>"+
-                                "<input uuid='"+uuid+"' title='"+name+"' type='text' value='"+name+"' name='"+name+"' class='fileinput'/>"+
-                                "</div>";
-                                break;
+                            name = cName+(len);
+                            break;
                         }else{
-                            var n1 = pre.val().substring(pre.val().indexOf('新建文件夹')+5, pre.val().length)==''?0:pre.val().substring(pre.val().indexOf('新建文件夹')+5, pre.val().length);
-                            var n2 = lst.val().substring(lst.val().indexOf('新建文件夹')+5, lst.val().length);
+                            var start = pre.val().indexOf(cName)+len;
+                            var end = pre.val().length;
+                            var n1 = pre.val().substr(start, end)==''?0:pre.val().substr(start,end);
+                            var n2 = lst.val().substr(lst.val().indexOf(cName)+len, lst.val().length);
+
                             if((parseInt(n2)-parseInt(n1))!=1){
-                                 var name = '新建文件夹'+(parseInt(n1)+1);
-                                 fileDiv = "<div class='filecontainer'>"+
-                                    "<div class='fileDiv ui-widget-content' ondblclick=initFile('"+userid+"','"+level+"','"+uuid+"')>" +
-                                    "<span class='gzv8Pv'></span><img src='resources/images/file.gif' /></div>"+
-                                    "<input uuid='"+uuid+"' title='"+name+"' type='text' value='"+name+"' name='"+name+"' class='fileinput'/>"+
-                                    "</div>";
+                                name = cName+(parseInt(n1)+1);
                             }
                         }
                     }
@@ -194,28 +162,169 @@ var filetable = function(){
                 }while(temp<len);
             }
         }
+        return name;
+    };
+    var realToLoad = function (url,upid,options,config,filename) {
+        options.linked.push({'id':upid,'filename':(filename || version.firstName)});
+        doAjaxRestfulRequest(url+upid,null,function (data) {
+            options.cache[upid] = data;
+            freshenContain(data,config,options);
+            changeActiveLi(options,config,data);
+            clickForFolder(url,options,config,realToLoad);
+        });
+    };
+    var clickForFolder = function(url,options,config,fun){
+        $(".folder-icon").off("dblclick").on('dblclick',function(){
+            var pid = $(this).parent().attr("id");
+            var filename = $(this).next().val();
+            // 当失败 删除前面一个元素
+            fun(url,pid,options,config,filename);
+        });
+    };
+    //创建
+    var create = function(url,callback){
+        var last = this.options.linked[this.options.linked.length - 1];
+        var f = getFolder(null,last);
+        var bean = f.bean;
+        $("#"+this.config.id).append(f.content);
+        clickForFolder(paper.selectUrl,this.options,this.config,realToLoad);
+        doAjaxRequest(url,JSON.stringify(bean),callback,version.post);
+    };
 
-        $(".portlet-body").append(fileDiv);
-        var $currentFile = $(fileDiv);
-        var filename = $currentFile.find(".fileinput").val();
-        $currentFile.attr('uuid',uuid);
-        $currentFile.attr('userid',userid);
-        $currentFile.attr('parentid',parentid);
-        $currentFile.attr('level',level);
-        fileInfo.uuid = uuid;
-        fileInfo.filename = filename;
-        fileInfo.userid = userid;
-        fileInfo.parentid = parentid;
-        fileInfo.level = level;
-        $.ajax({type: "POST",url: CONTEXTPATH+"/filecreate.do",data: {'uuid':uuid,'userid':userid,'filename':filename,'parentid':parentid,'level':level},cache: false,async : false,dataType: "json",
-            success: function (data ,textStatus, jqXHR)
-            {
-                bindEvent();
-            },
-            error:function (XMLHttpRequest, textStatus, errorThrown) {
+    //更新文件信息
+    var update = function(options,config,bean,url){
+        doAjaxRequest(url,JSON.stringify(bean),function (data) {
+            if (data.success){
+                var list = options.cache[options.linked[options.linked.length-1]['id']];
+                $(list).each(function (i,e) {
+                    if(e.pid == bean.id){
+                        e.filename = bean.filename;
+                        return;
+                    }
+                });
+            }else{
+                alert("修改失败");
             }
-         });
+        },version.post);
+    };
+    //点击头部
+    var doHead = function(options,config,bean){
+        $("#"+config.nav).find("li.active").attr('uid',bean.id);
+        $("#"+config.nav).find("li.active").siblings().off("click").on('click',function(param){
+            $(this).nextAll().remove();
+            $(this).html($(this).text());
+            $(this).addClass('active');
+            var cacheID = $(this).attr('uid');
+            getSubLinked(options,cacheID);
+            realToLoad(paper.selectUrl,cacheID,options,config);
+            //使用缓存策略
+/*            var list = options.cache[cacheID];
+            freshenContain(list,config);
+            clickForFolder(paper.selectUrl,options,config,realToLoad);
+            getSubLinked(options,cacheID);*/
+        });
+    };
+    //删除
+    var cutoff = function(options,config,bean,url){
+
+    };
+    var doNext = function(options,config){
+
+    };
+    
+    function bindForInput(config,options) {
+        var oldValue;
+        $('.folder-input').off("focus").on("focus",function(e){
+            oldValue = $(this).val();
+        });
+
+        $('.folder-input').off("blur").on("blur",function(e){
+            if(oldValue!==$(this).val()){
+                var id = $(this).parent().attr('id');
+                var name = $(this).val();
+                var list = options.cache[options.linked[options.linked.length-1]['id']];
+                var flag = true;
+                for(var index = 0; index < list.length;index ++){
+                    var element = list[index];
+                    if (element.filename == name){
+                        alert("文件名不能重复");
+                        $(this).val(oldValue);
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag)update(options,config,{'id':id,'filename':name},version.update_url);
+            }
+        });
     }
 
-    return {'bean':bean,'caches':_caches,'cache':_cache};
-}
+    var doAjaxRequest = function(url,bean,callback,type) {
+        $.ajax({
+            type: (type || 'GET'),
+            url: url,
+            data: bean,
+            dataType: version.dataType,
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                if (typeof callback === 'function') {
+                    callback(data);
+                }
+            },
+            error: function (e) {
+                if (typeof callback === 'function') {
+                    callback(e);
+                }
+            }
+        });
+    };
+
+    var doAjaxRestfulRequest = function(url,auth,callback,type) {
+        var param = {type: (type || 'GET'),url: url,dataType: version.dataType,
+            success: function (data) {
+                if (typeof callback === 'function') {
+                    callback(data);
+                }
+            },
+            error: function (e) {
+                if (typeof callback === 'function') {
+                    callback(e);
+                }
+            }};
+        if (auth)
+            param['data'] = auth;
+        $.ajax(param);
+    };
+
+    var sprintf = function (str) {
+        var args = arguments,
+            flag = true,
+            i = 1;
+
+        str = str.replace(/%s/g, function () {
+            var arg = args[i++];
+
+            if (typeof arg === 'undefined') {
+                flag = false;
+                return '';
+            }
+            return arg;
+        });
+        return flag ? str : '';
+    };
+    function guid() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+            return v.toString(16);
+        }).replace(/-/g,'');
+    }
+    w.paper = paper;
+})(window,$);
+
+var p = paper({'id':'filePanel','nav':'filelist'});
+
+p.doload("file/sys/",upid);
+
+$("#createfo").click(function(){
+    //p['hander']()['create']();
+    p.create('/file/sys/');
+});

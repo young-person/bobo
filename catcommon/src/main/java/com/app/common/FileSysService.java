@@ -13,5 +13,5 @@ public interface FileSysService {
 
     public boolean saveOneFileToSysDisk(Filetable filetable);
 
-    public int deleteFilesOnRemoteDisk(Filetable ... obj);
+    public int deleteFilesOnRemoteDisk(List<Filetable> list);
 }

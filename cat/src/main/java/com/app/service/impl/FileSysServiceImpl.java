@@ -6,9 +6,11 @@ import com.mybatis.pojo.Filetable;
 import com.mybatis.pojo.FiletableExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
+@Transactional
 public class FileSysServiceImpl implements FileSysService {
     @Autowired
     private FiletableMapper filetableMapper;
@@ -17,16 +19,23 @@ public class FileSysServiceImpl implements FileSysService {
         FiletableExample example = new FiletableExample();
         example.createCriteria().andPidEqualTo(pid);
         List<com.mybatis.pojo.Filetable> list = filetableMapper.selectByExample(example);
-        return null;
+        return list;
     }
 
     @Override
     public boolean saveOneFileToSysDisk(Filetable filetable) {
-        return false;
+        int cnt = filetableMapper.insertSelective(filetable);
+        return cnt > 0;
     }
 
     @Override
-    public int deleteFilesOnRemoteDisk(Filetable... obj) {
+    public int deleteFilesOnRemoteDisk(List<Filetable> list) {
+        int cnt = filetableMapper.deleteArrayByPrimaryKey(list);
         return 0;
     }
+
+    public int updateForModel(Filetable filetable){
+        return filetableMapper.updateByUuidKeySelective(filetable);
+    }
+
 }

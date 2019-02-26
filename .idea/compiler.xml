@@ -29,7 +29,9 @@
         <module name="ace-trace" />
         <module name="cat" />
         <module name="catcommon" />
-        <module name="catmodules" />
+        <module name="catinterface" />
+        <module name="catpay" />
+        <module name="catpayclient" />
         <module name="cattask" />
         <module name="catupload" />
         <module name="catwebservice" />
@@ -57,6 +59,8 @@
         <module name="ft-yst-auth" />
         <module name="ft-yst-lib" />
         <module name="ft-yst-mobile" />
+        <module name="rpcclient" />
+        <module name="rpcservice" />
         <module name="xxl-job-admin" />
         <module name="xxl-job-core" />
         <module name="xxl-job-executor-sample-spring" />
@@ -65,6 +69,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="cat-modules" target="1.8" />
+      <module name="catclient" target="1.8" />
       <module name="catgateway" target="1.8" />
     </bytecodeTargetLevel>
   </component>
