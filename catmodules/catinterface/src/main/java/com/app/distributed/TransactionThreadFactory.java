@@ -19,11 +19,10 @@ public class TransactionThreadFactory implements ThreadFactory {
     }
 
     /**
-     * create ThreadFactory.
-     *
-     * @param namePrefix namePrefix
-     * @param daemon     daemon
-     * @return ThreadFactory
+     * 创建事物工厂
+     * @param namePrefix
+     * @param daemon
+     * @return
      */
     public static ThreadFactory create(final String namePrefix, final boolean daemon) {
         return new TransactionThreadFactory(namePrefix, daemon);
@@ -31,8 +30,16 @@ public class TransactionThreadFactory implements ThreadFactory {
 
     @Override
     public Thread newThread(final Runnable runnable) {
-        Thread thread = new Thread(THREAD_GROUP, runnable,
-                THREAD_GROUP.getName() + "-" + namePrefix + "-" + threadNumber.getAndIncrement());
+        StringBuilder builder = new StringBuilder(THREAD_GROUP.getName());
+        builder.append("-");
+        builder.append(namePrefix);
+        builder.append("-");
+        builder.append(threadNumber.getAndIncrement());
+
+        Thread thread = new Thread(THREAD_GROUP, runnable,builder.toString());
+        /**
+         * 设置为守护进程
+         */
         thread.setDaemon(daemon);
         if (thread.getPriority() != Thread.NORM_PRIORITY) {
             thread.setPriority(Thread.NORM_PRIORITY);
