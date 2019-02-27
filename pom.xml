@@ -329,6 +329,7 @@
                 <artifactId>disruptor</artifactId>
                 <version>${disruptor.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
     <!-- maven 依赖管理-->

@@ -1,7 +1,6 @@
 package com.app.distributed.disruptor;
 
 import com.app.distributed.CatTransaction;
-import com.app.distributed.config.EventTypeEnum;
 import com.app.distributed.service.CoordinatorService;
 import com.lmax.disruptor.EventHandler;
 

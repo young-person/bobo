@@ -1,5 +1,6 @@
 package com.bobo.serializer.impl;
 
+import com.bobo.base.CatException;
 import com.bobo.enums.CEnum;
 import com.bobo.serializer.CObjectSerializer;
 
@@ -20,13 +21,13 @@ public class CJavaSerializer implements CObjectSerializer {
     }
 
     @Override
-    public <T> T deSerialize(byte[] param, Class<T> clazz) throws Exception {
+    public <T> T deSerialize(byte[] param, Class<T> clazz) throws CatException {
         try (
             ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(param);
             ObjectInput input = new ObjectInputStream(arrayInputStream)) {
             return (T) input.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            throw new Exception("java deSerialize error " + e.getMessage());
+            throw new CatException("java 序列化错误", e);
         }
     }
 

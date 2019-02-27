@@ -1,5 +1,5 @@
 
-package com.app.distributed.config;
+package com.bobo.enums;
 
 
 public enum EventTypeEnum {

@@ -71,6 +71,110 @@ public class CatConfig {
      */
     private FileConfig fileConfig;
 
+    public String getRepositorySuffix() {
+        return repositorySuffix;
+    }
+
+    public void setRepositorySuffix(String repositorySuffix) {
+        this.repositorySuffix = repositorySuffix;
+    }
+
+    public String getSerializer() {
+        return serializer;
+    }
+
+    public void setSerializer(String serializer) {
+        this.serializer = serializer;
+    }
+
+    public String getRepositorySupport() {
+        return repositorySupport;
+    }
+
+    public void setRepositorySupport(String repositorySupport) {
+        this.repositorySupport = repositorySupport;
+    }
+
+    public Boolean getNeedRecover() {
+        return needRecover;
+    }
+
+    public void setNeedRecover(Boolean needRecover) {
+        this.needRecover = needRecover;
+    }
+
+    public int getScheduledThreadMax() {
+        return scheduledThreadMax;
+    }
+
+    public void setScheduledThreadMax(int scheduledThreadMax) {
+        this.scheduledThreadMax = scheduledThreadMax;
+    }
+
+    public int getScheduledDelay() {
+        return scheduledDelay;
+    }
+
+    public void setScheduledDelay(int scheduledDelay) {
+        this.scheduledDelay = scheduledDelay;
+    }
+
+    public int getRetryMax() {
+        return retryMax;
+    }
+
+    public void setRetryMax(int retryMax) {
+        this.retryMax = retryMax;
+    }
+
+    public int getRecoverDelayTime() {
+        return recoverDelayTime;
+    }
+
+    public void setRecoverDelayTime(int recoverDelayTime) {
+        this.recoverDelayTime = recoverDelayTime;
+    }
+
+    public int getBufferSize() {
+        return bufferSize;
+    }
+
+    public void setBufferSize(int bufferSize) {
+        this.bufferSize = bufferSize;
+    }
+
+    public DbConfig getDbConfig() {
+        return dbConfig;
+    }
+
+    public void setDbConfig(DbConfig dbConfig) {
+        this.dbConfig = dbConfig;
+    }
+
+    public RedisConfig getRedisConfig() {
+        return redisConfig;
+    }
+
+    public void setRedisConfig(RedisConfig redisConfig) {
+        this.redisConfig = redisConfig;
+    }
+
+    public ZookeeperConfig getZookeeperConfig() {
+        return zookeeperConfig;
+    }
+
+    public void setZookeeperConfig(ZookeeperConfig zookeeperConfig) {
+        this.zookeeperConfig = zookeeperConfig;
+    }
+
+    public FileConfig getFileConfig() {
+        return fileConfig;
+    }
+
+    public void setFileConfig(FileConfig fileConfig) {
+        this.fileConfig = fileConfig;
+    }
+
     public CatConfig() {}
 
     public CatConfig(final Builder builder) {

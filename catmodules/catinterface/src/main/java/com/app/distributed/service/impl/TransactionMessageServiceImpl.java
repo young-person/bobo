@@ -10,6 +10,7 @@ import com.app.distributed.service.TransactionMessageService;
 import com.bobo.enums.JTAEnum;
 import com.bobo.serializer.CObjectSerializer;
 import com.bobo.serializer.impl.CJavaSerializer;
+import com.bobo.utils.SpringContextUtil;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,6 +19,8 @@ public class TransactionMessageServiceImpl implements TransactionMessageService 
     private volatile CObjectSerializer serializer;
 
     private volatile MqTransactionMessageService mqTransactionMessageService;
+
+
     private CatTransactionEventPublisher publisher;
 
     public TransactionMessageServiceImpl(CatTransactionEventPublisher publisher){
@@ -58,7 +61,7 @@ public class TransactionMessageServiceImpl implements TransactionMessageService 
         if (mqTransactionMessageService == null) {
             synchronized (TransactionMessageServiceImpl.class) {
                 if (mqTransactionMessageService == null) {
-                    //mqTransactionMessageService = new TransactionMessageServiceImpl(publisher);
+                    mqTransactionMessageService = SpringContextUtil.getBean(MqTransactionMessageService.class);
                 }
             }
         }

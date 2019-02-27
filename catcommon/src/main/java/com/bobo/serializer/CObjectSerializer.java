@@ -1,5 +1,7 @@
 package com.bobo.serializer;
 
+import com.bobo.base.CatException;
+
 public interface CObjectSerializer {
 
     /**
@@ -21,7 +23,7 @@ public interface CObjectSerializer {
      * @return 对象
      * @throws Exception 异常信息
      */
-    <T> T deSerialize(byte[] param, Class<T> clazz) throws Exception;
+    <T> T deSerialize(byte[] param, Class<T> clazz) throws CatException;
 
     /**
      * 设置scheme.

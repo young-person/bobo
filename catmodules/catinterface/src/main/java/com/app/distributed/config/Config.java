@@ -6,6 +6,7 @@ import java.io.Serializable;
  * 基础数据库配置
  */
 public class Config implements Serializable {
+
     private static final long serialVersionUID = -6834099969596119656L;
     /**
      * 用户名.
