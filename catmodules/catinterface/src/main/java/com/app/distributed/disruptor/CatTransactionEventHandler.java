@@ -2,6 +2,7 @@ package com.app.distributed.disruptor;
 
 import com.app.distributed.CatTransaction;
 import com.app.distributed.service.CoordinatorService;
+import com.bobo.enums.EventTypeEnum;
 import com.lmax.disruptor.EventHandler;
 
 public class CatTransactionEventHandler implements EventHandler<CatTransactionEvent> {
