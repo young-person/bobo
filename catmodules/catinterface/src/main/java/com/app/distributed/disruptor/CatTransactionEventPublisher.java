@@ -1,6 +1,7 @@
-package com.app.distributed.service.impl;
+package com.app.distributed.disruptor;
 
 import com.app.distributed.*;
+import com.app.distributed.context.TransactionThreadFactory;
 import com.lmax.disruptor.BlockingWaitStrategy;
 import com.lmax.disruptor.ExceptionHandler;
 import com.lmax.disruptor.RingBuffer;
@@ -36,7 +37,7 @@ public class CatTransactionEventPublisher implements DisposableBean {
     }
 
     public void start(final int bufferSize) {
-        disruptor = new Disruptor<>(new TransactionEventFactory(), bufferSize, r -> {
+        disruptor = new Disruptor<>(new CatTransactionEventFactory(), bufferSize, r -> {
             AtomicInteger index = new AtomicInteger(1);
             return new Thread(null, r, "disruptor-thread-" + index.getAndIncrement());
         }, ProducerType.MULTI, new BlockingWaitStrategy());
@@ -82,7 +83,7 @@ public class CatTransactionEventPublisher implements DisposableBean {
     public void publishEvent(final CatTransaction transaction, final int type) {
         executor.execute(() -> {
             final RingBuffer<CatTransactionEvent> ringBuffer = disruptor.getRingBuffer();
-            ringBuffer.publishEvent(new TransactionEventTranslator(type), transaction);
+            ringBuffer.publishEvent(new CatTransactionEventTranslator(type), transaction);
         });
 
     }

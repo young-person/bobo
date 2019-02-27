@@ -1,7 +1,10 @@
-package com.app.distributed;
+package com.app.distributed.context;
 
 import java.io.Serializable;
 
+/**
+ * 定义一个事务对象 作为上下文
+ */
 public class TransactionContextBean implements Serializable {
     private static final long serialVersionUID = -5289080166922118073L;
 

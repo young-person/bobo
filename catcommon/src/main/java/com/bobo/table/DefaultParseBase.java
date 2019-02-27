@@ -2,24 +2,37 @@ package com.bobo.table;
 
 import com.bobo.base.CatException;
 import com.bobo.constant.Measure;
+import com.bobo.table.db.CDbIndex;
+import com.bobo.table.db.DBTable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class DefaultParseBase implements ParseBase<Condition> {
+
+    private CDbIndex dbIndex;
+
+    public DefaultParseBase(CDbIndex dbIndex){
+        this.dbIndex = dbIndex;
+    }
+
+
     @Override
     public void parse(Condition condition) {
 
         parseCorn(condition);
 
+        List<DBTable> dbTables = dbIndex.loadTablesFromDbs();
+
+        ParseSql parseSql = new ParseSql(condition);
+
+        String where = parseSql.getWhereCondition();
+
 
 
     }
 
-    private void realParse(Set<Baseid> selectIds){
 
-    }
 
     private void parseCorn(Condition condition){
         if (null == condition.getCorn())

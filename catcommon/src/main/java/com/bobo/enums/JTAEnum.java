@@ -8,6 +8,11 @@ import java.util.Optional;
  * 分布式事物 常用枚举 属性
  */
 public enum JTAEnum {
+    /**
+     * 事务唯一名
+     */
+    TRANSACTION(0,"TRANSACTION"),
+
 
     START(1, "发起者"),
 

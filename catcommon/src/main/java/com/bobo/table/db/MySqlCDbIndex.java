@@ -94,12 +94,6 @@ public class MySqlCDbIndex extends CAbstractDbIndex<DBTable> {
     @Override
     public void aiAnalysis(List list) {
 
-
-
     }
 
-//    @Override
-//    public void aiAnalysis(List<DBTable> list) {
-//
-//    }
 }

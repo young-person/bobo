@@ -1,8 +1,8 @@
-package com.app.distributed;
+package com.app.distributed.disruptor;
 
 import com.lmax.disruptor.EventFactory;
 
-public class TransactionEventFactory implements EventFactory<CatTransactionEvent> {
+public class CatTransactionEventFactory implements EventFactory<CatTransactionEvent> {
 
     @Override
     public CatTransactionEvent newInstance() {

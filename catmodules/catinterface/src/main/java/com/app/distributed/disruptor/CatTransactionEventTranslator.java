@@ -1,12 +1,13 @@
-package com.app.distributed;
+package com.app.distributed.disruptor;
 
+import com.app.distributed.CatTransaction;
 import com.lmax.disruptor.EventTranslatorOneArg;
 
-public class TransactionEventTranslator implements EventTranslatorOneArg<CatTransactionEvent, CatTransaction> {
+public class CatTransactionEventTranslator implements EventTranslatorOneArg<CatTransactionEvent, CatTransaction> {
 
     private int type;
 
-    public TransactionEventTranslator(final int type) {
+    public CatTransactionEventTranslator(final int type) {
         this.type = type;
     }
 

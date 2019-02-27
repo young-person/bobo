@@ -1,7 +1,15 @@
-package com.app.distributed;
+package com.app.distributed.disruptor;
+
+import com.app.distributed.CatTransaction;
 
 import java.io.Serializable;
 
+/**
+ * disruptor 使用 定义 一个事件
+ * 一个 事件工厂
+ * EventHandler 事件的句柄
+ * 事件发布者
+ */
 public class CatTransactionEvent implements Serializable {
     private static final long serialVersionUID = -6965109161383975860L;
     private CatTransaction transaction;

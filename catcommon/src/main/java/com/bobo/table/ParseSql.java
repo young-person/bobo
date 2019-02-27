@@ -1,6 +1,8 @@
 package com.bobo.table;
 
 import com.bobo.base.CatException;
+import com.bobo.enums.CEnum;
+import com.bobo.table.db.DBTable;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -81,6 +83,9 @@ public class ParseSql {
     }
 
     private void parse(){
+
+    }
+    private void parse(List<DBTable> dbTables){
         ParseSql.Pip pip = new ParseSql.Pip();
         for(Baseid baseid:this.condition.getBaseids()){
             String table_col = baseid.getTable_col();
@@ -104,9 +109,10 @@ public class ParseSql {
         for(String key : pip.getGroupMap().keySet()){
             int flag = 0;
             for(Baseid baseid : pip.getBaseids()){
-                if (baseid.getId().equals(key) && "real".equals(baseid.getType()))
+
+                if (baseid.getId().equals(key) && CEnum.REAL.getSerialize().equals(baseid.getType()))
                     flag = 1;
-                if (baseid.getId().equals(key) && "sum".equals(baseid.getType()))
+                if (baseid.getId().equals(key) && CEnum.SUM.getSerialize().equals(baseid.getType()))
                     flag = 2;
                 break;
             }

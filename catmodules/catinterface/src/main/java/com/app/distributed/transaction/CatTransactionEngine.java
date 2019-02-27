@@ -2,10 +2,10 @@ package com.app.distributed.transaction;
 
 import com.app.distributed.CatParticipant;
 import com.app.distributed.CatTransaction;
-import com.app.distributed.TransactionContextBean;
-import com.app.distributed.TransactionContextLocal;
+import com.app.distributed.context.TransactionContextBean;
+import com.app.distributed.context.TransactionContextLocal;
 import com.app.distributed.service.TransactionMessageService;
-import com.app.distributed.service.impl.CatTransactionEventPublisher;
+import com.app.distributed.disruptor.CatTransactionEventPublisher;
 import com.bobo.enums.JTAEnum;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -30,7 +30,9 @@ public abstract class CatTransactionEngine {
      * 注入事物发布事件者
      */
     private CatTransactionEventPublisher publisher;
-
+    /**
+     * 注入事物发布服务
+     */
     private TransactionMessageService messageService;
 
     public abstract CatTransactionEventPublisher getPublisher();
