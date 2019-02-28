@@ -48,7 +48,14 @@ public enum JTAEnum {
 
     PRE_COMMIT(35, "预提交"),
 
-    LOCK(36, "锁定");
+    LOCK(36, "锁定"),
+
+    /**
+     * 操作状态
+     */
+    SUCCESS(200,"成功"),
+    ERROR(500,"失败")
+    ;
 
 
 

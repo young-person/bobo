@@ -7,6 +7,7 @@ import com.bobo.table.db.DBTable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class DefaultParseBase implements ParseBase<Condition> {
 
@@ -28,8 +29,26 @@ public class DefaultParseBase implements ParseBase<Condition> {
 
         String where = parseSql.getWhereCondition();
 
+        List<String> hSql = null,vSql = null;
+        Dimension hdimension = condition.getHdimension();
 
+        Dimension vdimension = condition.getVdimension();
 
+        getDimension(hdimension,hSql);
+        getDimension(vdimension,vSql);
+
+    }
+
+    private  void getDimension(Dimension dimension,List<String> sqls){
+        if (Objects.nonNull(dimension.getNext()) && null != sqls){
+            sqls = new ArrayList<String>();
+            StringBuilder builder = new StringBuilder();
+            builder.append("select ");
+            builder.append(dimension.getId());
+        }
+
+        if (Objects.nonNull(dimension.getNext()))
+            getDimension(dimension.getNext(),sqls);
     }
 
 

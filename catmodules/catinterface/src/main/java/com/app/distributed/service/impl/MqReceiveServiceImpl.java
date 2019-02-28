@@ -31,6 +31,12 @@ public class MqReceiveServiceImpl implements MqReceiveService {
 
     private CatConfig config;
 
+    public MqReceiveServiceImpl(CoordinatorService coordinatorService,CatTransactionEventPublisher publisher,CatConfig config){
+        this.coordinatorService = coordinatorService;
+        this.publisher = publisher;
+        this.config = config;
+    }
+
     @Override
     public Boolean processMessage(byte[] message) {
         try {

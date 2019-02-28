@@ -57,6 +57,7 @@ public class ParseSql {
         return builder.toString();
     }
 
+
     private Dimension exist(Dimension dimension,String key){
         if (null != dimension){
             String id = dimension.getId();
@@ -82,9 +83,8 @@ public class ParseSql {
         }
     }
 
-    private void parse(){
+    private void parse(){}
 
-    }
     private void parse(List<DBTable> dbTables){
         ParseSql.Pip pip = new ParseSql.Pip();
         for(Baseid baseid:this.condition.getBaseids()){

@@ -9,11 +9,6 @@ public class Dimension {
     private int nextLevel;
     private String value;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, level, nextLevel, value, len, next, height, width);
-    }
-
     private int len;
     private Dimension next;
 
@@ -119,5 +114,9 @@ public class Dimension {
                 Objects.equals(id, dimension.id) &&
                 Objects.equals(value, dimension.value) &&
                 Objects.equals(next, dimension.next);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, level, nextLevel, value, len, next, height, width);
     }
 }

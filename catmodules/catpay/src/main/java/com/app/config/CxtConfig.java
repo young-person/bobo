@@ -8,7 +8,6 @@ import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
@@ -18,7 +17,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 
 @Configuration
-@ImportResource(locations= {"classpath:application-bean.xml"})
 public class CxtConfig {
 
     //线程池配置
@@ -60,13 +58,13 @@ public class CxtConfig {
     //点对点队列
     @Bean
     public ActiveMQQueue getActiveMQQueue(){
-        ActiveMQQueue queue = new ActiveMQQueue("com.zheng.api.server.queue.default");
+        ActiveMQQueue queue = new ActiveMQQueue("cat.bobo.server.queue.default");
         return queue;
     }
     //一对多队列
     @Bean
     public ActiveMQTopic getActiveMQTopic(){
-        ActiveMQTopic topic = new ActiveMQTopic("com.zheng.api.server.topic.default");
+        ActiveMQTopic topic = new ActiveMQTopic("cat.bobo.server.topic.default");
         return topic;
     }
     //生产者

@@ -122,4 +122,56 @@ public class ComUtils {
         }
         return null;
     }
+
+    public static String buildRedisKey(final String keyPrefix, final String id) {
+        return String.join(":", keyPrefix, id);
+    }
+
+    public static String buildFilePath(final String applicationName) {
+        return String.join("/", PATH_SUFFIX, applicationName.replaceAll("-", "_"));
+    }
+
+    public static String getFullFileName(final String filePath, final String id) {
+        return String.format("%s/%s", filePath, id);
+    }
+
+    public static String buildDbTableName(final String applicationName) {
+        return DB_SUFFIX + applicationName.replaceAll("-", "_");
+    }
+
+    public static String buildMongoTableName(final String applicationName) {
+        return DB_SUFFIX + applicationName.replaceAll("-", "_");
+    }
+
+    public static String buildRedisKeyPrefix(final String applicationName) {
+        return String.format(RECOVER_REDIS_KEY_PRE, applicationName);
+    }
+
+    public static String buildZookeeperPathPrefix(final String applicationName) {
+        return String.join("-", PATH_SUFFIX, applicationName);
+    }
+
+    public static String buildZookeeperRootPath(final String prefix, final String id) {
+        return String.join("/", prefix, id);
+    }
+
+    static String DB_MYSQL = "mysql";
+
+    static String DB_SQLSERVER = "sqlserver";
+
+    static String DB_ORACLE = "oracle";
+
+    static String PATH_SUFFIX = "/myth";
+
+    static String DB_SUFFIX = "myth_";
+
+    static String RECOVER_REDIS_KEY_PRE = "myth:transaction:%s";
+
+    static String MYTH_TRANSACTION_CONTEXT = "MYTH_TRANSACTION_CONTEXT";
+
+    static String TOPIC_TAG_SEPARATOR = ",";
+
+    static int SUCCESS = 1;
+
+    static int ERROR = 0;
 }

@@ -66,4 +66,99 @@ public class DbConfig extends Config{
      */
     private int maxPoolPreparedStatementPerConnectionSize = 100;
 
+    public int getInitialSize() {
+        return initialSize;
+    }
+
+    public void setInitialSize(int initialSize) {
+        this.initialSize = initialSize;
+    }
+
+    public int getMaxActive() {
+        return maxActive;
+    }
+
+    public void setMaxActive(int maxActive) {
+        this.maxActive = maxActive;
+    }
+
+    public int getMinIdle() {
+        return minIdle;
+    }
+
+    public void setMinIdle(int minIdle) {
+        this.minIdle = minIdle;
+    }
+
+    public int getMaxWait() {
+        return maxWait;
+    }
+
+    public void setMaxWait(int maxWait) {
+        this.maxWait = maxWait;
+    }
+
+    public int getTimeBetweenEvictionRunsMillis() {
+        return timeBetweenEvictionRunsMillis;
+    }
+
+    public void setTimeBetweenEvictionRunsMillis(int timeBetweenEvictionRunsMillis) {
+        this.timeBetweenEvictionRunsMillis = timeBetweenEvictionRunsMillis;
+    }
+
+    public int getMinEvictableIdleTimeMillis() {
+        return minEvictableIdleTimeMillis;
+    }
+
+    public void setMinEvictableIdleTimeMillis(int minEvictableIdleTimeMillis) {
+        this.minEvictableIdleTimeMillis = minEvictableIdleTimeMillis;
+    }
+
+    public String getValidationQuery() {
+        return validationQuery;
+    }
+
+    public void setValidationQuery(String validationQuery) {
+        this.validationQuery = validationQuery;
+    }
+
+    public Boolean getTestOnBorrow() {
+        return testOnBorrow;
+    }
+
+    public void setTestOnBorrow(Boolean testOnBorrow) {
+        this.testOnBorrow = testOnBorrow;
+    }
+
+    public Boolean getTestOnReturn() {
+        return testOnReturn;
+    }
+
+    public void setTestOnReturn(Boolean testOnReturn) {
+        this.testOnReturn = testOnReturn;
+    }
+
+    public Boolean getTestWhileIdle() {
+        return testWhileIdle;
+    }
+
+    public void setTestWhileIdle(Boolean testWhileIdle) {
+        this.testWhileIdle = testWhileIdle;
+    }
+
+    public Boolean getPoolPreparedStatements() {
+        return poolPreparedStatements;
+    }
+
+    public void setPoolPreparedStatements(Boolean poolPreparedStatements) {
+        this.poolPreparedStatements = poolPreparedStatements;
+    }
+
+    public int getMaxPoolPreparedStatementPerConnectionSize() {
+        return maxPoolPreparedStatementPerConnectionSize;
+    }
+
+    public void setMaxPoolPreparedStatementPerConnectionSize(int maxPoolPreparedStatementPerConnectionSize) {
+        this.maxPoolPreparedStatementPerConnectionSize = maxPoolPreparedStatementPerConnectionSize;
+    }
 }
