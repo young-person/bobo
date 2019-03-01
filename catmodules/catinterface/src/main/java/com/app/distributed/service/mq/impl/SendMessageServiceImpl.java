@@ -1,12 +1,12 @@
-package com.app.distributed.service.impl;
+package com.app.distributed.service.mq.impl;
 
 import com.alibaba.dubbo.common.utils.CollectionUtils;
 import com.app.distributed.CatMessageEntity;
 import com.app.distributed.CatParticipant;
 import com.app.distributed.CatTransaction;
 import com.app.distributed.disruptor.CatTransactionEventPublisher;
-import com.app.distributed.service.MqTransactionMessageService;
-import com.app.distributed.service.TransactionMessageService;
+import com.app.distributed.service.mq.MqTransactionMessageService;
+import com.app.distributed.service.mq.SendMessageService;
 import com.bobo.enums.JTAEnum;
 import com.bobo.serializer.CObjectSerializer;
 import com.bobo.serializer.impl.CJavaSerializer;
@@ -15,7 +15,7 @@ import com.bobo.utils.SpringContextUtil;
 import java.util.List;
 import java.util.Objects;
 
-public class TransactionMessageServiceImpl implements TransactionMessageService {
+public class SendMessageServiceImpl implements SendMessageService {
     private volatile CObjectSerializer serializer;
 
     private volatile MqTransactionMessageService mqTransactionMessageService;
@@ -23,7 +23,7 @@ public class TransactionMessageServiceImpl implements TransactionMessageService 
 
     private CatTransactionEventPublisher publisher;
 
-    public TransactionMessageServiceImpl(CatTransactionEventPublisher publisher){
+    public SendMessageServiceImpl(CatTransactionEventPublisher publisher){
         this.publisher = publisher;
     }
 
@@ -32,15 +32,15 @@ public class TransactionMessageServiceImpl implements TransactionMessageService 
         if (Objects.isNull(transaction)) {
             return false;
         }
-        final List<CatParticipant> mythParticipants = transaction.getParticipants();
+        final List<CatParticipant> participants = transaction.getParticipants();
         /*
          * 这里的这个判断很重要，不为空，表示本地的方法执行成功，需要执行远端的rpc方法
          * 为什么呢，因为我会在切面的finally里面发送消息，意思是切面无论如何都需要发送mq消息
          * 那么考虑问题，如果本地执行成功，调用rpc的时候才需要发
-         * 如果本地异常，则不需要发送mq ，此时mythParticipants为空
+         * 如果本地异常，则不需要发送mq ，此时participants为空
          */
-        if (CollectionUtils.isNotEmpty(mythParticipants)) {
-            for (CatParticipant participant : mythParticipants) {
+        if (CollectionUtils.isNotEmpty(participants)) {
+            for (CatParticipant participant : participants) {
                 CatMessageEntity messageEntity = new CatMessageEntity(participant.getTransId(), participant.getInvocation());
                 try {
                     final byte[] message = getObjectSerializer().serialize(messageEntity);
@@ -59,7 +59,7 @@ public class TransactionMessageServiceImpl implements TransactionMessageService 
     }
     private synchronized MqTransactionMessageService getMythMqSendService() {
         if (mqTransactionMessageService == null) {
-            synchronized (TransactionMessageServiceImpl.class) {
+            synchronized (SendMessageServiceImpl.class) {
                 if (mqTransactionMessageService == null) {
                     mqTransactionMessageService = SpringContextUtil.getBean(MqTransactionMessageService.class);
                 }
@@ -70,7 +70,7 @@ public class TransactionMessageServiceImpl implements TransactionMessageService 
 
     private synchronized CObjectSerializer getObjectSerializer() {
         if (serializer == null) {
-            synchronized (TransactionMessageServiceImpl.class) {
+            synchronized (SendMessageServiceImpl.class) {
                 if (serializer == null) {
                     serializer = new CJavaSerializer();
                 }

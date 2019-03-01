@@ -24,8 +24,6 @@ public class RepositoryConvertUtils {
         adapter.setContents(objectSerializer.serialize(transaction.getParticipants()));
         return objectSerializer.serialize(adapter);
     }
-
-    @SuppressWarnings("unchecked")
     public static CatTransaction transformBean(final byte[] contents, final CObjectSerializer objectSerializer) throws Exception {
         CatTransaction transaction = new CatTransaction();
         final CoordinatorRepositoryAdapter adapter = objectSerializer.deSerialize(contents, CoordinatorRepositoryAdapter.class);

@@ -1,12 +1,12 @@
 
-package com.app.distributed.service.impl;
+package com.app.distributed.service.coordinator.impl;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.app.distributed.CatParticipant;
 import com.app.distributed.CatTransaction;
 import com.app.distributed.config.CatConfig;
-import com.app.distributed.config.DbConfig;
-import com.app.distributed.service.CoordinatorRepository;
+import com.app.distributed.config.MysqlConfig;
+import com.app.distributed.service.coordinator.CoordinatorRepository;
 import com.bobo.enums.JTAEnum;
 import com.bobo.serializer.CObjectSerializer;
 import com.bobo.utils.ComUtils;
@@ -158,7 +158,7 @@ public class JdbcCoordinatorRepository implements CoordinatorRepository {
 
     @Override
     public void init(final String modelName, final CatConfig catConfig) {
-        DbConfig config = catConfig.getDbConfig();
+        MysqlConfig config = catConfig.getDbConfig();
         dataSource = new DruidDataSource();
         dataSource.setUrl(config.getUrl());
         dataSource.setDriverClassName(config.getDriverClass());

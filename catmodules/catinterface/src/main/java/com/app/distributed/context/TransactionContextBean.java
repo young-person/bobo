@@ -9,7 +9,6 @@ public class TransactionContextBean implements Serializable {
     private static final long serialVersionUID = -5289080166922118073L;
 
     private String transId;
-
     /**
      * 事务参与的角色.
      */

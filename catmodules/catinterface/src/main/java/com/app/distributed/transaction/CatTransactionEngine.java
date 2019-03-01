@@ -4,7 +4,7 @@ import com.app.distributed.CatParticipant;
 import com.app.distributed.CatTransaction;
 import com.app.distributed.context.TransactionContextBean;
 import com.app.distributed.context.TransactionContextLocal;
-import com.app.distributed.service.TransactionMessageService;
+import com.app.distributed.service.mq.SendMessageService;
 import com.app.distributed.disruptor.CatTransactionEventPublisher;
 import com.bobo.enums.JTAEnum;
 import org.apache.commons.lang3.StringUtils;
@@ -33,10 +33,10 @@ public abstract class CatTransactionEngine {
     /**
      * 注入事物发布服务
      */
-    private TransactionMessageService messageService;
+    private SendMessageService messageService;
 
     public abstract CatTransactionEventPublisher getPublisher();
-    public abstract TransactionMessageService getTransactionMessageService();
+    public abstract SendMessageService getTransactionMessageService();
 
     /**
      * 开始项目分布式事物

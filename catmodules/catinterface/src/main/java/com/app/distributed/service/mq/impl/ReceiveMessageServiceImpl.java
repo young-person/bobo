@@ -1,4 +1,4 @@
-package com.app.distributed.service.impl;
+package com.app.distributed.service.mq.impl;
 
 import com.app.distributed.CatInvocation;
 import com.app.distributed.CatMessageEntity;
@@ -8,7 +8,7 @@ import com.app.distributed.context.TransactionContextBean;
 import com.app.distributed.context.TransactionContextLocal;
 import com.app.distributed.disruptor.CatTransactionEventPublisher;
 import com.app.distributed.service.CoordinatorService;
-import com.app.distributed.service.MqReceiveService;
+import com.app.distributed.service.mq.ReceiveMessageService;
 import com.bobo.base.CatException;
 import com.bobo.enums.JTAEnum;
 import com.bobo.serializer.CObjectSerializer;
@@ -19,7 +19,7 @@ import java.util.Objects;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class MqReceiveServiceImpl implements MqReceiveService {
+public class ReceiveMessageServiceImpl implements ReceiveMessageService {
 
     private static final Lock LOCK = new ReentrantLock();
 
@@ -31,7 +31,7 @@ public class MqReceiveServiceImpl implements MqReceiveService {
 
     private CatConfig config;
 
-    public MqReceiveServiceImpl(CoordinatorService coordinatorService,CatTransactionEventPublisher publisher,CatConfig config){
+    public ReceiveMessageServiceImpl(CoordinatorService coordinatorService, CatTransactionEventPublisher publisher, CatConfig config){
         this.coordinatorService = coordinatorService;
         this.publisher = publisher;
         this.config = config;
@@ -122,7 +122,6 @@ public class MqReceiveServiceImpl implements MqReceiveService {
         executeLocalTransaction(entity.getCatInvocation());
     }
 
-    @SuppressWarnings("unchecked")
     private void executeLocalTransaction(final CatInvocation invocation) throws Exception {
         if (Objects.nonNull(invocation)) {
             final Class clazz = invocation.getTargetClass();
@@ -149,7 +148,7 @@ public class MqReceiveServiceImpl implements MqReceiveService {
 
     private synchronized CObjectSerializer getObjectSerializer() {
         if (serializer == null) {
-            synchronized (MqReceiveServiceImpl.class) {
+            synchronized (ReceiveMessageServiceImpl.class) {
                 if (serializer == null) {
                     serializer = SpringContextUtil.getBean(CObjectSerializer.class);
                 }

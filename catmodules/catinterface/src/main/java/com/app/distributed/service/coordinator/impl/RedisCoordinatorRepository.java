@@ -1,12 +1,12 @@
 
-package com.app.distributed.service.impl;
+package com.app.distributed.service.coordinator.impl;
 
 import com.app.distributed.CatTransaction;
 import com.app.distributed.config.CatConfig;
 import com.app.distributed.config.CoordinatorRepositoryAdapter;
 import com.app.distributed.config.RedisConfig;
 import com.app.distributed.context.RepositoryConvertUtils;
-import com.app.distributed.service.CoordinatorRepository;
+import com.app.distributed.service.coordinator.CoordinatorRepository;
 import com.app.jedis.JedisClient;
 import com.app.jedis.JedisClientCluster;
 import com.app.jedis.JedisClientSentinel;

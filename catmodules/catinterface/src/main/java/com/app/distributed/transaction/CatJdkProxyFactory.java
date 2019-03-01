@@ -11,11 +11,10 @@ import java.lang.reflect.Proxy;
  */
 public class CatJdkProxyFactory extends JdkProxyFactory {
     @Override
-    @SuppressWarnings("unchecked")
     public <T> T getProxy(final Invoker<T> invoker, final Class<?>[] interfaces) {
         T proxy = (T) Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(),
                 interfaces, new InvokerInvocationHandler(invoker));
         return (T) Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(),
-                interfaces, new CatInvokerInvocationHandler(proxy, invoker));
+                interfaces, new CatInvocationHandler(proxy, invoker));
     }
 }

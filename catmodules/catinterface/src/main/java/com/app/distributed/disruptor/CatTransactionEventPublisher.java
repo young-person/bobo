@@ -57,17 +57,18 @@ public class CatTransactionEventPublisher implements DisposableBean {
         disruptor.setDefaultExceptionHandler(new ExceptionHandler<CatTransactionEvent>() {
             @Override
             public void handleEventException(Throwable ex, long sequence, CatTransactionEvent event) {
-                logger.error("Disruptor handleEventException:{},{},{}",new Object[]{ event.getType(),event.getTransaction().toString(),ex.getMessage()});
+                logger.error("Disruptor 事件异常:{},{},{}",new Object[]{ event.getType(),event.getTransaction().toString(),
+                        ex.getMessage()});
             }
 
             @Override
             public void handleOnStartException(Throwable ex) {
-                logger.error("Disruptor start exception");
+                logger.error("Disruptor 开始异常");
             }
 
             @Override
             public void handleOnShutdownException(Throwable ex) {
-                logger.error("Disruptor close Exception ");
+                logger.error("Disruptor 异常关闭");
             }
         });
         disruptor.start();

@@ -1,9 +1,9 @@
 package com.app.distributed.service;
 
-import com.alibaba.fastjson.serializer.ObjectSerializer;
 import com.app.distributed.CatTransaction;
 import com.app.distributed.config.CatConfig;
 import com.bobo.base.CatException;
+import com.bobo.serializer.CObjectSerializer;
 
 import java.util.Date;
 import java.util.List;
@@ -82,5 +82,5 @@ public interface CoordinatorService {
      * 进行序列化
      * @param serializer
      */
-    void setSerializer(ObjectSerializer serializer);
+    void setSerializer(CObjectSerializer serializer);
 }

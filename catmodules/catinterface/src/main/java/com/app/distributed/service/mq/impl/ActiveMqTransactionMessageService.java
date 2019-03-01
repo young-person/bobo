@@ -1,6 +1,6 @@
-package com.app.distributed.service.impl;
+package com.app.distributed.service.mq.impl;
 
-import com.app.distributed.service.MqTransactionMessageService;
+import com.app.distributed.service.mq.MqTransactionMessageService;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.jms.core.JmsTemplate;

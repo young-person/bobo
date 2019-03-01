@@ -1,9 +1,12 @@
 package com.app.distributed.config;
 
+import java.io.Serializable;
+
 /**
  * mysql 数据库配置
  */
-public class DbConfig extends Config{
+public class MysqlConfig implements Serializable {
+    private static final long serialVersionUID = -6965109161383975861L;
     /**
      * 初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时.
      */
@@ -65,6 +68,55 @@ public class DbConfig extends Config{
      * 不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100.
      */
     private int maxPoolPreparedStatementPerConnectionSize = 100;
+
+    /**
+     * 用户名.
+     */
+    protected String username;
+    /**
+     * 密码.
+     */
+    protected String password;
+    /**
+     * 驱动名
+     */
+    protected String driverClass;
+    /**
+     * url连接
+     */
+    protected String url;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getDriverClass() {
+        return driverClass;
+    }
+
+    public void setDriverClass(String driverClass) {
+        this.driverClass = driverClass;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public int getInitialSize() {
         return initialSize;

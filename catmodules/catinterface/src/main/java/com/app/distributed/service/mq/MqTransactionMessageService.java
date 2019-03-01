@@ -1,4 +1,4 @@
-package com.app.distributed.service;
+package com.app.distributed.service.mq;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

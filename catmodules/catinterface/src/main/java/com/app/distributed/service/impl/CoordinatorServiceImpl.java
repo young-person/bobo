@@ -1,12 +1,14 @@
 package com.app.distributed.service.impl;
 
-import com.alibaba.fastjson.serializer.ObjectSerializer;
 import com.app.distributed.CatTransaction;
 import com.app.distributed.config.CatConfig;
-import com.app.distributed.service.CoordinatorRepository;
 import com.app.distributed.service.CoordinatorService;
 import com.app.distributed.service.RpcApplicationService;
+import com.app.distributed.service.coordinator.CoordinatorRepository;
 import com.bobo.base.CatException;
+import com.bobo.serializer.CObjectSerializer;
+import com.bobo.utils.SpringContextUtil;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -25,51 +27,66 @@ public class CoordinatorServiceImpl implements CoordinatorService {
 
     @Override
     public void start(CatConfig config) throws CatException {
-
+        coordinatorRepository = SpringContextUtil.getBean(CoordinatorRepository.class);
+        final String repositorySuffix = buildRepositorySuffix(config.getRepositorySuffix());
+        //初始化spi 协调资源存储
+        coordinatorRepository.init(repositorySuffix, config);
     }
 
     @Override
     public String save(CatTransaction transaction) {
+        final int rows = coordinatorRepository.create(transaction);
+        if (rows > 0) {
+            return transaction.getTransId();
+        }
         return null;
     }
 
     @Override
     public CatTransaction findByTransationId(String id) {
-        return null;
+        return coordinatorRepository.findByTransId(id);
     }
 
     @Override
     public List<CatTransaction> listAllByDelay(Date date) {
-        return null;
+        return coordinatorRepository.listAllByDelay(date);
     }
 
     @Override
     public boolean remove(String transationId) {
-        return false;
+        return coordinatorRepository.remove(transationId) > 0;
     }
 
     @Override
     public int update(CatTransaction transaction) throws CatException {
-        return 0;
+        return coordinatorRepository.update(transaction);
     }
 
     @Override
     public void updateFailTransaction(CatTransaction transaction) throws CatException {
-
+        coordinatorRepository.updateFailTransaction(transaction);
     }
 
     @Override
     public void updateParticipant(CatTransaction transaction) throws CatException {
-
+        coordinatorRepository.updateParticipant(transaction);
     }
 
     @Override
     public int updateStatus(String transId, Integer status) throws CatException {
-        return 0;
+        return coordinatorRepository.updateStatus(transId, status);
     }
 
     @Override
-    public void setSerializer(ObjectSerializer serializer) {
+    public void setSerializer(CObjectSerializer serializer) {
 
+    }
+
+    private String buildRepositorySuffix(final String repositorySuffix) {
+        if (StringUtils.isNoneBlank(repositorySuffix)) {
+            return repositorySuffix;
+        } else {
+            return rpcApplicationService.acquireName();
+        }
     }
 }

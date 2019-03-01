@@ -1,10 +1,10 @@
-package com.app.distributed.service.impl;
+package com.app.distributed.service.coordinator.impl;
 
 import com.app.distributed.CatTransaction;
 import com.app.distributed.config.CatConfig;
 import com.app.distributed.config.CoordinatorRepositoryAdapter;
 import com.app.distributed.context.RepositoryConvertUtils;
-import com.app.distributed.service.CoordinatorRepository;
+import com.app.distributed.service.coordinator.CoordinatorRepository;
 import com.bobo.enums.JTAEnum;
 import com.bobo.serializer.CObjectSerializer;
 import com.bobo.utils.CFileUtils;
@@ -61,7 +61,7 @@ public class FileCoordinatorRepository implements CoordinatorRepository {
             transaction.setLastTime(new Date());
             CFileUtils.writeFile(fullFileName, RepositoryConvertUtils.convert(transaction, serializer));
         } catch (Exception e) {
-            throw new RuntimeException("update exception！");
+            throw new RuntimeException("更新异常");
         }
     }
 
@@ -76,7 +76,7 @@ public class FileCoordinatorRepository implements CoordinatorRepository {
             }
             CFileUtils.writeFile(fullFileName, serializer.serialize(adapter));
         } catch (Exception e) {
-            throw new RuntimeException("update exception！");
+            throw new RuntimeException("更新异常");
         }
 
     }

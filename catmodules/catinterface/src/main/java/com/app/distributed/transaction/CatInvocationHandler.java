@@ -13,14 +13,14 @@ import com.bobo.utils.SpringContextUtil;
 import java.lang.reflect.Method;
 import java.util.Objects;
 
-public class CatInvokerInvocationHandler extends InvokerInvocationHandler {
+public class CatInvocationHandler extends InvokerInvocationHandler {
     private Object target;
 
-    public CatInvokerInvocationHandler(final Invoker<?> handler) {
+    public CatInvocationHandler(final Invoker<?> handler) {
         super(handler);
     }
 
-    public <T> CatInvokerInvocationHandler(final T target, final Invoker<T> invoker) {
+    public <T> CatInvocationHandler(final T target, final Invoker<T> invoker) {
         super(invoker);
         this.target = target;
     }

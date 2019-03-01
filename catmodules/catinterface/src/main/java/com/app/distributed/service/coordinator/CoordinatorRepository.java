@@ -1,4 +1,4 @@
-package com.app.distributed.service;
+package com.app.distributed.service.coordinator;
 
 import com.app.distributed.CatTransaction;
 import com.app.distributed.config.CatConfig;

@@ -1,6 +1,6 @@
 package com.app.distributed.config;
 public class ZookeeperConfig {
-
+    private static final long serialVersionUID = -6965109161383975862L;
     private String host;
 
     private int sessionTimeOut = 1000;

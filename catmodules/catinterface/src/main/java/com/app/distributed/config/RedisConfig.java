@@ -1,18 +1,12 @@
 package com.app.distributed.config;
 public class RedisConfig {
-
+    private static final long serialVersionUID = -6965109161383975861L;
     private Boolean cluster = false;
 
     private Boolean sentinel = false;
 
-    /**
-     * clusterUrl   example:ip:port;ip:port.
-     */
     private String clusterUrl;
 
-    /**
-     * sentinelUrl   example:ip:port;ip:port.
-     */
     private String sentinelUrl;
 
     private String masterName;

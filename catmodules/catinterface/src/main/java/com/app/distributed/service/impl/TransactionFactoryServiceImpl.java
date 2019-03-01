@@ -19,7 +19,7 @@ public class TransactionFactoryServiceImpl implements TransactionFactoryService 
     }
 
     @Override
-    public Class factoryBean(TransactionContextBean contextBean) throws Throwable{
+    public Class factoryOf(TransactionContextBean contextBean) throws Throwable{
         /**
          * 如果事务还没开启 那么应该进入发起调用
          */

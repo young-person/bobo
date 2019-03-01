@@ -1,7 +1,7 @@
-package com.app.distributed.service;
+package com.app.distributed.service.mq;
 
 import com.app.distributed.CatTransaction;
 
-public interface TransactionMessageService {
+public interface SendMessageService {
     public boolean sendMessage(CatTransaction transaction);
 }

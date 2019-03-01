@@ -1,5 +1,7 @@
 package com.app.distributed.context;
 
+import com.app.distributed.config.CatConfig;
+
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -7,7 +9,7 @@ public class TransactionThreadFactory implements ThreadFactory {
 
     private static volatile boolean daemon;
 
-    private static final ThreadGroup THREAD_GROUP = new ThreadGroup("catTransaction");
+    private static final ThreadGroup THREAD_GROUP = new ThreadGroup(CatConfig.CNAME);
 
     private final AtomicLong threadNumber = new AtomicLong(1);
 

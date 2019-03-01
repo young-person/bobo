@@ -2,6 +2,9 @@ package com.app.distributed.config;
 
 public class CatConfig {
 
+    public static final String CNAME = "catTransaction";
+    public static final String LOCAL = "cat";
+
     /**
      * 资源后缀  此参数请填写  关于是事务存储路径
      * 1 如果是表存储 这个就是表名后缀，其他方式存储一样
@@ -54,7 +57,7 @@ public class CatConfig {
     /**
      * db配置.
      */
-    private DbConfig dbConfig;
+    private MysqlConfig dbConfig;
 
     /**
      * redis配置.
@@ -65,11 +68,6 @@ public class CatConfig {
      * zookeeper配置.
      */
     private ZookeeperConfig zookeeperConfig;
-
-    /**
-     * file配置.
-     */
-    private FileConfig fileConfig;
 
     public String getRepositorySuffix() {
         return repositorySuffix;
@@ -143,11 +141,11 @@ public class CatConfig {
         this.bufferSize = bufferSize;
     }
 
-    public DbConfig getDbConfig() {
+    public MysqlConfig getDbConfig() {
         return dbConfig;
     }
 
-    public void setDbConfig(DbConfig dbConfig) {
+    public void setDbConfig(MysqlConfig dbConfig) {
         this.dbConfig = dbConfig;
     }
 
@@ -165,14 +163,6 @@ public class CatConfig {
 
     public void setZookeeperConfig(ZookeeperConfig zookeeperConfig) {
         this.zookeeperConfig = zookeeperConfig;
-    }
-
-    public FileConfig getFileConfig() {
-        return fileConfig;
-    }
-
-    public void setFileConfig(FileConfig fileConfig) {
-        this.fileConfig = fileConfig;
     }
 
     public CatConfig() {}
@@ -198,7 +188,6 @@ public class CatConfig {
         this.dbConfig = builder.dbConfig;
         this.redisConfig = builder.redisConfig;
         this.zookeeperConfig = builder.zookeeperConfig;
-        this.fileConfig = builder.fileConfig;
     }
 
     public static class Builder {
@@ -221,13 +210,11 @@ public class CatConfig {
 
         private int bufferSize = 1024;
 
-        private DbConfig dbConfig;
+        private MysqlConfig dbConfig;
 
         private RedisConfig redisConfig;
 
         private ZookeeperConfig zookeeperConfig;
-
-        private FileConfig fileConfig;
 
         public Builder setRepositorySuffix(String repositorySuffix) {
             this.repositorySuffix = repositorySuffix;
@@ -274,7 +261,7 @@ public class CatConfig {
             return this;
         }
 
-        public Builder setMythDbConfig(DbConfig dbConfig) {
+        public Builder setMythDbConfig(MysqlConfig dbConfig) {
             this.dbConfig = dbConfig;
             return this;
         }
@@ -286,11 +273,6 @@ public class CatConfig {
 
         public Builder setMythZookeeperConfig(ZookeeperConfig zookeeperConfig) {
             this.zookeeperConfig = zookeeperConfig;
-            return this;
-        }
-
-        public Builder setMythFileConfig(FileConfig fileConfig) {
-            this.fileConfig = fileConfig;
             return this;
         }
 
@@ -330,7 +312,7 @@ public class CatConfig {
             return bufferSize;
         }
 
-        public DbConfig getDbConfig() {
+        public MysqlConfig getDbConfig() {
             return dbConfig;
         }
 
@@ -340,10 +322,6 @@ public class CatConfig {
 
         public ZookeeperConfig getZookeeperConfig() {
             return zookeeperConfig;
-        }
-
-        public FileConfig getFileConfig() {
-            return fileConfig;
         }
 
         public CatConfig build() {

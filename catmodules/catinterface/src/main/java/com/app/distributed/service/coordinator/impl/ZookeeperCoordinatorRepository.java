@@ -1,12 +1,12 @@
 
-package com.app.distributed.service.impl;
+package com.app.distributed.service.coordinator.impl;
 
 import com.app.distributed.CatTransaction;
 import com.app.distributed.config.CatConfig;
 import com.app.distributed.config.CoordinatorRepositoryAdapter;
 import com.app.distributed.config.ZookeeperConfig;
 import com.app.distributed.context.RepositoryConvertUtils;
-import com.app.distributed.service.CoordinatorRepository;
+import com.app.distributed.service.coordinator.CoordinatorRepository;
 import com.bobo.enums.JTAEnum;
 import com.bobo.serializer.CObjectSerializer;
 import com.bobo.utils.ComUtils;
@@ -32,7 +32,7 @@ public class ZookeeperCoordinatorRepository implements CoordinatorRepository {
 
     private CObjectSerializer objectSerializer;
 
-    private String rootPathPrefix = "/cat";
+    private String rootPathPrefix = CatConfig.LOCAL;
 
     @Override
     public int create(final CatTransaction transaction) {
@@ -85,9 +85,6 @@ public class ZookeeperCoordinatorRepository implements CoordinatorRepository {
                 final CoordinatorRepositoryAdapter adapter =
                         objectSerializer.deSerialize(content, CoordinatorRepositoryAdapter.class);
                 adapter.setContents(objectSerializer.serialize(transaction.getParticipants()));
-                //TODO issue 28 重复创建node ==> 异常
-                //zooKeeper.create(path, objectSerializer.serialize(adapter),
-                //        ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
                 zooKeeper.setData(path, objectSerializer.serialize(adapter), -1);
             }
         } catch (Exception e) {
@@ -104,10 +101,6 @@ public class ZookeeperCoordinatorRepository implements CoordinatorRepository {
                 final CoordinatorRepositoryAdapter adapter =
                         objectSerializer.deSerialize(content, CoordinatorRepositoryAdapter.class);
                 adapter.setStatus(status);
-                //TODO issue 28 重复创建node ==> 异常
-                //zooKeeper.create(path,
-                //        objectSerializer.serialize(adapter),
-                //        ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
                 zooKeeper.setData(path, objectSerializer.serialize(adapter), -1);
             }
         } catch (Exception e) {
