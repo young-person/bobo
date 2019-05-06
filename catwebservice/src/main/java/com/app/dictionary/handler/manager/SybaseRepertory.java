@@ -42,7 +42,8 @@ public class SybaseRepertory extends AbstractRepertory<Dbs> {
         builder.append(",systypes.name ");
         builder.append(_TYPE);
         builder.append(",allownulls ");
-        builder.append("from syscolumns left join sysobjects on syscolumns.id = sysobjects.id and (sysobjects.type = 'U' OR  sysobjects.type = 'V' )  left join systypes on syscolumns.usertype = systypes.usertype order  by sysobjects.name,syscolumns.name");
+        builder.append(NULLABLE);
+        builder.append(" from syscolumns left join sysobjects on syscolumns.id = sysobjects.id and (sysobjects.type = 'U' OR  sysobjects.type = 'V' )  left join systypes on syscolumns.usertype = systypes.usertype order  by sysobjects.name,syscolumns.name");
         List<Map<String, Object>> list = holderDefault.query(dbs, builder.toString());
 
         return filter.simpleExchange(list);

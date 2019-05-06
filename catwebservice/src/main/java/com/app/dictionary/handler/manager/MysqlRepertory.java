@@ -39,7 +39,9 @@ public class MysqlRepertory extends AbstractRepertory<Dbs> {
         builder.append(_TYPE);
         builder.append(",COLUMN_COMMENT ");
         builder.append(COLUMN_Comments);
-        builder.append("from information_schema.COLUMNS where 1 = 1 and table_schema = '");
+        builder.append(",IS_NULLABLE ");
+        builder.append(NULLABLE);
+        builder.append(" from information_schema.COLUMNS where 1 = 1 and table_schema = '");
         builder.append(dbs.getDbname());
         builder.append("'");
 

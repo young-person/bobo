@@ -19,7 +19,7 @@ public class OracleRepertory extends AbstractRepertory<Dbs> {
     @Override
     public List<Map<String, Object>> queryColumnsByDB(Dbs dbs) {
 
-        String sql = "SELECT table_name TABLENAME,column_name COLUMNNAME,data_type TYPE,data_length LENGTH,(SELECT COMMENTS FROM user_col_comments WHERE user_tab_columns.TABLE_NAME = user_col_comments.TABLE_NAME AND user_tab_columns.COLUMN_NAME= user_col_comments.COLUMN_NAME) TABLECOMMENTS FROM user_tab_columns where 1 = 1";
+        String sql = "SELECT NULLABLE,table_name TABLENAME,column_name COLUMNNAME,data_type TYPE,data_length LENGTH,(SELECT COMMENTS FROM user_col_comments WHERE user_tab_columns.TABLE_NAME = user_col_comments.TABLE_NAME AND user_tab_columns.COLUMN_NAME= user_col_comments.COLUMN_NAME) TABLECOMMENTS FROM user_tab_columns where 1 = 1";
 
         ConnectionHolderDefault holderDefault = new ConnectionHolderDefault();
         List<Map<String, Object>> list = holderDefault.query(dbs, sql);
@@ -46,28 +46,7 @@ public class OracleRepertory extends AbstractRepertory<Dbs> {
         List<Map<String, Object>> list = holderDefault.query(dbs,sql);
         return list;
     }
-    @Override
-    protected boolean isFieldNotNull(Dbs dbs,String table,String column){
 
-
-        ConnectionHolderDefault holderDefault = new ConnectionHolderDefault();
-        StringBuilder builder = new StringBuilder("SELECT * FROM ");
-
-        if (isAllLowerCase(table)){
-            builder.append("\"");
-            builder.append(table);
-            builder.append("\"");
-        }else{
-            builder.append(table);
-        }
-
-        builder.append(" WHERE 1 = 1 ");
-        builder.append(" AND ");
-        builder.append(column);
-        builder.append(" IS NULL ");
-        List<Map<String, Object>> list = holderDefault.query(dbs, builder.toString());
-        return list.size() == 0;
-    }
 
     private boolean isAllLowerCase(String table){
         boolean sure = false;
