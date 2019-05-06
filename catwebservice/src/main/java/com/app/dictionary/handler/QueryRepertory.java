@@ -25,7 +25,7 @@ public interface QueryRepertory<E> {
     public static final String TABLE_Comments = "tableComments";
     public static final String COLUMN_Name = "COLUMNNAME";
     public static final String COLUMN_Comments = "comments";
-
+    public static final String NULLABLE = "NULLABLE";
     public static final String _TYPE = "TYPE";
     public static final String _LENGTH = "LENGTH";
 

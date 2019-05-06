@@ -22,9 +22,6 @@ public abstract class AbstractRepertory<E> extends BaseClass implements QueryRep
         this.filter = filter;
     }
 
-    protected boolean isFieldNotNull(E dbs,String table,String column){
-        return false;
-    }
 
     public AutomationDict getAutomationDict() {
         return automationDict;
@@ -72,22 +69,27 @@ public abstract class AbstractRepertory<E> extends BaseClass implements QueryRep
     protected List<Form> createForms(E dbs, String table, List<Map<String, Object>> list) {
         List<Form> forms = new ArrayList<>();
         for (Map<String, Object> m : list) {
-            String tableName = (String) m.get(QueryRepertory.TABLE_Name);// 表名
+            String tableName = (String) m.get(QueryRepertory.TABLE_Name);
             if (table.equals(tableName)){
-                String colname = (String) m.get(QueryRepertory.COLUMN_Name);// 字段名
+                String colname = (String) m.get(QueryRepertory.COLUMN_Name);
                 String colType = (String) m.get(QueryRepertory._TYPE);
                 BigDecimal len = (BigDecimal) m.get(QueryRepertory._LENGTH);
                 String comments = (String) m.get(QueryRepertory.TABLE_Comments);
                 String columnRemark = m.get(QueryRepertory._PK)==null ? "" : (String)m.get(QueryRepertory._PK);
-                boolean sure = isFieldNotNull(dbs,table,colname);
+                boolean sure = false;
+                if("Y".equals(m.get(QueryRepertory.NULLABLE))){
+                    sure = true;
+                }
 
                 String columnDetail = automationDict.getKeyName(tableName,colname);
                 if (StringUtils.isNotBlank(columnDetail)){
                     comments = columnDetail;
                 }else if(StringUtils.isBlank(columnDetail) && StringUtils.isNotBlank(comments)){
                     logger.error("配置文件里面{}表的{}字段的对应不存在但是数据库有对应翻译",new Object[]{tableName,COLUMN_Name});
+                    comments = "";
                 }else{
                     logger.error("{}表的{}字段的翻译不存在需要人工补录",new Object[]{tableName,COLUMN_Name});
+                    comments = "";
                 }
 
                 Form form = new Form(colname, colType, comments,columnRemark, "");

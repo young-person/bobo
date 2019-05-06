@@ -7,15 +7,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="catcenter" />
-        <module name="catcommon" />
         <module name="catgateway" />
-        <module name="catinterface" />
-        <module name="catmain" />
-        <module name="catpay" />
         <module name="catpayclient" />
+        <module name="catpay" />
+        <module name="catmain" />
         <module name="cattask" />
+        <module name="catinterface" />
         <module name="catupload" />
+        <module name="catcommon" />
+        <module name="catcenter" />
         <module name="catwebservice" />
       </profile>
     </annotationProcessing>
@@ -47,22 +47,9 @@
       <module name="ace-tool" target="1.8" />
       <module name="ace-tool-interface" target="1.8" />
       <module name="ace-trace" target="1.8" />
-      <module name="bobo" target="1.5" />
       <module name="cat" target="1.8" />
       <module name="cat-modules" target="1.8" />
-      <module name="catcenter" target="1.5" />
       <module name="catclient" target="1.8" />
-      <module name="catcloud" target="1.5" />
-      <module name="catcommon" target="1.5" />
-      <module name="catgateway" target="1.5" />
-      <module name="catinterface" target="1.5" />
-      <module name="catmain" target="1.5" />
-      <module name="catmodules" target="1.5" />
-      <module name="catpay" target="1.5" />
-      <module name="catpayclient" target="1.5" />
-      <module name="cattask" target="1.5" />
-      <module name="catupload" target="1.5" />
-      <module name="catwebservice" target="1.5" />
       <module name="demo" target="1.8" />
       <module name="file-converter-core" target="1.8" />
       <module name="file-converter-web" target="1.8" />
@@ -98,5 +85,10 @@
       <module name="xxl-job-executor-sample-springboot" target="1.7" />
       <module name="xxl-job-executor-samples" target="1.7" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="demo" options="" />
+    </option>
   </component>
 </project>
