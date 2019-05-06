@@ -21,7 +21,7 @@ public class DictionaryController {
     @RequestMapping(value = "/export/template", method = RequestMethod.GET)
     public void centerTemplateDown(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/vnd.ms-excel;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=ISO8859_1");
-        response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("上诉案件模板.xls", "UTF-8") + "");
+        response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("数据字典.xls", "UTF-8") + "");
         ServletOutputStream out = response.getOutputStream();
 
         ExcelExportDictionary excelExportDictionary = new ExcelExportDictionary();
