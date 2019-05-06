@@ -1,5 +1,7 @@
 package com.bobo.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +26,12 @@ public class ComUtils {
         }
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
+        }
+        if (StringUtils.isNotBlank(ip) && !"unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("realClientIP");
+        }
+        if (StringUtils.isNotBlank(ip) && !"unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("X-Real-IP");
         }
         return ip;
     }

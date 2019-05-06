@@ -11,8 +11,10 @@
 
     <artifactId>catpayclient</artifactId>
     <dependencies>
-
-
+        <dependency>
+            <groupId>bobo</groupId>
+            <artifactId>catinterface</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

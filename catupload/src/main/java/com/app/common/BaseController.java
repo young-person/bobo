@@ -18,7 +18,7 @@ import java.nio.channels.FileChannel;
 public class BaseController {
     protected static final Logger logger = LoggerFactory.getLogger(BaseController.class);
     protected static String UPLOADED_FOLDER = "D://temp//";
-    private static String SERVER_DIR_URL = "http://127.0.0.1:9003/remote/upload";
+    private static String SERVER_DIR_URL = "http://127.0.0.1:9008/remote/upload";
 
     private static String BOUNDARY = "--------------------";
 
@@ -102,7 +102,7 @@ public class BaseController {
     public static void main(String[] args) throws Exception {
         BaseController baseController = new BaseController();
         FileInfo fileInfo = new FileInfo();
-        fileInfo.setPath("D:\\mypicture\\IMG_0128.JPG");
+        fileInfo.setPath("D:\\java反编译工具.exe");
         fileInfo.setFileName("apache");
         baseController.doRemotePutFile(fileInfo);
        // baseController.test1();
@@ -111,7 +111,7 @@ public class BaseController {
     }
 
     public void test1(){
-        PostMethod filePost = new PostMethod("http://127.0.0.1:9003/remote/upload");
+        PostMethod filePost = new PostMethod("http://127.0.0.1:9007/remote/upload");
         HttpClient client = new HttpClient();
         try {
             int status = client.executeMethod(filePost);

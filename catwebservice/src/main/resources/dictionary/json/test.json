@@ -1,0 +1,976 @@
+{
+    "CAMC_APP":
+    {
+
+        "ID": "App唯一标识",
+        "NAME": "App名称",
+        "IDENTIFIER": "子应用所属主App应用的唯一标识&平台应用的该字段为空",
+        "REMARK": "详细描述",
+        "STATUS": "状态& 0:禁用/删除 1:启用（默认）",
+        "SHORT_REMARK": "内容提要",
+        "SYSTEM_TYPE": "系统类别& 0：平台应用 1：子应用-内嵌应用（原生） 2：子应用-网页应用（H5） 3：子应用-网页应用（第三方带token） 4：子应用-网页应用（第三方无token） 6：子应用-商业应用",
+        "DEVELOPER": "开发者",
+        "IS_BUILT_IN_APP": "默认应用&0:非默认 1:默认",
+        "APP_TYPE": "应用类别",
+        "APP_TAG": "标签，多个用逗号隔开",
+        "APP_IMAGE_URL": "应用图标地址",
+        "CREATE_TIME": "创建时间",
+        "SUPPORT_TOURIST": "支持者",
+        "SCREENSHOT": "截图",
+        "VERSION": "版本号",
+        "IOS_SIGN": "IOS验签",
+        "ANDROID_SIGN": "安卓验签",
+        "IS_REQUIRED":"是否强制更新&0表示否,1表示是",
+        "ONLINE_URL":"H5在线访问地址",
+        "IS_ONLINE":"是否允许在线访问H5&0表示不允许,1表示允许"
+    },
+    "CAMC_APPINFO_CERT_REL":
+    {
+        "ID": "主键ID",
+        "APP_INFO_ID": "APP版本ID",
+        "CERT_ID": "证书ID"
+
+    },
+    "CAMC_APPINFO_SUBAPP_REL":
+    {
+        "ID": "主键ID",
+        "APP_INFO_ID": "APP版本ID",
+        "SUB_APP_ID": "APP子应用ID",
+        "IS_BUILT_IN_APP": "是否默认在首页展示 &0： 否 （默认） 1：是",
+        "STATUS": "状态&0:禁用 1:启用",
+        "SORT": "排序字段",
+        "TYPE": "类型&1:应用商店 2:功能模块",
+        "UPDATE_TIME":"更新时间",
+        "UPDATE_TYPE":"升级方式& 1:自动升级(默认) 2:手动升级"
+    },
+    "CAMC_APP_ACCESS_INFO":
+    {
+        "ID": "主键ID",
+        "APP_ID": "APP应用ID",
+        "OBJ_ID": "用户ID、机构ID、角色ID或者设备ID",
+        "OBJ_TYPE": "选择对象类型&1:用户 2:机构 3角色 4:设备",
+        "ACCESS_TYPE": "权限类型 &1:白名单 2:黑名单 3:灰度用户 4审核员 5 发布员"
+    },
+    "CAMC_APP_AUTHINFO_REL":
+    {
+        "ID": "主键ID",
+        "APP_ID": "APP应用ID",
+        "AUTH_ID": "认证信息ID"
+    },
+    "CAMC_APP_AUTH_RECORD":
+    {
+        "ID": "主键ID",
+        "INNER_CODE": "内码",
+        "AUTH_PARAMS": "主认证接口参数",
+        "DEVICE_ID": "设备id",
+        "AUTH_TYPE": "认证类型",
+        "APP_ID": "app应用标识",
+        "AUTH_TIME": "认证时间",
+        "USER_ID": "用户帐号",
+        "GESTURE_HASH":"手势Hash"
+
+    },"CAMC_APP_CESHI":{
+    "CREATE_TIME":"创建时间",
+    "APP_CERT_ID":"APP证书ID",
+    "SUPPORT_TOURIST":"提供机构",
+    "SCREENSHOT":"屏幕截图",
+    "APP_IMAGE_URL":"图片地址",
+    "APP_TAG":"APP标签",
+    "APP_TYPE":"app类型",
+    "DEVELOPER":"开发者",
+    "SYSTEM_TYPE":"系统类型",
+    "SHORT_REMARK":"内容提要",
+    "STATUS":"状态",
+    "REMARK":"备注",
+    "IDENTIFIER":"唯一标识",
+    "VERSION":"版本",
+    "NAME":"名称",
+    "ID":"主键ID"
+},
+    "CAMC_APP_BUSINESS_REL":
+    {
+        "ID": "主键ID",
+        "APP_ID": "APP应用ID",
+        "BUSINESS_ID": "业务系统ID"
+
+    },
+    "CAMC_APP_CERT":
+    {
+        "ID": "主键ID",
+        "ORG_CODE": "证书颁布的机构标识",
+        "ORG_NAME": "证书颁布的机构名称",
+        "VALIDITY": "证书使用年限（年）",
+        "START_DATE": "证书有效起始日期",
+        "END_DATE": "证书有效结束日期",
+        "COMMON_KEY": "固定文件密钥",
+        "REQUIRED_KEY": "必要文件密钥",
+        "GENERAL_KEY": "非必要文件密钥",
+        "CERT_PATH": "证书文件存放路径",
+        "KEYSTORE_PATH": "密钥库文件存放路径",
+        "ENCRYPTION_TYPE": "加密方式 &1:国际 2:国密",
+        "CREATE_TIME": "创建时间"
+    },
+    "CAMC_APP_CERT_REL":
+    {
+        "ID": "主键ID",
+        "APP_ID": "APP应用ID",
+        "CERT_ID": "证书ID"
+    },
+    "CAMC_APP_CLIENTINFO_REL":
+    {
+        "ID": "主键ID",
+        "APP_ID": "APP应用ID",
+        "DEVICE_ID": "设备ID"
+    },
+    "CAMC_APP_DATASOURCE_REL":
+    {
+        "ID": "主键ID",
+        "DS_IDENTIFIER": "数据源唯一标识",
+        "APP_ID": "APP应用ID",
+        "DS_NAME": "数据源名称"
+    },
+    "CAMC_APP_H5_RESOURCE_REL":
+    {
+        "ID": "主键ID",
+        "APP_ID": "APP应用ID",
+        "H5_RESOURCE_ID": "H5资源ID"
+    },
+    "CAMC_APP_INFO":
+    {
+        "ID": "主键ID",
+        "APP_INFO_ID": "APP版本ID",
+        "MAINFEST_TYPE": "清单类型& 0-APP版本、1-资源、2-H5、3-接口、4-埋点、5-热修复、6-开关",
+        "MAINFEST_CONTENT": "清单内容",
+        "HASH_VALUE": "清单hash值",
+        "PUBLISH_TIME": "发布时间",
+        "PUBLISH_TYPE": "发布类型& 7表示灰度发布、8表示正式发布",
+        "ENCRYPTION_TYPE":"加密方式 &1:国际 2:国密",
+        "PUSH_TYPE":"发布类型 0表示企业级 1表示appstore",
+        "REMARK":"备注",
+        "SSO_PARAM_URL":"获取单点认证参数的接口地址",
+        "QRCODE":"二维码图片访问地址",
+        "PREVIEW_URL":"预览图片访问地址，多个用分号隔开",
+        "APP_OUT_URL":"应用提供给其他应用访问的地址",
+        "LANGUAGE":"'应用语言&中文（默认）、英语",
+        "APP_SIZE":"应用大小，单位kb",
+        "LAST_UPD_USER":"更新人",
+        "LAST_UPD_DATE":"最后更新时间&(格式:yyyy-mm-dd hh:mm:ss)",
+        "PUBLISH_DATE":"发布时间& (格式:yyyy-mm-dd hh:mm:ss)",
+        "APP_TYPE":"APP版本类型&（原生态，HTML5，PC移动化）通过字典配置",
+        "APP_DOWNLOAD_URL":"APP下载URL",
+        "APP_FILE":"安装包保存方式（1:上传至服务器，2:访问下载地址)",
+        "CREATE_TIME":"创建时间",
+        "DEVICE_TYPE":"运行APP所需的设备类型&（从数据字典获取）",
+        "DEVICE_SYS":"运行APP所需的设备操作系统类型&（从数据字典获取）",
+        "STATUS":"状态& -1:删除 0:禁用 1:启用/已发布 2:修改 3:待审核 4:已审核 5:审核未通过 6:撤回 7:灰度发布 8:已发布",
+        "IS_UPDATE":"是否强制客户端更新应用（0：不强制更新，1：强制更新）",
+        "DOWNLOAD_DATE":"下载应用的结束时间",
+        "START_DATE":"应用开始使用时间",
+        "IDENTIFIER":"APP应用ID",
+        "SORT":"应用版本号排序",
+        "VERSION":"版本",
+        "NAME":"名称",
+        "SYSTEM_KEY":"系统密钥 / 或者证书地址"
+    },
+    "CAMC_APP_INFO_MAINFEST":
+    {
+
+        "ID": "主键ID",
+        "APP_INFO_ID": "APP版本ID",
+        "MAINFEST_TYPE": "清单类型& 0-APP版本、1-资源、2-H5、3-接口、4-埋点、5-热修复、6-开关",
+        "MAINFEST_CONTENT": "清单内容",
+        "HASH_VALUE": "清单hash值",
+        "PUBLISH_TIME": "发布时间",
+        "PUBLISH_TYPE": "发布类型& 7表示灰度发布、8表示正式发布"
+    },
+    "CAMC_APP_INFO_PUBLISH":
+    {
+        "ID": "主键ID",
+        "APP_INFO_ID": "APP版本ID",
+        "ABOUTME": "关于信息",
+        "HELPINFO": "帮助信息",
+        "UPDATEINFO": "更新信息",
+        "CREATE_TIME": "创建时间"
+    },
+    "CAMC_APP_MSG_PUSH_ACCOUNT":
+    {
+        "ID": "主键ID",
+        "APP_ID": "APP应用ID",
+        "SERVICE_ID": "推送服务标识",
+        "USER_ID": "用户帐号",
+        "PUSH_ID": "推送帐号",
+        "ICHAT_NO":"聊天账号",
+        "DEVICE_ID":"设备id"
+    },
+    "CAMC_APP_PATCH":
+    {
+        "ID": "主键ID",
+        "APP_INFO_ID": "APP版本ID",
+        "PATCH_VERSION": "版本号",
+        "STATUS": "状态 &-1:删除 0:禁用 1:启用 2:修改 3:待审核 4:已审核 5:审核未通过 6:撤回 7:灰度发布 8:已发布 9:停止发布 10:正在发布中 11:已保存",
+        "DOWN_URL": "下载地址",
+        "REMARK": "备注",
+        "PATCH_HASH": "文件Hash值",
+        "PATCH_SIZE": "文件大小（单位：字节）",
+        "CREATOR": "创建用户id",
+        "CREATE_TIME": "创建时间",
+        "DOWN_NUM": "已下发数量 ",
+        "ACTIVE_NUM": "已激活数量",
+        "DESCRIPTION": "审核发布描述"
+    },
+    "CAMC_APP_PATCH_HISTORY":
+    {
+        "ID": "主键ID",
+        "PATCH_ID": "热修复主键ID",
+        "CHANGE_TYPE": "变更类型",
+        "REMARK": "备注",
+        "CHANGE_TIME": "变更时间",
+        "CHANGE_USER": "变更人账号"
+    },
+    "CAMC_APP_PUSH_REL":
+    {
+        "ID": "主键ID",
+        "APP_ID": "APP应用ID",
+        "SERVICE_ID": "推送服务标识",
+        "PUSH_ID": "推送帐号",
+        "DEVICE_ID":"设备ID"
+    },
+    "CAMC_APP_RESOURCE_REL":
+    {
+        "ID": "主键ID",
+        "APP_ID": "APP应用ID",
+        "RESOURCE_ID": "资源"
+    },
+    "CAMC_APP_ROLE_GROUP_REL":
+    {
+        "ID": "主键ID",
+        "APP_ID": "APP应用ID",
+        "ROLE_GROUP_ID": "角色组ID"
+    },
+    "CAMC_APP_SPG_REL":
+    {
+        "ID": "主键ID",
+        "APP_ID": "APP应用ID",
+        "GROUP_ID": "组ID"
+    },
+    "CAMC_APP_URL_MANAGER":
+    {
+        "ID": "主键ID",
+        "URL": "URL地址",
+        "APP_INFO_ID": "APP版本ID",
+        "TYPE": "类型 &0:白名单 1:黑名单"
+    },
+    "CAMC_APP_USER_REL":
+    {
+        "ID": "主键ID",
+        "APP_ID": "APP应用ID",
+        "ACCT": "账号",
+        "ROLE_TYPE": "角色类型"
+    },
+    "CAMC_AUTH_INFO":
+    {
+        "ID": "主键ID",
+        "OUTTIME_ENABLE": "允许超时&（0：否，1：是）",
+        "SESSION_VALIDITY": "会话有效期(单位：分钟)",
+        "AUTH_VALIDITY": "认证方式有效期(单位：天)",
+        "ONLINE_ENABLE": "开启限制账号同时在线数量&（0：否，1：是）",
+        "LIMIT_NUM": "限制数量",
+        "AUTH_ENABLE": "辅认证过期是否主认证&（0：否，1：是）"
+    },
+    "CAMC_AUTH_MODE":
+    {
+        "ID": "主键ID",
+        "AUTH_ID": "认证配置ID",
+        "AUTH_MODE": "认证模式&（1：主，2：辅助）",
+        "AUTH_TYPE": "认证方式",
+        "AUTH_NAME": "认证名称&（用户名密码、短信密码、手势密码、指纹、人脸）",
+        "INF_ID": "接口ID",
+        "VALIDITY": "有效时间&（用户名密码：天，短信密码：秒）",
+        "SMS_TEMPLATE": "短信内容模版",
+        "SORT_NUM": "认证顺序"
+    },
+    "CAMC_BAS_DICT":
+    {
+        "ID": "主键ID",
+        "CODE": "编号",
+        "NAME": "字典名称",
+        "DESCRIPTION": "字典描述",
+        "TYPE": "类型"
+    },
+    "CAMC_BAS_DICT_ITEM":
+    {
+        "ID": "主键ID",
+        "DICT_ID": "数据字典主表主键ID",
+        "CODE": "编码",
+        "NAME": "显示名称",
+        "SORT": "排序",
+        "DESCRIPTION":"说明"
+    },
+    "CAMC_CLIENT_INFO":
+    {
+        "ID": "主键ID",
+        "DEVICE_NO": "设备号",
+        "DEVICE_NAME": "设备名称",
+        "MOBILE_PHONE": "手机号",
+        "MOBILE_SIM": "SIM卡号",
+        "DEVICE_SYSTEM": "外键：MOBLIE_DICT_DEVICE_SYSTEM的id",
+        "DEVICE_SYSTEM_VERSION": "操作系统版本",
+        "DEVICE_TYPE": "设备类型",
+        "DEVICE_CATEGORY": "设备别名",
+        "DEVICE_IP": "设备IP",
+        "DEVICE_MANUFACTURE": "设备制造商",
+        "DEVICE_MAC": "MAC地址",
+        "DEVICE_MODEL": "设备型号",
+        "MOBILE_IMEI": "IMEI编号",
+        "CPU_CORES": "CPU核数",
+        "RATE": "CPU频率",
+        "MEMORY": "内存",
+        "SCREEN_QUALITY": "屏幕质量",
+        "SCREEN_SIZE": "屏幕尺寸",
+        "LOGIN_TIME": "登录时间"
+    },
+    "CAMC_CONFIG_INFO":
+    {
+        "IDENTIFY_ID": "唯一标识",
+        "VALUE": "值",
+        "REMARK": "备注",
+        "TYPE": "类型"
+    },
+    "CAMC_GATEWAY":
+    {
+        "ID": "主键",
+        "APP_ID": "应用ID",
+        "IDENTIFIER": "标识",
+        "NAME": "名称",
+        "STATUS": "状态 &on:开 off:关",
+        "RATE": "CPU使用率",
+        "MEMORY": "内存使用率",
+        "THREAD": "线程数"
+    },
+    "CAMC_H5_RESOURCE":
+    {
+        "ID": "主键ID",
+        "NAME": "H5资源中文名称",
+        "RESOURCE_PATH": "H5资源文件路径",
+        "DESCRIPTION": "H5资源描述",
+        "VERSION": "H5资源文件版本号&（每次修改H5资源文件，将该字段赋值为对应的H5资源包的版本号）",
+        "LANGUAGE": "语言",
+        "UPDATE_TIME": "更新时间",
+        "IS_PUBLISH": "是否已发布& 0表示没有,1表示已发布 (任意一个版本发布过这个H5资源,这个属于就设置为1)",
+        "REMOTE_FILE_PATH": "文件远程加密后保存地址",
+        "ZIP_SIZE": "zip文件大小",
+        "SOURCE_FILE_PATH": "文件远程源文件保存地址"
+    },
+    "CAMC_INF_OPERATE_RECORD":
+    {
+        "ID": "主键ID",
+        "DATA_ID": "当前的数据id -- 接口服务主键id",
+        "DATA_NAME": "当前的数据名称 -- 接口名称",
+        "DATA_VERSION": "当前的数据版本 --接口版本",
+        "IDENTIFIER": "操作唯一标示符",
+        "APP_SERVICE_URL": "操作接口地址",
+        "APP_SERVICE_FUNCTION": "操作调用webservice接口方法名",
+        "APP_SERVICE_TYPE": "接口类型&(webservices,http)",
+        "LAST_DATA_ID": "操作前的数据id",
+        "OPERATE_TYPE": "操作类型 &1表示新增 2表示修改 3表示撤回",
+        "APP_INFO_ID": "app应用版本id",
+        "DATA_TYPE": "数据类型&1表示资源 2表示H5资源 3表示接口服务",
+        "UPDATE_TIME": "更新时间",
+        "PUBLIC_TIME": "发布时间",
+        "REMARK": "备注&(例如:新增1.0版本,修改1.1版本)",
+        "STATUS": "状态& -1:删除 0:禁用 1:启用 2:修改 3:待审核 4:已审核 5:审核未通过 6:撤回 7:灰度发布 8:已发布"
+    },
+    "CAMC_ON_OFF":
+    {
+        "ID": "主键",
+        "APP_INFO_ID": "应用版本ID",
+        "IDENTIFIER": "标识",
+        "NAME": "名称",
+        "STATUS": "状态 &on:开 off:关",
+        "DOWN_NET": "下发网络 &1:仅Wifi 2:Wifi和4G"
+    },
+    "CAMC_OPERATE_RECORD":
+    {
+        "ID": "主键ID",
+        "DATA_ID": "当前的数据id",
+        "DATA_NAME": "当前的数据名称",
+        "DATA_PATH": "当前的数据路径",
+        "DATA_VERSION": "当前的数据版本",
+        "DATA_LANGUAGE": "当前的数据语言",
+        "LAST_DATA_ID": "操作前的数据id",
+        "OPERATE_TYPE": "操作类型&1表示新增 2表示修改 3表示撤回",
+        "APP_INFO_ID": "app应用版本id",
+        "DATA_TYPE": "数据类型&1表示资源 2表示H5资源",
+        "UPDATE_TIME": "更新时间",
+        "PUBLISH_TIME": "发布时间",
+        "REMARK": "备注&(例如:新增1.0版本,修改1.1版本)",
+        "STATUS": "-1:删除 0:禁用 1:启用 2:修改 3:待审核 4:已审核 5:审核未通过 6:撤回 7:灰度发布 8:已发布",
+        "REMOTE_FILE_PATH": "文件远程保存地址"
+    },
+    "CAMC_PUBLISH_STRATEGY":
+    {
+        "ID": "主键",
+        "STRATEGY_TYPE": "策略类型&(地域、机型、系统、网络、白名单)",
+        "OPERATE_TYPE": "操作类型&（in/not in、>/=/<、开启、白名单）",
+        "STRATEGY_VALUE": "策略值&（武汉、华为/小米、ios9、机构、用户、设备）",
+        "CREATE_TIME": "创建时间"
+    },
+    "CAMC_PUBLISH_STRATEGY_REL":
+    {
+        "ID": "主键ID",
+        "STRATEGY_ID": "策略ID",
+        "HASH": "hash值",
+        "REL_TYPE": "关系类型",
+        "CREATE_TIME": "创建时间"
+    },
+    "CAMC_RESOURCE":
+    {
+        "ID": "主键",
+        "NAME": "资源名称",
+        "RESOURCE_PATH": "资源路径",
+        "DESCRIPTION": "描述",
+        "VERSION": "资源版本",
+        "LANGUAGE": "语言",
+        "UPDATE_TIME": "更新时间",
+        "IS_PUBLISH": "是否发布",
+        "REMOTE_FILE_PATH": "文件远程保存路径",
+        "ZIP_SIZE": "zip文件大小"
+    },
+    "CAMC_SCROLL_PIC":
+    {
+        "ID": "主键ID",
+        "GROUP_TYPE": "滚动图片组类型，根据字典配置项scrollPicType读取",
+        "NAME": "组名称",
+        "CREATE_TIME": "创建时间",
+        "STATUS": "状态&0-停用,1-生效",
+        "PIC_TYPE": "类型&0-本地,1-外链",
+        "OUTER_URL": "外链地址",
+        "INTERVAL": "图片滚动间隔时间",
+        "SCALE": "占比例，单位%",
+        "WIDTH": "宽度",
+        "HEIGHT": "高度",
+        "SHOW_MODE": "展示方式&：0.随机，1.顺序",
+        "PERMISSION": "权限&:0-无,1-有",
+        "DETAIL_NAME":"详情名称",
+        "DETAIL_TIME":"详情时间",
+        "DETAIL_SIZE":"详情大小",
+        "BIGNESS":"规模",
+        "GROUP_ID":"组ID",
+        "DETAIL_PATH":"详情路径",
+        "DETAIL_TYPE":"详情类型",
+        "PIC_PATH":"图片路径",
+        "SORT_NUM":"排序号",
+        "TITLE":"标题"
+    },
+    "CAMC_SCROLL_PIC_GROUP":
+    {
+        "ID": "主键ID",
+        "GROUP_TYPE": "滚动图片组类型&根据字典配置项scrollPicType读取",
+        "NAME": "组名称",
+        "CREATE_TIME": "创建时间",
+        "STATUS": "状态&0-停用,1-生效",
+        "PIC_TYPE": "类型&0-本地,1-外链",
+        "OUTER_URL": "外链地址",
+        "INTERVAL": "图片滚动间隔时间",
+        "SCALE": "占比例，单位%",
+        "WIDTH": "宽度",
+        "HEIGHT": "高度",
+        "SHOW_MODE": "展示方式&0.随机，1.顺序",
+        "PERMISSION": "权限:0-无,1-有",
+        "TIME_INTERVAL":"时间间隔"
+    },
+    "CAMC_SPG_APPINFO_REL":
+    {
+        "ID": "主键ID",
+        "GROUP_ID": "滚动图片组ID",
+        "APP_INFO_ID": "APP版本ID"
+    },
+    "CAMC_SPG_AUTH_REL":
+    {
+        "ID": "主键ID",
+        "GROUP_ID": "滚动图片组ID",
+        "AUTH_ID": "权限ID",
+        "AUTH_TYPE": "权限类&1.用户，2.机构，3.设备"
+    },
+    "CAMC_USER_SUB_APP":
+    {
+        "ID": "主键ID",
+        "APP_INFO_ID": "APP版本ID",
+        "SUB_APP_DATA": "app版本关联的小程序应用主键id数组字符串",
+        "USER_ID": "用户账号acct",
+        "CREATE_TIME":"创建时间"
+    },
+    "CBDC_APP_BAFFLE":
+    {
+        "ID": "主键ID",
+        "NAME": "挡板名称",
+        "GROUP_ID": "所属组ID,如app应用主键ID",
+        "SERVICE_ID": "接口主键ID",
+        "SERVICE_IDENTIFIER": "接口标识",
+        "SERVICE_NAME": "接口名称&某某系统-查询用户-1.0",
+        "STATUS": "状态&1-定时上线；2-立即上线；3-立即下线",
+        "ONLINE_START": "上线时间",
+        "ONLINE_END": "下线时间",
+        "OPERATOR": "操作人",
+        "UPDATE_DATE": "更新日期"
+    },
+    "CBDC_APP_BAFFLE_CONFIG":
+    {
+        "ID": "主键ID",
+        "BAFFLE_ID": "挡板主键ID",
+        "REQ_PARAM": "请求参数",
+        "RETURN_TYPE": "接口返回类&1-模拟数据；2-友好提示；3-跳转地址",
+        "RETURN_DATA": "接口返回结果"
+    },
+    "CBDC_APP_BAFFLE_LOG":
+    {
+        "ID": "主键ID",
+        "BAFFLE_ID": "挡板主键ID",
+        "GROUP_ID": "所属组ID,如APP应用主键ID",
+        "SERVICE_ID": "接口主键ID",
+        "SERVICE_IDENTIFIER": "接口标识",
+        "SERVICE_NAME": "接口名称&某某系统-查询用户-1.0",
+        "DEVICE_NO": "设备号",
+        "USER_ID": "用户账号",
+        "REQ_PARAM": "请求参数",
+        "RETURN_DATA": "返回结果",
+        "DEVICE_SYS": "设备系统",
+        "DEVICE_TYPE": "设备类型",
+        "APP_VERSION": "APP版本",
+        "CREATE_TIME": "创建时间"
+    },
+    "CBDC_APP_SERVICE":
+    {
+        "ID": "主键ID",
+        "VERSION": "接口版本",
+        "IDENTIFIER": "接口标识",
+        "NAME": "接口名称",
+        "INTRO": "接口功能介绍",
+        "APP_SERVICE_URL": "接口地址",
+        "APP_SERVICE_FUNCTION": "接口方法名",
+        "APP_SERVICE_TYPE": "接口类型(webservices,http)",
+        "IS_HANDSHAKE": "是否握手& 0:不需要 1:需要（默认）",
+        "IS_VISITOR_ACCESS": "游客访问& 0:可以 1:不可以（默认）",
+        "APP_SERVICE_AUTHORITY": "接口权限 0:公有 1:私有（默认）",
+        "IS_TEMPLATE_ON": "模板是否启动 0:不启动 1:启动",
+        "TEMPLATE_TYPE": "模板类型& 0:通用模板 1:自定义模板",
+        "APP_SERVICE_TEMPLATE": "只有类型为webservices的接口,才会有这个选项,存放模板文件路径",
+        "APP_SERVICE_ENCODING": "接口返回的编码格式&gbk,utf-8",
+        "TEMPLATE_NAME": "模板名称",
+        "IS_PUBLISH": "是否发布& 0:否 1:是",
+        "BODY_CONTENT":"请求body",
+        "BODY_TYPE":"报文类型& 1 application/x-www-form-urlencoded / 2 multipart/form-data / 3 application/json 4 text/xml / 5 其他",
+        "CACHE_TIME":"缓存时间 单位分钟",
+        "IS_CACHE":"是否开启缓存 &0关闭 / 1开启",
+        "IS_DEGRADE":"是否开启降级& 0关闭 / 1开启",
+        "REQUEST_TYPE":"请求类型& 如GET,POST,PUT",
+        "LIMIT_NUM":"限流数",
+        "LIMIT_END_TIME":"限流结束时间 &YYYY-MM_DD HH:mm:ss",
+        "LIMIT_BEGIN_TIME":"限流开启时间& YYYY-MM_DD HH:mm:ss",
+        "IS_LIMIT":"是否开启限流"
+
+    },
+    "CBDC_APP_SERVICE_MAPPING":
+    {
+        "ID": "主键ID",
+        "APP_SERVICE_ID": "接口主键ID",
+        "APP_PARAM_NAME": "APP请求参数名称",
+        "PARAM_TYPE": "参数类型&0:表示JASON数据流 1:表示请求报文参数 2:表示URL参数",
+        "FIELD_DESC": "该字段的描述",
+        "REMARK": "备注",
+        "SORT": "参数顺序号",
+        "DEFAULT_VALUE":"默认值"
+    },
+    "CBDC_BAFFLE_GRAY_USER":
+    {
+        "ID": "主键ID",
+        "BAFFLE_ID": "挡板主键ID",
+        "OBJ_ID": "用户账号或者设备号",
+        "OBJ_TYPE": "类型-1:用户, 2:设备"
+    },
+    "CBDC_BUSINESS_INF_REL":
+    {
+        "ID": "主键ID",
+        "BUSINESS_ID": "业务系统主键ID",
+        "INF_ID": "接口主键ID"
+    },
+    "CBDC_BUSINESS_SYSTEM":
+    {
+        "ID": "主键ID",
+        "NAME": "系统名称",
+        "SYSTEM_CODE": "系统编码",
+        "URL": "接入地址",
+        "SYSTEM_KEY": "系统密钥",
+        "STATUS": "状态& 0:禁用 1:启用",
+        "PUSH_MSG": "是否允许该系统推送信息& 0:否 1:是",
+        "POINT_LOGIN": "是否允许app单点到该系统& 0:否 1:是",
+        "DESCRIPTION": "描述",
+        "PRIORITY":"'1.一级 2. 二级 3. 三级 4. 四级 5. 五级 6. 六级 7. 七级 8. 八级 9. 九级 10. 十级'",
+        "USER_LIMIT":"用户限制",
+        "UNREAD_TIME":"未读时间",
+        "READ_TIME":"已读时间",
+        "CREATE_TIME":"创建时间",
+        "LIMIT_NUM":"限制数量",
+        "LIMIT_END_TIME":"最后限制时间",
+        "LIMIT_BEGIN_TIME":"开始限制时间",
+        "IS_LIMIT":"是否限制",
+        "KEY_TYPE":"密钥类型& 1 本地 / 2证书"
+    },
+    "CBDC_GRAY_USER":
+    {
+        "ID": "主键ID",
+        "APP_ID": "APP应用ID",
+        "OBJ_ID": "用户账号或者设备号",
+        "TYPE": "类型"
+    },
+    "CDC_FILE_RECORD":
+    {
+        "ID": "主键",
+        "NAME": "名称",
+        "EXT": "类型&jpg,docx,txt",
+        "SAVE_GROUP": "存储组",
+        "SAVE_NAME": "存储名称",
+        "URL": "地址",
+        "CREATE_TIME": "创建时间"
+    },
+    "CDMC_APP_DEVICE_BOUND_CONFIG":
+    {
+        "ID": "主键",
+        "APP_ID": "APP应用ID",
+        "IS_AUTO_UNBOUND": "是否自动解绑&0:否 1:是",
+        "NOTIFY_TYPE": "通知类型&0:消息 1:短信 2:邮件",
+        "BOUND_NUM": "绑定上限数",
+        "BOUND_TYPE": "绑定类型&0:不绑定 1:用户绑定 2:管理员绑定"
+    },
+    "CDMC_APP_USER_DEVICE_BOUND":
+    {
+        "ID": "主键ID",
+        "APP_ID": "APP应用主键ID",
+        "USER_ID": "用户账号",
+        "DEVICE_ID": "设备号",
+        "BOUND_ORDER": "排序",
+        "BOUND_TIME": "绑定时间"
+    },
+    "CDMC_USER_BOUND_CONFIG":
+    {
+        "ID": "主键ID",
+        "APP_ID": "APP应用主键ID",
+        "USER_ID": "用户账号",
+        "BOUND_NUM": "绑定次数"
+    },
+    "CDMC_USER_DEVICE_APPLY":
+    {
+        "ID": "主键ID",
+        "DEVICE_ID": "设备号",
+        "USER_ID": "用户账号",
+        "MOBILE_PHONE": "手机号",
+        "APPLY_TIME": "申请时间",
+        "BOUND_TIME": "绑定时间",
+        "STATUS": "状态&0:未绑定 1:已绑定",
+        "APP_ID":"APP应用ID"
+    },
+    "CNC_MSG_PUSH_ACCOUNT":
+    {
+        "ID": "消息帐号",
+        "SERVICE_ID": "服务标识",
+        "DEVICE_ID": "设备id",
+        "PWD": "帐号密码",
+        "DEVICE_MANUFACTURE": "厂商"
+    },
+    "CNC_NOTIFY_MESSAGE":
+    {
+        "ID": "ID(主键)",
+        "RECEIVE_TIME": "消息接收时间",
+        "RECEIVER_TYPE": "类型&1.个人 2. 机构、3、角色、4、设备",
+        "RECEIVER_OBJ": "向角色、群组、部门等人员集合对象发消息时，将角色、群组、部门的ID存入此字段。",
+        "APP_ID": "APP应用ID",
+        "SENDER": "发送人",
+        "NOTIFY_MODE": "1.立即发送 2. 周期发送 3. 预约发送",
+        "NOTIFY_SCHEDULE_TIME": "消息发送时间",
+        "NOTIFY_INTERVAL": "小时或分钟，如果消息通知方式为立即发送和预约发送，则此值为0",
+        "APP_PRIORITY": "优先级别&1.一级 2. 二级 3. 三级 4. 四级 5. 五级 6. 六级 7. 七级 8. 八级 9. 九级 10. 十级",
+        "EMERGENCY": "紧急情况级别&1.非常紧急 2.紧急 3.一般 4.不紧急",
+        "IS_SENSITIVE": "含敏感词汇&0.不包含敏感词汇 1.包含敏感词汇",
+        "MSG_CONTENT": "消息内容",
+        "MSG_COUNT": "接收对象的个数",
+        "CYCLE_START_TIME": "周期发送开始时间",
+        "CYCLE_END_TIME": "周期发送截至时间",
+        "STATUS": "状态",
+    },
+    "COC_APP_INFO_POINT":
+    {
+        "ID": "ID(主键)",
+        "APP_INFO_ID": "app应用版本id",
+        "POINT_ID": "埋点id",
+        "STATUS": "状态&0:禁用;1:启用"
+    },
+    "COC_APP_POINT":
+    {
+        "ID": "ID(主键)",
+        "APP_ID": "app应用id",
+        "POINT_ID": "埋点id"
+    },
+    "COC_LOG_POINT_CONFIG":
+    {
+        "ID": "主键ID",
+        "APP_INFO_ID": "app版本id",
+        "UPLOAD_PERIOD": "上传周期& 0：实时上传,>0：周期上传,数字为上传间隔分钟",
+        "STATUS": "状态&0:禁用;1:启用",
+        "HASH": "app版本关联的埋点配置hash"
+    },
+    "COC_LOG_POINT_INFO":
+    {
+        "ID": "主键",
+        "POINT_ID": "埋点标识",
+        "POINT_NAME": "埋点名称",
+        "TITLE": "标签",
+        "TYPE": "埋点类型&0内置埋点 1自定义埋点"
+    },
+    "COC_POINT_TITLE":
+    {
+        "ID": "主键",
+        "TITLE": "标签"
+    },
+    "CUC_DATASOURCE":
+    {
+        "ID": "主键",
+        "IDENTIFIER": "唯一标识 自动生成3位数",
+        "NAME": "数据源名称",
+        "STATUS": "状态&-1:删除 0:停用 1:启用",
+        "SORT": "排序号",
+        "CREATOR": "创建人账号"
+    },
+    "CUC_DS_RG_REL":
+    {
+        "ID": "主键",
+        "DS_ID": "数据源id",
+        "ROLE_GROUP_ID": "角色组id"
+    },
+    "CUC_ORG_000":
+    {
+        "ID": "主键id",
+        "ORG_CODE": "机构编码",
+        "PARENT_ID": "父id",
+        "FNAME": "机构全称",
+        "SNAME": "机构简称",
+        "GRADE": "层级",
+        "TYPE": "机构类型",
+        "TEL": "电话",
+        "FAX": "传真",
+        "ADDRESS": "机构地址",
+        "SORT": "机构排序号",
+        "REMARK": "备注",
+        "OFFICER": "办公信息",
+        "POSTCODE": "邮编",
+        "ID_PATH": "机构编码路径",
+        "SNAME_PATH": "机构简称路径,新增",
+        "STATUS": "逻辑删除"
+    },
+    "CUC_ORG_AUTH_000":
+    {
+        "ID": "主键",
+        "USER_ID": "用户主键id",
+        "ORG_ID": "机构主键id",
+        "IDENTIFIER": "数据源唯一标识",
+        "ID_PATH": "机构编码路径"
+    },
+    "CUC_ORG_USER_000":
+    {
+        "ID": "主键",
+        "USER_ID": "用户主键id",
+        "ORG_ID": "机构主键id",
+        "TYPE": "类型& 1表示主机构,2表示兼职 3表示借调",
+        "SORT": "排序,默认存入当前时间戳"
+    },
+    "CUC_RESOURCE_000":
+    {
+        "ID": "主键",
+        "PARENT_ID": "父资源ID",
+        "NAME": "名称",
+        "CODE": "编码",
+        "TYPE": "类型",
+        "URL": "URL路径",
+        "REMARK": "备注",
+        "SORT": "排序",
+        "ICON_URL": "图标路径",
+        "ID_PATH": "编码路径",
+        "NAME_PATH": "名称路径",
+        "STATUS": "状态"
+    },
+    "CUC_RESOURCE_DEFAULT":
+    {
+        "ID": "主键ID",
+        "ROLE_TYPE": "角色类型&系统管理员:sysAdmin, app组管理员:groupAdmin, 发布员:publishRole, 审核员:checkRole",
+        "RESOURCE_ID": "资源主键ID"
+    },
+    "CUC_ROLE_000":
+    {
+        "ID": "主键ID",
+        "NAME": "名称",
+        "CODE": "编码",
+        "TYPE": "类型",
+        "REMARK": "备注",
+        "STATUS": "状态",
+        "KIND": "角色种类 &0:全局角色, 1:组管理员",
+        "GROUP_ID": "所属角色组ID"
+    },
+    "CUC_ROLE_GROUP_000":
+    {
+        "ID": "主键ID",
+        "NAME": "名称",
+        "CODE": "编码",
+        "REMARK": "备注",
+        "STATUS": "状态"
+    },
+    "CUC_ROLE_ORG_000":
+    {
+        "ID": "主键ID",
+        "ROLE_ID": "角色主键ID",
+        "ORG_ID": "机构主键ID"
+    },
+    "CUC_ROLE_RESOURCE_000":
+    {
+        "ID": "主键ID",
+        "RESOURCE_ID": "资源主键ID",
+        "OBJ_ID": "角色/用户主键ID",
+        "OBJ_TYPE": "对象类型& 1用户 / 2角色"
+    },
+    "CUC_ROLE_USER_000":
+    {
+        "ID": "主键ID",
+        "ROLE_ID": "角色主键ID",
+        "USER_ID": "用户主键ID"
+    },
+    "CUC_USER_000":
+    {
+        "ID": "主键ID",
+        "EMPNO": "用户员工号",
+        "ACCT": "用户账号",
+        "PWD": "密码",
+        "CNAME": "中文名",
+        "ENAME": "英文名",
+        "SEX": "性别",
+        "MOBILE": "手机号",
+        "IDC": "身份证",
+        "TEL": "座机号",
+        "EMAIL": "邮箱",
+        "STATUS": "状态",
+        "REMARK": "备注",
+        "TYPE": "个人类型 &0行内用户,1行外用户,2游客",
+        "AVATAR_URL": "用户头像",
+        "GROUP_IMAGE_URL": "群头像",
+        "ICHAT_NO":"聊天账号"
+    },
+    "CAMC_WHITE_STRATEGY":
+    {
+        "ID": "主键ID",
+        "APP_INFO_ID": "APP版本ID",
+        "DATA_ID": "数据ID",
+        "OBJ_ID": "用户ID、机构ID、角色ID或者设备ID",
+        "OBJ_TYPE": "选择对象类型 & 1:用户 2:机构 3角色 4:设备",
+        "DATA_TYPE": "数据类型&1表示资源 2表示H5资源 3表示接口服务"
+    },
+    "CCSC_OPTIONAL_CONFIG":
+    {
+        "ID": "主键",
+        "IDENTIFIER": "标识",
+        "NAME": "名称"
+    },
+    "CNC_PUSH_SERVICE_CONFIG":
+    {
+        "ID": "主键",
+        "NAME": "推送服务类型名称",
+        "MSG_SERVICE_CODE": "推送服务编码(与数据字典配置匹配)",
+        "MSG_SERVICE_NAME": "推送服务名称(与数据字典配置匹配)",
+        "SERVICE_TYPE": "服务类别&（1：系统，2：第三方）",
+        "MSG_SERVER": "推送服务器地址",
+        "PROXY_SERVER": "代理服务器地址",
+        "SECRET_KEY": "安全密钥&（对应个推的APP_KEY，极光推送的SECRET_KEY",
+        "MASTER_SECRET": "个推使用的安全配置",
+        "HMS_APP_ID": "华为手机应用id",
+        "HMS_APP_KEY": "华为手机应用秘钥",
+        "HMS_APP_PACKAGE": "华为手机包名",
+        "MI_APP_ID": "小米手机应用Id",
+        "MI_APP_KEY": "小米手机应用秘钥",
+        "MI_APP_PACKAGE": "小米手机包名",
+        "UPS_APP_ID": "魅族手机应用id",
+        "UPS_APP_KEY": "魅族手机应用秘钥",
+        "SERVICE_ID": "服务标识&（对应个推的AppID，极光推送的API_KEY，App应用根据服务标识生成推送帐号）"
+    },
+    "CNC_MSG_PUSH_INFO_OBJS":
+    {
+        "ID_": "主键",
+        "PID_": "外键，推送信息表主键",
+        "APP_ID_": "应用id",
+        "IDENTIFIER_": "数据源",
+        "TYPE_": "类型&1:用户2:机构3:广播",
+        "CODE_": "用户/机构编号",
+        "NAME_": "用户/机构名称",
+        "IDENTIFY_":"唯一标识"
+    },
+    "CNC_MSG_PUSH_INFO":
+    {
+        "ID_": "ID(主键)",
+        "APP_ID_": "应用id",
+        "SYS_CODE_": "推送系统编号",
+        "SYS_NAME_": "推送系统名称",
+        "TEMPLATE_ID_": "模板ID",
+        "PUSH_MODE_": "1.实时发送 2. 预约发送",
+        "RESVA_TIME_": "预约时间，预约发送时此字段有效",
+        "PUSH_ACCTIME_": "实际推送时间",
+        "MSG_TYPE_": "消息类型&0:文字消息1:H5消息",
+        "MSG_CONTENT_": "替换好的消息内容",
+        "STATUS_": "状态&1:未推送 2:推送中 3:部分成功 4:推送成功 5:推送失败",
+        "CREATED_BY_": "创建人",
+        "CREATED_TIME_": "创建时间"
+    },
+    "CNC_MSG_PUSH_INFO_STATUS":
+    {
+        "ID_": "主键",
+        "PID_": "外键，推送信息表主键",
+        "POID_": "外键，推送对象表主键",
+        "CODE_": "用户编号",
+        "NAME_": "用户名称",
+        "STATUS_": "1:未推送2:推送中3:推送成功4:推送失败",
+        "DESC_": "推送结果",
+        "TIME_": "推送时间"
+    },
+    "CCSC_PROPERTIES":
+    {
+        "ID": "主键",
+        "NAME": "参数名",
+        "VALUE": "参数值",
+        "APP_NAME": "应用名，空为通用配置",
+        "PROFILE": "环境标识",
+        "STATUS": "状态&（0：停用，1：启用）",
+        "VERSION": "版本号",
+        "REMARK": "参数描述",
+        "TYPE": "参数类型&（2：基础配置，3：注册中心配置，4：数据库配置，5：Redis配置，6：消息队列配置，7：文件服务器配置，8：链路追踪配置，9：服务监控配置，10：登录配置，11：调试信息，99：其他）",
+        "IS_EDIT": "是否可编辑&（0：不可编辑，1：可编辑，2：优先编辑）"
+    },
+    "CNC_MSG_PUSH_TEMPLATE":
+    {
+        "ID": "主键",
+        "APP_ID_": "应用id",
+        "TEMPLATE_TYPE": "模板类型&0:表示文字模板(默认) 1:表示图片模板",
+        "TEMPLATE_DESC": "模板描述",
+        "STATUS": "状态 &0:禁用/删除 1:启用（默认）",
+        "TEMPLATE_CONTENT": "消息内容",
+        "TEMPLATE_LAYOUT": "消息布局",
+        "CREATE_TIME": "创建时间",
+        "TEMPLATE_NAME": "模板名称"
+    },
+    "schema_version":
+    {
+        "installed_rank": "安装值",
+        "version": "版本",
+        "description": "描述",
+        "type": "类型",
+        "script": "脚本",
+        "checksum": "总值",
+        "installed_by": "安装对象",
+        "installed_on": "安装时间",
+        "execution_time": "安装执行时间",
+        "success": "成功 为1"
+    }
+}

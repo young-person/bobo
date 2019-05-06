@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,7 +22,12 @@ import java.nio.file.Paths;
  */
 @Controller
 public class UploadController extends BaseController {
-
+    @GetMapping(value = "services")
+    public ModelAndView list(ModelAndView mv) {
+        mv.setViewName("/services");
+        mv.addObject("title","欢迎使用Thymeleaf!");
+        return mv;
+    }
     /**
      * 文件上传
      * @param file

@@ -60,4 +60,14 @@ public class Forecast implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
+
+
+    public static void main(String[] args) {
+        String filename = "1556093452760545.jpg";
+        //文件名
+        String fileName = filename.substring(0, filename.lastIndexOf("."));
+        //文件扩展名
+        String ext = filename.substring(filename.lastIndexOf(".") + 1);
+        System.out.printf(ext);
+    }
 }

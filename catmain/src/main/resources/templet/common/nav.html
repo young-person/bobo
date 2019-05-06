@@ -1,0 +1,54 @@
+<div id="sidebar" class="sidebar responsive ace-save-state">
+    <ul class="nav nav-list">
+        <#macro itemChilden items>
+        <#assign countSize = items?size>
+        <ul class="submenu nav-hide">
+            <#list items as item>
+            <li>
+                <#if (item.children?? && item.children?size >0)>
+                <a href="#" class="dropdown-toggle">
+                    <i ${item.icon}></i>${item.name}
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+                <@itemChilden item.children></@itemChilden>
+            <#else>
+            <a href="${item.url}">
+                <i ${item.icon}></i>${item.name}
+            </a>
+        </#if>
+        <b class="arrow"></b>
+        </li>
+    </#list>
+    </ul>
+</#macro>
+
+<#list beans as item>
+<#assign index="item_index"/>
+<#if (COMPLETE_URL == item.url)>
+<li class="active">
+    <#else>
+<li>
+</#if>
+
+<#if (item.children?? && item.children?size >0)>
+<a href="#" class="dropdown-toggle">
+    <i ${item.icon}></i>
+    <span class="menu-text">${item.name}</span>
+    <b class="arrow fa fa-angle-down"></b>
+</a>
+<@itemChilden item.children></@itemChilden>
+<#else>
+<a href="${item.url}">
+    <i ${item.icon}></i>
+    <span class="menu-text">${item.name}</span>
+</a>
+</#if>
+<b class="arrow"></b>
+</li>
+</#list>
+</ul>
+
+<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+    <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+</div>
+</div>

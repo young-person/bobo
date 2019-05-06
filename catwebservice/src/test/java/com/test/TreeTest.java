@@ -14,6 +14,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 public class TreeTest {
     @Test
     public void test1(){
+
+
         System.out.println(1);
     }
 
@@ -26,6 +28,10 @@ public class TreeTest {
     public void after() {
         System.out.println("测试结束-----------------");
     }
+
+
+
+
 }
 
 

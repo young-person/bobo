@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>系统菜单</title>
+    <#include "common/include.html" />
+</head>
+<body class="no-skin">
+<#include "common/head.html" />
+<div class="main-container ace-save-state" id="main-container">
+    <#include "common/nav.html" />
+    <div class="main-content">
+        <div class="col-xs-12">
+            <h3 class="header smaller lighter blue">系统菜单</h3>
+            <div>
+                <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th class="center">唯一约束</th>
+                        <th class="center">所属上级</th>
+                        <th class="center">名字</th>
+                        <th class="center">备注</th>
+                        <th class="center">链接</th>
+                        <th class="center">状态</th>
+                        <th class="center">类型</th>
+                        <th class="center">排序号</th>
+                        <th class="center">样式图标</th>
+                        <th class="center">创建时间</th>
+                        <th class="center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <#list menus as node>
+                    <tr>
+                        <td class="center">${node.id}</td>
+                        <td class="center">${node.parentid}</td>
+                        <td class="center">${node.name}</td>
+                        <td class="center">${node.urlkey}</td>
+                        <td class="center">${node.url}</td>
+                        <td class="center">${node.status}</td>
+                        <td class="center">${node.type}</td>
+                        <td class="center">${node.sort}</td>
+                        <td class="center">${node.icon}</td>
+                        <td class="center">${node.create_time}</td>
+                        <td class="center">
+                            <div class="hidden-sm hidden-xs action-buttons">
+                                <a class="blue" href="#" onclick="addMenuIframeModel()">
+                                    <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                </a>
+                                <a class="green" href="#" onclick="showIframeModel(${node.id})">
+                                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                </a>
+                                <a class="red" href="/page/authorization/sysmenu/${node.id}">
+                                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    </#list>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="NoPermissionModal" >
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 700px;height:700px;">
+            <iframe id="NoPermissioniframe" width="100%" height="100%" frameborder="0"></iframe>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="${BASEPATH}/static/js/authorization/sysmenu.js"></script>
+</html>
+
+

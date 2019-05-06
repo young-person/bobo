@@ -1,7 +1,6 @@
 package com.bobo.serializer.impl;
 
 import com.bobo.base.CatException;
-import com.bobo.enums.CEnum;
 import com.bobo.serializer.CObjectSerializer;
 
 import java.io.*;
@@ -33,6 +32,6 @@ public class CJavaSerializer implements CObjectSerializer {
 
     @Override
     public String getScheme() {
-        return CEnum.JDK.getSerialize();
+        return "jdk";
     }
 }

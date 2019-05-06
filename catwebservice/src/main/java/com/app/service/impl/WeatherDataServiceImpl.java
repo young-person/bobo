@@ -1,8 +1,8 @@
 package com.app.service.impl;
 
-import com.app.Const;
 import com.app.pojo.WeatherResponse;
 import com.app.service.WeatherDataService;
+import com.bobo.constant.Measure;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,10 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.zip.GZIPInputStream;
 
 @Service
 public class WeatherDataServiceImpl implements WeatherDataService {
@@ -23,13 +20,13 @@ public class WeatherDataServiceImpl implements WeatherDataService {
 
     @Override
     public WeatherResponse getDataByCityId(String cityId) {
-        String uri = Const.WEATHER_URI + "citykey=" + cityId;
+        String uri = Measure.WEATHER_URI + "citykey=" + cityId;
         return this.doGetWeather(uri);
     }
 
     @Override
     public WeatherResponse getDataByCityName(String cityName) {
-        String uri = Const.WEATHER_URI + "city=" + cityName;
+        String uri = Measure.WEATHER_URI + "city=" + cityName;
         return this.doGetWeather(uri);
     }
 

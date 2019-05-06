@@ -17,6 +17,7 @@ import java.io.*;
 
 @RestController
 public class TestController extends BaseController {
+
     @GetMapping(value = "test")
     public String getDemo(){
         FileInfo fileInfo = new FileInfo();

@@ -13,7 +13,10 @@
     <dependencies>
 
 
-
+        <dependency>
+            <groupId>bobo</groupId>
+            <artifactId>catcommon</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

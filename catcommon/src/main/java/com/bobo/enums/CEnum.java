@@ -5,9 +5,10 @@ import java.util.Objects;
 import java.util.Optional;
 
 public enum CEnum {
-    JDK("jdk"),
+    SUM("sum"),
     REAL("real"),
-    SUM("sum");
+    FIRST("first"),
+    LAST("last");
 
     private String serialize;
 
@@ -20,7 +21,7 @@ public enum CEnum {
                 Arrays.stream(CEnum.values())
                         .filter(v -> Objects.equals(v.getSerialize(), serialize))
                         .findFirst();
-        return serializeEnum.orElse(CEnum.JDK);
+        return serializeEnum.orElse(CEnum.SUM);
 
     }
     public String getSerialize() {

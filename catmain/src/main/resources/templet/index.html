@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<#assign BASEPATH=request.contextPath />
+<#assign time = .now?long>
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0"> 
+	<title>登录界面</title>
+    <link href="${BASEPATH}/static/css/default.css" rel="stylesheet" type="text/css" />
+	<!--必要样式-->
+    <link href="${BASEPATH}/static/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="${BASEPATH}/static/css/demo.css" rel="stylesheet" type="text/css" />
+    <link href="${BASEPATH}/static/css/loaders.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+		var BASEPATH = '${BASEPATH}';
+	</script>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+	<div class='login'>
+		<div class='login_title'>
+			<span>管理员登录</span>
+		</div>
+		<div class='login_fields'>
+			<form>
+				<input type="hidden" name="backUrl" value="${backUrl}" />
+				<div class='login_fields__user'>
+					<div class='icon'>
+						<img alt="" src='${BASEPATH}/static/images/user_icon_copy.png'>
+					</div>
+					<input name="username" placeholder='用户名' maxlength="16" type='text' autocomplete="off" value=""/>
+					<div class='validation'>
+						<img alt="" src='static/images/tick.png'>
+					</div>
+				</div>
+				<div class='login_fields__password'>
+					<div class='icon'>
+						<img alt="" src='${BASEPATH}/static/images/lock_icon_copy.png'>
+					</div>
+					<input name="password" placeholder='密码' maxlength="16" type='text' autocomplete="off">
+					<div class='validation'>
+						<img alt="" src='${BASEPATH}/static/images/tick.png'>
+					</div>
+				</div>
+				<div class='login_fields__submit'>
+					<input type='button' value='登录'>
+				</div>
+			</form>
+		</div>
+		<div class='success'>
+		</div>
+		<div class='disclaimer'>
+			<p>欢迎登录后台管理系统</p>
+		</div>
+	</div>
+	<div class='authent'>
+		<div class="loader" style="height: 44px;width: 44px;margin-left: 28px;">
+			<div class="loader-inner ball-clip-rotate-multiple">
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+		<p>认证中...</p>
+	</div>
+	<div class="OverWindows"></div>
+	
+    <link href="${BASEPATH}/static/lib/layui/css/layui.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="${BASEPATH}/static/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="${BASEPATH}/static/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src='${BASEPATH}/static/js/stopExecutionOnTimeout.js?t=1'></script>
+    <script type="text/javascript" src="${BASEPATH}/static/lib/layui/layui.js"></script>
+    <script type="text/javascript" src="${BASEPATH}/static/lib/Particleground.js"></script>
+    <script type="text/javascript" src="${BASEPATH}/static/js/Treatment.js?t=${time}"></script>
+    <script type="text/javascript" src="${BASEPATH}/static/lib/jquery.mockjax.js?t=${time}"></script>
+	<script type="text/javascript" src="${BASEPATH}/static/js/index.js?t=${time}"></script>
+</body>
+</html>
