@@ -7,7 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="catcenter" />
+        <module name="catgateway" />
         <module name="catpayclient" />
         <module name="catpay" />
         <module name="catmain" />
@@ -15,7 +15,7 @@
         <module name="catinterface" />
         <module name="catupload" />
         <module name="catcommon" />
-        <module name="catgateway" />
+        <module name="catcenter" />
         <module name="catwebservice" />
       </profile>
     </annotationProcessing>
