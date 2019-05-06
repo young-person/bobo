@@ -11,5 +11,5 @@ target/
 logs
 */*.lnk
 */*.pdb
-compiler.xml
-workspace.xml
+compiler.*
+workspace.*
