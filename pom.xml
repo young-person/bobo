@@ -100,6 +100,7 @@
         <tio-core.version>1.7.0.v20170501-RELEASE</tio-core.version>
         <poi.version>3.9</poi.version>
         <oracle.version>11.2.0.3.0</oracle.version>
+        <mapper.version>3.4.0</mapper.version>
     </properties>
 
     <dependencies>
@@ -404,6 +405,7 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
 
         </dependencies>
     </dependencyManagement>
