@@ -7,16 +7,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="catgateway" />
         <module name="catpayclient" />
+        <module name="catwebservice" />
         <module name="catpay" />
         <module name="catmain" />
-        <module name="cattask" />
+        <module name="catgateway" />
         <module name="catinterface" />
         <module name="catupload" />
         <module name="catcommon" />
         <module name="catcenter" />
-        <module name="catwebservice" />
+        <module name="cattask" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
