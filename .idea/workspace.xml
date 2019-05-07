@@ -2,88 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98e5d1de-2a84-414a-8cee-2522ea44d4bf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bobo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bobo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/catcenter/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/catcenter/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/catcenter/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/catcenter/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/catcenter/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/catcenter/catcenter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/catcloud/catcenter/catcenter.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/catcloud.iml" beforeDir="false" afterPath="$PROJECT_DIR$/catcloud/catcloud.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/catgateway/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/catgateway/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/catgateway/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/catgateway/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/catgateway/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/catgateway/catgateway.iml" beforeDir="false" afterPath="$PROJECT_DIR$/catcloud/catgateway/catgateway.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/.settings/org.eclipse.wst.common.component" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/.settings/org.eclipse.wst.common.project.facet.core.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/.settings/org.eclipse.wst.validation.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/catcommon.iml" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/catcommon.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmain/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmain/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmain/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmain/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmain/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmain/catmain.iml" beforeDir="false" afterPath="$PROJECT_DIR$/catmain/catmain.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catinterface/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catinterface/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catinterface/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catinterface/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catinterface/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catinterface/catinterface.iml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catinterface/catinterface.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catmodules.iml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catmodules.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpay/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpay/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpay/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpay/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpay/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpay/catpay.iml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catpay/catpay.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpayclient/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpayclient/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpayclient/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpayclient/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpayclient/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpayclient/catpayclient.iml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catpayclient/catpayclient.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/rpcclient/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/rpcclient/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/rpcclient/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/rpcclient/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/rpcclient/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/rpcservice/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/rpcservice/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/rpcservice/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/rpcservice/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/rpcservice/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catupload/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catupload/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catupload/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catupload/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catupload/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catupload/catupload.iml" beforeDir="false" afterPath="$PROJECT_DIR$/catupload/catupload.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catwebservice/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catwebservice/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catwebservice/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catwebservice/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catwebservice/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catwebservice/catwebservice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/catwebservice/catwebservice.iml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -238,7 +159,7 @@
         <entry file="file://$PROJECT_DIR$/catupload/src/main/java/com/CatuploadApplication.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="459">
-              <caret line="36" column="13" lean-forward="true" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+              <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -247,16 +168,7 @@
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
-              <caret line="12" column="7" lean-forward="true" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catcommon/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
+              <caret line="12" column="7" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -485,7 +397,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/utils" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/catmodules/rpcservice/pom.xml" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -494,7 +406,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -718,7 +630,7 @@
       <workItem from="1557069129342" duration="1088000" />
       <workItem from="1557122960844" duration="7794000" />
       <workItem from="1557147072446" duration="4182000" />
-      <workItem from="1557193022408" duration="1304000" />
+      <workItem from="1557193022408" duration="2055000" />
     </task>
     <task id="LOCAL-00001" summary="云注册中心">
       <created>1547298624589</created>
@@ -937,7 +849,14 @@
       <option name="project" value="LOCAL" />
       <updated>1557151605784</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="环境修改&#10;Signed-off-by: bobo &lt;1243434698@qq.com&gt;">
+      <created>1557194655081</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1557194655081</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -973,7 +892,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="380214000" />
+    <option name="totallyTimeSpent" value="380965000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -987,7 +906,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.75" visible="true" weight="0.26439232" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.75" visible="true" weight="0.26439232" />
       <window_info id="Structure" order="1" sideWeight="0.25" side_tool="true" visible="true" weight="0.26439232" />
       <window_info id="Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -1002,7 +921,7 @@
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32827735" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.7318763" visible="true" weight="0.12892741" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49946696" weight="0.32827735" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.26812366" side_tool="true" visible="true" weight="0.12892741" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="9" sideWeight="0.26812366" side_tool="true" visible="true" weight="0.12892741" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.4749467" weight="0.23076923" />
       <window_info anchor="bottom" id="Problems" order="11" sideWeight="0.49946696" weight="0.219935" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
@@ -1042,6 +961,7 @@
       <path value="$PROJECT_DIR$/../repository" />
       <path value="$PROJECT_DIR$/fintech-web-front" />
       <path value="$PROJECT_DIR$/fintech-back" />
+      <path value="$PROJECT_DIR$/gp" />
     </ignored-roots>
     <MESSAGE value="云注册中心" />
     <MESSAGE value="共用类和工具类" />
@@ -1061,7 +981,8 @@
     <MESSAGE value="数据字典修改&#10;Signed-off-by: bobo &lt;1243434698@qq.com&gt;" />
     <MESSAGE value="表结构&#10;Signed-off-by: bobo &lt;1243434698@qq.com&gt;" />
     <MESSAGE value="数据字典&#10;Signed-off-by: bobo &lt;1243434698@qq.com&gt;" />
-    <option name="LAST_COMMIT_MESSAGE" value="数据字典&#10;Signed-off-by: bobo &lt;1243434698@qq.com&gt;" />
+    <MESSAGE value="环境修改&#10;Signed-off-by: bobo &lt;1243434698@qq.com&gt;" />
+    <option name="LAST_COMMIT_MESSAGE" value="环境修改&#10;Signed-off-by: bobo &lt;1243434698@qq.com&gt;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1159,13 +1080,6 @@
     <SUITE FILE_PATH="coverage/bobo$All_in_cattask.ic" NAME="All in cattask Coverage Results" MODIFIED="1556182356248" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://D:/repertory/org/apache/poi/poi/3.9/poi-3.9-sources.jar!/org/apache/poi/ss/usermodel/Row.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2091">
-          <caret line="138" column="9" selection-start-line="138" selection-start-column="9" selection-end-line="138" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://D:/repertory/org/apache/poi/poi/3.9/poi-3.9-sources.jar!/org/apache/poi/hssf/util/HSSFColor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8806">
@@ -1551,14 +1465,17 @@
     <entry file="file://$PROJECT_DIR$/catupload/src/main/java/com/CatuploadApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
-          <caret line="36" column="13" lean-forward="true" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catmodules/catmodules.iml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="12" column="7" lean-forward="true" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
+          <caret line="12" column="7" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -1615,7 +1532,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>cattask</last-edited>
+          <last-edited>rpcservice</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
