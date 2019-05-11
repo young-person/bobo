@@ -41,6 +41,7 @@
         <module>catcloud</module>
         <module>cattask</module>
         <module>catmain</module>
+        <module>catresource</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -411,12 +412,20 @@
     </dependencyManagement>
     <!-- maven 依赖管理-->
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
+
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+            </resource>
+        </resources>
+
     </build>
 
 </project>

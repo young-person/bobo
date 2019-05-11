@@ -7,18 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="catcenter" />
-        <module name="catcommon" />
-        <module name="catgateway" />
-        <module name="catinterface" />
-        <module name="catmain" />
-        <module name="catpay" />
-        <module name="catpayclient" />
-        <module name="cattask" />
-        <module name="catupload" />
-        <module name="catwebservice" />
-        <module name="rpcclient" />
         <module name="rpcservice" />
+        <module name="catupload" />
+        <module name="catpayclient" />
+        <module name="catcommon" />
+        <module name="catmain" />
+        <module name="cattask" />
+        <module name="catinterface" />
+        <module name="catpay" />
+        <module name="catgateway" />
+        <module name="rpcclient" />
+        <module name="catresource" />
+        <module name="catcenter" />
+        <module name="catwebservice" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -49,22 +50,9 @@
       <module name="ace-tool" target="1.8" />
       <module name="ace-tool-interface" target="1.8" />
       <module name="ace-trace" target="1.8" />
-      <module name="bobo" target="1.8" />
       <module name="cat" target="1.8" />
       <module name="cat-modules" target="1.8" />
-      <module name="catcenter" target="1.8" />
       <module name="catclient" target="1.8" />
-      <module name="catcloud" target="1.8" />
-      <module name="catcommon" target="1.8" />
-      <module name="catgateway" target="1.8" />
-      <module name="catinterface" target="1.8" />
-      <module name="catmain" target="1.8" />
-      <module name="catmodules" target="1.8" />
-      <module name="catpay" target="1.8" />
-      <module name="catpayclient" target="1.8" />
-      <module name="cattask" target="1.8" />
-      <module name="catupload" target="1.8" />
-      <module name="catwebservice" target="1.8" />
       <module name="demo" target="1.8" />
       <module name="file-converter-core" target="1.8" />
       <module name="file-converter-web" target="1.8" />
@@ -92,8 +80,6 @@
       <module name="ft-yst-lib" target="1.8" />
       <module name="ft-yst-mobile" target="1.8" />
       <module name="mybatisplus-spring-boot" target="1.6" />
-      <module name="rpcclient" target="1.8" />
-      <module name="rpcservice" target="1.8" />
       <module name="xxl-job-admin" target="1.7" />
       <module name="xxl-job-core" target="1.7" />
       <module name="xxl-job-executor-sample-spring" target="1.7" />

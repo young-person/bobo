@@ -13,13 +13,10 @@
     <file url="file://$PROJECT_DIR$/catmodules/catpayclient" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/catmodules/rpcclient" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/catmodules/rpcservice" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/catresource" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cattask" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/catupload" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/catwebservice" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/demo" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/demo" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/springboot-jsp-master" charset="UTF-8" />
-    <file url="file://D:/springboot-jsp-master" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
