@@ -1,7 +1,6 @@
 package com.app.cattask.shiro;
 
 import com.app.cattask.pojo.UserToken;
-import com.app.cattask.shiro.policy.PolicyEvent;
 import com.app.cattask.shiro.policy.PolicyLoginEvent;
 import com.bobo.base.CatException;
 import org.apache.shiro.authc.AuthenticationException;
@@ -12,7 +11,6 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,24 +22,14 @@ import java.util.Set;
 public class MyShiroRealm extends AuthorizingRealm {
 
 
-	protected PolicyEvent event;
 
 	private PolicyLoginEvent loginEvent;
 
 	public PolicyLoginEvent getLoginEvent() {
 		return loginEvent;
 	}
-	@Autowired
 	public void setLoginEvent(PolicyLoginEvent loginEvent) {
 		this.loginEvent = loginEvent;
-	}
-
-	public PolicyEvent getEvent() {
-		return event;
-	}
-	@Autowired
-	public void setEvent(PolicyEvent event) {
-		this.event = event;
 	}
 
 	/**
@@ -58,10 +46,6 @@ public class MyShiroRealm extends AuthorizingRealm {
 		UserToken userToken = loginEvent.authentication(authcToken);
 
 		if (null != userToken){
-			if (null !=event){
-				event.init(authcToken);
-			}
-
 			AuthenticationInfo info = new SimpleAuthenticationInfo(authcToken, userToken.getPassword(), this.getName());
 			return info;
 		}

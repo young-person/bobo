@@ -4,6 +4,8 @@ package com.app.cattask.config;
 import com.app.cattask.shiro.MyShiroRealm;
 import com.app.cattask.shiro.filter.DeviceFilter;
 import com.app.cattask.shiro.filter.KickoutSessionControlFilter;
+import com.app.cattask.shiro.impl.DefaultPolicyLoginEvent;
+import com.app.cattask.shiro.policy.PolicyLoginEvent;
 import com.bobo.constant.Measure;
 import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.codec.Base64;
@@ -27,10 +29,11 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
+
 	@Bean
-	public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
+	public ShiroFilterFactoryBean shiroFilter() {
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-		shiroFilterFactoryBean.setSecurityManager(securityManager);
+		shiroFilterFactoryBean.setSecurityManager(getSecurityManager());
 		shiroFilterFactoryBean.setLoginUrl("/login");
 		shiroFilterFactoryBean.setSuccessUrl("/index");
 		shiroFilterFactoryBean.setUnauthorizedUrl("/403");
@@ -55,11 +58,12 @@ public class ShiroConfig {
 	@Bean
 	public MyShiroRealm myShiroRealm() {
 		MyShiroRealm myShiroRealm = new MyShiroRealm();
+		PolicyLoginEvent loginEvent = new DefaultPolicyLoginEvent();
+		myShiroRealm.setLoginEvent(loginEvent);
 		return myShiroRealm;
 	}
 
-	@Bean
-	public SecurityManager securityManager() {
+	public SecurityManager getSecurityManager() {
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
 		securityManager.setRealm(myShiroRealm());
 		securityManager.setCacheManager(getMemoryConstrainedCacheManager());
@@ -88,8 +92,10 @@ public class ShiroConfig {
 	}
 	public RedisManager redisManager() {
 		RedisManager redisManager = new RedisManager();
-		redisManager.setHost("203.195.250.160");
-		redisManager.setPort(7013);
+//		redisManager.setHost("203.195.250.160");
+//		redisManager.setPort(7013);
+		redisManager.setHost("127.0.0.1");
+		redisManager.setPort(6379);
 		redisManager.setExpire(1800);// 配置缓存过期时间
 		redisManager.setTimeout(1000);
 		// redisManager.setPassword(password);

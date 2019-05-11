@@ -9,14 +9,14 @@
     <meta http-equiv="expires" content="0">
     <title>模板界面</title>
 
-    <link rel="stylesheet" href="../static/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../static/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="../static/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+    <link rel="stylesheet" href="${CONTEXTKPATH}static/lib/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="${CONTEXTKPATH}static/lib/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="${CONTEXTKPATH}/static/lib/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
 
-    <script type="text/javascript" src="../static/lib/jquery.min.js"></script>
-    <script type="text/javascript" src="../static/assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../static/assets/js/ace.min.js"></script>
-    <script type="text/javascript" src="../static/js/contextmenu.js"></script>
+    <script type="text/javascript" src="${CONTEXTKPATH}/static/lib/jquery/jquery.js"></script>
+    <script type="text/javascript" src="${CONTEXTKPATH}/static/lib/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${CONTEXTKPATH}/static/lib/assets/js/ace.min.js"></script>
+    <script type="text/javascript" src="${CONTEXTKPATH}/static/js/contextmenu.js"></script>
     <style type="text/css">
         .main{
             position: absolute;
@@ -43,7 +43,7 @@
             margin: 2px 0px 0px 8px;
         }
         .folder-icon{
-            background: url(../static/images/file.gif) no-repeat;
+            background: url(/static/images/file.gif) no-repeat;
             background-size: cover;
             height: 74px;
             width: 80px;
@@ -61,12 +61,13 @@
             position:absolute;
             visibility:hidden;
             cursor:pointer;
-            background: url("../static/images/delete3.png") no-repeat;
+            background: url("/static/images/delete3.png") no-repeat;
         }
     </style>
     <script type="text/javascript">
         var upid = '${Authorization}';
         var cid = '${request.contextPath}';
+        var CONTEXTKPATH = "${CONTEXTKPATH}";
     </script>
 </head>
 <body class="no-skin">
@@ -104,5 +105,5 @@
     </ul>
 </div>
 </body>
-<script type="text/javascript" src="../static/js/file.js"></script>
+<script type="text/javascript" src="${CONTEXTKPATH}/static/js/file.js"></script>
 </html>

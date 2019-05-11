@@ -322,9 +322,9 @@
 
 var p = paper({'id':'filePanel','nav':'filelist'});
 
-p.doload("file/sys/",upid);
+p.doload(CONTEXTKPATH+"file/sys/",upid);
 
 $("#createfo").click(function(){
     //p['hander']()['create']();
-    p.create('/file/sys/');
+    p.create(CONTEXTKPATH+'/file/sys/');
 });
