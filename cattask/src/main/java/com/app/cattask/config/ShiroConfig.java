@@ -103,6 +103,8 @@ public class ShiroConfig {
 	}
 
 
+
+
 	public SimpleCookie rememberMeCookie(){
        SimpleCookie simpleCookie = new SimpleCookie(Measure.head_Authorization);
        simpleCookie.setMaxAge(2592000);

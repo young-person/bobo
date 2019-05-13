@@ -8,17 +8,17 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="rpcservice" />
-        <module name="catupload" />
         <module name="catpayclient" />
+        <module name="catcenter" />
         <module name="catcommon" />
         <module name="catmain" />
         <module name="cattask" />
         <module name="catinterface" />
         <module name="catpay" />
-        <module name="catgateway" />
+        <module name="catupload" />
         <module name="rpcclient" />
         <module name="catresource" />
-        <module name="catcenter" />
+        <module name="catgateway" />
         <module name="catwebservice" />
       </profile>
     </annotationProcessing>
