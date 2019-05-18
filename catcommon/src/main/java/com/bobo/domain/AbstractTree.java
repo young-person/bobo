@@ -1,8 +1,8 @@
 package com.bobo.domain;
 
-import com.google.common.collect.Lists;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +19,7 @@ public abstract class AbstractTree<T extends BaseTree<T, ID>, ID extends Seriali
      */
     @Override
     public List<T> getChildTreeObjects(List<T> list, ID parentId) {
-        List<T> returnList = Lists.newArrayList();
+        List<T> returnList = new ArrayList<T>();
         for (T res : list) {
             if (res.getPid() == null) {
                 continue;
@@ -68,7 +68,7 @@ public abstract class AbstractTree<T extends BaseTree<T, ID>, ID extends Seriali
      */
     @Override
     public List<T> getChildList(List<T> list, T t) {
-        List<T> childList = Lists.newArrayList();
+        List<T> childList = new ArrayList<T>();
         for (T child : list) {
             if (isEmpty(child.getPid())) {
                 continue;

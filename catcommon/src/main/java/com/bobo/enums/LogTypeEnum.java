@@ -1,9 +1,8 @@
 
 package com.bobo.enums;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,9 +60,9 @@ public enum LogTypeEnum {
 
 
 	public static List<Map<String, Object>> getList() {
-		List<Map<String, Object>> list = Lists.newArrayList();
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		for (LogTypeEnum ele : LogTypeEnum.values()) {
-			Map<String, Object> map = Maps.newHashMap();
+			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("key", ele.getType());
 			map.put("value", ele.getName());
 			list.add(map);

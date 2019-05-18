@@ -1,20 +1,23 @@
 package com.bobo.domain;
 
-import com.bobo.annotation.Tree;
-import com.bobo.utils.CReflectUtil;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.InputStream;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import com.bobo.annotation.Tree;
+import com.bobo.utils.CReflectUtil;
 
 /**
  * 树转换生成类
@@ -36,7 +39,6 @@ public class TreeUtils {
 
         String id = null,pid = null,text = null,icon = null,url = null;
         Field[] fields = datas.get(0).getClass().getDeclaredFields();
-        List<Map<String,String>> children = new ArrayList<Map<String,String>>();
         for(Field f : fields) {
             f.setAccessible(true);
             Tree tree = f.getAnnotation(Tree.class);
@@ -183,7 +185,6 @@ public class TreeUtils {
             if(entry.getValue()){
                 for(Bean map : list){
                     String pValue = BeanUtils.getProperty(map, pid);
-                    String idValue = BeanUtils.getProperty(map, id);
                     if (entry.getKey().equals(pValue)){
                         pNodes2.add(map);
                     }
@@ -271,33 +272,6 @@ public class TreeUtils {
             beans.add(bean);
         }
         return beans;
-    }
-
-    public static void main(String[] args) {
-        TreeUtils entity =  new TreeUtils();
-        InputStream stream = entity.getClass().getResourceAsStream("/tree.json");
-
-        String path = entity.getClass().getResource("/tree.json").getPath();
-        System.out.println(path);
-        File file = new File(path);
-        String cxt = readTextAllContent(file);
-        System.out.println(cxt);
-    }
-
-
-    public static String readTextAllContent(File file) {
-        StringBuilder result = new StringBuilder();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String s = null;
-            while ((s = br.readLine()) != null) {
-                result.append(System.lineSeparator() + s);
-            }
-            br.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result.toString();
     }
 
 }

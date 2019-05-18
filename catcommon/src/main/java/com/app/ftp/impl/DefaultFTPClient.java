@@ -4,7 +4,7 @@ import com.app.ftp.FTPConfig;
 import com.app.ftp.FileTransportListener;
 import com.app.ftp.IFTPClient;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.net.ProtocolCommandListener;
 import org.apache.commons.net.ftp.*;
 import org.slf4j.Logger;

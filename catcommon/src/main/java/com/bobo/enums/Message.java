@@ -2,9 +2,8 @@ package com.bobo.enums;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,9 +71,9 @@ public enum Message {
 
 
     public static List<Map<String, Object>> getList() {
-        List<Map<String, Object>> list = Lists.newArrayList();
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         for (Message ele : Message.values()) {
-            Map<String, Object> map = Maps.newHashMap();
+            Map<String, Object> map = new HashMap<String, Object>();
             map.put("code", ele.getCode());
             map.put("value", ele.getValue());
             list.add(map);
