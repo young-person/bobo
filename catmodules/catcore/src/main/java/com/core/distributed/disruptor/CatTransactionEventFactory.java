@@ -1,4 +1,4 @@
-package com.app.distributed.disruptor;
+package com.core.distributed.disruptor;
 
 import com.lmax.disruptor.EventFactory;
 

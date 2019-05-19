@@ -1,12 +1,12 @@
-package com.app.distributed.dubbo;
+package com.core.distributed.dubbo;
 
 import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.fastjson.JSONObject;
-import com.app.distributed.config.CatConfig;
-import com.app.distributed.context.TransactionContextBean;
-import com.app.distributed.context.TransactionContextLocal;
-import com.app.distributed.filter.TransactionAspectService;
-import com.app.distributed.filter.TransactionInterceptor;
+import com.core.distributed.config.CatConfig;
+import com.core.distributed.context.TransactionContextBean;
+import com.core.distributed.context.TransactionContextLocal;
+import com.core.distributed.filter.TransactionAspectService;
+import com.core.distributed.filter.TransactionInterceptor;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 

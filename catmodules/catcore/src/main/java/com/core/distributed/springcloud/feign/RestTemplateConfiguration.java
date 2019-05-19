@@ -1,4 +1,4 @@
-package com.app.distributed.springcloud.feign;
+package com.core.distributed.springcloud.feign;
 
 import feign.Feign;
 import feign.InvocationHandlerFactory;

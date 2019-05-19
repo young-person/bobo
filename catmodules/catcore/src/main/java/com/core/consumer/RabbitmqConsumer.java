@@ -1,6 +1,6 @@
-package com.app.consumer;
+package com.core.consumer;
 
-import com.app.distributed.service.mq.ReceiveMessageService;
+import com.core.distributed.service.mq.ReceiveMessageService;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

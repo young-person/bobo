@@ -1,11 +1,11 @@
-package com.app.distributed.service.impl;
+package com.core.distributed.service.impl;
 
-import com.app.distributed.config.CatConfig;
-import com.app.distributed.disruptor.CatTransactionEventPublisher;
-import com.app.distributed.service.coordinator.CoordinatorRepository;
-import com.app.distributed.service.CoordinatorService;
-import com.app.distributed.service.CoreInitService;
-import com.app.distributed.service.coordinator.impl.JdbcCoordinatorRepository;
+import com.core.distributed.config.CatConfig;
+import com.core.distributed.disruptor.CatTransactionEventPublisher;
+import com.core.distributed.service.coordinator.CoordinatorRepository;
+import com.core.distributed.service.CoordinatorService;
+import com.core.distributed.service.CoreInitService;
+import com.core.distributed.service.coordinator.impl.JdbcCoordinatorRepository;
 import com.bobo.serializer.CObjectSerializer;
 import com.bobo.serializer.impl.CJavaSerializer;
 import org.springframework.context.ConfigurableApplicationContext;

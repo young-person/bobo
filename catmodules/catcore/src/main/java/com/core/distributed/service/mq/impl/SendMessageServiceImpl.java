@@ -1,12 +1,12 @@
-package com.app.distributed.service.mq.impl;
+package com.core.distributed.service.mq.impl;
 
 import com.alibaba.dubbo.common.utils.CollectionUtils;
-import com.app.distributed.CatMessageEntity;
-import com.app.distributed.CatParticipant;
-import com.app.distributed.CatTransaction;
-import com.app.distributed.disruptor.CatTransactionEventPublisher;
-import com.app.distributed.service.mq.MqTransactionMessageService;
-import com.app.distributed.service.mq.SendMessageService;
+import com.core.distributed.CatMessageEntity;
+import com.core.distributed.CatParticipant;
+import com.core.distributed.CatTransaction;
+import com.core.distributed.disruptor.CatTransactionEventPublisher;
+import com.core.distributed.service.mq.MqTransactionMessageService;
+import com.core.distributed.service.mq.SendMessageService;
 import com.bobo.enums.JTAEnum;
 import com.bobo.serializer.CObjectSerializer;
 import com.bobo.serializer.impl.CJavaSerializer;

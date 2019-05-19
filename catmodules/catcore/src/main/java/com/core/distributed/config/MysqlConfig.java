@@ -1,4 +1,4 @@
-package com.app.distributed.config;
+package com.core.distributed.config;
 
 import java.io.Serializable;
 

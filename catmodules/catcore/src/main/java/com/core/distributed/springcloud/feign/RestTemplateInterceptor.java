@@ -1,9 +1,9 @@
 
-package com.app.distributed.springcloud.feign;
+package com.core.distributed.springcloud.feign;
 
 import com.alibaba.fastjson.JSON;
-import com.app.distributed.context.TransactionContextBean;
-import com.app.distributed.context.TransactionContextLocal;
+import com.core.distributed.context.TransactionContextBean;
+import com.core.distributed.context.TransactionContextLocal;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 

@@ -1,4 +1,4 @@
-package com.app.distributed.context;
+package com.core.distributed.context;
 
 import java.io.Serializable;
 

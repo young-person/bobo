@@ -1,11 +1,11 @@
-package com.app.distributed.transaction;
+package com.core.distributed.transaction;
 
 import com.alibaba.dubbo.rpc.Invoker;
 import com.alibaba.dubbo.rpc.proxy.InvokerInvocationHandler;
-import com.app.distributed.CatInvocation;
-import com.app.distributed.CatParticipant;
-import com.app.distributed.context.TransactionContextBean;
-import com.app.distributed.context.TransactionContextLocal;
+import com.core.distributed.CatInvocation;
+import com.core.distributed.CatParticipant;
+import com.core.distributed.context.TransactionContextBean;
+import com.core.distributed.context.TransactionContextLocal;
 import com.bobo.annotation.JTATransaction;
 import com.bobo.utils.ComUtils;
 import com.bobo.utils.SpringContextUtil;

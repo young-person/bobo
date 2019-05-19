@@ -1,6 +1,6 @@
-package com.app.distributed.service;
+package com.core.distributed.service;
 
-import com.app.distributed.context.TransactionContextBean;
+import com.core.distributed.context.TransactionContextBean;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 public interface TransactionHandler {

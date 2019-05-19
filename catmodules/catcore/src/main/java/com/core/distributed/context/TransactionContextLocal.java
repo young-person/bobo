@@ -1,4 +1,4 @@
-package com.app.distributed.context;
+package com.core.distributed.context;
 
 /**
  * 事务的上下文

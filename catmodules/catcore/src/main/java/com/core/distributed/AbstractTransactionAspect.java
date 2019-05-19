@@ -1,7 +1,7 @@
 
-package com.app.distributed;
+package com.core.distributed;
 
-import com.app.distributed.filter.TransactionInterceptor;
+import com.core.distributed.filter.TransactionInterceptor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

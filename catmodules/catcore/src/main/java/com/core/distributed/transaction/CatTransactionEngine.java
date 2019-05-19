@@ -1,11 +1,11 @@
-package com.app.distributed.transaction;
+package com.core.distributed.transaction;
 
-import com.app.distributed.CatParticipant;
-import com.app.distributed.CatTransaction;
-import com.app.distributed.context.TransactionContextBean;
-import com.app.distributed.context.TransactionContextLocal;
-import com.app.distributed.service.mq.SendMessageService;
-import com.app.distributed.disruptor.CatTransactionEventPublisher;
+import com.core.distributed.CatParticipant;
+import com.core.distributed.CatTransaction;
+import com.core.distributed.context.TransactionContextBean;
+import com.core.distributed.context.TransactionContextLocal;
+import com.core.distributed.service.mq.SendMessageService;
+import com.core.distributed.disruptor.CatTransactionEventPublisher;
 import com.bobo.enums.JTAEnum;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;

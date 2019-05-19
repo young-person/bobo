@@ -1,7 +1,7 @@
-package com.app.distributed.service;
+package com.core.distributed.service;
 
-import com.app.distributed.CatTransaction;
-import com.app.distributed.config.CatConfig;
+import com.core.distributed.CatTransaction;
+import com.core.distributed.config.CatConfig;
 import com.bobo.base.CatException;
 import com.bobo.serializer.CObjectSerializer;
 

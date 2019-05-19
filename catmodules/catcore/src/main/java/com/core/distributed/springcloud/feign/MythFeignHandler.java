@@ -1,12 +1,12 @@
 
-package com.app.distributed.springcloud.feign;
+package com.core.distributed.springcloud.feign;
 
 
-import com.app.distributed.CatInvocation;
-import com.app.distributed.CatParticipant;
-import com.app.distributed.context.TransactionContextBean;
-import com.app.distributed.context.TransactionContextLocal;
-import com.app.distributed.transaction.CatTransactionEngine;
+import com.core.distributed.CatInvocation;
+import com.core.distributed.CatParticipant;
+import com.core.distributed.context.TransactionContextBean;
+import com.core.distributed.context.TransactionContextLocal;
+import com.core.distributed.transaction.CatTransactionEngine;
 import com.bobo.annotation.JTATransaction;
 import com.bobo.utils.SpringContextUtil;
 import feign.InvocationHandlerFactory.MethodHandler;

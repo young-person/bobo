@@ -1,7 +1,7 @@
-package com.app.distributed.service.impl;
+package com.core.distributed.service.impl;
 
-import com.app.distributed.config.CatConfig;
-import com.app.distributed.service.RpcApplicationService;
+import com.core.distributed.config.CatConfig;
+import com.core.distributed.service.RpcApplicationService;
 
 public class SpringCloudRpcApplicationServiceImpl implements RpcApplicationService {
     @Override

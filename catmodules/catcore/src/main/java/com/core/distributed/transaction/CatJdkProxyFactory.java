@@ -1,4 +1,4 @@
-package com.app.distributed.transaction;
+package com.core.distributed.transaction;
 
 import com.alibaba.dubbo.rpc.Invoker;
 import com.alibaba.dubbo.rpc.proxy.InvokerInvocationHandler;

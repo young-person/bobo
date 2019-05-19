@@ -7,19 +7,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="rpcservice" />
-        <module name="catpayclient" />
-        <module name="catcenter" />
-        <module name="catcommon" />
-        <module name="catmain" />
-        <module name="cattask" />
-        <module name="catinterface" />
-        <module name="catpay" />
-        <module name="catupload" />
-        <module name="rpcclient" />
         <module name="catresource" />
         <module name="catgateway" />
+        <module name="rpcservice" />
+        <module name="catcenter" />
+        <module name="catinterface" />
+        <module name="rpcclient" />
+        <module name="catmain" />
         <module name="catwebservice" />
+        <module name="catcommon" />
+        <module name="catupload" />
+        <module name="catpay" />
+        <module name="cattask" />
+        <module name="catpayclient" />
+        <module name="catcore" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

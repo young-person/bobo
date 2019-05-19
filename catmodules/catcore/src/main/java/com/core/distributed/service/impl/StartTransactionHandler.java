@@ -1,9 +1,9 @@
-package com.app.distributed.service.impl;
+package com.core.distributed.service.impl;
 
-import com.app.distributed.context.TransactionContextBean;
-import com.app.distributed.context.TransactionContextLocal;
-import com.app.distributed.service.TransactionHandler;
-import com.app.distributed.transaction.CatTransactionEngine;
+import com.core.distributed.context.TransactionContextBean;
+import com.core.distributed.context.TransactionContextLocal;
+import com.core.distributed.service.TransactionHandler;
+import com.core.distributed.transaction.CatTransactionEngine;
 import com.bobo.base.CatException;
 import org.aspectj.lang.ProceedingJoinPoint;
 

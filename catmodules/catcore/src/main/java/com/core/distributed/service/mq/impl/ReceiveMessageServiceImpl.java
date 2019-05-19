@@ -1,14 +1,14 @@
-package com.app.distributed.service.mq.impl;
+package com.core.distributed.service.mq.impl;
 
-import com.app.distributed.CatInvocation;
-import com.app.distributed.CatMessageEntity;
-import com.app.distributed.CatTransaction;
-import com.app.distributed.config.CatConfig;
-import com.app.distributed.context.TransactionContextBean;
-import com.app.distributed.context.TransactionContextLocal;
-import com.app.distributed.disruptor.CatTransactionEventPublisher;
-import com.app.distributed.service.CoordinatorService;
-import com.app.distributed.service.mq.ReceiveMessageService;
+import com.core.distributed.CatInvocation;
+import com.core.distributed.CatMessageEntity;
+import com.core.distributed.CatTransaction;
+import com.core.distributed.config.CatConfig;
+import com.core.distributed.context.TransactionContextBean;
+import com.core.distributed.context.TransactionContextLocal;
+import com.core.distributed.disruptor.CatTransactionEventPublisher;
+import com.core.distributed.service.CoordinatorService;
+import com.core.distributed.service.mq.ReceiveMessageService;
 import com.bobo.base.CatException;
 import com.bobo.enums.JTAEnum;
 import com.bobo.serializer.CObjectSerializer;

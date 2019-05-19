@@ -1,11 +1,11 @@
-package com.app.distributed.filter;
+package com.core.distributed.filter;
 
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
 import com.alibaba.dubbo.rpc.*;
 import com.alibaba.fastjson.JSON;
-import com.app.distributed.context.TransactionContextBean;
-import com.app.distributed.context.TransactionContextLocal;
+import com.core.distributed.context.TransactionContextBean;
+import com.core.distributed.context.TransactionContextLocal;
 import com.bobo.annotation.JTATransaction;
 import com.bobo.enums.JTAEnum;
 

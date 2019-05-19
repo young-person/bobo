@@ -1,4 +1,4 @@
-package com.app.distributed.config;
+package com.core.distributed.config;
 public class RedisConfig {
     private static final long serialVersionUID = -6965109161383975861L;
     private Boolean cluster = false;

@@ -1,7 +1,7 @@
-package com.app.distributed.disruptor;
+package com.core.distributed.disruptor;
 
-import com.app.distributed.*;
-import com.app.distributed.context.TransactionThreadFactory;
+import com.core.distributed.*;
+import com.core.distributed.context.TransactionThreadFactory;
 import com.lmax.disruptor.BlockingWaitStrategy;
 import com.lmax.disruptor.ExceptionHandler;
 import com.lmax.disruptor.RingBuffer;

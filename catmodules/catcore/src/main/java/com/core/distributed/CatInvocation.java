@@ -1,4 +1,4 @@
-package com.app.distributed;
+package com.core.distributed;
 
 import java.io.Serializable;
 import java.util.Arrays;

@@ -2,7 +2,7 @@ package com.core.properties.domain;
 
 import com.core.properties.CatConfigurationPropertySource;
 
-public class RedisPropertiies extends CatConfigurationPropertySource<RedisPropertiies> {
+public class RedisProperties extends CatConfigurationPropertySource<RedisProperties> {
 
     private int timeout;
     private int database;
@@ -12,6 +12,16 @@ public class RedisPropertiies extends CatConfigurationPropertySource<RedisProper
     private int maxIdle;
     private int minIdle;
     private int maxWait;
+
+    private int maxTotal;
+
+    public int getMaxTotal() {
+        return maxTotal;
+    }
+
+    public void setMaxTotal(int maxTotal) {
+        this.maxTotal = maxTotal;
+    }
 
     public int getTimeout() {
         return timeout;

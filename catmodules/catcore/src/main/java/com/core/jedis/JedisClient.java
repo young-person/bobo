@@ -1,5 +1,5 @@
 
-package com.app.jedis;
+package com.core.jedis;
 
 import java.util.Set;
 

@@ -1,7 +1,7 @@
-package com.app.distributed.dubbo;
+package com.core.distributed.dubbo;
 
-import com.app.distributed.AbstractTransactionAspect;
-import com.app.distributed.filter.TransactionInterceptor;
+import com.core.distributed.AbstractTransactionAspect;
+import com.core.distributed.filter.TransactionInterceptor;
 import org.springframework.core.Ordered;
 
 public class DubboTransactionAspect extends AbstractTransactionAspect implements Ordered {

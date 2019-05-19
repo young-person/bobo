@@ -1,6 +1,6 @@
-package com.app.distributed.context;
+package com.core.distributed.context;
 
-import com.app.distributed.config.CatConfig;
+import com.core.distributed.config.CatConfig;
 
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicLong;

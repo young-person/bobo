@@ -1,4 +1,4 @@
-package com.app.distributed;
+package com.core.distributed;
 
 import com.bobo.utils.UniqueIdFactory;
 import com.google.common.collect.Lists;

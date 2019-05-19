@@ -1,4 +1,4 @@
-package com.app.distributed.filter;
+package com.core.distributed.filter;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 

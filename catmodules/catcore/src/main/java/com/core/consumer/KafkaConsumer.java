@@ -1,6 +1,6 @@
-package com.app.consumer;
+package com.core.consumer;
 
-import com.app.distributed.service.mq.ReceiveMessageService;
+import com.core.distributed.service.mq.ReceiveMessageService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

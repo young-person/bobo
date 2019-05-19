@@ -1,7 +1,7 @@
-package com.app.distributed.disruptor;
+package com.core.distributed.disruptor;
 
-import com.app.distributed.CatTransaction;
-import com.app.distributed.service.CoordinatorService;
+import com.core.distributed.CatTransaction;
+import com.core.distributed.service.CoordinatorService;
 import com.bobo.enums.EventTypeEnum;
 import com.lmax.disruptor.EventHandler;
 

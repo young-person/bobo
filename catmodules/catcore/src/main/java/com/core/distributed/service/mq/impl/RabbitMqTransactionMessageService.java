@@ -1,6 +1,6 @@
-package com.app.distributed.service.mq.impl;
+package com.core.distributed.service.mq.impl;
 
-import com.app.distributed.service.mq.MqTransactionMessageService;
+import com.core.distributed.service.mq.MqTransactionMessageService;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.support.CorrelationData;

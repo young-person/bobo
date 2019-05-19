@@ -11,13 +11,13 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Properties;
 
-public abstract class CatConfigurationPropertyImpl<E>{
-    
+public abstract class CatConfigurationPropertySource<E>{
+
     private static final String BIND = "cat.cfg";
 
     private Class<E> e;
 
-    public CatConfigurationPropertyImpl(){
+    public CatConfigurationPropertySource(){
         ParameterizedType genericSuperclass = (ParameterizedType) this.getClass().getGenericSuperclass();
         Type[] actualTypeArguments = genericSuperclass.getActualTypeArguments();
         e = (Class<E>) actualTypeArguments[0];
@@ -32,34 +32,11 @@ public abstract class CatConfigurationPropertyImpl<E>{
         } catch (IllegalAccessException ex) {
             ex.printStackTrace();
         }
-
-        ClassLoader loader = getDefaultClassLoader();
     }
-    public ClassLoader getDefaultClassLoader() {
-        ClassLoader cl = null;
-        try {
-            cl = Thread.currentThread().getContextClassLoader();
-        }
-        catch (Throwable ex) {
-        }
-        if (cl == null) {
-            cl = CatConfigurationPropertyImpl.class.getClassLoader();
-            if (cl == null) {
-                try {
-                    cl = ClassLoader.getSystemClassLoader();
-                }
-                catch (Throwable ex) {
-                }
-            }
-        }
-        return cl;
-    }
-
 
     public String loadConfigurationPath(){
         return null;
     }
-
 
     private String getSimpleName(String name){
         int index = name.lastIndexOf("Properties");
@@ -96,8 +73,8 @@ public abstract class CatConfigurationPropertyImpl<E>{
         for(Object key:properties.keySet()){
             Object val = properties.get(key);
             for(Field field:fields){
-                if (key.equals(BIND+"."+name+field.getName().toLowerCase())){
-                    BeanUtils.copyProperty(e,field.getName(),val);
+                if (key.equals(BIND+"."+name+"."+field.getName())){
+                    BeanUtils.copyProperty(this,field.getName(),val);
                 }
             }
         }

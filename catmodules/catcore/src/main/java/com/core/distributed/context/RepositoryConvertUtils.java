@@ -1,8 +1,8 @@
-package com.app.distributed.context;
+package com.core.distributed.context;
 
-import com.app.distributed.CatParticipant;
-import com.app.distributed.CatTransaction;
-import com.app.distributed.config.CoordinatorRepositoryAdapter;
+import com.core.distributed.CatParticipant;
+import com.core.distributed.CatTransaction;
+import com.core.distributed.config.CoordinatorRepositoryAdapter;
 import com.bobo.serializer.CObjectSerializer;
 
 import java.util.ArrayList;

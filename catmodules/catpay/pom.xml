@@ -33,6 +33,10 @@
             <artifactId>spring-boot-starter-activemq</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+        <dependency>
             <groupId>bobo</groupId>
             <artifactId>catinterface</artifactId>
         </dependency>

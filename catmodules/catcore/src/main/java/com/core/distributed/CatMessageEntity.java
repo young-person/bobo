@@ -1,4 +1,4 @@
-package com.app.distributed;
+package com.core.distributed;
 
 import java.util.Objects;
 

@@ -1,12 +1,12 @@
 
-package com.app.distributed.service.coordinator.impl;
+package com.core.distributed.service.coordinator.impl;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.app.distributed.CatParticipant;
-import com.app.distributed.CatTransaction;
-import com.app.distributed.config.CatConfig;
-import com.app.distributed.config.MysqlConfig;
-import com.app.distributed.service.coordinator.CoordinatorRepository;
+import com.core.distributed.CatParticipant;
+import com.core.distributed.CatTransaction;
+import com.core.distributed.config.CatConfig;
+import com.core.distributed.config.MysqlConfig;
+import com.core.distributed.service.coordinator.CoordinatorRepository;
 import com.bobo.enums.JTAEnum;
 import com.bobo.serializer.CObjectSerializer;
 import com.bobo.utils.ComUtils;

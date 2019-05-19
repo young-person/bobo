@@ -1,6 +1,6 @@
-package com.app.distributed.springcloud;
+package com.core.distributed.springcloud;
 
-import com.app.distributed.AbstractTransactionAspect;
+import com.core.distributed.AbstractTransactionAspect;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;

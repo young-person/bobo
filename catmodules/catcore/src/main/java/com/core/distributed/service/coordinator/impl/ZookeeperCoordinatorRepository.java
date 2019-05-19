@@ -1,12 +1,12 @@
 
-package com.app.distributed.service.coordinator.impl;
+package com.core.distributed.service.coordinator.impl;
 
-import com.app.distributed.CatTransaction;
-import com.app.distributed.config.CatConfig;
-import com.app.distributed.config.CoordinatorRepositoryAdapter;
-import com.app.distributed.config.ZookeeperConfig;
-import com.app.distributed.context.RepositoryConvertUtils;
-import com.app.distributed.service.coordinator.CoordinatorRepository;
+import com.core.distributed.CatTransaction;
+import com.core.distributed.config.CatConfig;
+import com.core.distributed.config.CoordinatorRepositoryAdapter;
+import com.core.distributed.config.ZookeeperConfig;
+import com.core.distributed.context.RepositoryConvertUtils;
+import com.core.distributed.service.coordinator.CoordinatorRepository;
 import com.bobo.enums.JTAEnum;
 import com.bobo.serializer.CObjectSerializer;
 import com.bobo.utils.ComUtils;

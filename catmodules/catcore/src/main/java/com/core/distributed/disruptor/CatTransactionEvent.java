@@ -1,6 +1,6 @@
-package com.app.distributed.disruptor;
+package com.core.distributed.disruptor;
 
-import com.app.distributed.CatTransaction;
+import com.core.distributed.CatTransaction;
 
 import java.io.Serializable;
 
