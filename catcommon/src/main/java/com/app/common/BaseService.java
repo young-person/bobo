@@ -1,6 +1,8 @@
 package com.app.common;
 
 import org.apache.ibatis.annotations.Param;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -9,6 +11,7 @@ import java.util.List;
  */
 public interface BaseService<Record, Example> {
 
+	public static final Logger logger = LoggerFactory.getLogger(BaseService.class);
     /**
      * 根据条件查询记录数量
      * @param example

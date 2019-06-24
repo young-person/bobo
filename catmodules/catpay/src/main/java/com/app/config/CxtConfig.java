@@ -39,65 +39,65 @@ public class CxtConfig {
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         return executor;
     }
-    private String brokerURL;
-    //连接工厂
-    @Bean
-    public ActiveMQConnectionFactory getActiveMQConnectionFactory(){
-        ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory();
-        factory.setBrokerURL(brokerURL);
-        factory.setUseAsyncSend(true);
-        return factory;
-    }
-    @Bean
-    public CachingConnectionFactory getCachingConnectionFactory(){
-        CachingConnectionFactory factory = new CachingConnectionFactory();
-        factory.setTargetConnectionFactory(getActiveMQConnectionFactory());
-        factory.setSessionCacheSize(100);
-        return factory;
-    }
-    //点对点队列
-    @Bean
-    public ActiveMQQueue getActiveMQQueue(){
-        ActiveMQQueue queue = new ActiveMQQueue("cat.bobo.server.queue.default");
-        return queue;
-    }
-    //一对多队列
-    @Bean
-    public ActiveMQTopic getActiveMQTopic(){
-        ActiveMQTopic topic = new ActiveMQTopic("cat.bobo.server.topic.default");
-        return topic;
-    }
-    //生产者
-    @Bean
-    public JmsTemplate getJmsTemplate(){
-        JmsTemplate template = new JmsTemplate();
-        template.setConnectionFactory(getCachingConnectionFactory());
-        template.setPubSubDomain(false);
-        return template;
-    }
-    //生产者
-    @Bean("topicTemplate")
-    public JmsTemplate getTopicTemplate(){
-        JmsTemplate template = new JmsTemplate();
-        template.setConnectionFactory(getCachingConnectionFactory());
-        template.setPubSubDomain(true);
-        return template;
-    }
-    @Bean
-    public DefaultMessageQueueListener getDefaultMessageQueueListener(){
-        return new DefaultMessageQueueListener();
-    }
-    //消费者
-    @Bean
-    public DefaultMessageListenerContainer getDefaultMessageListenerContainer(){
-        DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
-        container.setConnectionFactory(getCachingConnectionFactory());
-        container.setDestination(getActiveMQQueue());
-        container.setMessageListener(getDefaultMessageQueueListener());
-        container.setSessionTransacted(true);
-        container.setConcurrency("4-10");
-        return container;
-    }
+//    private String brokerURL;
+//    //连接工厂
+//    @Bean
+//    public ActiveMQConnectionFactory getActiveMQConnectionFactory(){
+//        ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory();
+//        factory.setBrokerURL(brokerURL);
+//        factory.setUseAsyncSend(true);
+//        return factory;
+//    }
+//    @Bean
+//    public CachingConnectionFactory getCachingConnectionFactory(){
+//        CachingConnectionFactory factory = new CachingConnectionFactory();
+//        factory.setTargetConnectionFactory(getActiveMQConnectionFactory());
+//        factory.setSessionCacheSize(100);
+//        return factory;
+//    }
+//    //点对点队列
+//    @Bean
+//    public ActiveMQQueue getActiveMQQueue(){
+//        ActiveMQQueue queue = new ActiveMQQueue("cat.bobo.server.queue.default");
+//        return queue;
+//    }
+//    //一对多队列
+//    @Bean
+//    public ActiveMQTopic getActiveMQTopic(){
+//        ActiveMQTopic topic = new ActiveMQTopic("cat.bobo.server.topic.default");
+//        return topic;
+//    }
+//    //生产者
+//    @Bean
+//    public JmsTemplate getJmsTemplate(){
+//        JmsTemplate template = new JmsTemplate();
+//        template.setConnectionFactory(getCachingConnectionFactory());
+//        template.setPubSubDomain(false);
+//        return template;
+//    }
+//    //生产者
+//    @Bean("topicTemplate")
+//    public JmsTemplate getTopicTemplate(){
+//        JmsTemplate template = new JmsTemplate();
+//        template.setConnectionFactory(getCachingConnectionFactory());
+//        template.setPubSubDomain(true);
+//        return template;
+//    }
+//    @Bean
+//    public DefaultMessageQueueListener getDefaultMessageQueueListener(){
+//        return new DefaultMessageQueueListener();
+//    }
+//    //消费者
+//    @Bean
+//    public DefaultMessageListenerContainer getDefaultMessageListenerContainer(){
+//        DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
+//        container.setConnectionFactory(getCachingConnectionFactory());
+//        container.setDestination(getActiveMQQueue());
+//        container.setMessageListener(getDefaultMessageQueueListener());
+//        container.setSessionTransacted(true);
+//        container.setConcurrency("4-10");
+//        return container;
+//    }
     /**
      * 支付客户端
      * @return

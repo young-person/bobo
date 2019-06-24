@@ -7,8 +7,8 @@ import com.app.dictionary.handler.manager.MysqlRepertory;
 import com.app.dictionary.handler.manager.OracleRepertory;
 import com.app.dictionary.handler.manager.SybaseRepertory;
 import com.app.dictionary.templet.model.StoreRoom;
+import com.app.utils.FreeMakerUtils;
 import com.bobo.base.BaseClass;
-import com.bobo.utils.FreeMakerUtils;
 import com.mybatis.pojo.Dbs;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +38,7 @@ public class DictionaryController extends BaseClass {
         ServletOutputStream out = response.getOutputStream();
 
         ExcelExportDictionary excelExportDictionary = new ExcelExportDictionary();
-        AbstractRepertory repertory = new OracleRepertory();
+        AbstractRepertory<Dbs> repertory = new OracleRepertory();
         repertory.setFilter(new CherryxFilter());
 
         Dbs dbs = new Dbs("oracle.jdbc.OracleDriver", "jdbc:oracle:thin:@10.14.122.60:1521:portaldb", "CHERRYX", "CHERRYX");
@@ -111,5 +111,5 @@ public class DictionaryController extends BaseClass {
             if(file != null) file.delete(); // 删除临时文件
         }
     }
-
+    
 }

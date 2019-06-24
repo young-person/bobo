@@ -178,5 +178,4 @@
       pay_mch_id = #{payMchId,jdbcType=INTEGER}
     where pay_type_id = #{payTypeId,jdbcType=INTEGER}
   </update>
-  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
 </mapper>

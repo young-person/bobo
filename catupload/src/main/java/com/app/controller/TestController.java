@@ -11,7 +11,12 @@ import com.bobo.constant.CProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 
@@ -76,4 +81,12 @@ public class TestController extends BaseController {
         model.addAttribute("policy", policy);
         return "/aliyun/upload";
     }
+    
+    @RequestMapping(value =  "attendee",method=RequestMethod.POST)
+    @ResponseBody
+    public String name(@RequestParam("requiredKey") String requiredKey,@RequestParam("file") MultipartFile file) {
+		System.out.println(requiredKey);
+		System.out.println(file);
+		return "aaaa"+requiredKey;
+	}
 }

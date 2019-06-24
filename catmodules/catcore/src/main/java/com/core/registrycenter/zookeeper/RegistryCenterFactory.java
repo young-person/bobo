@@ -1,19 +1,34 @@
-package com.core.zookeeper;
+package com.core.registrycenter.zookeeper;
 
-import com.core.generator.CoordinatorRegistryCenter;
 import com.core.generator.IncrementIdGenerator;
 import com.core.generator.RegisterDto;
 import com.core.properties.CatCloudProperties;
 import com.core.properties.domain.ZookeeperProperties;
+import com.core.registrycenter.CoordinatorRegistryCenter;
 import com.google.common.base.Charsets;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.Hasher;
 import com.google.common.hash.Hashing;
 import com.core.properties.domain.AliyunProperties;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class RegistryCenterFactory {
+	
+	public static void main(String[] args) {
+		    CatCloudProperties cloudProperties = null;
+		    String applicationName = null;
+		    String hostAddress;
+			try {
+				hostAddress = InetAddress.getLocalHost().getHostAddress();
+				RegistryCenterFactory.startup(cloudProperties, hostAddress, applicationName);
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+			}
+		    
+	}
     private static final ConcurrentHashMap<HashCode, CoordinatorRegistryCenter> REG_CENTER_REGISTRY = new ConcurrentHashMap<>();
 
     /**
@@ -44,7 +59,7 @@ public class RegistryCenterFactory {
      * @param app                 the app
      */
     public static void startup(CatCloudProperties cloudProperties, String host, String app) {
-        CoordinatorRegistryCenter coordinatorRegistryCenter = createCoordinatorRegistryCenter(cloudProperties.getZk());
+        CoordinatorRegistryCenter coordinatorRegistryCenter = createCoordinatorRegistryCenter(cloudProperties.getZookeeperProperties());
         RegisterDto dto = new RegisterDto(app, host, coordinatorRegistryCenter);
         Long serviceId = new IncrementIdGenerator(dto).nextId();
         IncrementIdGenerator.setServiceId(serviceId);
@@ -52,7 +67,7 @@ public class RegistryCenterFactory {
     }
 
     private static void registerMq(CatCloudProperties CloudProperties, String host, String app) {
-        CoordinatorRegistryCenter coordinatorRegistryCenter = createCoordinatorRegistryCenter(CloudProperties.getZk());
+        CoordinatorRegistryCenter coordinatorRegistryCenter = createCoordinatorRegistryCenter(CloudProperties.getZookeeperProperties());
         AliyunProperties.RocketMqProperties rocketMq = CloudProperties.getAliyun().getRocketMq();
         String consumerGroup = rocketMq.isReliableMessageConsumer() ? rocketMq.getConsumerGroup() : null;
         String namesrvAddr = rocketMq.getNamesrvAddr();

@@ -17,7 +17,8 @@ public abstract class CatConfigurationPropertySource<E>{
 
     private Class<E> e;
 
-    public CatConfigurationPropertySource(){
+    @SuppressWarnings("unchecked")
+	public CatConfigurationPropertySource(){
         ParameterizedType genericSuperclass = (ParameterizedType) this.getClass().getGenericSuperclass();
         Type[] actualTypeArguments = genericSuperclass.getActualTypeArguments();
         e = (Class<E>) actualTypeArguments[0];

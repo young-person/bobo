@@ -2,6 +2,8 @@ package com.app.config;
 
 import com.bobo.constant.Measure;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +13,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PermissionFilter implements Filter {
+	private static final Logger logger = LoggerFactory.getLogger(PermissionFilter.class);
+	
     /**
      Access-Control-Allow-Origin：允许访问的客户端域名，例如：http://baidu.com，若为*，则表示从任意域都能访问，即不做任何限制。
      Access-Control-Allow-Methods：允许访问的方法名，多个方法名用逗号分割，例如：GET,POST,PUT,DELETE,OPTIONS。
@@ -25,7 +29,6 @@ public class PermissionFilter implements Filter {
     private String exposeHeaders;
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("程占波");
         allowOrigin = filterConfig.getInitParameter("allowOrigin");
         allowMethods = filterConfig.getInitParameter("allowMethods");
         allowCredentials = filterConfig.getInitParameter("allowCredentials");
@@ -66,7 +69,7 @@ public class PermissionFilter implements Filter {
         }
 
         String token = request.getHeader(Measure.head_Authorization);
-System.out.println("per:"+token);
+        logger.info("请求头token :[{}]",token);
         filterChain.doFilter(request, response);
     }
 

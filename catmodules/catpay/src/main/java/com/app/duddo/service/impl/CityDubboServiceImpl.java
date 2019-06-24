@@ -4,7 +4,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.app.duddo.service.CityDubboService;
 import com.mybatis.pojo.China;
 
-@Service(version = "1.0.0")
+@Service(version = "1.0.0",loadbalance="random")
 public class CityDubboServiceImpl implements CityDubboService {
 
     public China findCityByName(String cityName) {

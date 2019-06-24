@@ -1,5 +1,7 @@
 package com.core.generator;
 
+import com.core.registrycenter.CoordinatorRegistryCenter;
+
 public class RegisterDto {
     private String app;
 

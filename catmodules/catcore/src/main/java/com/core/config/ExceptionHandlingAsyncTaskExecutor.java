@@ -13,31 +13,15 @@ public class ExceptionHandlingAsyncTaskExecutor implements AsyncTaskExecutor, In
     private static Logger logger = LoggerFactory.getLogger(ExceptionHandlingAsyncTaskExecutor.class);
     private final AsyncTaskExecutor executor;
 
-    /**
-     * Instantiates a new Exception handling async task executor.
-     *
-     * @param executor the executor
-     */
     ExceptionHandlingAsyncTaskExecutor(AsyncTaskExecutor executor) {
         this.executor = executor;
     }
 
-    /**
-     * Execute.
-     *
-     * @param task the task
-     */
     @Override
     public void execute(Runnable task) {
         executor.execute(createWrappedRunnable(task));
     }
 
-    /**
-     * Execute.
-     *
-     * @param task         the task
-     * @param startTimeout the start timeout
-     */
     @Override
     public void execute(Runnable task, long startTimeout) {
         executor.execute(createWrappedRunnable(task), startTimeout);
@@ -48,7 +32,7 @@ public class ExceptionHandlingAsyncTaskExecutor implements AsyncTaskExecutor, In
             try {
                 return task.call();
             } catch (Exception e) {
-                handle(e);
+            	logger.error(e.getMessage());
                 throw e;
             }
         };
@@ -59,50 +43,21 @@ public class ExceptionHandlingAsyncTaskExecutor implements AsyncTaskExecutor, In
             try {
                 task.run();
             } catch (Exception e) {
-                handle(e);
+            	logger.error(e.getMessage());
             }
         };
     }
 
-    /**
-     * Handle.
-     *
-     * @param e the e
-     */
-    private void handle(Exception e) {
-        logger.error("Caught async exception", e);
-    }
-
-    /**
-     * Submit future.
-     *
-     * @param task the task
-     *
-     * @return the future
-     */
     @Override
     public Future<?> submit(Runnable task) {
         return executor.submit(createWrappedRunnable(task));
     }
 
-    /**
-     * Submit future.
-     *
-     * @param <T>  the type parameter
-     * @param task the task
-     *
-     * @return the future
-     */
     @Override
     public <T> Future<T> submit(Callable<T> task) {
         return executor.submit(createCallable(task));
     }
 
-    /**
-     * Destroy.
-     *
-     * @throws Exception the exception
-     */
     @Override
     public void destroy() throws Exception {
         if (executor instanceof DisposableBean) {
@@ -110,12 +65,7 @@ public class ExceptionHandlingAsyncTaskExecutor implements AsyncTaskExecutor, In
             bean.destroy();
         }
     }
-
-    /**
-     * After properties set.
-     *
-     * @throws Exception the exception
-     */
+    
     @Override
     public void afterPropertiesSet() throws Exception {
         if (executor instanceof InitializingBean) {

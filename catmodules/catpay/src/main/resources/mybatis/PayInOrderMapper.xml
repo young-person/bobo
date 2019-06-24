@@ -225,5 +225,4 @@
       ctime = #{ctime,jdbcType=BIGINT}
     where pay_in_order_id = #{payInOrderId,jdbcType=INTEGER}
   </update>
-  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
 </mapper>

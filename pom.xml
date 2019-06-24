@@ -63,6 +63,8 @@
 		<mybatis-pagehelper.version>4.1.6</mybatis-pagehelper.version>
 		<cxf.version>3.1.8</cxf.version>
 		<commons-httpclient.version>3.0.1</commons-httpclient.version>
+		<httpclient.version>4.5.1</httpclient.version>
+		<httpcore.version>4.4.11</httpcore.version>
 		<spring-websocket.version>1.3.5.RELEASE</spring-websocket.version>
 		<quartz.version>2.3.0</quartz.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
@@ -86,7 +88,6 @@
 		<mybatis.generator.version>1.3.5</mybatis.generator.version>
 		<curator.version>2.12.0</curator.version>
 		<thymeleaf-layout-dialect.version>2.1.2</thymeleaf-layout-dialect.version>
-		<httpclient.version>4.5.6</httpclient.version>
 		<jaxb.version>2.3.0</jaxb.version>
 		<dubbo-spring-boot>1.0.0</dubbo-spring-boot>
 		<alipay.version>1.1.3</alipay.version>
@@ -105,17 +106,19 @@
 		<mapper.version>3.4.0</mapper.version>
 		<catinterface.version>1.0-SNAPSHOT</catinterface.version>
 		<javax.mail.version>1.4</javax.mail.version>
+		<jsoup.version>1.8.3</jsoup.version>
+		<jedis.clients.version>2.9.0</jedis.clients.version>
 	</properties>
-	
+
 	<dependencyManagement>
 		<dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 
 			<dependency>
 				<groupId>org.mybatis.spring.boot</groupId>
@@ -295,12 +298,6 @@
 				<version>${thymeleaf-layout-dialect.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.apache.httpcomponents</groupId>
-				<artifactId>httpclient</artifactId>
-				<version>${httpclient.version}</version>
-			</dependency>
-
-			<dependency>
 				<groupId>javax.xml.bind</groupId>
 				<artifactId>jaxb-api</artifactId>
 				<version>${jaxb.version}</version>
@@ -423,6 +420,26 @@
 				<groupId>javax.mail</groupId>
 				<artifactId>mail</artifactId>
 				<version>${javax.mail.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jsoup</groupId>
+				<artifactId>jsoup</artifactId>
+				<version>${jsoup.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>${httpclient.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpcore</artifactId>
+				<version>${httpcore.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>redis.clients</groupId>
+				<artifactId>jedis</artifactId>
+				<version>${jedis.clients.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

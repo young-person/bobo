@@ -10,7 +10,7 @@ public class CatCloudProperties {
     private QiniuProperties qiniu;
     private GaodeProperties gaode;
     private JobProperties job;
-    private ZookeeperProperties zk;
+    private ZookeeperProperties zookeeperProperties;
     private RedisProperties redisProperties;
 
     public RedisProperties getRedisProperties() {
@@ -77,13 +77,13 @@ public class CatCloudProperties {
         this.job = job;
     }
 
-    public ZookeeperProperties getZk() {
-        return zk == null ? zk = new ZookeeperProperties() : zk;
-    }
+	public ZookeeperProperties getZookeeperProperties() {
+		return zookeeperProperties == null ? zookeeperProperties = new ZookeeperProperties() : zookeeperProperties;
+	}
 
-    public void setZk(ZookeeperProperties zk) {
-        this.zk = zk;
-    }
+	public void setZookeeperProperties(ZookeeperProperties zookeeperProperties) {
+		this.zookeeperProperties = zookeeperProperties;
+	}
 
 
 }

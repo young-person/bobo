@@ -178,5 +178,4 @@
       remark = #{remark,jdbcType=VARCHAR}
     where pay_out_order_detail_id = #{payOutOrderDetailId,jdbcType=INTEGER}
   </update>
-  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
 </mapper>

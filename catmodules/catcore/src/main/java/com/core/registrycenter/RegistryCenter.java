@@ -1,4 +1,4 @@
-package com.core.generator;
+package com.core.registrycenter;
 
 import org.apache.curator.framework.recipes.atomic.AtomicValue;
 import org.apache.curator.retry.RetryNTimes;

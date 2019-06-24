@@ -208,5 +208,4 @@
       config = #{config,jdbcType=VARCHAR}
     where pay_vendor_id = #{payVendorId,jdbcType=INTEGER}
   </update>
-  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
 </mapper>

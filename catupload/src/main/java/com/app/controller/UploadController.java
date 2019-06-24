@@ -24,7 +24,7 @@ import java.nio.file.Paths;
 public class UploadController extends BaseController {
     @GetMapping(value = "services")
     public ModelAndView list(ModelAndView mv) {
-        mv.setViewName("/services");
+        mv.setViewName("services");
         mv.addObject("title","欢迎使用Thymeleaf!");
         return mv;
     }

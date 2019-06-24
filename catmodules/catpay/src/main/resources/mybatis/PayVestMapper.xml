@@ -193,5 +193,4 @@
       param = #{param,jdbcType=VARCHAR}
     where pay_vest_id = #{payVestId,jdbcType=INTEGER}
   </update>
-  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
 </mapper>

@@ -3,6 +3,7 @@ package com.bobo.table.handler.impl;
 import com.bobo.base.CatException;
 import com.bobo.constant.Measure;
 import com.bobo.enums.CEnum;
+import com.bobo.exception.CException;
 import com.bobo.table.bean.Baseid;
 import com.bobo.table.bean.Condition;
 import com.bobo.table.bean.Dimension;
@@ -173,7 +174,7 @@ public class DefaultParseBase implements ParseBase<Condition> {
         for (CEnum cEnum : CEnum.values()) {
             Map<String, List<Baseid>> group = ResultCache.getInstance().getGroupBaseids().get(cEnum.ordinal());
             if (null != group && group.size() > 0){
-                QueryParse queryParse = null;
+                QueryParse<CEnum> queryParse = null;
 
                 if (CEnum.REAL.getSerialize().equals(cEnum.getSerialize())){
                     queryParse = new ParseRealResult();
@@ -195,6 +196,8 @@ public class DefaultParseBase implements ParseBase<Condition> {
                     }else if(CEnum.LAST.getSerialize().equals(cEnum.getSerialize())){
                         queryParse = new ParseSumResult();
                         where = parseCondition.getWhereConditionLast();
+                    }else {
+                    	throw new CException("不在定义操作里面");
                     }
                     for(String key : group.keySet()){
                         List<Baseid> baseids = group.get(key);

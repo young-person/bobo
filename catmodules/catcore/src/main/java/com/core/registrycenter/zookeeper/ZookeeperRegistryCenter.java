@@ -1,10 +1,10 @@
-package com.core.zookeeper;
+package com.core.registrycenter.zookeeper;
 
 import com.core.exception.RegExceptionHandler;
-import com.core.generator.CoordinatorRegistryCenter;
 import com.core.generator.GlobalConstant;
 import com.core.generator.ReliableMessageRegisterDto;
 import com.core.properties.domain.ZookeeperProperties;
+import com.core.registrycenter.CoordinatorRegistryCenter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Charsets;
@@ -52,18 +52,10 @@ public class ZookeeperRegistryCenter implements CoordinatorRegistryCenter {
 
     private DistributedAtomicInteger distributedAtomicInteger;
 
-    /**
-     * Instantiates a new Zookeeper registry center.
-     *
-     * @param zkConfig the zk config
-     */
     public ZookeeperRegistryCenter(final ZookeeperProperties zkConfig) {
         this.zkConfig = zkConfig;
     }
 
-    /**
-     * Init.
-     */
     @Override
     public void init() {
         logger.debug("Elastic job: zookeeper registry center init, server lists is: {}.", zkConfig.getZkAddressList());
@@ -99,9 +91,7 @@ public class ZookeeperRegistryCenter implements CoordinatorRegistryCenter {
                 throw new KeeperException.OperationTimeoutException();
             }
 
-            //CHECKSTYLE:OFF
         } catch (final Exception ex) {
-            //CHECKSTYLE:ON
             RegExceptionHandler.handleException(ex);
         }
     }
@@ -131,14 +121,6 @@ public class ZookeeperRegistryCenter implements CoordinatorRegistryCenter {
             Thread.currentThread().interrupt();
         }
     }
-
-    /**
-     * Get string.
-     *
-     * @param key the key
-     *
-     * @return the string
-     */
     @Override
     public String get(final String key) {
         TreeCache cache = findTreeCache(key);
@@ -160,14 +142,6 @@ public class ZookeeperRegistryCenter implements CoordinatorRegistryCenter {
         }
         return null;
     }
-
-    /**
-     * Gets directly.
-     *
-     * @param key the key
-     *
-     * @return the directly
-     */
     @Override
     public String getDirectly(final String key) {
         try {
@@ -180,13 +154,6 @@ public class ZookeeperRegistryCenter implements CoordinatorRegistryCenter {
         }
     }
 
-    /**
-     * Gets children keys.
-     *
-     * @param key the key
-     *
-     * @return the children keys
-     */
     @Override
     public List<String> getChildrenKeys(final String key) {
         try {
@@ -201,13 +168,6 @@ public class ZookeeperRegistryCenter implements CoordinatorRegistryCenter {
         }
     }
 
-    /**
-     * Gets num children.
-     *
-     * @param key the key
-     *
-     * @return the num children
-     */
     @Override
     public int getNumChildren(final String key) {
         Stat stat = null;
@@ -218,14 +178,6 @@ public class ZookeeperRegistryCenter implements CoordinatorRegistryCenter {
         }
         return stat == null ? 0 : stat.getNumChildren();
     }
-
-    /**
-     * Is existed boolean.
-     *
-     * @param key the key
-     *
-     * @return the boolean
-     */
     @Override
     public boolean isExisted(final String key) {
         try {
@@ -237,13 +189,6 @@ public class ZookeeperRegistryCenter implements CoordinatorRegistryCenter {
             return false;
         }
     }
-
-    /**
-     * Persist.
-     *
-     * @param key   the key
-     * @param value the value
-     */
     @Override
     public void persist(final String key, final String value) {
         try {

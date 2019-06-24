@@ -1,4 +1,4 @@
-package com.core.generator;
+package com.core.registrycenter;
 
 import java.util.List;
 
