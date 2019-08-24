@@ -18,5 +18,6 @@
         <module>catinterface</module>
         <module>catpayclient</module>
         <module>catcore</module>
+        <module>catlock</module>
     </modules>
 </project>

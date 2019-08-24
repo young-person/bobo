@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 public class BaseClass {
     protected static ObjectMapper objectMapper = new ObjectMapper();
-    protected static final Logger logger = LoggerFactory.getLogger(BaseClass.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(BaseClass.class);
 
     /**
      * 将 图片插入到现有的Excel里面
@@ -23,4 +23,21 @@ public class BaseClass {
 //        wwb.write();
 //        wwb.close();
 //    }
+    
+    
+    /**
+     * 删除以/开头的字符串
+     *  @param str
+     *  @return
+     *  @Description: trimSplit
+     *  @date 2019年6月29日 下午11:27:44
+     */
+    protected String trimSplit(String url) {
+		
+    	if (url != null && url.startsWith("/")) {
+			return url.substring(1);
+		}
+    	
+    	return url;
+	}
 }

@@ -74,10 +74,10 @@ public class DefaultAutomationDict extends BaseClass implements AutomationDict {
         if (!Objects.isNull(tableObject)){
             columnDetail = tableObject.getString (columnName);
         }else{
-            logger.error("没有对应数据解释表名:{}",tableName);
+        	LOGGER.error("没有对应数据解释表名:{}",tableName);
         }
         if (StringUtils.isBlank(columnDetail)){
-            logger.error("存在对表:{}解释但是不存在对该字段:{}的解释",new Object[]{tableName,columnName});
+        	LOGGER.error("存在对表:{}解释但是不存在对该字段:{}的解释",new Object[]{tableName,columnName});
         }
         return null;
     }

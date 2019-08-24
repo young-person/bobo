@@ -85,10 +85,10 @@ public abstract class AbstractRepertory<E> extends BaseClass implements QueryRep
                 if (StringUtils.isNotBlank(columnDetail)){
                     comments = columnDetail;
                 }else if(StringUtils.isBlank(columnDetail) && StringUtils.isNotBlank(comments)){
-                    logger.error("配置文件里面{}表的{}字段的对应不存在但是数据库有对应翻译",new Object[]{tableName,COLUMN_Name});
+                	LOGGER.error("配置文件里面{}表的{}字段的对应不存在但是数据库有对应翻译",new Object[]{tableName,COLUMN_Name});
                     comments = "";
                 }else{
-                    logger.error("{}表的{}字段的翻译不存在需要人工补录",new Object[]{tableName,COLUMN_Name});
+                	LOGGER.error("{}表的{}字段的翻译不存在需要人工补录",new Object[]{tableName,COLUMN_Name});
                     comments = "";
                 }
 

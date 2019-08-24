@@ -20,6 +20,7 @@
         <module name="catupload" />
         <module name="catpay" />
         <module name="cattask" />
+        <module name="catlock" />
         <module name="catpayclient" />
         <module name="catcore" />
       </profile>

@@ -61,6 +61,26 @@ public class Algorithm_sort {
      *
      * 第 index 元素 和 后面的所有元素进行对比
      */
+    public static void main(String[] args) {
+        Algorithm_sort hand = new Algorithm_sort();
+        hand.bubble_sort_simple();
+    }
+    public void bubble_sort_simple(){
+        int len = a.length;
+        for(int i = 0; i < len - 1; i ++){
+
+            for(int j = 0; j < len - i - 1; j ++){
+                if(a[j] > a[j+1]){
+                    int tmp = a[j];
+                    a[j] = a[j + 1];
+                    a[j + 1] = tmp;
+                }
+            }
+
+        }
+        sys(a);
+    }
+
     public void bubble_sort(){
         int pos = 0,k = a.length - 1;
         boolean flag = true;

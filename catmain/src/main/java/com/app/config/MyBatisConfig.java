@@ -14,11 +14,13 @@ import java.util.Properties;
 
 @Configuration
 public class MyBatisConfig{
+
+
     @Bean
     public DataSource getDataSource() throws Exception {
         Properties props = new Properties();
         props.put("driverClassName", "com.mysql.cj.jdbc.Driver");
-        props.put("url", "jdbc:mysql://localhost:3307/datas?useSSL=false&serverTimezone=GMT%2B8");
+        props.put("url", "jdbc:mysql://localhost:3306/datas?&characterEncoding=utf8&useSSL=true&allowMultiQueries=true&serverTimezone=GMT%2B8");
         props.put("username", "root");
         props.put("password", "199345");
         return DruidDataSourceFactory.createDataSource(props);
@@ -28,7 +30,7 @@ public class MyBatisConfig{
      */
     @Bean(name = "sqlSessionFactory")
     public SqlSessionFactoryBean sqlSessionFactory(ApplicationContext applicationContext,PageHelper pageHelper) throws Exception {
-        SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+    	SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(getDataSource());// 指定数据源(这个必须有，否则报错)
         sessionFactory.setPlugins(new Interceptor[]{pageHelper });
         sessionFactory.setMapperLocations(applicationContext.getResources("classpath:mybatis/*.xml"));

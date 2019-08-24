@@ -1,5 +1,6 @@
 package com.test;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @WebAppConfiguration
 public class TreeTest {
     @Test
-    public void test1(){
+    public void test1() {
 
 
         System.out.println(1);
@@ -30,7 +31,14 @@ public class TreeTest {
     }
 
 
+    @HystrixCommand(fallbackMethod = "errorMethod")
+    public void test2() {
 
+    }
+
+    public void errorMethod(){
+        
+    }
 
 }
 

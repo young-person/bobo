@@ -11,7 +11,7 @@ public class GlobalExceptionHandler extends BaseClass {
 
     @ExceptionHandler(MultipartException.class)
     public String handleError1(MultipartException e, RedirectAttributes redirectAttributes) {
-        logger.error("请求错误:{}",e.getCause().getMessage(),e);
+    	LOGGER.error("请求错误:{}",e.getCause().getMessage(),e);
         redirectAttributes.addFlashAttribute("message", e.getCause().getMessage());
         return "redirect:/uploadStatus";
     }

@@ -4,7 +4,6 @@ import java.util.Timer;
 
 public final class PropertiesForFile {
 
-    private static final String source_src = "";
     private volatile static PropertiesForFile _instance = null;
 
     public static PropertiesForFile getInstance(){

@@ -75,7 +75,7 @@ public class CProperties extends BaseClass {
             try {
                 properties.load(stream);
             } catch (IOException e) {
-                logger.error("读取配置文件:{}失败",cfg,e.getMessage());
+            	LOGGER.error("读取配置文件:{}失败",cfg,e.getMessage());
             }
         }
 
