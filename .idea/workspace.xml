@@ -1,62 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="98e5d1de-2a84-414a-8cee-2522ea44d4bf" name="Default Changelist" comment="新增资源目录">
-      <change afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/algorithm/tree/BTree.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/algorithm/tree/TNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/jedis/JedisUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/resources/redis/redis-list.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/resources/redis/redis-protocol.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/resources/redis/redis-server.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/resources/redis/redis-string.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/resources/redis/redis-subpub.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/resources/redis/redis-transaction.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catlock/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/AutoConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/annotation/Lock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/annotation/LockKey.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/aspect/DistributedLockAspect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/lock/CLock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/lock/LuaDistributedLock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/CLockManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/LockCallBack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/LuaRedisLockManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/ReturnCallBack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/properties/LockProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/resources/lock/lock.lua" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/resources/lock/unlock.lua" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catmodules/rpcservice/src/test/java/com/test/socket/ServerBoot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catwebservice/src/main/java/com/app/utils/RedisLockUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catwebservice/src/test/java/com/test/RedisLockTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="98e5d1de-2a84-414a-8cee-2522ea44d4bf" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/catconfig/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catcloud/catconfig/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/catconfig/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/catcloud/catconfig/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/algorithm/Algorithm_sort.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/algorithm/Algorithm_sort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/base/BaseClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/base/BaseClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/constant/CProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/constant/CProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmain/src/main/java/com/app/config/MyBatisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmain/src/main/java/com/app/config/MyBatisConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmain/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/catmain/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcloud/catcenter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catcloud/catcenter/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcloud/catgateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catcloud/catgateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcloud/catgateway/src/main/java/com/cloud/center/gateway/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcloud/catgateway/src/main/java/com/cloud/center/gateway/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcloud/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catcloud/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/FileTransportListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/FileTransportListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/IFTPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/IFTPClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/impl/DefaultFTPConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/impl/DefaultFTPConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/impl/FTPCommandListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/impl/FTPCommandListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/impl/FTPConfigFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/impl/FTPConfigFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/impl/FileTransportAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/impl/FileTransportAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/computer/NetstatMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/computer/NetstatMonitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/computer/NetstatMonitorForWindows.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/computer/NetstatMonitorForWindows.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/domain/FileInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/domain/FileInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/enums/EventTypeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/enums/EventTypeEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/enums/LogTypeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/enums/LogTypeEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/enums/MessageTypeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/enums/MessageTypeEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/enums/PropagationEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/enums/PropagationEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/ParseBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/ParseBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/QueryParse.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/QueryParse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcommon/src/main/resources/keys/build.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/resources/keys/build.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcommon/src/main/resources/keys/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/resources/keys/build.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catcommon/src/main/resources/service.sh" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/resources/service.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmain/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catmain/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmain/src/main/resources/static/js/contextmenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/catmain/src/main/resources/static/js/contextmenu.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/catmodules/catcore/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/config/RedisConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/config/ZookeeperRunner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/consumer/ActivemqConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/consumer/ActivemqConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/consumer/AmqpConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/consumer/AmqpConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/consumer/KafkaConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/consumer/KafkaConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/consumer/RabbitmqConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/consumer/RabbitmqConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/AbstractTransactionAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/AbstractTransactionAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/config/CatConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/config/CatConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/config/MysqlConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/config/MysqlConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/config/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/config/RedisConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/config/ZookeeperConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/config/ZookeeperConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/service/coordinator/impl/JdbcCoordinatorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/service/coordinator/impl/JdbcCoordinatorRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/service/coordinator/impl/RedisCoordinatorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/service/coordinator/impl/RedisCoordinatorRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/service/coordinator/impl/ZookeeperCoordinatorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/service/coordinator/impl/ZookeeperCoordinatorRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/SpringCloudTransactionAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/SpringCloudTransactionAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/SpringCloudTransactionInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/SpringCloudTransactionInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/feign/MythFeignHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/feign/MythFeignHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/feign/RestTemplateConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/feign/RestTemplateConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/feign/RestTemplateInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/feign/RestTemplateInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/jedis/JedisClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/jedis/JedisClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/jedis/JedisClientCluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/jedis/JedisClientCluster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/jedis/JedisClientSentinel.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/jedis/JedisClientSentinel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/jedis/JedisClientSingle.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/jedis/JedisClientSingle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/AliyunProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/AliyunProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/AsyncTaskProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/AsyncTaskProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/GaodeProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/GaodeProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/JobProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/JobProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/QiniuProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/QiniuProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/ReliableMessageProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/ReliableMessageProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/SwaggerProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/SwaggerProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/ZookeeperProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/ZookeeperProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catinterface/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catinterface/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catlock/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/AutoConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/AutoConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/annotation/Lock.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/annotation/Lock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/annotation/LockKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/annotation/LockKey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/aspect/DistributedLockAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/aspect/DistributedLockAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/lock/CLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/lock/CLock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/lock/LuaDistributedLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/lock/LuaDistributedLock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/CLockManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/CLockManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/LockCallBack.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/LockCallBack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/LuaRedisLockManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/LuaRedisLockManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/ReturnCallBack.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/ReturnCallBack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/properties/LockProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/properties/LockProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/resources/lock/lock.lua" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/resources/lock/lock.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/resources/lock/unlock.lua" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/resources/lock/unlock.lua" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/catmodules/catpay/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catpay/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpay/src/main/java/com/app/config/CxtConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catpay/src/main/java/com/app/config/CxtConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpay/src/main/java/com/app/duddo/service/impl/CityDubboServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catpay/src/main/java/com/app/duddo/service/impl/CityDubboServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpay/src/main/java/com/app/pay/listener/DefaultMessageQueueListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catpay/src/main/java/com/app/pay/listener/DefaultMessageQueueListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpay/src/main/java/com/app/properties/PropertiesForFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catpay/src/main/java/com/app/properties/PropertiesForFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpay/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catpay/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/catmodules/catpayclient/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catpayclient/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpayclient/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catpayclient/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/catmodules/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catupload/src/main/java/com/app/common/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/catupload/src/main/java/com/app/common/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/rpcclient/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/rpcclient/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catmodules/rpcservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/rpcservice/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catresource/src/main/resources/static/lib/jquery/jquery-ui.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/catresource/src/main/resources/static/lib/jquery/jquery-ui.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cattask/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cattask/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/.mvn/wrapper/MavenWrapperDownloader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cattask/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cattask/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cattask/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cattask/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cattask/src/main/java/com/CattaskApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/src/main/java/com/CattaskApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cattask/src/main/java/com/app/cattask/shiro/filter/KickoutSessionControlFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/src/main/java/com/app/cattask/shiro/filter/KickoutSessionControlFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cattask/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cattask/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cattask/src/test/java/com/test/CattaskApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/src/test/java/com/test/CattaskApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catupload/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catupload/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catupload/src/main/java/com/app/pojo/FileInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/catupload/src/main/java/com/app/pojo/FileInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/css/font.awesome.css" beforeDir="false" afterPath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/css/font.awesome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/fonts/fontawesome-webfont.svg" beforeDir="false" afterPath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/fonts/fontawesome-webfont.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/fonts/glyphicons-halflings-regular.svg" beforeDir="false" afterPath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/js/html5shiv.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/js/html5shiv.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/js/respond.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/js/respond.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catupload/src/main/resources/static/js/jquery.metisMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/catupload/src/main/resources/static/js/jquery.metisMenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catwebservice/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/catwebservice/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/catwebservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catwebservice/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catwebservice/src/main/java/com/app/controller/DictionaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/catwebservice/src/main/java/com/app/controller/DictionaryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catwebservice/src/main/java/com/app/dictionary/action/WordExportDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/catwebservice/src/main/java/com/app/dictionary/action/WordExportDictionary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catwebservice/src/main/java/com/app/dictionary/handler/manager/AbstractRepertory.java" beforeDir="false" afterPath="$PROJECT_DIR$/catwebservice/src/main/java/com/app/dictionary/handler/manager/AbstractRepertory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catwebservice/src/main/java/com/app/dictionary/handler/manager/DefaultAutomationDict.java" beforeDir="false" afterPath="$PROJECT_DIR$/catwebservice/src/main/java/com/app/dictionary/handler/manager/DefaultAutomationDict.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catwebservice/src/test/java/com/test/TreeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/catwebservice/src/test/java/com/test/TreeTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -184,7 +227,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/catwebservice/src/test/java/com/test/TreeTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="476">
@@ -207,15 +250,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
               <caret line="10" column="26" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/config/RedisConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="39" column="40" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -361,19 +395,21 @@
     </option>
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="d1dc0d4e320acd233a44010eabb5ce14cbd18894" />
+      </map>
+    </option>
     <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/catmain/src/main/resources/static/js/file.js" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/catmain/src/main/resources/templet/index.html" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/dictionary/handler/manager/SybaseRepertory.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/catmain/src/main/resources/templet/index.html" root0="SKIP_INSPECTION" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/catmain/src/main/java/com/app/utils/FreeMakerUtils.java" />
-        <option value="$PROJECT_DIR$/catmain/pom.xml" />
-        <option value="$PROJECT_DIR$/catcommon/pom.xml" />
         <option value="$PROJECT_DIR$/catupload/src/test/java/com/test/GjsonTest.java" />
         <option value="$PROJECT_DIR$/cattask/src/main/java/com/app/cattask/cache/RedisCacheManager.java" />
         <option value="$PROJECT_DIR$/cattask/src/main/java/com/app/cattask/config/RedisTemplateConfig.java" />
@@ -403,9 +439,7 @@
         <option value="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/ReturnCallBack.java" />
         <option value="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/AutoConfiguration.java" />
         <option value="$PROJECT_DIR$/catcloud/catconfig/pom.xml" />
-        <option value="$PROJECT_DIR$/catwebservice/pom.xml" />
         <option value="$PROJECT_DIR$/catmain/src/main/java/com/app/config/MyBatisConfig.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/catmodules/catpay/src/main/java/com/app/duddo/service/impl/CityDubboServiceImpl.java" />
         <option value="$PROJECT_DIR$/catmodules/catpayclient/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/catmodules/catpay/src/main/resources/application.properties" />
@@ -422,6 +456,11 @@
         <option value="$PROJECT_DIR$/catwebservice/src/test/java/com/test/TreeTest.java" />
         <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/dictionary/action/WordExportDictionary.java" />
         <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/controller/DictionaryController.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/selenium/Test.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/catwebservice/pom.xml" />
+        <option value="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/ParseBase.java" />
+        <option value="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/QueryParse.java" />
       </list>
     </option>
   </component>
@@ -454,9 +493,9 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="1932" />
     <option name="height" value="1048" />
   </component>
@@ -472,6 +511,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -482,41 +522,6 @@
             <path>
               <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
               <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="cattask" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="cattask" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="cattask" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="cattask" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="cattask" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
               <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -558,28 +563,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
@@ -598,151 +581,12 @@
               <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="dictionary" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="dictionary" type="462c0819:PsiDirectoryNode" />
-              <item name="handler" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="dictionary" type="462c0819:PsiDirectoryNode" />
-              <item name="handler" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="dictionary" type="462c0819:PsiDirectoryNode" />
-              <item name="templet" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="dictionary" type="462c0819:PsiDirectoryNode" />
-              <item name="templet" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="webservice" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="webservice" type="462c0819:PsiDirectoryNode" />
-              <item name="impl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="drivers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -757,7 +601,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="D:/360安全浏览器下载/dubbo-zookeeper-spring-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -766,18 +610,18 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\code\repertory\bobo\catresource\src\main\resources\static\lib\particleground" />
+      <recent name="D:\code\repertory\bobo\catwebservice\src\main\resources\dictionary\json" />
+      <recent name="D:\code\repertory\bobo\cattask\src\main\resources" />
+      <recent name="D:\code\repertory\bobo\cattask\src\main\java\com\app\cattask" />
+      <recent name="D:\code\repertory\bobo\cattask\src\main\java\com\app\cattask\config" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\code\repertory\bobo\catmodules\catlock\src\main\java\com\app\distributedlock" />
-      <recent name="D:\code\repertory\bobo\catmodules\catlock\src\main\resources" />
-      <recent name="D:\code\repertory\bobo\catmodules\catlock\src\main\java\com\app\distributedlock\manager" />
-      <recent name="D:\code\repertory\bobo\catmodules\catlock\src\main\java\com\app\distributedlock\lock" />
-      <recent name="D:\code\repertory\bobo\catmodules\catlock\src\main\java\com\app\distributedlock\aspect" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.app.utils" />
@@ -786,12 +630,12 @@
       <recent name="com.app.cattask.controller" />
       <recent name="com.app.cattask" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\code\repertory\bobo\catresource\src\main\resources\static\lib\particleground" />
-      <recent name="D:\code\repertory\bobo\catwebservice\src\main\resources\dictionary\json" />
-      <recent name="D:\code\repertory\bobo\cattask\src\main\resources" />
-      <recent name="D:\code\repertory\bobo\cattask\src\main\java\com\app\cattask" />
-      <recent name="D:\code\repertory\bobo\cattask\src\main\java\com\app\cattask\config" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\code\repertory\bobo\catresource\src\main\resources\static\data" />
+      <recent name="D:\code\repertory\bobo\catmodules\catlock\src\main\java\com\app\distributedlock" />
+      <recent name="D:\code\repertory\bobo\catmodules\catlock\src\main\resources" />
+      <recent name="D:\code\repertory\bobo\catmodules\catlock\src\main\java\com\app\distributedlock\manager" />
+      <recent name="D:\code\repertory\bobo\catmodules\catlock\src\main\java\com\app\distributedlock\lock" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -861,197 +705,6 @@
         <option name="INSTRUMENTATION_ENABLED" value="true" />
       </Profilers>
       <method />
-    </configuration>
-    <configuration name="Algorithm_sort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.bobo.algorithm.Algorithm_sort" />
-      <module name="catcommon" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.bobo.algorithm.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CatuploadApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.CatuploadApplication" />
-      <module name="catupload" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RedisConfig" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.app.config.RedisConfig" />
-      <module name="catwebservice" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.app.config.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.app.crawler.selenium.Test" />
-      <module name="catwebservice" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.app.crawler.selenium.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
-      <setting name="vmparams" value="" />
-      <setting name="cmdLine" value="run-app" />
-      <setting name="passParentEnv" value="true" />
-      <setting name="launchBrowser" value="true" />
-      <setting name="launchBrowserUrl" value="" />
-      <setting name="depsClasspath" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <module name="" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="catpayclient" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.app.CatpayclientApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CatMainApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="catmain" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.CatMainApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CatpayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="catpay" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.app.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.app.CatpayApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CenterApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="catcenter" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cloud.center.CenterApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="catgateway" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cloud.center.gateway.GatewayApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="TestNG">
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="js.build_tools.gulp">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <envs />
-      <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Application.CatuploadApplication" />
@@ -1193,7 +846,12 @@
       <workItem from="1564893273451" duration="2192000" />
       <workItem from="1564965996727" duration="4166000" />
       <workItem from="1565229447211" duration="4933000" />
-      <workItem from="1566606537868" duration="371000" />
+      <workItem from="1566606537868" duration="1402000" />
+      <workItem from="1566710443737" duration="609000" />
+      <workItem from="1567519565589" duration="728000" />
+      <workItem from="1567520399212" duration="345000" />
+      <workItem from="1567521027251" duration="910000" />
+      <workItem from="1567522013188" duration="1033000" />
     </task>
     <task id="LOCAL-00001" summary="云注册中心">
       <created>1547298624589</created>
@@ -1447,7 +1105,77 @@
       <option name="project" value="LOCAL" />
       <updated>1557710574615</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="新增资源目录">
+      <created>1566607125246</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1566607125246</updated>
+    </task>
+    <task id="LOCAL-00038" summary="新增资源目录">
+      <created>1567337422516</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1567337422516</updated>
+    </task>
+    <task id="LOCAL-00039" summary="新增资源目录">
+      <created>1567342477749</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1567342477749</updated>
+    </task>
+    <task id="LOCAL-00040" summary="新增资源目录">
+      <created>1567343976460</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1567343976460</updated>
+    </task>
+    <task id="LOCAL-00041" summary="新增资源目录">
+      <created>1567344671431</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1567344671431</updated>
+    </task>
+    <task id="LOCAL-00042" summary="新增资源目录2">
+      <created>1567519735033</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1567519735033</updated>
+    </task>
+    <task id="LOCAL-00043" summary="新增资源目录2">
+      <created>1567519866084</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1567519866084</updated>
+    </task>
+    <task id="LOCAL-00044" summary="新增资源目录2">
+      <created>1567520308868</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1567520308868</updated>
+    </task>
+    <task id="LOCAL-00045" summary="新增资源目录2">
+      <created>1567520580435</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1567520580435</updated>
+    </task>
+    <task id="LOCAL-00046" summary="工程初始化">
+      <created>1567521394693</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1567521394693</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1483,7 +1211,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="553479000" />
+    <option name="totallyTimeSpent" value="568972000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1497,7 +1225,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28784648" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29104477" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -1507,19 +1235,19 @@
       <window_info id="Nl-Palette" order="7" />
       <window_info id="Web" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32925472" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4989339" weight="0.26362625" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.20355952" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.28921023" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.28921023" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32925472" />
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32925472" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5032051" side_tool="true" visible="true" weight="0.32435465" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.21468298" />
       <window_info anchor="bottom" id="Problems" order="11" />
       <window_info anchor="bottom" id="Java Enterprise" order="12" />
-      <window_info anchor="bottom" id="Version Control" order="13" weight="0.2246941" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="13" sideWeight="0.49679488" visible="true" weight="0.32435465" />
       <window_info anchor="bottom" id="Docker" order="14" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="15" />
       <window_info active="true" anchor="bottom" id="SVN Repositories" order="16" visible="true" weight="0.5461624" />
@@ -1620,7 +1348,9 @@
     <MESSAGE value="数据字典&#10;Signed-off-by: bobo &lt;1243434698@qq.com&gt;" />
     <MESSAGE value="环境修改&#10;Signed-off-by: bobo &lt;1243434698@qq.com&gt;" />
     <MESSAGE value="新增资源目录" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增资源目录" />
+    <MESSAGE value="新增资源目录2" />
+    <MESSAGE value="工程初始化" />
+    <option name="LAST_COMMIT_MESSAGE" value="工程初始化" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1735,299 +1465,6 @@
     <SUITE FILE_PATH="coverage/bobo$All_in_cattask.ic" NAME="All in cattask Coverage Results" MODIFIED="1556182356248" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-actuator/1.5.4.RELEASE/spring-boot-actuator-1.5.4.RELEASE-sources.jar!/org/springframework/boot/actuate/health/DataSourceHealthIndicator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="101" selection-start-line="101" selection-end-line="101" />
-          <folding>
-            <element signature="e#3792#4013#0" expanded="true" />
-            <element signature="e#4012#4013#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-actuator/1.5.4.RELEASE/spring-boot-actuator-1.5.4.RELEASE-sources.jar!/org/springframework/boot/actuate/health/AbstractHealthIndicator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="48" selection-start-line="48" selection-end-line="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-actuator/1.5.4.RELEASE/spring-boot-actuator-1.5.4.RELEASE-sources.jar!/org/springframework/boot/actuate/health/CompositeHealthIndicator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.1.0/druid-1.1.0-sources.jar!/com/alibaba/druid/pool/DruidDataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="847" selection-start-line="847" selection-end-line="847" />
-          <folding>
-            <element signature="e#7875#7876#0" expanded="true" />
-            <element signature="e#7902#7903#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.4.1/mybatis-3.4.1-sources.jar!/org/apache/ibatis/executor/SimpleExecutor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="64" selection-start-line="64" selection-end-line="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.4.1/mybatis-3.4.1-sources.jar!/org/apache/ibatis/executor/BaseExecutor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="158" selection-start-line="158" selection-end-line="158" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/pagehelper/pagehelper/4.1.6/pagehelper-4.1.6-sources.jar!/com/github/pagehelper/SqlUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="376" selection-start-line="376" selection-end-line="376" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.4.1/mybatis-3.4.1-sources.jar!/org/apache/ibatis/plugin/Plugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="58" column="36" selection-start-line="58" selection-start-column="36" selection-end-line="58" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.1.0/druid-1.1.0-sources.jar!/com/alibaba/druid/util/JdbcUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="549" selection-start-line="549" selection-end-line="549" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catmain/src/main/java/com/app/config/MyBatisConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catmodules/catpay/src/main/java/com/app/CatpayApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#238#239#0" expanded="true" />
-            <element signature="e#306#307#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catmodules/catinterface/src/main/java/com/app/duddo/service/LogService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catmodules/catinterface/src/main/java/com/app/duddo/service/CityDubboService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catmodules/pom.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catmodules/catpay/src/main/java/com/app/duddo/service/impl/CityDubboServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="311" selection-start-line="311" selection-end-line="325" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catmodules/catpayclient/src/main/java/com/app/CatpayclientApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catmodules/catpayclient/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catmodules/catpay/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catmodules/catpay/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="610">
-          <caret line="50" column="21" lean-forward="true" selection-start-line="50" selection-start-column="21" selection-end-line="50" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catmodules/catpay/src/main/java/com/app/config/MyBatisConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="23" column="46" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catmodules/catpayclient/src/main/java/com/app/catpay/client/config/JmsConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catmodules/catpayclient/src/main/java/com/app/duddo/service/CityDubboConsumerService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catmodules/catpayclient/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="20" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catmodules/rpcclient/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catmodules/rpcservice/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catmodules/rpcservice/src/test/java/com/test/socket/ServerBoot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="41" column="40" selection-start-line="41" selection-start-column="40" selection-end-line="41" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/algorithm/Algorithm_sort.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1309">
-          <caret line="77" column="13" selection-start-line="77" selection-start-column="13" selection-end-line="77" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/algorithm/tree/TNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/algorithm/tree/BTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/environment/java8/jdk/src.zip!/java/util/Dictionary.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1360">
-          <caret line="103" column="6" selection-start-line="103" selection-start-column="6" selection-end-line="103" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/utils/HttpUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="51" column="13" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="37" lean-forward="true" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/environment/java8/jdk/src.zip!/java/util/Hashtable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2805">
-          <caret line="193" selection-start-line="193" selection-end-line="193" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cattask/src/main/java/com/CattaskApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/1.5.4.RELEASE/spring-boot-autoconfigure-1.5.4.RELEASE-sources.jar!/org/springframework/boot/autoconfigure/SpringBootApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="54" column="18" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/utils/RedisLockUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2686">
-          <caret line="167" column="13" selection-start-line="167" selection-start-column="13" selection-end-line="167" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/test/java/com/test/RedisLockTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="59" selection-start-line="59" selection-end-line="59" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/CatwebserviceApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="16" selection-start-line="16" selection-end-line="16" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://D:/environment/java8/jdk/src.zip!/java/util/HashMap.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3723">
@@ -2056,20 +1493,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/dictionary/demo/CherryxFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="10" column="26" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/dictionary/action/WordExportDictionary.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="15" column="16" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
-          <folding>
-            <element signature="e#883#899#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2113,10 +1540,246 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/config/RedisConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="39" column="40" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
+        <state relative-caret-position="357">
+          <caret line="38" column="17" lean-forward="true" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/bean/Baseid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/bean/Condition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/resources/datas/china_v1.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-357" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/video/sexforum/ChineseDown.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="39" column="38" selection-start-line="39" selection-start-column="38" selection-end-line="39" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/db/MySqlCDbIndex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1088">
+          <caret line="70" column="79" selection-start-line="70" selection-start-column="79" selection-end-line="70" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/video/sexforum/MainParse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="39" column="9" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/impl/ParseCondition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="26" column="10" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/selenium/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="31" column="44" lean-forward="true" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="114" column="34" selection-start-line="114" selection-start-column="34" selection-end-line="114" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="983">
+          <caret line="64" selection-start-line="64" selection-end-line="69" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1020" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catmain/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-207" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catresource/pom.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cattask/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1887" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catupload/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-751" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catmodules/pom.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catmodules/catcore/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1278" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catmodules/catinterface/pom.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catmodules/catlock/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-71" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catmodules/catpay/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1224" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catmodules/catpayclient/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-105" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catmodules/rpcclient/pom.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catmodules/rpcservice/pom.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/area_backup.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-204" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/dictionary/demo/CherryxFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="10" column="26" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/dictionary/demo/CherryxOracle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/impl/ActuatorDBeanImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/impl/ActuatorImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/AbstractQueryParse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/db/CAbstractDbIndex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/Actuator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/QueryParse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/impl/DefaultParseBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/BasicFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/DynamicData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/ParseBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/ProxyFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/impl/DynamicDataDefault.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catresource/src/main/resources/static/data/china.txt">
+      <provider selected="true" editor-type-id="LargeFileEditor" />
     </entry>
   </component>
   <component name="masterDetails">
