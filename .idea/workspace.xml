@@ -1,106 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="98e5d1de-2a84-414a-8cee-2522ea44d4bf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="98e5d1de-2a84-414a-8cee-2522ea44d4bf" name="Default Changelist" comment="工程初始化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/catcenter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catcloud/catcenter/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/catgateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catcloud/catgateway/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/catgateway/src/main/java/com/cloud/center/gateway/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcloud/catgateway/src/main/java/com/cloud/center/gateway/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcloud/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catcloud/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/FileTransportListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/FileTransportListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/IFTPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/IFTPClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/impl/DefaultFTPConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/impl/DefaultFTPConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/impl/FTPCommandListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/impl/FTPCommandListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/impl/FTPConfigFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/impl/FTPConfigFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/impl/FileTransportAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/app/ftp/impl/FileTransportAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/computer/NetstatMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/computer/NetstatMonitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/computer/NetstatMonitorForWindows.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/computer/NetstatMonitorForWindows.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/domain/FileInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/domain/FileInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/enums/EventTypeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/enums/EventTypeEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/enums/LogTypeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/enums/LogTypeEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/enums/MessageTypeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/enums/MessageTypeEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/enums/PropagationEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/enums/PropagationEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/ParseBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/ParseBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/QueryParse.java" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/QueryParse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/resources/keys/build.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/resources/keys/build.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/resources/keys/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/resources/keys/build.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catcommon/src/main/resources/service.sh" beforeDir="false" afterPath="$PROJECT_DIR$/catcommon/src/main/resources/service.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmain/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catmain/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmain/src/main/resources/static/js/contextmenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/catmain/src/main/resources/static/js/contextmenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/consumer/ActivemqConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/consumer/ActivemqConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/consumer/AmqpConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/consumer/AmqpConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/consumer/KafkaConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/consumer/KafkaConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/consumer/RabbitmqConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/consumer/RabbitmqConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/AbstractTransactionAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/AbstractTransactionAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/config/CatConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/config/CatConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/config/MysqlConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/config/MysqlConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/config/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/config/RedisConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/config/ZookeeperConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/config/ZookeeperConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/service/coordinator/impl/JdbcCoordinatorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/service/coordinator/impl/JdbcCoordinatorRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/service/coordinator/impl/RedisCoordinatorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/service/coordinator/impl/RedisCoordinatorRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/service/coordinator/impl/ZookeeperCoordinatorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/service/coordinator/impl/ZookeeperCoordinatorRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/SpringCloudTransactionAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/SpringCloudTransactionAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/SpringCloudTransactionInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/SpringCloudTransactionInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/feign/MythFeignHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/feign/MythFeignHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/feign/RestTemplateConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/feign/RestTemplateConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/feign/RestTemplateInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/distributed/springcloud/feign/RestTemplateInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/jedis/JedisClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/jedis/JedisClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/jedis/JedisClientCluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/jedis/JedisClientCluster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/jedis/JedisClientSentinel.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/jedis/JedisClientSentinel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/jedis/JedisClientSingle.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/jedis/JedisClientSingle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/AliyunProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/AliyunProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/AsyncTaskProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/AsyncTaskProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/GaodeProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/GaodeProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/JobProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/JobProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/QiniuProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/QiniuProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/ReliableMessageProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/ReliableMessageProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/SwaggerProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/SwaggerProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/ZookeeperProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catcore/src/main/java/com/core/properties/domain/ZookeeperProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catinterface/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catinterface/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catlock/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/AutoConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/AutoConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/annotation/Lock.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/annotation/Lock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/annotation/LockKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/annotation/LockKey.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/aspect/DistributedLockAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/aspect/DistributedLockAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/lock/CLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/lock/CLock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/lock/LuaDistributedLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/lock/LuaDistributedLock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/CLockManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/CLockManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/LockCallBack.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/LockCallBack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/LuaRedisLockManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/LuaRedisLockManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/ReturnCallBack.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/manager/ReturnCallBack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/properties/LockProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/java/com/app/distributedlock/properties/LockProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/resources/lock/lock.lua" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/resources/lock/lock.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catlock/src/main/resources/lock/unlock.lua" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catlock/src/main/resources/lock/unlock.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpay/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catpay/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/catpayclient/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/catpayclient/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/rpcclient/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/rpcclient/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catmodules/rpcservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catmodules/rpcservice/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catresource/src/main/resources/static/lib/jquery/jquery-ui.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/catresource/src/main/resources/static/lib/jquery/jquery-ui.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cattask/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cattask/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/.mvn/wrapper/MavenWrapperDownloader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cattask/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cattask/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cattask/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/mvnw.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cattask/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cattask/src/main/java/com/CattaskApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/src/main/java/com/CattaskApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cattask/src/main/java/com/app/cattask/shiro/filter/KickoutSessionControlFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/src/main/java/com/app/cattask/shiro/filter/KickoutSessionControlFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cattask/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cattask/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cattask/src/test/java/com/test/CattaskApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/cattask/src/test/java/com/test/CattaskApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catupload/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catupload/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catupload/src/main/java/com/app/pojo/FileInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/catupload/src/main/java/com/app/pojo/FileInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/css/font.awesome.css" beforeDir="false" afterPath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/css/font.awesome.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/fonts/fontawesome-webfont.svg" beforeDir="false" afterPath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/fonts/fontawesome-webfont.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/fonts/glyphicons-halflings-regular.svg" beforeDir="false" afterPath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/js/html5shiv.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/js/html5shiv.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/js/respond.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/catupload/src/main/resources/static/assets/adminlte/js/respond.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catupload/src/main/resources/static/js/jquery.metisMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/catupload/src/main/resources/static/js/jquery.metisMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catwebservice/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/catwebservice/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catwebservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catwebservice/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -227,12 +129,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/catwebservice/src/test/java/com/test/TreeTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="476">
               <caret line="39" column="8" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/catresource/src/main/resources/static/data/china.txt">
+          <provider selected="true" editor-type-id="LargeFileEditor">
+            <state relative-caret-position="-255" />
           </provider>
         </entry>
       </file>
@@ -522,6 +431,51 @@
             <path>
               <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
               <item name="bobo" type="462c0819:PsiDirectoryNode" />
+              <item name="catresource" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bobo" type="462c0819:PsiDirectoryNode" />
+              <item name="catresource" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bobo" type="462c0819:PsiDirectoryNode" />
+              <item name="catresource" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bobo" type="462c0819:PsiDirectoryNode" />
+              <item name="catresource" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bobo" type="462c0819:PsiDirectoryNode" />
+              <item name="catresource" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bobo" type="462c0819:PsiDirectoryNode" />
+              <item name="catresource" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bobo" type="462c0819:PsiDirectoryNode" />
               <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -536,44 +490,6 @@
               <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="crawler" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
@@ -705,6 +621,163 @@
         <option name="INSTRUMENTATION_ENABLED" value="true" />
       </Profilers>
       <method />
+    </configuration>
+    <configuration name="Algorithm_sort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.bobo.algorithm.Algorithm_sort" />
+      <module name="catcommon" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bobo.algorithm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CatuploadApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.CatuploadApplication" />
+      <module name="catupload" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RedisConfig" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.app.config.RedisConfig" />
+      <module name="catwebservice" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.app.config.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.app.crawler.selenium.Test" />
+      <module name="catwebservice" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.app.crawler.selenium.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="passParentEnv" value="true" />
+      <setting name="launchBrowser" value="true" />
+      <setting name="launchBrowserUrl" value="" />
+      <setting name="depsClasspath" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="catpayclient" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.app.CatpayclientApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CatMainApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="catmain" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.CatMainApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CatpayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="catpay" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.app.CatpayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CenterApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="catcenter" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cloud.center.CenterApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="catgateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cloud.center.gateway.GatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Application.CatuploadApplication" />
@@ -1175,7 +1248,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567521394693</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="工程初始化">
+      <created>1567608438092</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1567608438092</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1211,7 +1291,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="568972000" />
+    <option name="totallyTimeSpent" value="569214000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1225,7 +1305,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29104477" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29104477" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -1247,7 +1327,7 @@
       <window_info anchor="bottom" id="Messages" order="10" weight="0.21468298" />
       <window_info anchor="bottom" id="Problems" order="11" />
       <window_info anchor="bottom" id="Java Enterprise" order="12" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="13" sideWeight="0.49679488" visible="true" weight="0.32435465" />
+      <window_info anchor="bottom" id="Version Control" order="13" sideWeight="0.49679488" visible="true" weight="0.32435465" />
       <window_info anchor="bottom" id="Docker" order="14" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="15" />
       <window_info active="true" anchor="bottom" id="SVN Repositories" order="16" visible="true" weight="0.5461624" />
@@ -1779,7 +1859,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/catresource/src/main/resources/static/data/china.txt">
-      <provider selected="true" editor-type-id="LargeFileEditor" />
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="-255" />
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">
