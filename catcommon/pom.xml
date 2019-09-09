@@ -9,11 +9,7 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>jar</packaging>
-	<artifactId>catcommon</artifactId>
-
-	<properties>
-		<mapper.version>3.4.0</mapper.version>
-	</properties>
+    <artifactId>catcommon</artifactId>
 
 	<dependencies>
 		<!--测试包 -->

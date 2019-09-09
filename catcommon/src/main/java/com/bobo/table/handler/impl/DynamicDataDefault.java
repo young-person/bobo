@@ -49,7 +49,7 @@ public class DynamicDataDefault implements DynamicData {
             result.getBaseids();
             List<Map<String, Object>> list = result.getResult();
             for(Map<String, Object> m : list){
-                Map<String,Object> map = new HashMap<>();
+                Map<String,Object> map = new HashMap<String,Object>();
                 for(String key : m.keySet()){
                     boolean flag = isIn(s,key);
                     if(flag){//维度值

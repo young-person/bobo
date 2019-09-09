@@ -12,5 +12,5 @@ public interface DynamicData {
      * @param vdimension
      * @param results
      */
-    public void dynamicCreate(Dimension hdimension, Dimension vdimension,String dimensions, List<SimpleResult> results);
+    void dynamicCreate(Dimension hdimension, Dimension vdimension,String dimensions, List<SimpleResult> results);
 }
