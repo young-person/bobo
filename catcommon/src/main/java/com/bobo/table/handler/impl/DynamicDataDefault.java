@@ -17,19 +17,31 @@ public class DynamicDataDefault implements DynamicData {
         //固定X轴 动态最后的Y轴
         Dimension xdimension = hdimension.clone();
 
+        List<Dimension> reverse = new ArrayList<>();
+        //如果存在子 则链表反转再组装数据
         do{
-            List<DBean>  dbeans = xdimension.getResult();
-            for(DBean dBean :dbeans){
-                dBean.getCode();
-                dBean.getName();
-
-                for(SimpleResult result : results){
-                    List<Map<String, Object>> list = result.getResult();
-                }
-
-            }
-            xdimension = xdimension.getNext();
+            reverse.add(xdimension);
         }while(null != xdimension);
+
+        for(int index = reverse.size(); index >=0; index --){
+            Dimension d = reverse.get(index);
+            List<DBean> dbeans = d.getResult();
+            for(DBean dBean :dbeans){
+                //根据对应 字段结果ID 生成 对应列数据
+                String name = dBean.getName();
+                String code = dBean.getCode();
+                for(SimpleResult result : results){
+                    List<Baseid> baseids = result.getBaseids();
+                    List<Map<String, Object>> list = result.getResult();
+                    for(Baseid b : baseids){
+                        for(Map<String, Object> map : list){
+                           Object o = map.get(b.getId());//获取对应 baseid 数据点的值
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     //先将数据 全部合并 同类项

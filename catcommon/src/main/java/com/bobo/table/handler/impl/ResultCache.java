@@ -1,12 +1,11 @@
 package com.bobo.table.handler.impl;
 
-import com.bobo.enums.CEnum;
 import com.bobo.table.bean.Baseid;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ResultCache {
 
@@ -28,7 +27,7 @@ public class ResultCache {
     /**
      * 存在多线程问题
      */
-    private List<Map<String, List<Baseid>>> groupBaseids = new ArrayList<Map<String,List<Baseid>>>(CEnum.values().length);
+    private List<Map<String, List<Baseid>>> groupBaseids = new CopyOnWriteArrayList<Map<String,List<Baseid>>>();
 
     public void put(int index, String key, Baseid baseid){
         Map<String,List<Baseid>> group = groupBaseids.get(index);
@@ -48,7 +47,4 @@ public class ResultCache {
         return groupBaseids;
     }
 
-    public void setGroupBaseids(List<Map<String, List<Baseid>>> groupBaseids) {
-        this.groupBaseids = groupBaseids;
-    }
 }

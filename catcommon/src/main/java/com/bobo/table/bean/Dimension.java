@@ -14,7 +14,6 @@ public class Dimension implements Cloneable{
     private String value;
     private String name;
 
-    private List<DBean> result = new ArrayList<DBean>();
 
     private int len;
     private Dimension next;
@@ -22,6 +21,10 @@ public class Dimension implements Cloneable{
     private int height;
     private int width;
 
+    /**
+     * 每个维度对应的维度数据
+     */
+    private List<DBean> result = new ArrayList<DBean>();
 
     public Dimension(String id, int level, int len){
         this.id = id;
