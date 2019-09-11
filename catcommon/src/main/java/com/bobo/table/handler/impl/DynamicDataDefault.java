@@ -1,8 +1,6 @@
 package com.bobo.table.handler.impl;
 
-import com.bobo.table.bean.Baseid;
-import com.bobo.table.bean.Dimension;
-import com.bobo.table.bean.SimpleResult;
+import com.bobo.table.bean.*;
 import com.bobo.table.db.DBean;
 import com.bobo.table.handler.DynamicData;
 
@@ -23,22 +21,45 @@ public class DynamicDataDefault implements DynamicData {
             reverse.add(xdimension);
         }while(null != xdimension);
 
+
+
         for(int index = reverse.size(); index >=0; index --){
             Dimension d = reverse.get(index);
-            List<DBean> dbeans = d.getResult();
+            List<DBean> dbeans = d.getResult();//根据维度数据 获取对应值
+
+            TableResult tableResult = new TableResult();
+            List<List<RNode>> datas = tableResult.getDatas();
+
+            int j = 0;
             for(DBean dBean :dbeans){
                 //根据对应 字段结果ID 生成 对应列数据
                 String name = dBean.getName();
                 String code = dBean.getCode();
-                for(SimpleResult result : results){
+
+                List<RNode> rows = datas.get(j);
+
+                for(int k = 0; k < results.size(); k ++){
+
+
+                    SimpleResult result = results.get(k);
                     List<Baseid> baseids = result.getBaseids();
                     List<Map<String, Object>> list = result.getResult();
                     for(Baseid b : baseids){
+                        RNode n = new RNode();
+                        n.setValue(d.getId());
+
                         for(Map<String, Object> map : list){
-                           Object o = map.get(b.getId());//获取对应 baseid 数据点的值
+                            Object o = map.get(b.getId());//获取对应 baseid 数据点的值
+                            Object v = map.get(d.getId());
+                            if (code.equals(v)){
+                                RNode node = new RNode();
+                                node.setValue(o);
+                                break;
+                            }
                         }
                     }
                 }
+
             }
         }
 
