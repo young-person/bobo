@@ -3,12 +3,14 @@ package com.bobo.table.bean;
 /**
  * 数据最小节点
  */
-public class RNode {
+public class XNode {
     private int x;
 
     private int y;
 
     private Object value;
+
+    private String id;
 
     private Dimension vdimension;
 
@@ -53,4 +55,14 @@ public class RNode {
     public void setHdimension(Dimension hdimension) {
         this.hdimension = hdimension;
     }
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }

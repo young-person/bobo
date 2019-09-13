@@ -87,17 +87,14 @@ public class ParseCondition {
      */
     public String getWhereConditionReal(final String sql){
         final List<String> tmp = new ArrayList<String>(1);
-        String conditionSql = this.getWhereCondition(new Filter() {
-            @Override
-            public void doFilter(String key,StringBuilder builder,Map<String,String> condMap) {
-                StringBuilder b = new StringBuilder("@");
-                b.append(key);
-                b.append("@");
-                StringBuilder cond = new StringBuilder();
-                if (sql.indexOf(b.toString()) > -1){
-                    String s = sql.replace(b.toString(),condMap.get(key));
-                    tmp.set(0,s);
-                }
+        String conditionSql = this.getWhereCondition((key, builder, condMap) -> {
+            StringBuilder b = new StringBuilder("@");
+            b.append(key);
+            b.append("@");
+            StringBuilder cond = new StringBuilder();
+            if (sql.indexOf(b.toString()) > -1){
+                String s = sql.replace(b.toString(),condMap.get(key));
+                tmp.set(0,s);
             }
         });
         return tmp.get(0).replace(Special.COND.getSerialize(),conditionSql);
@@ -108,12 +105,9 @@ public class ParseCondition {
      * @return
      */
     public String getDimensionValues(){
-        StringBuilder builder = new StringBuilder();
-
         List<String> hd = new ArrayList<>();
         getNames(this.condition.getHdimension(),hd);
         getNames(this.condition.getVdimension(),hd);
-
         return String.join(",",hd);
     }
     /**
@@ -121,13 +115,10 @@ public class ParseCondition {
      * @return
      */
     public String getWhereCondition(){
-        return getWhereCondition(new Filter() {
-            @Override
-            public void doFilter(String key,StringBuilder builder,Map<String,String> condMap) {
-                builder.append(key);
-                builder.append(" = ");
-                builder.append(condMap.get(key));
-            }
+        return getWhereCondition((key, builder, condMap) -> {
+            builder.append(key);
+            builder.append(" = ");
+            builder.append(condMap.get(key));
         });
     }
     public String getWhereCondition(Filter filter){

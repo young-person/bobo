@@ -43,10 +43,11 @@ public class DefaultParseBase implements ParseBase<Condition> {
         hdimension.getResult();
         List<SimpleResult> results = query(condition);
 
-        String dimensions = getDimensions(condition);
+        ParseCondition parseCondition = new ParseCondition(condition);
+        String dimensions = parseCondition.getDimensionValues();
 
         DynamicData dynamicData = new DynamicDataDefault();
-        dynamicData.dynamicCreate(hdimension,vdimension,dimensions,results);
+        dynamicData.dynamicCreate(hdimension,vdimension,dimensions,results,condition);
     }
 
     /**
@@ -97,7 +98,7 @@ public class DefaultParseBase implements ParseBase<Condition> {
     }
 
     public interface CondFilter{
-        public void filter(Map<String,String> condMap);
+        void filter(Map<String,String> condMap);
     }
 
     /**
@@ -135,12 +136,6 @@ public class DefaultParseBase implements ParseBase<Condition> {
             condition.getRelativeMap().put(s,baseids);
         }
         condition.setBaseids(allBaseid);
-    }
-
-
-    protected String getDimensions(Condition condition){
-        ParseCondition parseCondition = new ParseCondition(condition);
-        return parseCondition.getDimensionValues();
     }
 
     /**
@@ -187,14 +182,12 @@ public class DefaultParseBase implements ParseBase<Condition> {
                         }
                     }
                 }else{
+                    queryParse = new ParseSumResult();
                     if (CEnum.SUM.getSerialize().equals(cEnum.getSerialize())){
-                        queryParse = new ParseSumResult();
                         where = parseCondition.getWhereCondition();
                     }else if(CEnum.FIRST.getSerialize().equals(cEnum.getSerialize())){
-                        queryParse = new ParseSumResult();
                         where = parseCondition.getWhereConditionFirst();
                     }else if(CEnum.LAST.getSerialize().equals(cEnum.getSerialize())){
-                        queryParse = new ParseSumResult();
                         where = parseCondition.getWhereConditionLast();
                     }else {
                     	throw new CException("不在定义操作里面");

@@ -1,5 +1,6 @@
 package com.bobo.table.handler;
 
+import com.bobo.table.bean.Condition;
 import com.bobo.table.bean.Dimension;
 import com.bobo.table.bean.SimpleResult;
 
@@ -12,5 +13,5 @@ public interface DynamicData {
      * @param vdimension 垂直Y轴
      * @param results SQL查询组装后数据集
      */
-    void dynamicCreate(Dimension hdimension, Dimension vdimension,String dimensions, List<SimpleResult> results);
+    void dynamicCreate(Dimension hdimension, Dimension vdimension, String dimensions, List<SimpleResult> results, Condition condition);
 }

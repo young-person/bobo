@@ -8,7 +8,7 @@ import java.util.*;
 
 public class DynamicDataDefault implements DynamicData {
     @Override
-    public void dynamicCreate(Dimension hdimension, Dimension vdimension,String dimensions, List<SimpleResult> results) {
+    public void dynamicCreate(Dimension hdimension, Dimension vdimension,String dimensions, List<SimpleResult> results,Condition condition) {
 
         List<DBean> dBeans = hdimension.getResult();
 
@@ -22,38 +22,46 @@ public class DynamicDataDefault implements DynamicData {
         }while(null != xdimension);
 
 
-
+        TableResult tableResult = new TableResult();
         for(int index = reverse.size(); index >=0; index --){
+            if (index < (reverse.size() - 1)){
+                break;
+            }
             Dimension d = reverse.get(index);
             List<DBean> dbeans = d.getResult();//根据维度数据 获取对应值
 
-            TableResult tableResult = new TableResult();
-            List<List<RNode>> datas = tableResult.getDatas();
-
+            tableResult.setDatas(new XNode[dbeans.size()][]);
             int j = 0;
             for(DBean dBean :dbeans){
                 //根据对应 字段结果ID 生成 对应列数据
                 String name = dBean.getName();
                 String code = dBean.getCode();
 
-                List<RNode> rows = datas.get(j);
-
+                XNode[] rows = tableResult.getDatas()[j];
+                j ++;
+                int m = 0;
                 for(int k = 0; k < results.size(); k ++){
-
 
                     SimpleResult result = results.get(k);
                     List<Baseid> baseids = result.getBaseids();
                     List<Map<String, Object>> list = result.getResult();
                     for(Baseid b : baseids){
-                        RNode n = new RNode();
-                        n.setValue(d.getId());
+                        XNode n = new XNode();
+                        n.setId(b.getId());
+                        //n.setValue(d.getId());//TODO 获取当前 整列总数
+                        if (0 == k){
+                            rows[m] = n;
+                            m ++;
+                        }
 
                         for(Map<String, Object> map : list){
                             Object o = map.get(b.getId());//获取对应 baseid 数据点的值
                             Object v = map.get(d.getId());
                             if (code.equals(v)){
-                                RNode node = new RNode();
+                                XNode node = new XNode();
                                 node.setValue(o);
+                                rows[m] = node;
+                                m ++;
                                 break;
                             }
                         }
@@ -62,6 +70,30 @@ public class DynamicDataDefault implements DynamicData {
 
             }
         }
+
+        this.getTableDatas(tableResult,condition.getCorn());
+    }
+
+
+    private void getTableDatas(TableResult tableResult,List<String> corns){
+
+        XNode[][] tableDatas = tableResult.getDatas();
+        for(int m = 0; m < tableDatas.length; m ++){
+
+            XNode[] rowData = tableDatas[m];
+
+            Map<String,Object> data = new HashMap<>();
+            for(int n = 0; n < rowData.length; n ++){
+                XNode node =rowData[n];
+//                data.put(node.getValue())
+            }
+
+            for(int index = 0; index < corns.size(); index ++){
+
+            }
+
+        }
+
 
     }
 

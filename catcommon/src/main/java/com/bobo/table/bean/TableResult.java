@@ -1,8 +1,5 @@
 package com.bobo.table.bean;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 表单结果数据集
  */
@@ -16,7 +13,7 @@ public class TableResult {
     /**
      * 数据集
      */
-    List<List<RNode>> datas = new ArrayList<>();
+    XNode[][] datas= null;
 
     public TableResult getParent() {
         return parent;
@@ -25,12 +22,11 @@ public class TableResult {
     public void setParent(TableResult parent) {
         this.parent = parent;
     }
-
-    public List<List<RNode>> getDatas() {
+    public XNode[][] getDatas() {
         return datas;
     }
 
-    public void setDatas(List<List<RNode>> datas) {
+    public void setDatas(XNode[][] datas) {
         this.datas = datas;
     }
 }
