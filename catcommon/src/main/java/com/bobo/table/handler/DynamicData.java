@@ -13,5 +13,5 @@ public interface DynamicData {
      * @param vdimension 垂直Y轴
      * @param results SQL查询组装后数据集
      */
-    void dynamicCreate(Dimension hdimension, Dimension vdimension, String dimensions, List<SimpleResult> results, Condition condition);
+    void dynamicCreate(Dimension hdimension, Dimension vdimension, List<SimpleResult> results, Condition condition);
 }

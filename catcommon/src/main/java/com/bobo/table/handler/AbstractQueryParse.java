@@ -1,5 +1,7 @@
 package com.bobo.table.handler;
 
+import com.bobo.base.BaseClass;
+
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
@@ -7,16 +9,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractQueryParse<E> implements QueryParse<E>,AutoCloseable{
+public abstract class AbstractQueryParse<E> extends BaseClass implements QueryParse<E>{
     public abstract DataSource getDynamicDataSource();
 
     protected List<Map<String,Object>> queryExec(String sql){
-        List<Map<String,Object>> result = new ArrayList<Map<String,Object>>();
+        List<Map<String,Object>> result = new ArrayList<>();
         DataSource dataSource = getDynamicDataSource();
-        try {
-            Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+
             ResultSetMetaData metaData = resultSet.getMetaData();
             int count = metaData.getColumnCount();
             String[] names = new String[count];
@@ -24,7 +26,7 @@ public abstract class AbstractQueryParse<E> implements QueryParse<E>,AutoCloseab
                 names[i] = metaData.getColumnLabel(i+1);
             }
             while(resultSet.next()){
-                Map<String,Object> m = new HashMap<String,Object>();
+                Map<String,Object> m = new HashMap<>();
                 for (int i = 0; i < count; i++) {
                     String k = resultSet.getString(names[i]);
                     Object v = resultSet.getObject(k);
@@ -33,13 +35,8 @@ public abstract class AbstractQueryParse<E> implements QueryParse<E>,AutoCloseab
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("queryExec is fail ...",e);
         }
         return result;
-    }
-
-    @Override
-    public void close() throws Exception{
-
     }
 }

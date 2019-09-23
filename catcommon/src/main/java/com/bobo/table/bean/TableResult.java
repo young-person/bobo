@@ -13,7 +13,7 @@ public class TableResult {
     /**
      * 数据集
      */
-    XNode[][] datas= null;
+    private TNode[][] datas= null;
 
     public TableResult getParent() {
         return parent;
@@ -22,11 +22,11 @@ public class TableResult {
     public void setParent(TableResult parent) {
         this.parent = parent;
     }
-    public XNode[][] getDatas() {
+    public TNode[][] getDatas() {
         return datas;
     }
 
-    public void setDatas(XNode[][] datas) {
+    public void setDatas(TNode[][] datas) {
         this.datas = datas;
     }
 }

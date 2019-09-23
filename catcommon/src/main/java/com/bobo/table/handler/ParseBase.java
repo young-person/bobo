@@ -10,4 +10,11 @@ public interface ParseBase<T> {
      * @param condition
      */
     void parse(T condition);
+
+    /**
+     *
+     * @param condition
+     * @return
+     */
+    T parseCorn(T condition);
 }

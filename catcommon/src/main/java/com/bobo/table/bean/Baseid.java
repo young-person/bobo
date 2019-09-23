@@ -3,17 +3,42 @@ package com.bobo.table.bean;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Baseid implements Serializable {
+/**
+ * 作为每一个数据列点
+ */
+public final class Baseid implements Serializable {
     /**
      * id为主键
      */
     private String id;
-    private String table_col;
-    private String explain;
-    private String detail;
-    private String type;
-
+    /**
+     * 每个点对应得sql
+     */
     private String sql;
+
+    /**
+     * 统计sql对应明细sql
+     */
+    private volatile String realSql;
+
+    /**
+     *明细表对应得 表字段table.column
+     */
+    private String table_col;
+    /**
+     *说明
+     */
+    private String explain;
+
+
+    /**
+     * 解析开始位置
+     */
+    private int start;
+    /**
+     * 解析结束位置
+     */
+    private int end;
 
     /**
      * 是否同期 临时符合主键
@@ -24,22 +49,31 @@ public class Baseid implements Serializable {
      */
     private boolean showsq = false;
 
+    public String getId() {
+        return id;
+    }
 
-
-    public Baseid(String id) {
+    public void setId(String id) {
+        if (Objects.isNull(id) && id.isEmpty()){
+            throw new RuntimeException("Baseid is id not allowed null...");
+        }
         this.id = id;
+    }
+
+    public String getSql() {
+        return sql;
     }
 
     public void setSql(String sql) {
         this.sql = sql;
     }
 
-    public String getId() {
-        return id;
+    public String getRealSql() {
+        return realSql;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setRealSql(String realSql) {
+        this.realSql = realSql;
     }
 
     public String getTable_col() {
@@ -58,26 +92,23 @@ public class Baseid implements Serializable {
         this.explain = explain;
     }
 
-    public String getDetail() {
-        return detail;
+    public int getStart() {
+        return start;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setStart(int start) {
+        this.start = start;
     }
 
-    public String getType() {
-        return type;
+    public int getEnd() {
+        return end;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-    public String getSql() {
-        return sql;
+    public void setEnd(int end) {
+        this.end = end;
     }
 
-    public boolean getShowtq() {
+    public boolean isShowtq() {
         return showtq;
     }
 
@@ -85,39 +116,11 @@ public class Baseid implements Serializable {
         this.showtq = showtq;
     }
 
-    public boolean getShowsq() {
+    public boolean isShowsq() {
         return showsq;
     }
 
     public void setShowsq(boolean showsq) {
         this.showsq = showsq;
-    }
-
-    @Override
-    public String toString() {
-        return "Baseid{" +
-                "id='" + id + '\'' +
-                ", table_col='" + table_col + '\'' +
-                ", explain='" + explain + '\'' +
-                ", detail='" + detail + '\'' +
-                ", type='" + type + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Baseid baseid = (Baseid) o;
-        return id.equals(baseid.id) &&
-                table_col.equals(baseid.table_col) &&
-                explain.equals(baseid.explain) &&
-                detail.equals(baseid.detail) &&
-                type.equals(baseid.type);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, table_col, explain, detail, type);
     }
 }

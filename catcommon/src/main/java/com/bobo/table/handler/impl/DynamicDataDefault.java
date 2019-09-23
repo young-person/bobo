@@ -3,12 +3,13 @@ package com.bobo.table.handler.impl;
 import com.bobo.table.bean.*;
 import com.bobo.table.db.DBean;
 import com.bobo.table.handler.DynamicData;
+import com.bobo.utils.Calculator;
 
 import java.util.*;
 
 public class DynamicDataDefault implements DynamicData {
     @Override
-    public void dynamicCreate(Dimension hdimension, Dimension vdimension,String dimensions, List<SimpleResult> results,Condition condition) {
+    public void dynamicCreate(Dimension hdimension, Dimension vdimension, List<SimpleResult> results,Condition condition) {
 
         List<DBean> dBeans = hdimension.getResult();
 
@@ -30,26 +31,30 @@ public class DynamicDataDefault implements DynamicData {
             Dimension d = reverse.get(index);
             List<DBean> dbeans = d.getResult();//根据维度数据 获取对应值
 
-            tableResult.setDatas(new XNode[dbeans.size()][]);
+            tableResult.setDatas(new TNode[dbeans.size()][]);
             int j = 0;
-            for(DBean dBean :dbeans){
+            for(DBean dBean :dbeans){// 维度轴
                 //根据对应 字段结果ID 生成 对应列数据
                 String name = dBean.getName();
                 String code = dBean.getCode();
 
-                XNode[] rows = tableResult.getDatas()[j];
+                TNode[] rows = tableResult.getDatas()[j];
                 j ++;
                 int m = 0;
                 for(int k = 0; k < results.size(); k ++){
 
                     SimpleResult result = results.get(k);
-                    List<Baseid> baseids = result.getBaseids();
+                    List<Baseid> baseids = null;// result.getBaseids();
                     List<Map<String, Object>> list = result.getResult();
                     for(Baseid b : baseids){
-                        XNode n = new XNode();
-                        n.setId(b.getId());
-                        //n.setValue(d.getId());//TODO 获取当前 整列总数
                         if (0 == k){
+                            YNode n = new YNode();
+                            n.setId(b.getId());
+                            n.setCode(code);
+                            n.setName(name);
+                            n.setHdimension(hdimension);
+                            n.setVdimension(vdimension);
+
                             rows[m] = n;
                             m ++;
                         }
@@ -60,6 +65,10 @@ public class DynamicDataDefault implements DynamicData {
                             if (code.equals(v)){
                                 XNode node = new XNode();
                                 node.setValue(o);
+                                node.setHdimension(hdimension);
+                                node.setVdimension(vdimension);
+                                node.setId(b.getId());
+
                                 rows[m] = node;
                                 m ++;
                                 break;
@@ -70,86 +79,54 @@ public class DynamicDataDefault implements DynamicData {
 
             }
         }
-
-        this.getTableDatas(tableResult,condition.getCorn());
+        LinkedHashMap<String, List<Baseid>> relativeMap = condition.getRelativeMap();
+        this.getTableDatas(tableResult,condition.getCorns(),relativeMap);
     }
 
+    private void getTableDatas(TableResult tableResult,List<String> corns,LinkedHashMap<String, List<Baseid>> relativeMap){
 
-    private void getTableDatas(TableResult tableResult,List<String> corns){
-
-        XNode[][] tableDatas = tableResult.getDatas();
+        TNode[][] tableDatas = tableResult.getDatas();
         for(int m = 0; m < tableDatas.length; m ++){
 
-            XNode[] rowData = tableDatas[m];
+            TNode[] rowData = tableDatas[m];
 
             Map<String,Object> data = new HashMap<>();
+            List<TNode> tmpNodes = new ArrayList<>();
+
             for(int n = 0; n < rowData.length; n ++){
-                XNode node =rowData[n];
-//                data.put(node.getValue())
+                TNode node = rowData[n];
+                if (node instanceof YNode){
+                    tmpNodes.add(node);//保障最左Y列数据集
+                }else{
+                    data.put(node.getId(),((XNode)node).getValue());
+                }
             }
 
             for(int index = 0; index < corns.size(); index ++){
-
-            }
-
-        }
-
-
-    }
-
-    //先将数据 全部合并 同类项
-    protected SimpleResult getSingleSimpleResult(List<SimpleResult> results,String dimensions){
-        String[] s = dimensions.split(",");
-        Set<Baseid> set = new HashSet<Baseid>();
-        for(SimpleResult result : results){
-            List<Baseid> baseids = result.getBaseids();
-            for(Baseid b : baseids){
-                set.add(b);
-            }
-        }
-        SimpleResult simpleResult = new SimpleResult();
-        List<Map<String, Object>> datas =  new ArrayList<Map<String, Object>>();
-
-        for(SimpleResult result : results){
-            result.getBaseids();
-            List<Map<String, Object>> list = result.getResult();
-            for(Map<String, Object> m : list){
-                Map<String,Object> map = new HashMap<String,Object>();
-                for(String key : m.keySet()){
-                    boolean flag = isIn(s,key);
-                    if(flag){//维度值
-
-                    }else{
-                        isIn(set,key);//数据项
-                    }
-                    map.put(key,m.get(key));
-
-                    for(Map<String, Object> dMap : datas){
-
-
-                    }
-
+                String s = corns.get(index);
+                List<Baseid> baseids = relativeMap.get(s);
+                StringBuilder builder = new StringBuilder();
+                int preIndex = 0;
+                for(Baseid baseid : baseids){
+                    Object o = data.get(baseid.getId());
+                    builder.append(s.substring(preIndex, baseid.getEnd()));
+                    builder.append(o);
+                    preIndex = baseid.getEnd();
                 }
+                //TODO 根据不同数据类型进行处理 通过计算表达式直接将数据转为运行结果
+                Calculator calculator = new Calculator(builder.toString());
+                String result = calculator.start();
+                XNode node = new XNode();
+                node.setValue(result);
+                tmpNodes.add(node);
+
+                TNode[] tmp = new TNode[tmpNodes.size()];
+                for(int k = 0; k < tmpNodes.size(); k ++){
+                    tmp[k] = tmpNodes.get(k);
+                }
+                tableDatas[m] = tmp;
             }
         }
-
-        return simpleResult;
     }
 
-    private boolean isIn(Set<Baseid> set,String key){
-        Iterator<Baseid> iterator = set.iterator();
-        while(iterator.hasNext()){
-            Baseid b = iterator.next();
-            if (b.getId().equals(key))
-                return true;
-        }
-        return false;
-    }
-    private boolean isIn(String[] s,String key){
-        for(int index = 0; index < s.length; index ++){
-            if (s.equals(key))
-                return s.equals(key);
-        }
-        return false;
-    }
 }

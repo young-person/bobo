@@ -14,7 +14,7 @@ public class ParseRealResult extends AbstractQueryParse<CEnum> {
     public SimpleResult parse(CEnum cEnum,String where,String dimensions,List<Baseid> baseids,String from) {
 
         SimpleResult result = new SimpleResult();
-        result.setBaseids(baseids);
+//        result.setBaseids(baseids);
         result.setDimensions(dimensions);
         result.setSql(where);
         result.setResult(queryExec(where));

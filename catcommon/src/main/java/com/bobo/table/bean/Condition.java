@@ -5,43 +5,50 @@ import java.util.*;
 /**
  * 条件
  */
-public class Condition {
-    private String sql;
-    private Dimension vdimension;
-    private Dimension hdimension;
-    private Map<String,String> condMap;
+final public class Condition {
+    /**
+     * x轴维度
+     */
+    private List<Dimension> vdimensions = new ArrayList<>();
+    /**
+     * y轴维度
+     */
+    private List<Dimension> hdimensions = new ArrayList<>();
+    /**
+     * 携带附加参数
+     */
+    private Map<String,String> condMap = new HashMap<>();
 
-    private List<Baseid> baseids = new ArrayList<>();//表达式解析之后的baseid
-    private List<String> corn = new ArrayList<>();//表达式
+    /**
+     * 数据表格每一列的表达式
+     */
+    private List<String> corns = new ArrayList<>();
+
     /**
      * 数据对照映射关系
      */
-    private LinkedHashMap<String,List<Baseid>> relativeMap = new LinkedHashMap<>();
+    private LinkedHashMap<String, List<Baseid>> relativeMap = new LinkedHashMap<>();
+    /**
+     * 表达式解析之后的baseid
+     */
+    private List<Baseid> baseids = new ArrayList<>();
 
     public Condition(){}
 
-    public String getSql() {
-        return sql;
+    public List<Dimension> getVdimensions() {
+        return vdimensions;
     }
 
-    public void setSql(String sql) {
-        this.sql = sql;
+    public void setVdimensions(List<Dimension> vdimensions) {
+        this.vdimensions = vdimensions;
     }
 
-    public Dimension getVdimension() {
-        return vdimension;
+    public List<Dimension> getHdimensions() {
+        return hdimensions;
     }
 
-    public void setVdimension(Dimension vdimension) {
-        this.vdimension = vdimension;
-    }
-
-    public Dimension getHdimension() {
-        return hdimension;
-    }
-
-    public void setHdimension(Dimension hdimension) {
-        this.hdimension = hdimension;
+    public void setHdimensions(List<Dimension> hdimensions) {
+        this.hdimensions = hdimensions;
     }
 
     public Map<String, String> getCondMap() {
@@ -52,22 +59,6 @@ public class Condition {
         this.condMap = condMap;
     }
 
-    public List<Baseid> getBaseids() {
-        return baseids;
-    }
-
-    public void setBaseids(List<Baseid> baseids) {
-        this.baseids = baseids;
-    }
-
-    public List<String> getCorn() {
-        return corn;
-    }
-
-    public void setCorn(List<String> corn) {
-        this.corn = corn;
-    }
-
     public LinkedHashMap<String, List<Baseid>> getRelativeMap() {
         return relativeMap;
     }
@@ -75,36 +66,18 @@ public class Condition {
     public void setRelativeMap(LinkedHashMap<String, List<Baseid>> relativeMap) {
         this.relativeMap = relativeMap;
     }
-
-    @Override
-    public String toString() {
-        return "Condition{" +
-                "sql='" + sql + '\'' +
-                ", vdimension=" + vdimension +
-                ", hdimension=" + hdimension +
-                ", condMap=" + condMap +
-                ", baseids=" + baseids +
-                ", corn=" + corn +
-                ", relativeMap=" + relativeMap +
-                '}';
+    public List<String> getCorns() {
+        return corns;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Condition)) return false;
-        Condition condition = (Condition) o;
-        return Objects.equals(sql, condition.sql) &&
-                Objects.equals(vdimension, condition.vdimension) &&
-                Objects.equals(hdimension, condition.hdimension) &&
-                Objects.equals(condMap, condition.condMap) &&
-                Objects.equals(baseids, condition.baseids) &&
-                Objects.equals(corn, condition.corn) &&
-                Objects.equals(relativeMap, condition.relativeMap);
+    public void setCorns(List<String> corns) {
+        this.corns = corns;
+    }
+    public List<Baseid> getBaseids() {
+        return baseids;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(sql, vdimension, hdimension, condMap, baseids, corn, relativeMap);
+    public void setBaseids(List<Baseid> baseids) {
+        this.baseids = baseids;
     }
 }

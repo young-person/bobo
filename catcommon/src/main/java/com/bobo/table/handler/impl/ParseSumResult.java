@@ -25,10 +25,10 @@ public class ParseSumResult extends AbstractQueryParse<CEnum> {
         builder.append(from);
         SimpleResult simpleResult = new SimpleResult();
         simpleResult.setSql(builder.toString());
-        simpleResult.setBaseids(baseids);
+//        simpleResult.setBaseids(baseids);
         simpleResult.setDimensions(dimensions);
         simpleResult.setResult(queryExec(builder.toString()));
-        return null;
+        return simpleResult;
     }
 
     @Override
