@@ -19,6 +19,6 @@ public class BasicFactory {
     }
 
     public static <T> T getResult(Actuator actuator, String sql){
-        return  (T)actuator.exec(sql);
+        return  (T)actuator.executeSql(sql);
     }
 }
