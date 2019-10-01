@@ -1,0 +1,77 @@
+{
+  "vdimension": {
+    "id": "",
+    "level": 0,
+    "nextLevel": 1,
+    "value": "",
+    "name": "",
+    "len": 1,
+    "height": 200,
+    "width": 200,
+    "next": {
+      "id": "",
+      "level": 0,
+      "nextLevel": 1,
+      "value": "",
+      "name": "",
+      "len": 1,
+      "height": 200,
+      "width": 200,
+      "next": {
+        "id": "",
+        "level": 0,
+        "nextLevel": 1,
+        "value": "",
+        "name": "",
+        "len": 1,
+        "height": 200,
+        "width": 200,
+        "next": {
+          "id": "",
+          "level": 0,
+          "nextLevel": 1,
+          "value": "",
+          "name": "",
+          "len": 1,
+          "height": 200,
+          "width": 200,
+          "next": {}
+        }
+      }
+    }
+  },
+ "hdimension": {
+   "id": "",
+   "level": 0,
+   "nextLevel": 1,
+   "value": "",
+   "name": "",
+   "len": 1,
+   "height": 200,
+   "width": 200,
+   "next": {
+     "id": "",
+     "level": 0,
+     "nextLevel": 1,
+     "value": "",
+     "name": "",
+     "len": 1,
+     "height": 200,
+     "width": 200,
+     "next": {
+       "id": "",
+       "level": 0,
+       "nextLevel": 1,
+       "value": "",
+       "name": "",
+       "len": 1,
+       "height": 200,
+       "width": 200,
+       "next": {}
+     }
+   }
+ },
+  "condMap": {},
+  "sql": {},
+  "corn": ["BB01","BB02","BB01+BB02"]
+}

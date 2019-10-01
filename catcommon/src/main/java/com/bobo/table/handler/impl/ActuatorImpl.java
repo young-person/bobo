@@ -1,26 +1,39 @@
 package com.bobo.table.handler.impl;
 
-import com.bobo.table.db.DBean;
+import com.alibaba.druid.pool.DruidDataSource;
 import com.bobo.table.handler.Actuator;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 import java.util.Map;
 
-public class ActuatorImpl extends Actuator<DBean> {
-    private JdbcTemplate jdbcTemplate;
+public class ActuatorImpl implements Actuator {
 
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-
-    public JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
-    }
-
+    /**
+     * sql 执行  获取唯独 代码信息数据
+     *
+     * @param sql
+     * @return
+     */
     @Override
-    public DBean exec(String sql) {
-        List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
+    public List<Map<String, Object>> executeSql(String sql) {
+        //        List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
+//        List<DBean> beans = new ArrayList<>();
+//        for(Map<String,Object> map : list){
+//            DBean dbean = new DBean();
+//            dbean.setCode((String)map.get("code"));
+//            dbean.setName((String)map.get("name"));
+//            beans.add(dbean);
+//        }
+        return null;
+    }
+
+    /**
+     * 获取数据源
+     *
+     * @return
+     */
+    @Override
+    public DruidDataSource getDynamicDataSource() {
         return null;
     }
 

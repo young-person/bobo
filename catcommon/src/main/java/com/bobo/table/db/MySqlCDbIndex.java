@@ -91,9 +91,15 @@ public class MySqlCDbIndex extends CAbstractDbIndex<DBTable> {
         return cache;
     }
 
+    /**
+     * 进行最优索引方案分析选择 最左匹配原则
+     *
+     * @param list
+     */
     @Override
     public void aiAnalysis(List list) {
 
     }
+
 
 }

@@ -1,11 +1,12 @@
 package com.bobo.table.bean;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * 条件
  */
-final public class Condition {
+final public class Condition implements Serializable {
     /**
      * x轴维度
      */

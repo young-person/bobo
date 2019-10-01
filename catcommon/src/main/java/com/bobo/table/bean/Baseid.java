@@ -1,6 +1,7 @@
 package com.bobo.table.bean;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -48,6 +49,11 @@ public final class Baseid implements Serializable {
      * 是否上期
      */
     private boolean showsq = false;
+
+    /**
+     * 每个点对应条件
+     */
+    private Map<String,Object> condition;
 
     public String getId() {
         return id;
@@ -122,5 +128,13 @@ public final class Baseid implements Serializable {
 
     public void setShowsq(boolean showsq) {
         this.showsq = showsq;
+    }
+
+    public Map<String, Object> getCondition() {
+        return condition;
+    }
+
+    public void setCondition(Map<String, Object> condition) {
+        this.condition = condition;
     }
 }

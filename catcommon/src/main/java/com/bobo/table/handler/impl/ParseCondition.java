@@ -1,25 +1,36 @@
 package com.bobo.table.handler.impl;
 
+import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.util.JdbcConstants;
+import com.bobo.base.BaseClass;
+import com.bobo.base.CatException;
+import com.bobo.table.bean.Baseid;
 import com.bobo.table.bean.Condition;
 import com.bobo.table.bean.Dimension;
+import com.bobo.table.handler.QueryParse;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.UnsupportedEncodingException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 条件解析
  */
-public class ParseCondition {
+public class ParseCondition extends BaseClass {
     final String charsetName = "UTF-8";
-    private static final Logger LOGGER = LoggerFactory.getLogger(ParseCondition.class);
+
+    /**
+     * 匹配占位符
+     */
+    final static Pattern PATTERN = Pattern.compile("\\$\\{[^}]+\\}");
 
     public static enum Special {
-        KSSJ("#{KSSJ}"),
-        JSSJ("#{JSSJ}"),
-        COND("#{COND}");
+        KSSJ("${KSSJ}"),
+        JSSJ("${JSSJ}"),
+        COND("${COND}");
         private String serialize;
 
         Special(final String serialize) {
@@ -43,124 +54,127 @@ public class ParseCondition {
         }
     }
 
-    interface Filter {
-        void doFilter(String key, StringBuilder builder, Map<String, String> condMap);
-    }
-
     private Condition condition;
 
     public ParseCondition(Condition condition) {
         this.condition = condition;
     }
 
-    /**
-     * 获取开始日期统计
-     */
-    public String getWhereConditionFirst() {
-        return this.getWhereCondition((key, builder, condMap) -> {
-            if (!Special.JSSJ.getSerialize().equals(key)) {
-                spellStr(key, builder, condMap);
-            }
-        });
-    }
-
-    /**
-     * 获取结束日期统计
-     */
-    public String getWhereConditionLast() {
-
-        return this.getWhereCondition((key, builder, condMap) -> {
-            if (!Special.KSSJ.getSerialize().equals(key)) {
-                spellStr(key, builder, condMap);
-            }
-        });
-    }
 
     /**
      * 实时sql查询 根据不同sql需要进行sql语句调整
      */
-    public String getWhereConditionReal(final String sql) {
-        final List<String> tmp = new ArrayList<>(1);
-        String conditionSql = this.getWhereCondition((key, builder, condMap) -> {
-            StringBuilder b = new StringBuilder("@");
-            b.append(key);
-            b.append("@");
-            if (sql.indexOf(b.toString()) > -1) {
-                String s = sql.replace(b.toString(), condMap.get(key));
-                tmp.set(0, s);
-            }
-        });
-        return tmp.get(0).replace(Special.COND.getSerialize(), conditionSql);
+     public StringBuilder getWhereConditionRealSql(final Baseid baseid) {
+        Map<String, String> condMap = this.condition.getCondMap();
+        StringBuilder builder = this.getCommonCondition(baseid.getSql(), condMap);
+        this.condMapAppendToSql(builder, baseid.getCondition());
+        return builder;
     }
-
-    /**
-     * 获取所有维度
-     *
-     * @return
-     */
-    public String getDimensionValues() {
-        List<String> hd = new ArrayList<>();
-        for(Dimension dimension :this.condition.getHdimensions()){
-            getNames(dimension, hd);
-        }
-        for(Dimension dimension :this.condition.getVdimensions()){
-            getNames(dimension, hd);
-        }
-        return String.join(",", hd);
-    }
-
     /**
      * 获取正常SUM sql
      *
      * @return
      */
-    public String getWhereCondition() {
-        return getWhereCondition((key, builder, condMap) -> {
-            builder.append(key);
-            builder.append(" = ");
-            builder.append(condMap.get(key));
-        });
+    public StringBuilder getWhereConditionSql(final Baseid baseid) {
+        return this.getWhereConditionRealSql(baseid);
     }
 
-    public String getWhereCondition(Filter filter) {
-        if (null == this.condition.getCondMap())
-            return "";
-        StringBuilder builder = new StringBuilder();
-        for (String key : this.condition.getCondMap().keySet()) {
-            if (StringUtils.isBlank(this.condition.getCondMap().get(key)))
+    /**
+     * 进行 特殊处理key：【sql】
+     * @param condMap
+     * @param builder
+     * @return
+     */
+    private StringBuilder dealWithSql(Map<String,String> condMap,StringBuilder builder){
+        Set<Map.Entry<String, String>> set = condMap.entrySet();
+        for (Map.Entry<String, String> map : set) {
+            String key = map.getKey();
+            String v = map.getValue();
+
+            if (StringUtils.isBlank(v))
                 continue;
-            if("sql".equals(key)){
-                String sql = this.condition.getCondMap().get(key);
-                if(StringUtils.isNotBlank(sql)){
+            if ("sql".equals(key)) {
+                String sql = condMap.get(key);
+                if (StringUtils.isNotBlank(sql)) {
                     String value = null;
                     try {
                         value = Base64.getEncoder().encodeToString(sql.getBytes(charsetName));
                         builder.append(value);
                     } catch (UnsupportedEncodingException e) {
-                        LOGGER.error("getWhereCondition encodeToString is fail.... key:[{}],value:[{}]",key,value,e);
+                        LOGGER.error("getWhereCondition encodeToString is fail.... key:[{}],value:[{}]", key, value, e);
                     }
                 }
-                continue;
+                break;
             }
-            Dimension d1 = exist(this.condition.getHdimensions().get(0), key);
-            Dimension d2 = exist(this.condition.getVdimensions().get(0), key);
-            if (null != d1)
-                d1.setValue(this.condition.getCondMap().get(key));
-            if (null != d2)
-                d2.setValue(this.condition.getCondMap().get(key));
-            if (null != d1 || null != d2) {
-                builder.append(key);
-                builder.append(" like '");
-                builder.append(this.condition.getCondMap().get(key));
-                builder.append("%'");
-            } else {
-                if (null != filter) {
-                    filter.doFilter(key, builder, this.condition.getCondMap());
+        }
+        return builder;
+    }
+
+    /**
+     * 对sql 进行通用处理
+     * @param sql
+     * @param condMap
+     * @return
+     */
+    private StringBuilder getCommonCondition(String sql,Map<String, String> condMap){
+        Matcher matcher = PATTERN.matcher(sql);
+        Set<String> groups = new HashSet<>();
+        while (matcher.find()) {
+            groups.add(matcher.group());
+        }
+        Set<Map.Entry<String, String>> set = condMap.entrySet();
+        for (String s : groups) {
+            for (Map.Entry<String, String> entry : set) {
+                String k = entry.getKey();
+                String v = entry.getValue();
+                if (s.substring(1, s.length() - 2).equals(k)) {
+                    sql.replace(s, v);
+                    condMap.remove(k);
                 }
             }
         }
-        return builder.toString();
+        return this.dealWithSql(condMap, new StringBuilder(sql));
     }
+
+    /**
+     * 将还未处理的条件件进行sql处理
+     * @param builder
+     * @param condMap
+     */
+    protected void condMapAppendToSql(StringBuilder builder,Map<String,Object> condMap){
+        if(MapUtils.isNotEmpty(condMap)){
+            condMap.forEach((key,value)->{
+                if(value instanceof Integer){
+
+                }else if(value instanceof String){
+
+                }else if(value instanceof Float){
+
+                }else if(value instanceof Double){
+
+                }else{
+                    throw new CatException("超出定义类型范围");
+                }
+            });
+        }
+    }
+
+    /**
+     * 获取最下层维度
+     *
+     * @return
+     */
+    public List<String> getDimensionValues() {
+        List<String> hd = new ArrayList<>();
+        Dimension hdimension = this.condition.getHdimensions().get(this.condition.getHdimensions().size() - 1);
+        Dimension vdimension = this.condition.getVdimensions().get(this.condition.getVdimensions().size() - 1);
+        getNames(hdimension, hdimension.getNext(), hd);
+        getNames(vdimension, vdimension.getNext(), hd);
+        return hd;
+    }
+
+
+
 
 
     private Dimension exist(Dimension dimension, String key) {
@@ -189,12 +203,12 @@ public class ParseCondition {
         }
     }
 
-    private void getNames(Dimension dimension, List<String> list) {
-        if (null == dimension) {
+    private void getNames(Dimension dimension, Dimension next, List<String> list) {
+        if (null == next) {
+            list.add(dimension.getId());
             return;
         }
-        list.add(dimension.getId());
-        getNames(dimension.getNext(), list);
+        getNames(dimension, dimension.getNext(), list);
     }
 
     private void spellStr(String key, StringBuilder builder, Map<String, String> condMap) {
@@ -202,4 +216,63 @@ public class ParseCondition {
         builder.append(" = ");
         builder.append(condMap.get(key));
     }
+
+
+    /**
+     * 将同表名称，条件相同，维度相同进行查询合并。
+     * @param map
+     * @param queryParse
+     */
+    public void getCommonSql(Map<String, List<Baseid>> map, QueryParse queryParse){
+        DruidDataSource dataSource = queryParse.getDynamicDataSource();
+        String dbType = dataSource.getDbType();
+
+        switch (dbType) {
+            case JdbcConstants.MYSQL:
+                break;
+            case JdbcConstants.ORACLE:
+                break;
+            case JdbcConstants.SYBASE:
+                break;
+            case JdbcConstants.SQL_SERVER:
+                break;
+        }
+
+        Set<Map.Entry<String, List<Baseid>>> set  = map.entrySet();
+        String sql = null;
+        List<String> hd = this.getDimensionValues();
+
+        for(Map.Entry<String, List<Baseid>> entry : set){
+            String key = entry.getKey();
+            List<Baseid> list = entry.getValue();
+            for(Baseid baseid : list){
+                String table_col = baseid.getTable_col();
+                char point = '.';
+                String tableName = null;
+                if (StringUtils.isNotBlank(table_col) &&  table_col.contains(String.valueOf(point))) {
+                    tableName = table_col.split(String.valueOf(point))[0];
+                    sql = this.getWhereConditionSql(baseid).toString();
+                }else{
+                    sql = this.getWhereConditionSql(baseid).toString();
+                }
+                if(Objects.nonNull(tableName)){
+                    for(Map.Entry<String, List<Baseid>> e : set){
+                        String k = e.getKey();
+                        if (!key.equals(k)){
+                            List<Baseid> compares = e.getValue();
+                            for(Baseid b : compares){
+                                if (StringUtils.isNotBlank(table_col) && table_col.indexOf(point) > -1) {
+                                    String name = table_col.split(String.valueOf(point))[0];
+                                    if(tableName.equals(name) && StringUtils.trimToEmpty(baseid.getSql()).equals(b.getSql()) ){//属于同类
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }

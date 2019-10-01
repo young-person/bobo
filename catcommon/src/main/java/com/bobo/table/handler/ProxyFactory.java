@@ -1,7 +1,5 @@
 package com.bobo.table.handler;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 public class ProxyFactory {
@@ -9,17 +7,14 @@ public class ProxyFactory {
         Object proxyObject = Proxy.newProxyInstance(
                 target.getClass().getClassLoader(),
                 target.getClass().getInterfaces(),
-                new InvocationHandler() {
-                    @Override
-                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                        Object res = null;
-                        try {
-                            res = method.invoke(target, args);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        return res;
+                (proxy, method, args) -> {
+                    Object res = null;
+                    try {
+                        res = method.invoke(target, args);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
+                    return res;
                 });
         return proxyObject;
     }
@@ -34,12 +29,9 @@ public class ProxyFactory {
         return Proxy.newProxyInstance(
                 target.getClass().getClassLoader(),
                 target.getClass().getInterfaces(),
-                new InvocationHandler() {
-                    @Override
-                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                        Object returnValue = method.invoke(target, args);
-                        return returnValue;
-                    }
+                (proxy, method, args) -> {
+                    Object returnValue = method.invoke(target, args);
+                    return returnValue;
                 }
         );
     }

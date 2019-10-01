@@ -9,10 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractQueryParse<E> extends BaseClass implements QueryParse<E>{
-    public abstract DataSource getDynamicDataSource();
+public abstract class AbstractQueryParse extends BaseClass implements QueryParse{
 
-    protected List<Map<String,Object>> queryExec(String sql){
+    protected List<Map<String,Object>> queryExecute(String sql){
         List<Map<String,Object>> result = new ArrayList<>();
         DataSource dataSource = getDynamicDataSource();
         try (Connection connection = dataSource.getConnection();

@@ -7,18 +7,16 @@ import java.util.List;
 
 /**
  * 数据查询
- * @param <E>
  */
-public interface QueryParse<E> {
+public interface QueryParse extends Actuator{
 
     /**
      * 简单数据查询
-     * @param result
-     * @param where
+     * @param type
+     * @param sql
      * @param dimensions
      * @param baseids
-     * @param from
      * @return
      */
-    SimpleResult parse(E result, String where, String dimensions, List<Baseid> baseids, String from);
+    SimpleResult parse(String type, String sql, List<String> dimensions, List<Baseid> baseids);
 }
