@@ -5,9 +5,11 @@ import org.apache.commons.lang3.StringUtils;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class ComUtils {
     public static String getIpAddress(HttpServletRequest request) {
@@ -182,4 +184,45 @@ public class ComUtils {
     static int SUCCESS = 1;
 
     static int ERROR = 0;
+
+
+
+
+    /**
+     * 获取过去任意天内的日期集合
+     *
+     * @param intervals intervals天内
+     * @return 日期数组
+     */
+    public static List<String> pastDaysList(int intervals) {
+        List<String> pastDaysList = new ArrayList<>();
+        for (int i = -intervals + 1; i <= 0; i++) {
+            pastDaysList.add(getPastDate(i, DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.CHINA)));
+        }
+        return pastDaysList;
+    }
+    public static String dateToWeek(String datetime) {
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        String[] weekDays = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+        Calendar cal = Calendar.getInstance(); // 获得一个日历
+        Date datet = null;
+        try {
+            datet = f.parse(datetime);
+            cal.setTime(datet);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1; // 指示一个星期中的某天。
+        if (w < 0)
+            w = 0;
+        return weekDays[w];
+    }
+    /**
+     * 获取某天为基准，前后某天日期
+     * @param offset offset 0今天，1明天，-1昨天，依次类推
+     * @return
+     */
+    public static String getPastDate(int offset,DateTimeFormatter format) {
+        return LocalDate.now().plusDays(offset).atStartOfDay().format(format);
+    }
 }

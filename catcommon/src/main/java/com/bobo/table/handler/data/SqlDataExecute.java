@@ -89,11 +89,11 @@ public class SqlDataExecute extends BaseClass implements DataExecute<Condition> 
             if (CEnum.REAL.name().equals(key)){
                 for (Baseid b : list) {
                     queryParse = new ParseRealResult();
-                    sql = parseCondition.getWhereConditionRealSql(b);
+//                    sql = parseCondition.getWhereConditionRealSql(b);
                 }
             }else{
                 queryParse = new ParseSumResult();
-                sql = parseCondition.getWhereConditionSql();
+//                sql = parseCondition.getWhereConditionSql();
             }
             SimpleResult result = queryParse.parse(key, sql, hd, list);
             all.add(result);

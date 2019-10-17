@@ -2,23 +2,20 @@ package com.bobo.table.handler.impl;
 
 import com.bobo.table.bean.Baseid;
 import com.bobo.table.bean.Condition;
-import com.bobo.table.db.CDbIndex;
-import com.bobo.table.db.DBTable;
 import com.bobo.table.handler.DataExecute;
 import com.bobo.table.handler.ParseBase;
 import com.bobo.table.handler.data.SingleDataExecute;
 import com.bobo.table.handler.data.SqlDataExecute;
 import com.bobo.table.handler.data.VariousDataExecute;
 
-import java.util.List;
 import java.util.Objects;
 
 public class DefaultParseBase extends ParseBaseFactory implements ParseBase<Condition> {
 
-    public DefaultParseBase(CDbIndex dbIndex) {
-        this.dbIndex = dbIndex;
+    public static void main(String[] args) {
+        DefaultParseBase defaultParseBase = new DefaultParseBase();
+        defaultParseBase.parse(null);
     }
-
 
     @Override
     public void parse(Condition condition) {
@@ -27,10 +24,6 @@ public class DefaultParseBase extends ParseBaseFactory implements ParseBase<Cond
 
         this.parseDimension(condition.getHdimensions());
         this.parseDimension(condition.getVdimensions());
-
-
-        List<DBTable> dbTables = dbIndex.loadTablesFromDbs();
-
         DataExecute dataExecute = null;
         if (Objects.isNull(condition.getHdimensions()) && Objects.isNull(condition.getVdimensions()) || this.sure) {
             dataExecute = new SqlDataExecute();
