@@ -1,5 +1,16 @@
 package com.app.crawler.statistics;
 
+import com.app.crawler.pojo.CNode;
+import com.app.utils.HttpUtil;
+import com.bobo.base.BaseClass;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,26 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.RejectedExecutionHandler;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import com.app.crawler.pojo.CNode;
-import com.app.utils.HttpUtil;
-import com.bobo.base.BaseClass;
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import java.util.concurrent.*;
 
 /**
  * @Description: TODO
@@ -97,8 +89,6 @@ public class Department extends BaseClass {
 	}
 
 	/**
-	 * @param arr1
-	 * @param arr2
 	 * @Description: continueLoad
 	 * @date 2019年6月25日 下午1:31:08
 	 */
