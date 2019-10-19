@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>  
 <configuration scan="true" scanPeriod="60 seconds" debug="true">  
     <!-- 模块名称， 影响日志配置名，日志文件名 --> 
-    <property name="appName" value="catmain"/>
+    <property name="appName" value="catcenter"/>
     <!--rootPath 日志路径，这里是相对路径，web项目eclipse下会输出到eclipse的安装目录下，如果部署到linux上的tomcat下，会输出到tomcat/bin目录 下 -->  
-    <property name="rootPath" value="/app/catmain/logs"/>
+    <property name="rootPath" value="/app/catcenter/logs"/>
     <contextName>${appName}</contextName>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">

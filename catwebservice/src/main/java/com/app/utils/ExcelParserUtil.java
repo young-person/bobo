@@ -1,38 +1,26 @@
 package com.app.utils;
 
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.Format;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellValue;
-import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.DateUtil;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.ss.util.CellRangeAddress;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.*;
 
 
 /**
- * 
+ *
  * Excel文件解析
  */
 public class ExcelParserUtil{
 
 	public void parserFile(File file){
-		
+
 	}
 
     private static final Logger logger = LoggerFactory.getLogger(ExcelParserUtil.class);
@@ -155,7 +143,7 @@ public class ExcelParserUtil{
 			}else{
 				inStream = new FileInputStream(this.file);
 			}
-            
+
             workBook = WorkbookFactory.create(inStream);
             sheet = workBook.getSheet(sheetName);
         } catch (Exception e) {
@@ -343,11 +331,11 @@ public class ExcelParserUtil{
                         Cell cell = rower.getCell(j);
                         String resultValue = readCellValue(cell,rowNum,j);
                         Map<String, Object> m = new HashMap<String, Object>();
-                        
+
                         m.put("value", resultValue);
                         m.put("row", rowNum);
                         m.put("col", j);
-                        
+
                         views.add(m);
                     }
                 }
@@ -433,7 +421,7 @@ public class ExcelParserUtil{
         }
         return sheetNames;
     }
-    
+
     public static List<String> getSheetNames(InputStream inStream) throws Exception{
         List<String> sheetNames = new ArrayList<String>();
 
@@ -451,7 +439,7 @@ public class ExcelParserUtil{
         }
         return sheetNames;
     }
-    
+
     public File getFile() {
 		return file;
 	}
@@ -460,42 +448,42 @@ public class ExcelParserUtil{
 		this.file = file;
 	}
 
-	public static class Unit 
-    {    
-       private int x;    
-       private int y;    
+	public static class Unit
+    {
+       private int x;
+       private int y;
        public Unit(int x, int y)
-       {        
-          this.x = x;        
-          this.y = y;    
-       }    
-       
-       public int getX() 
-       {        
-          return x;    
-       }    
-       
-       public int getY() 
-       {        
-          return y;    
-       }    
-       
+       {
+          this.x = x;
+          this.y = y;
+       }
+
+       public int getX()
+       {
+          return x;
+       }
+
+       public int getY()
+       {
+          return y;
+       }
+
        public void shiftPoint(int w, int h)
-       {        
-          x += w;       
-          y += y;    
-       }    
-       
+       {
+          x += w;
+          y += y;
+       }
+
        public String getvalue()
        {
           return "("+x+","+y+")";
        }
-       
+
        public boolean pointEquals(Unit unit)
-       {        
-          if(unit.x == x && unit.y == y)            
-             return true;        
-          return false;    
+       {
+          if(unit.x == x && unit.y == y)
+             return true;
+          return false;
        }
     }
 }

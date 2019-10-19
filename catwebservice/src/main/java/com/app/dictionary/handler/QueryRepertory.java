@@ -21,14 +21,14 @@ public interface QueryRepertory<E> {
 
     public StoreRoom createDBInfOBean(E dbs, String name);
 
-    public static final String TABLE_Name = "TABLENAME";
-    public static final String TABLE_Comments = "tableComments";
-    public static final String COLUMN_Name = "COLUMNNAME";
-    public static final String COLUMN_Comments = "comments";
-    public static final String NULLABLE = "NULLABLE";
-    public static final String _TYPE = "TYPE";
-    public static final String _LENGTH = "LENGTH";
+    String TABLE_Name = "TABLENAME";
+    String TABLE_Comments = "tableComments";
+    String COLUMN_Name = "COLUMNNAME";
+    String COLUMN_Comments = "comments";
+    String NULLABLE = "NULLABLE";
+    String _TYPE = "TYPE";
+    String _LENGTH = "LENGTH";
 
-    public static final String _PK = "PK";
+    String _PK = "PK";
 
 }
