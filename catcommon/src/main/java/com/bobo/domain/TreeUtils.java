@@ -17,20 +17,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.bobo.annotation.Tree;
+import com.bobo.base.BaseClass;
 import com.bobo.utils.CReflectUtil;
 
 /**
  * 树转换生成类
  */
-public class TreeUtils {
-    private static Logger logger = LoggerFactory.getLogger(TreeUtils.class);
+public class TreeUtils extends BaseClass{
 
     public static  <T> List<Bean> buildListTree(List<T> datas){
         if(null == datas || 0 == datas.size()){
-            logger.error("转换数据长度错误");
+            LOGGER.error("转换数据长度错误");
             return null;
         }
-        logger.info("转成树结构数据：{}",datas.size());
+        LOGGER.info("转成树结构数据：{}",datas.size());
         return findRootList(datas);
     }
 
@@ -59,7 +59,7 @@ public class TreeUtils {
                 url = tree.url();
             }
         }
-        logger.info("转成树结构对应字段有：{},{},{},{},{}",new Object[]{id ,pid ,text,icon,url});
+        LOGGER.info("转成树结构对应字段有：{},{},{},{},{}",new Object[]{id ,pid ,text,icon,url});
         List<Bean> notRoots = new ArrayList<Bean>();
         try {
             List<Bean> results = findRootBean(list, pid, id);//获取跟节点
@@ -73,11 +73,11 @@ public class TreeUtils {
             }
             return results;
         } catch (IllegalAccessException e) {
-            logger.error(e.getMessage(),e);
+            LOGGER.error(e.getMessage(),e);
         } catch (NoSuchMethodException e) {
-            logger.error(e.getMessage(),e);
+            LOGGER.error(e.getMessage(),e);
         } catch (InvocationTargetException e) {
-            logger.error(e.getMessage(),e);
+            LOGGER.error(e.getMessage(),e);
         }
         return new ArrayList<Bean>();
     }
@@ -177,7 +177,7 @@ public class TreeUtils {
             }
         }
         if (errorNodes.size()>0){
-            logger.error("当前数据里有错误节点个数：{}",errorNodes.size());
+            LOGGER.error("当前数据里有错误节点个数：{}",errorNodes.size());
         }
         Iterator<Map.Entry<String, Boolean>> it = has.entrySet().iterator();
         while(it.hasNext()){
@@ -202,7 +202,7 @@ public class TreeUtils {
         errorNodes.forEach(node->{
             results.add(node);
         });
-        logger.info("生成根节点：{}，错误节点个数{}，父节点为null节点个数,正确节点个数：{}，总节点个数：{}",new Object[]{errorNodes.size(),pNodes1.size(),
+        LOGGER.info("生成根节点：{}，错误节点个数{}，父节点为null节点个数,正确节点个数：{}，总节点个数：{}",new Object[]{errorNodes.size(),pNodes1.size(),
                 pNodes2.size(),results.size()});
         return results;
     }

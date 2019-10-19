@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.app.common.PayOutOrderService;
 import com.app.pay.service.BaseServiceImpl;
 import com.bobo.annotation.BaseService;
 import com.mybatis.mapper.PayOutOrderMapper;
+import com.mybatis.mapper.PayOutOrderService;
 import com.mybatis.pojo.PayOutOrder;
 import com.mybatis.pojo.PayOutOrderExample;
 

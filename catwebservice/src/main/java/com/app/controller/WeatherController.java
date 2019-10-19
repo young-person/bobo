@@ -2,7 +2,6 @@ package com.app.controller;
 
 import com.app.pojo.WeatherResponse;
 import com.app.service.impl.WeatherDataServiceImpl;
-import com.cloud.feign.catwebservice.WeatherActionFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class WeatherController implements WeatherActionFeign {
+public class WeatherController{
     @Autowired
     private WeatherDataServiceImpl weatherDataService;
     @GetMapping("/weather")
@@ -22,7 +21,6 @@ public class WeatherController implements WeatherActionFeign {
     }
 
     @PostMapping("/weather/city")
-    @Override
     public String getWeather(@RequestParam("name") String name){
         WeatherResponse weatherResponse = weatherDataService.getDataByCityName(name);
         System.out.println(name);

@@ -58,6 +58,10 @@
 			<artifactId>catinterface</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>bobo</groupId>
+			<artifactId>catmapper</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.github.sgroschupf</groupId>
 			<artifactId>zkclient</artifactId>
 		</dependency>

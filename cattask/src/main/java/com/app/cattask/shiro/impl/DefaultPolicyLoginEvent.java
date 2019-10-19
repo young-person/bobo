@@ -6,6 +6,7 @@ import com.bobo.base.CatException;
 import com.bobo.domain.AuthUser;
 import com.bobo.domain.ResultMeta;
 import com.cloud.feign.catmain.LoginActionFeign;
+
 import org.apache.shiro.authc.AuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 

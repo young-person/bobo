@@ -1,6 +1,8 @@
 package com.bobo.utils;
 
-import com.bobo.domain.FtpConfig;
+import com.app.ftp.config.FtpConfig;
+import com.bobo.base.BaseClass;
+
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
@@ -12,9 +14,7 @@ import java.net.SocketException;
 import java.util.StringTokenizer;
 
 
-public class FtpUtilComm {
-
-	private static Logger logger = LoggerFactory.getLogger(FtpUtilComm.class);
+public class FtpUtilComm extends  BaseClass{
 
 	private FTPClient ftpClient = new FTPClient();
 	private FtpConfig config;
@@ -164,7 +164,7 @@ public class FtpUtilComm {
 						if (this.ftpClient.makeDirectory(subDirectory)) {
 							this.ftpClient.changeWorkingDirectory(subDirectory);
 						} else {
-							logger.error("创建目录失败");
+							LOGGER.error("创建目录失败");
 							return false;
 						}
 					}
@@ -178,7 +178,7 @@ public class FtpUtilComm {
 
 			return true;
 		} catch (IOException e) {
-			logger.error("切换目录出错：" + pathname);
+			LOGGER.error("切换目录出错：" + pathname);
 		}
 		return false;
 	}
@@ -243,7 +243,7 @@ public class FtpUtilComm {
 					if (this.ftpClient.makeDirectory(subDirectory)) {
 						this.ftpClient.changeWorkingDirectory(subDirectory);
 					} else {
-						logger.error("创建目录失败");
+						LOGGER.error("创建目录失败");
 						return "Create_Directory_Fail";
 					}
 				}
@@ -280,7 +280,7 @@ public class FtpUtilComm {
 
 			if (localreadbytes / step != process) {
 				process = localreadbytes / step;
-				logger.info("上传进度:" + process);
+				LOGGER.info("上传进度:" + process);
 			}
 		}
 		out.flush();
@@ -323,7 +323,7 @@ public class FtpUtilComm {
 
 		FTPFile[] files = this.ftpClient.listFiles(gbk2Iso(remote));
 		if (files.length != 1) {
-			logger.error("远程文件不存在");
+			LOGGER.error("远程文件不存在");
 			return "Remote_File_Noexist";
 		}
 
@@ -337,7 +337,7 @@ public class FtpUtilComm {
 			long localSize = f.length();
 
 			if (localSize >= lRemoteSize) {
-				logger.info("本地文件大于远程文件，下载中止");
+				LOGGER.info("本地文件大于远程文件，下载中止");
 				return "Local_Bigger_Remote";
 			}
 
@@ -355,7 +355,7 @@ public class FtpUtilComm {
 				if (nowProcess > process) {
 					process = nowProcess;
 					if (process % 10L == 0L) {
-						logger.info("下载进度：" + process);
+						LOGGER.info("下载进度：" + process);
 					}
 				}
 			}
@@ -382,7 +382,7 @@ public class FtpUtilComm {
 				if (nowProcess > process) {
 					process = nowProcess;
 					if (process % 10L == 0L) {
-						logger.info("下载进度：" + process);
+						LOGGER.info("下载进度：" + process);
 					}
 				}
 			}
@@ -454,7 +454,7 @@ public class FtpUtilComm {
 
 		FTPFile[] files = this.ftpClient.listFiles(gbk2Iso(remote));
 		if (files.length != 1) {
-			logger.error("远程文件不存在");
+			LOGGER.error("远程文件不存在");
 			return;
 		}
 
@@ -473,7 +473,7 @@ public class FtpUtilComm {
 			if (nowProcess > process) {
 				process = nowProcess;
 				if (process % 10L == 0L) {
-					logger.info("下载进度：" + process);
+					LOGGER.info("下载进度：" + process);
 				}
 			}
 		}
@@ -517,7 +517,7 @@ public class FtpUtilComm {
             this.ftpClient.enterLocalPassiveMode();  
             boolean flag1 = this.ftpClient.changeWorkingDirectory(ftpPath2); 
             if (!flag1) {
-				logger.error("没有找到" + ftpPath + "---该路径");
+				LOGGER.error("没有找到" + ftpPath + "---该路径");
                 return;
             }
             File localFile = new File(localPath + File.separatorChar + local_filename);  
@@ -528,21 +528,21 @@ public class FtpUtilComm {
             boolean flag2 = ftpClient.retrieveFile(new String(fileName.getBytes(LOCAL_CHARSET),SERVER_CHARSET), os); 
 //            boolean flag2 = ftpClient.retrieveFile(fileName, os); 
             if (!flag2) {
-				logger.error("没有找到" + fileName + "---该文件");
+				LOGGER.error("没有找到" + fileName + "---该文件");
                 localFile.delete();
             }
             os.close();  
             ftpClient.logout();
-			logger.info("成功下载远程文件"+ftpPath+""+fileName+"......");
+			LOGGER.info("成功下载远程文件"+ftpPath+""+fileName+"......");
         } catch (FileNotFoundException e) {
-			logger.error("没有找到" + ftpPath + "文件");
+			LOGGER.error("没有找到" + ftpPath + "文件");
             e.printStackTrace();
         } catch (SocketException e) {
-			logger.error("连接FTP失败.");
+			LOGGER.error("连接FTP失败.");
             e.printStackTrace();
         } catch (IOException e) {  
             e.printStackTrace();
-			logger.error("文件读取错误。");
+			LOGGER.error("文件读取错误。");
             e.printStackTrace();
         }  
     }

@@ -63,10 +63,10 @@
             <groupId>nz.net.ultraq.thymeleaf</groupId>
             <artifactId>thymeleaf-layout-dialect</artifactId>
         </dependency>
-        <dependency>
-            <groupId>bobo</groupId>
-            <artifactId>catcommon</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>bobo</groupId>
+			<artifactId>catmapper</artifactId>
+		</dependency>
     </dependencies>
 
     <build>

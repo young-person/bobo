@@ -1,13 +1,14 @@
 package com.app.dictionary.handler.manager;
 
-import com.mybatis.pojo.Dbs;
 
 import java.io.IOException;
 import java.io.OutputStream;
 
+import com.bobo.dbconnection.DBType;
+
 public abstract class ExportDictionary {
 
-    public abstract void doExport(AbstractRepertory repertory, Dbs dbs, OutputStream outputStream) throws IOException;
+    public abstract void doExport(AbstractRepertory<DBType> repertory, DBType dbs, OutputStream outputStream) throws IOException;
 
     public String getClassName(String tableName) {
 

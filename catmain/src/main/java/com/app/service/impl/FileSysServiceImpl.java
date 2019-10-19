@@ -1,6 +1,6 @@
 package com.app.service.impl;
 
-import com.app.common.FileSysService;
+import com.mybatis.mapper.FileSysService;
 import com.mybatis.mapper.FiletableMapper;
 import com.mybatis.pojo.Filetable;
 import com.mybatis.pojo.FiletableExample;

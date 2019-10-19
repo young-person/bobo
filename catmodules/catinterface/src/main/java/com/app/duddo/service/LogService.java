@@ -1,7 +1,5 @@
 package com.app.duddo.service;
 
-import com.bobo.domain.ConditionQuery;
-import com.bobo.domain.PageBean;
 
 import java.util.List;
 
@@ -9,13 +7,6 @@ import java.util.List;
  * 应用 日志接口
  */
 public interface LogService<T> {
-    /***
-     *
-     * @param query
-     * @return
-     */
-    PageBean<T> listByPage(ConditionQuery query);
-
     /**
      * batch remove transaction log by ids.
      *

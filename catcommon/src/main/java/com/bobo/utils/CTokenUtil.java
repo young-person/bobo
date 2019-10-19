@@ -1,5 +1,6 @@
 package com.bobo.utils;
 
+import com.bobo.base.BaseClass;
 import com.bobo.domain.AuthUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,14 +17,13 @@ import java.security.SecureRandom;
  *
  * 需要重写 T对象的 equals hashCode方法
  */
-public class CTokenUtil {
-    static Logger logger = LoggerFactory.getLogger(CTokenUtil.class);
+public class CTokenUtil extends BaseClass{
     private  static String key="10lbfgXgYhubdzzs3W4hgQ4etJhdCfe4MtdfBpm52xzerSDegMJtghg";
     public static <T> String generatorT_Token(T t){
         try {
             return  DESUtil.encrypt(t.toString(), key);
         } catch (Exception e) {
-            logger.error("{}",e.getMessage(),e);
+            LOGGER.error("{}",e.getMessage(),e);
         }
         return null;
     }
@@ -41,7 +41,7 @@ public class CTokenUtil {
 
             return user;
         } catch (Exception e) {
-            logger.error("解密失败{}",e.getMessage(),e);
+            LOGGER.error("解密失败{}",e.getMessage(),e);
         }
         return null;
     }

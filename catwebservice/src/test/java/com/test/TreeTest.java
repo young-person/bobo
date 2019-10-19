@@ -1,6 +1,5 @@
 package com.test;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,11 +29,6 @@ public class TreeTest {
         System.out.println("测试结束-----------------");
     }
 
-
-    @HystrixCommand(fallbackMethod = "errorMethod")
-    public void test2() {
-
-    }
 
     public void errorMethod(){
         

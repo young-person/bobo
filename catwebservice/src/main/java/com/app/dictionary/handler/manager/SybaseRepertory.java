@@ -1,25 +1,20 @@
 package com.app.dictionary.handler.manager;
 
-import com.app.dictionary.handler.manager.AbstractRepertory;
-import com.app.dictionary.templet.model.Form;
-import com.bobo.dbconnection.ConnectionHolderDefault;
-import com.mybatis.pojo.Dbs;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.bobo.dbconnection.ConnectionHolderDefault;
+import com.bobo.dbconnection.DBType;
 
 /**
  * Sybase数据库字典
  *
  * @author bobo
  */
-public class SybaseRepertory extends AbstractRepertory<Dbs> {
+public class SybaseRepertory extends AbstractRepertory<DBType> {
 
     @Override
-    public List<String> queryTablesByConnection(Dbs dbs) {
+    public List<String> queryTablesByConnection(DBType dbs) {
         ConnectionHolderDefault holderDefault = new ConnectionHolderDefault();
         StringBuilder builder = new StringBuilder("SELECT name ");
         builder.append(TABLE_Name);
@@ -30,7 +25,7 @@ public class SybaseRepertory extends AbstractRepertory<Dbs> {
 
 
     @Override
-    public List<Map<String, Object>> queryColumnsByDB(Dbs dbs) {
+    public List<Map<String, Object>> queryColumnsByDB(DBType dbs) {
         ConnectionHolderDefault holderDefault = new ConnectionHolderDefault();
 
         StringBuilder builder = new StringBuilder("SELECT sysobjects.name ");

@@ -1,5 +1,6 @@
 package com.bobo.utils;
 
+import com.bobo.base.BaseClass;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
@@ -24,12 +25,7 @@ import java.util.EnumMap;
 /**
  * 条形码和二维码编码解码
  */
-public final class ZxingHelper {
-
-    /**
-     * Logger
-     */
-    private static final Logger logger = LoggerFactory.getLogger(ZxingHelper.class);
+public final class ZxingHelper extends BaseClass{
 
     private ZxingHelper() {
         throw new IllegalAccessError("Utility class");
@@ -63,7 +59,7 @@ public final class ZxingHelper {
                 .writeToPath(bitMatrix, "png", new File(imgPath).toPath());
 
         } catch (Exception e) {
-            logger.error("生成条形码错误", e);
+            LOGGER.error("生成条形码错误", e);
         }
     }
 
@@ -79,7 +75,7 @@ public final class ZxingHelper {
         try {
             image = ImageIO.read(new File(imgPath));
             if (image == null) {
-                logger.error("the decode image may be not exit.");
+                LOGGER.error("the decode image may be not exit.");
                 return null;
             }
             LuminanceSource source = new BufferedImageLuminanceSource(image);
@@ -88,7 +84,7 @@ public final class ZxingHelper {
             result = new MultiFormatReader().decode(bitmap, null);
             return result.getText();
         } catch (Exception e) {
-            logger.error("条形码解析错误", e);
+            LOGGER.error("条形码解析错误", e);
         }
         return null;
     }
@@ -120,7 +116,7 @@ public final class ZxingHelper {
                 .writeToPath(bitMatrix, "png", new File(imgPath).toPath());
 
         } catch (Exception e) {
-            logger.error("生成二维码错误", e);
+            LOGGER.error("生成二维码错误", e);
         }
     }
 
@@ -136,7 +132,7 @@ public final class ZxingHelper {
         try {
             image = ImageIO.read(new File(imgPath));
             if (image == null) {
-                logger.error("the decode image may be not exit.");
+                LOGGER.error("the decode image may be not exit.");
                 return null;
             }
             LuminanceSource source = new BufferedImageLuminanceSource(image);
@@ -148,7 +144,7 @@ public final class ZxingHelper {
             result = new MultiFormatReader().decode(bitmap, hints);
             return result.getText();
         } catch (Exception e) {
-            logger.error("二维码解码错误", e);
+            LOGGER.error("二维码解码错误", e);
         }
         return null;
     }

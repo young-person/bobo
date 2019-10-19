@@ -1,14 +1,15 @@
 package com.app.pay.listener;
 
-import com.app.common.BaseInterface;
-import com.bobo.annotation.BaseService;
+import java.lang.reflect.Method;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 
-import java.lang.reflect.Method;
-import java.util.Map;
+import com.bobo.annotation.BaseService;
+import com.mybatis.mapper.BaseInterface;
 
 public class ApplicationContextListener implements ApplicationListener<ContextRefreshedEvent> {
 

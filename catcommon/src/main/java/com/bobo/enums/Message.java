@@ -1,12 +1,11 @@
 package com.bobo.enums;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.alibaba.druid.support.json.JSONUtils;
 
 public enum Message {
 
@@ -24,15 +23,9 @@ public enum Message {
 
     public String getJson(){
         Map<String,String> result = new HashMap<>();
-        try {
-            result.put("code",this.getCode());
-            result.put("value",this.getValue());
-            return mapper.writeValueAsString(result);
-        } catch (JsonProcessingException e) {
-            result.clear();
-            e.printStackTrace();
-        }
-        return result.toString();
+        result.put("code",this.getCode());
+        result.put("value",this.getValue());
+        return JSONUtils.toJSONString(result);
     }
 
     public String getCode() {
@@ -80,7 +73,6 @@ public enum Message {
         }
         return list;
     }
-    private static final transient  ObjectMapper mapper = new ObjectMapper();
     private String code;
     private String value;
 

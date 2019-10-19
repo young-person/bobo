@@ -13,7 +13,6 @@
 			<name>central repository mvn</name>
 			<url>http://mvnrepository.com/</url>
 		</repository>
-
 		<repository>
 			<id>springsource-repos</id>
 			<name>SpringSource Repository</name>
@@ -42,6 +41,7 @@
 		<module>cattask</module>
 		<module>catmain</module>
 		<module>catresource</module>
+		<module>catmapper</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -102,7 +102,7 @@
 		<commons-compress.version>1.13</commons-compress.version>
 		<tio-core.version>1.7.0.v20170501-RELEASE</tio-core.version>
 		<poi.version>3.9</poi.version>
-		<!--<oracle.version>11.2.0.3.0</oracle.version>-->
+		<!--<oracle.version>11.2.0.3.0</oracle.version> -->
 		<oracle.version>12.1.0.2</oracle.version>
 		<mapper.version>3.4.0</mapper.version>
 		<catinterface.version>1.0-SNAPSHOT</catinterface.version>
@@ -114,6 +114,7 @@
 		<bcpg-jdk15on.version>1.60</bcpg-jdk15on.version>
 		<jna.version>4.2.1</jna.version>
 		<selenium.version>3.4.0</selenium.version>
+		<slf4j.version>1.7.25</slf4j.version>
 	</properties>
 
 	<dependencyManagement>
@@ -147,11 +148,11 @@
 				<artifactId>mysql-connector-java</artifactId>
 				<version>${mysql-connector-java.version}</version>
 			</dependency>
-<!--			<dependency>
-				<groupId>com.oracle</groupId>
-				<artifactId>ojdbc6</artifactId>
-				<version>${oracle.version}</version>
-			</dependency>-->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.oracle</groupId>
 				<artifactId>ojdbc7</artifactId>
@@ -160,6 +161,12 @@
 			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>druid-spring-boot-starter</artifactId>
+				<version>${druid-java.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
 				<version>${druid-java.version}</version>
 			</dependency>
 			<dependency>
@@ -367,6 +374,11 @@
 			</dependency>
 			<dependency>
 				<groupId>bobo</groupId>
+				<artifactId>catmapper</artifactId>
+				<version>${catcommon.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>bobo</groupId>
 				<artifactId>catinterface</artifactId>
 				<version>${catinterface.version}</version>
 			</dependency>
@@ -467,12 +479,6 @@
 				<groupId>org.seleniumhq.selenium</groupId>
 				<artifactId>selenium-java</artifactId>
 				<version>${selenium.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>com.squareup.okhttp3</groupId>
-						<artifactId>okhttp</artifactId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 
 			<dependency>

@@ -11,7 +11,7 @@ import java.nio.channels.FileChannel;
 import java.nio.file.FileAlreadyExistsException;
 
 public class CFileUtils extends FileUtils {
-    private static final Logger logger = LoggerFactory.getLogger(CFileUtils.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CFileUtils.class);
     public static void writeShellFile(String filePath, String info) {
         OutputStreamWriter osw = null;
         BufferedWriter bw = null;
@@ -25,24 +25,24 @@ public class CFileUtils extends FileUtils {
                 bw.newLine();
                 bw.flush();
             } catch (IOException e) {
-                logger.error(String.format("write shell file error. file_path = %s, info = %s", filePath, info), e);
+                LOGGER.error(String.format("write shell file error. file_path = %s, info = %s", filePath, info), e);
             }
         } catch (FileNotFoundException e) {
-            logger.error(String.format("write shell file error. file_path = %s, info = %s", filePath, info),e);
+            LOGGER.error(String.format("write shell file error. file_path = %s, info = %s", filePath, info),e);
         } finally {
             try {
                 if (bw != null) {
                     bw.close();
                 }
             } catch (IOException e) {
-                logger.error(String.format("close BufferedWriter error. file_path = %s, info = %s", filePath, info),e);
+                LOGGER.error(String.format("close BufferedWriter error. file_path = %s, info = %s", filePath, info),e);
             }
             try {
                 if (osw != null) {
                     osw.close();
                 }
             } catch (IOException e) {
-                logger.error(String.format("close OutputStreamWriter error. file_path = %s, info = %s", filePath, info),e);
+                LOGGER.error(String.format("close OutputStreamWriter error. file_path = %s, info = %s", filePath, info),e);
             }
         }
     }
@@ -73,7 +73,7 @@ public class CFileUtils extends FileUtils {
     public static boolean copy(String srcFileName, String descFileName) throws IOException {
         File file = new File(srcFileName);
         if (!file.exists()) {
-            logger.debug(String.format(FILE_NOT_FIND, srcFileName));
+            LOGGER.debug(String.format(FILE_NOT_FIND, srcFileName));
             return false;
         } else {
             if (file.isFile()) {
@@ -139,7 +139,7 @@ public class CFileUtils extends FileUtils {
             copy(ins, outs);
             return true;
         } catch (Exception e) {
-            logger.warn("复制文件失败：", e);
+            LOGGER.warn("复制文件失败：", e);
             return false;
         }
     }
@@ -292,7 +292,7 @@ public class CFileUtils extends FileUtils {
     public static boolean delFile(String fileName) {
         File file = new File(fileName);
         if (!file.exists()) {
-            logger.debug(String.format(FILE_NOT_FIND, fileName));
+            LOGGER.debug(String.format(FILE_NOT_FIND, fileName));
             return false;
         } else {
             if (file.isFile()) {
@@ -313,14 +313,14 @@ public class CFileUtils extends FileUtils {
         File file = new File(fileName);
         if (file.exists() && file.isFile()) {
             if (file.delete()) {
-                logger.debug("删除文件 {} 成功!", fileName);
+                LOGGER.debug("删除文件 {} 成功!", fileName);
                 return true;
             } else {
-                logger.debug("删除文件 {} 失败!", fileName);
+                LOGGER.debug("删除文件 {} 失败!", fileName);
                 return false;
             }
         } else {
-            logger.debug(String.format(FILE_NOT_FIND, fileName));
+            LOGGER.debug(String.format(FILE_NOT_FIND, fileName));
             return true;
         }
     }
@@ -338,14 +338,14 @@ public class CFileUtils extends FileUtils {
         }
         File dirFile = new File(dirNames);
         if (!dirFile.exists() || !dirFile.isDirectory()) {
-            logger.debug("{} 目录不存在!", dirNames);
+            LOGGER.debug("{} 目录不存在!", dirNames);
             return true;
         }
         if (clearFolder(dirFile) && dirFile.delete()) {
-            logger.debug("删除目录 {} 成功!", dirName);
+            LOGGER.debug("删除目录 {} 成功!", dirName);
             return true;
         } else {
-            logger.debug("删除目录 {} 失败!", dirName);
+            LOGGER.debug("删除目录 {} 失败!", dirName);
             return false;
         }
 
@@ -403,14 +403,14 @@ public class CFileUtils extends FileUtils {
         // 创建文件
         try {
             if (file.createNewFile()) {
-                logger.debug("{} 文件创建成功!", descFileName);
+                LOGGER.debug("{} 文件创建成功!", descFileName);
                 return true;
             } else {
-                logger.debug("{} 文件创建失败!", descFileName);
+                LOGGER.debug("{} 文件创建失败!", descFileName);
                 return false;
             }
         } catch (IOException e) {
-            logger.debug(String.format("%s 文件创建失败!", descFileName), e);
+            LOGGER.debug(String.format("%s 文件创建失败!", descFileName), e);
             return false;
         }
     }
@@ -433,10 +433,10 @@ public class CFileUtils extends FileUtils {
         }
         // 创建目录
         if (descDir.mkdirs()) {
-            logger.debug("目录 {} 创建成功!", descDirNames);
+            LOGGER.debug("目录 {} 创建成功!", descDirNames);
             return true;
         } else {
-            logger.debug("目录 {} 创建失败!", descDirNames);
+            LOGGER.debug("目录 {} 创建失败!", descDirNames);
             return false;
         }
 
@@ -577,7 +577,7 @@ public class CFileUtils extends FileUtils {
             try {
                 closeable.close();
             } catch (Exception e) {
-                logger.error("数据流关闭失败.", e);
+                LOGGER.error("数据流关闭失败.", e);
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.bobo.utils;
 
+import com.bobo.base.BaseClass;
 import com.bobo.domain.Bean;
 import net.sf.cglib.beans.BeanGenerator;
 import net.sf.cglib.beans.BeanMap;
@@ -11,8 +12,7 @@ import java.beans.PropertyDescriptor;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CReflectUtil {
-    private static Logger logger = LoggerFactory.getLogger(CReflectUtil.class);
+public class CReflectUtil extends BaseClass{
 
     public static <T> T getTargetStr(T dest, Map<String, String> addProperties) {
         PropertyUtilsBean propertyUtilsBean =new PropertyUtilsBean();
@@ -31,14 +31,14 @@ public class CReflectUtil {
                     dynamicBean.setValue(k, propertyUtilsBean.getNestedProperty(dest, k));
                 }
             }catch (Exception e) {
-                logger.error(e.getMessage(), e);
+                LOGGER.error(e.getMessage(), e);
             }
         });
         addProperties.forEach((k, v) -> {
             try{
                 dynamicBean.setValue(k, v);
             }catch (Exception e) {
-                logger.error(e.getMessage(), e);
+                LOGGER.error(e.getMessage(), e);
             }
         });
         Object target = dynamicBean.getTarget();
@@ -62,14 +62,14 @@ public class CReflectUtil {
                     dynamicBean.setValue(k, propertyUtilsBean.getNestedProperty(dest, k));
                 }
             }catch (Exception e) {
-                logger.error(e.getMessage(), e);
+                LOGGER.error(e.getMessage(), e);
             }
         });
         addProperties.forEach((k, v) -> {
             try{
                 dynamicBean.setValue(k, v);
             }catch (Exception e) {
-                logger.error(e.getMessage(), e);
+                LOGGER.error(e.getMessage(), e);
             }
         });
         Object target = dynamicBean.getTarget();

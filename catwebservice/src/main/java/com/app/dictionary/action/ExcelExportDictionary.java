@@ -1,27 +1,35 @@
 package com.app.dictionary.action;
 
-import com.app.dictionary.handler.manager.ExportDictionary;
-import com.app.dictionary.handler.manager.AbstractRepertory;
-import com.app.dictionary.templet.model.Form;
-import com.app.dictionary.templet.model.StoreRoom;
-import com.app.dictionary.templet.model.Table;
-import com.mybatis.pojo.Dbs;
-import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Hyperlink;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.util.CellRangeAddress;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.usermodel.HSSFHyperlink;
+import org.apache.poi.hssf.usermodel.HSSFRichTextString;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Hyperlink;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.CellRangeAddress;
+
+import com.app.dictionary.handler.manager.AbstractRepertory;
+import com.app.dictionary.handler.manager.ExportDictionary;
+import com.app.dictionary.templet.model.Form;
+import com.app.dictionary.templet.model.StoreRoom;
+import com.app.dictionary.templet.model.Table;
+import com.bobo.dbconnection.DBType;
+
 public class ExcelExportDictionary extends ExportDictionary {
     @Override
-    public void doExport(AbstractRepertory repertory, Dbs dbs, OutputStream outputStream) throws IOException {
+    public void doExport(AbstractRepertory<DBType> repertory, DBType dbs, OutputStream outputStream) throws IOException {
 
         StoreRoom storeRoom = repertory.createDBInfOBean(dbs, "基础");
 
@@ -42,6 +50,7 @@ public class ExcelExportDictionary extends ExportDictionary {
 
         HSSFRichTextString text = new HSSFRichTextString("手机管理平台数据库设计V5.4");
         HSSFCellStyle style =  getStyle(workbook);
+        getStyleBorder(workbook);
         HSSFCellStyle mainstyle =  getSimpleStyle(workbook);
         Cell cell = row1.createCell(0);
         cell.setCellStyle(style);

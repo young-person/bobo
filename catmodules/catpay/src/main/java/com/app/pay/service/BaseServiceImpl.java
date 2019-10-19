@@ -1,15 +1,17 @@
 package com.app.pay.service;
 
-import com.app.common.BaseService;
-import com.bobo.utils.SpringContextUtil;
-import com.github.pagehelper.PageHelper;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.annotations.Param;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+
+import com.github.pagehelper.PageHelper;
+import com.mybatis.mapper.BaseService;
 
 /**
  * 实现BaseService抽象类
@@ -18,7 +20,6 @@ public abstract class BaseServiceImpl<Mapper, Record, Example> implements BaseSe
 
     public Mapper mapper;
 
-    private static String name = "dataSource";
     @Override
     public int countByExample(Example example) {
         try {
@@ -377,9 +378,12 @@ public abstract class BaseServiceImpl<Mapper, Record, Example> implements BaseSe
 
     @Override
     public void initMapper() {
-        this.mapper = SpringContextUtil.getBean(getMapperClass());
+        this.mapper = applicationContext.getBean(getMapperClass());
     }
 
+    @Autowired
+    private ApplicationContext applicationContext;
+    
     /**
      * 获取类泛型class
      * @return

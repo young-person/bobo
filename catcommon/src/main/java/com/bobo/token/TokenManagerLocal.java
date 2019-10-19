@@ -20,7 +20,7 @@ public class TokenManagerLocal extends TokenManager {
                 // 已过期，清除对应token
                 if (now.compareTo(cin.getDate()) > 0) {
                     localCache.remove(token);
-                    logger.error("token : " + token + "已失效");
+                    LOGGER.debug("token : {}已失效",token);
                 }
             }
         }
@@ -37,7 +37,6 @@ public class TokenManagerLocal extends TokenManager {
 
     @Override
     public void addToken(String token,String value) {
-        Date date = new Date();
         Cin cin = new Cin(value);
         extendExpiredTime(cin);
         localCache.put(token,cin);

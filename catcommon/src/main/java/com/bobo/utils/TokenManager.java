@@ -1,14 +1,12 @@
 package com.bobo.utils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.bobo.base.BaseClass;
 
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public abstract class TokenManager {
-    protected static final Logger logger = LoggerFactory.getLogger(TokenManager.class);
+public abstract class TokenManager extends BaseClass{
     private final Timer timer = new Timer(true);
     // 令牌有效期，单位为秒，默认30分钟
     protected int tokenTimeout = 1800;

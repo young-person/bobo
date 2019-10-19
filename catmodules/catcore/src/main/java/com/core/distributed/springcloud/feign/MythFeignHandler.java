@@ -7,8 +7,8 @@ import com.core.distributed.CatParticipant;
 import com.core.distributed.context.TransactionContextBean;
 import com.core.distributed.context.TransactionContextLocal;
 import com.core.distributed.transaction.CatTransactionEngine;
+import com.core.utils.SpringContextUtil;
 import com.bobo.annotation.JTATransaction;
-import com.bobo.utils.SpringContextUtil;
 import feign.InvocationHandlerFactory.MethodHandler;
 import feign.Target;
 
@@ -34,8 +34,7 @@ public class MythFeignHandler implements InvocationHandler {
                 return this.handlers.get(method).invoke(args);
             }
             try {
-                final CatTransactionEngine transactionEngine =
-                        SpringContextUtil.getBean(CatTransactionEngine.class);
+                final CatTransactionEngine transactionEngine = SpringContextUtil.getBean(CatTransactionEngine.class);
                 final CatParticipant participant = buildParticipant(transaction, method, args);
                 if (Objects.nonNull(participant)) {
                     transactionEngine.registerParticipant(participant);

@@ -1,6 +1,6 @@
 package com.bobo.dbconnection;
 
-import com.mybatis.pojo.Dbs;
+import com.bobo.base.BaseClass;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,19 +8,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ConnectionHolderDefault implements ConnectionHolder {
+public class ConnectionHolderDefault extends BaseClass implements ConnectionHolder<DBType> {
 	private static final int LIMIT = 500;
 
 	@Override
-	public List<Map<String, Object>> query(Dbs db, String sql) {
+	public List<Map<String, Object>> query(DBType db, String sql) {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			Class.forName(db.getDriver());
-			connection = DriverManager.getConnection(db.getUrl(),db.getUsername(), db.getPassword());
-			logger.info(sql);
+			connection = DriverManager.getConnection(db.getUrl(),db.getUserName(), db.getPassWord());
+			LOGGER.info(sql);
 			statement = connection.prepareStatement(sql,ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 			statement.setFetchSize(LIMIT);
 			resultSet = statement.executeQuery();
@@ -48,15 +48,15 @@ public class ConnectionHolderDefault implements ConnectionHolder {
 	}
 
 	@Override
-	public int update(Dbs db, String sql) {
+	public int update(DBType db, String sql) {
 		Connection connection = null;
 		Statement statement = null;
 		int cnt = 0;
 		try {
 			Class.forName(db.getDriver());
-			connection = DriverManager.getConnection(db.getUrl(),db.getUsername(), db.getPassword());
+			connection = DriverManager.getConnection(db.getUrl(),db.getUserName(), db.getPassWord());
 			statement = connection.createStatement();
-			logger.info(sql);
+			LOGGER.info(sql);
 			cnt = statement.executeUpdate(sql);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
@@ -67,15 +67,15 @@ public class ConnectionHolderDefault implements ConnectionHolder {
 	}
 
 	@Override
-	public boolean delete(Dbs db, String sql) {
+	public boolean delete(DBType db, String sql) {
 		Connection connection = null;
 		Statement statement = null;
 		boolean cnt = false;
 		try {
 			Class.forName(db.getDriver());
-			connection = DriverManager.getConnection(db.getUrl(),db.getUsername(), db.getPassword());
+			connection = DriverManager.getConnection(db.getUrl(),db.getUserName(), db.getPassWord());
 			statement = connection.createStatement();
-			logger.info(sql);
+			LOGGER.info(sql);
 			cnt = statement.execute(sql);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
@@ -86,14 +86,14 @@ public class ConnectionHolderDefault implements ConnectionHolder {
 	}
 
 	@Override
-	public void save(Dbs db, String sql) {
+	public void save(DBType db, String sql) {
 		Connection connection = null;
 		Statement statement = null;
 		try {
 			Class.forName(db.getDriver());
-			connection = DriverManager.getConnection(db.getUrl(),db.getUsername(), db.getPassword());
+			connection = DriverManager.getConnection(db.getUrl(),db.getUserName(), db.getPassWord());
 			statement = connection.createStatement();
-			logger.info(sql);
+			LOGGER.info(sql);
 			statement.execute(sql);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
@@ -103,18 +103,18 @@ public class ConnectionHolderDefault implements ConnectionHolder {
 	}
 	
 	@Override
-	public boolean execute(Dbs db, String sql) {
+	public boolean execute(DBType db, String sql) {
 		Connection connection = null;
 		Statement statement = null;
 		boolean cnt = false;
 		try {
 			Class.forName(db.getDriver());
-			connection = DriverManager.getConnection(db.getUrl(),db.getUsername(), db.getPassword());
+			connection = DriverManager.getConnection(db.getUrl(),db.getUserName(), db.getPassWord());
 			statement = connection.createStatement();
-			logger.info(sql);
+			LOGGER.info(sql);
 			cnt = statement.execute(sql);
 		} catch (ClassNotFoundException | SQLException e) {
-			logger.error("连接信息:"+connection.toString()+statement.toString());
+			LOGGER.error("连接信息:"+connection.toString()+statement.toString());
 			e.printStackTrace();
 		}finally{
 			close(connection,statement,null);
@@ -123,16 +123,16 @@ public class ConnectionHolderDefault implements ConnectionHolder {
 	}
 	
 	@Override
-	public int queryForInt(Dbs db, String sql) {
+	public int queryForInt(DBType db, String sql) {
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
 		int cnt = 0;
 		try {
 			Class.forName(db.getDriver());
-			connection = DriverManager.getConnection(db.getUrl(),db.getUsername(), db.getPassword());
+			connection = DriverManager.getConnection(db.getUrl(),db.getUserName(), db.getPassWord());
 			statement = connection.createStatement();
-			logger.info(sql);
+			LOGGER.info(sql);
 			resultSet = statement.executeQuery(sql);
 			while(resultSet.next()){
 				cnt = resultSet.getInt(1);
@@ -154,17 +154,17 @@ public class ConnectionHolderDefault implements ConnectionHolder {
 	}
 
 	@Override
-	public boolean executeAtomicity(Dbs db, String sql) {
+	public boolean executeAtomicity(DBType db, String sql) {
 		Connection connection = null;
 		Statement statement = null;
 		boolean cnt = false;
 		try {
 			Class.forName(db.getDriver());
-			connection = DriverManager.getConnection(db.getUrl(),db.getUsername(), db.getPassword());
+			connection = DriverManager.getConnection(db.getUrl(),db.getUserName(), db.getPassWord());
 			connection.setAutoCommit(false);
 			connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
 			statement = connection.createStatement();
-			logger.info(sql);
+			LOGGER.info(sql);
 			cnt = statement.execute(sql);
 			connection.commit();
 			cnt = true;
