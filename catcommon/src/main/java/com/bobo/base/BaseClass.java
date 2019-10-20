@@ -25,7 +25,7 @@ public class BaseClass {
     
     /**
      * 删除以/开头的字符串
-     *  @param str
+     *  @param url
      *  @return
      *  @Description: trimSplit
      *  @date 2019年6月29日 下午11:27:44

@@ -1,8 +1,8 @@
 package com.app.crawler.statistics;
 
+import com.app.crawler.CrawlerDown;
 import com.app.crawler.url.Linking;
 import com.app.utils.HttpUtil;
-import com.bobo.base.BaseClass;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
  * @author bobo
  *
  */
-public class WeatherRecordTask extends BaseClass {
+public class WeatherRecordTask implements CrawlerDown {
 
 	public void initCityUrls(){
 		String content = HttpUtil.doGetRequest(Linking.WEATHERURL.getUrl());
@@ -62,7 +62,7 @@ public class WeatherRecordTask extends BaseClass {
 		}
 	}
 	
-	public static void paramContent(String content,String url){
+	private void paramContent(String content,String url){
 		if (null != content) {
 			
 			try {
@@ -89,7 +89,7 @@ public class WeatherRecordTask extends BaseClass {
 									Element a = as.get(0);
 									String href = a.attr("href");
 									String html = HttpUtil.doGetRequest(href);//访问详情页面
-									paramHtml(mc,html);
+									this.paramHtml(mc,html);
 								}
 							}
 						}
@@ -103,7 +103,7 @@ public class WeatherRecordTask extends BaseClass {
 		}
 	}
 	
-	public static void paramHtml(String mc, String html) throws UnsupportedEncodingException{
+	public void paramHtml(String mc, String html) throws UnsupportedEncodingException{
 		html = new String(html.getBytes("ISO-8859-1"),"UTF-8");
 		Document doc = Jsoup.parse(html);
 		Elements uls = doc.select("ul.t.clearfix li");
@@ -141,5 +141,32 @@ public class WeatherRecordTask extends BaseClass {
 
 			}
 		}
+	}
+
+	@Override
+	public void start() {
+		if (!isRuning()){
+			this.initCityUrls();
+		}
+	}
+
+	@Override
+	public boolean stop() {
+		return false;
+	}
+
+	@Override
+	public boolean suspend() {
+		return false;
+	}
+
+	@Override
+	public boolean isRuning() {
+		return false;
+	}
+
+	@Override
+	public String executeTimeFormat() {
+		return null;
 	}
 }

@@ -1,28 +1,22 @@
 package com.app.crawler.video.sexforum;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.sql.DataSource;
-
+import com.app.crawler.CrawlerDown;
+import com.app.crawler.video.StartDown;
+import com.app.utils.HttpUtil;
+import com.bobo.base.BaseClass;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.jdbc.core.BatchPreparedStatementSetter;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
-import com.app.crawler.video.StartDown;
-import com.app.utils.HttpUtil;
-import com.bobo.base.BaseClass;
-import com.mysql.cj.jdbc.Driver;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.app.crawler.CrawlerDown.SPACE;
 
 /** 
  * @Description: TODO
@@ -31,10 +25,6 @@ import com.mysql.cj.jdbc.Driver;
  */
 public abstract class ChineseTables extends BaseClass implements StartDown{
 
-	/* (non-Javadoc)
-	 * @see com.app.crawler.video.StartDown#startMode()
-	 */
-	
 	private String url = null;
 	
 	@Override
@@ -105,35 +95,31 @@ public abstract class ChineseTables extends BaseClass implements StartDown{
 	
 	private void insertToDb(List<Map<String, String>> datas) {
 		if (CollectionUtils.isNotEmpty(datas)) {
-			try {
-				Driver driver = new Driver();
-				DataSource dataSource = new SimpleDriverDataSource(driver,"jdbc:mysql://localhost:3307/datas?useSSL=false&serverTimezone=GMT%2B8","root","199345");
-				JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-				
-				String sql = "insert into crawlerurl(url,typeName,content,content1,content2,content3,content4,soltcontent,content5) values (?,?,?,?,?,?,?,?,?)";
-				
-				jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
 
-					@Override
-					public void setValues(PreparedStatement ps, int i) throws SQLException {
-						ps.setString(1, datas.get(i).get("url"));
-						ps.setString(2, datas.get(i).get("typeName"));
-						ps.setString(3, datas.get(i).get("content"));
-						ps.setString(4, datas.get(i).get("torrent"));
-						ps.setString(5, datas.get(i).get("fileName"));
-						ps.setString(6, datas.get(i).get("detail"));
-						ps.setString(7, datas.get(i).get("content4"));
-						ps.setString(8, datas.get(i).get("soltcontent"));
-						ps.setString(9, datas.get(i).get("content5"));
-					}
+			for(Map<String,String> map : datas){
+				List<String> keys = new ArrayList<>(map.size());
 
-					@Override
-					public int getBatchSize() {
-						return datas.size();
-					}
-				});
-			} catch (SQLException e) {
-				e.printStackTrace();
+				for(String s : map.keySet()){
+					keys.add(s);
+				}
+				keys.sort(String.CASE_INSENSITIVE_ORDER);
+
+				List<String> values = new ArrayList<>(keys.size());
+				for(String s: keys){
+					String value = map.get(s);
+					values.add(value);
+				}
+				String str = String.join(SPACE,values);
+				CrawlerDown.writeToTxt(str, "/app/datas/videos.txt");
+				StringBuilder builder = new StringBuilder("insert into crawlerurl (");
+				builder.append(String.join(",",keys));
+				builder.append(") values (");
+				for(int index = 0; index < values.size(); index ++){
+					values.set(index,"'"+values.get(index)+"'");
+				}
+				builder.append(String.join(",",values));
+				builder.append(")");
+				CrawlerDown.writeToTxt(builder.toString(), "/app/datas/videos.sql");
 			}
 		
 		}

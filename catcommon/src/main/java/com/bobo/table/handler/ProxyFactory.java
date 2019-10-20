@@ -1,39 +1,42 @@
 package com.bobo.table.handler;
 
 import java.lang.reflect.Proxy;
+import java.util.Objects;
 
+/**
+ * 反射工厂
+ */
 public class ProxyFactory {
-    public static Object createPorxy(final Actuator target){
+
+    private InvokeFilter filter;
+
+    //给目标对象生成代理对象
+    public <T> Object createPorxy(final T target) {
         Object proxyObject = Proxy.newProxyInstance(
                 target.getClass().getClassLoader(),
                 target.getClass().getInterfaces(),
                 (proxy, method, args) -> {
                     Object res = null;
-                    try {
+                    if (Objects.isNull(filter)) {
                         res = method.invoke(target, args);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } else if (Objects.nonNull(filter) && filter.isEqualMethod(method.getName(), args.length)) {
+                        res = method.invoke(target, args);
                     }
                     return res;
                 });
         return proxyObject;
     }
 
-    private Object target;
-    public ProxyFactory(Object target){
-        this.target=target;
+
+    interface InvokeFilter {
+        boolean isEqualMethod(String methodName, int args);
     }
 
-    //给目标对象生成代理对象
-    public Object getProxyInstance(){
-        return Proxy.newProxyInstance(
-                target.getClass().getClassLoader(),
-                target.getClass().getInterfaces(),
-                (proxy, method, args) -> {
-                    Object returnValue = method.invoke(target, args);
-                    return returnValue;
-                }
-        );
+    public InvokeFilter getFilter() {
+        return filter;
     }
 
+    public void setFilter(InvokeFilter filter) {
+        this.filter = filter;
+    }
 }

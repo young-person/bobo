@@ -52,7 +52,6 @@
     </appender>
 
     <appender name="ERROR-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--<File>${rootPath}/${appName}/error.log</File>-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${rootPath}/${appName}/%d{yyyy-MM-dd}/error.%i.log</fileNamePattern>
             <maxHistory>30</maxHistory>
@@ -76,8 +75,8 @@
     <logger name="java.sql.PreparedStatement" level="TRACE"/>
 
     <root level="INFO">
-        <appender-ref ref="INFO-file" />
         <appender-ref ref="STDOUT" />
+        <appender-ref ref="INFO-file" />
     </root>
 
     <logger name="com.mybatis.mapper" level="debug" additivity="false">
