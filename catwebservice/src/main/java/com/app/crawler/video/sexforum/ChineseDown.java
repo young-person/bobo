@@ -1,21 +1,16 @@
 package com.app.crawler.video.sexforum;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-import java.util.Map;
-
+import com.app.crawler.CFilter;
+import com.app.utils.HttpUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.app.crawler.CFilter;
-import com.app.utils.HttpUtil;
+import java.io.*;
+import java.util.List;
+import java.util.Map;
 
 /** 
  * @Description: TODO
@@ -57,7 +52,12 @@ public class ChineseDown extends ChineseTables{
 		}
 		
 	}
-	
+
+	@Override
+	public String getSql(List<String> keys, List<String> values) {
+		return null;
+	}
+
 	private void saveAndDown(Elements ts,Map<String, String> map,String detail) {
 		
 		if (null!=ts&& ts.size()>0) {
@@ -85,7 +85,7 @@ public class ChineseDown extends ChineseTables{
 			@Override
 			public void excute(InputStream is) {
 				try {
-					File file = new File("D:\\temp\\"+fileName);
+					File file = new File(folder+"torrent"+File.separator+fileName);
 					FileOutputStream fos = new FileOutputStream(file);
 					byte[] buffer = new byte[4096];
 					int len = -1;

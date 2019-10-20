@@ -50,10 +50,6 @@ public class Forum extends BaseClass {
         StringBuilder builder = new StringBuilder();
         for (CNode node : list) {
             ChineseTables hand = null;
-            builder.append("case \"");
-            builder.append(node.getName());
-            builder.append("\":");
-            builder.append(" 	break;");
             switch (node.getName()) {
 
                 case "高薪 | 全職招聘區 | Full-Time Jobs":
@@ -93,32 +89,74 @@ public class Forum extends BaseClass {
                 case "新手签到区 | Novice Report":
                     break;
                 case "原创视频区|Original video":
+                    hand = new ChineseOnline();
+                    hand.setPath("Original-video.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "原创图片区|original picture":
+                    hand = new ChineseOnline();
+                    hand.setPath("original-picture.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "原创录音区|Original recording":
+                    hand = new ChineseOnline();
+                    hand.setPath("original-recording.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "影视体验区 | Movies Preview":
+                    hand = new ChineseOnline();
+                    hand.setPath("original-Preview.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "VR影视体验区 | VRs Preview":
+                    hand = new ChineseOnline();
+                    hand.setPath("VRs-Preview.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "精美图片体验区 | Pics Preview":
+                    hand = new ChineseOnline();
+                    hand.setPath("Pics-Preview.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "杏吧VR虚拟现实影片区 | Virtual Reality Porn Movies":
+                    hand = new ChineseOnline();
+                    hand.setPath("Reality-Porn.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "破处|主播|偷拍|野战|车震区 | Specific Movies":
+                    hand = new ChineseOnline();
+                    hand.setPath("Specific-Movies.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "亚洲无码区 | Asian Non-mosaic Movies":
+                    hand = new ChineseOnline();
+                    hand.setPath("mosaic-Movies.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "亚洲有码区 | Asian Mosaic Movies":
+                    hand = new ChineseOnline();
+                    hand.setPath("Mosaic-Movies.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "欧美性爱区 | Western Sex Movies":
+                    hand = new ChineseOnline();
+                    hand.setPath("Sex-Movies.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "华人精品原创|Chinese Homemade Videos":
+                    hand = new ChineseOnline();
+                    hand.setPath("Homemade-Videos.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "全坛图片精品荟萃 | Globe Selfie Photos":
+                    hand = new ChineseOnline();
+                    hand.setPath("Globe-Photos.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "套图下载区 | Photos Download":
+                    hand = new ChineseOnline();
+                    hand.setPath("Photos-Download.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "VIP超级资源点播区 | VIP Bespoke Websites":
                     break;
@@ -179,8 +217,14 @@ public class Forum extends BaseClass {
                 case "有声小说在线听 | 免费":
                     break;
                 case "精品下载 | Download Boutique":
+                    hand = new ChineseOnline();
+                    hand.setPath("Download-Boutique.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "视频连载| Serializing Videos":
+                    hand = new ChineseOnline();
+                    hand.setPath("Serializing-Videos.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "私人定制区 | Custom-tailor Voice":
                     break;
@@ -215,48 +259,104 @@ public class Forum extends BaseClass {
                 case "图片合成区 | Compose":
                     break;
                 case "亚洲性爱 | Asian Sex":
+                    hand = new ChineseOnline();
+                    hand.setPath("Asian-Sex.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "欧美性爱 | Western Sex":
+                    hand = new ChineseOnline();
+                    hand.setPath("Western-Sex.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "亚洲裸女 | Asian Naked":
+                    hand = new ChineseOnline();
+                    hand.setPath("Asian-Naked.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "欧美裸女 | Western Naked":
+                    hand = new ChineseOnline();
+                    hand.setPath("Western-Naked.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "裸模艺术 | Inland Model":
+                    hand = new ChineseOnline();
+                    hand.setPath("Inland-Model.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "亚欧套图 | Pics Sets":
+                    hand = new ChineseOnline();
+                    hand.setPath("Pics-Sets.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "国模套图 | Model Sets":
+                    hand = new ChineseOnline();
+                    hand.setPath("Model-Sets.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "华人生活自拍 | Selfie Pics For Daily Life":
+                    hand = new ChineseOnline();
+                    hand.setPath("Daily-Life.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "华人性爱自拍 | Selfie Pics For Sex":
+                    hand = new ChineseOnline();
+                    hand.setPath("Pics-ForSex.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "华人街拍区 | Street Snap":
+                    hand = new ChineseOnline();
+                    hand.setPath("Street-Snap.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "极致诱惑 | Uniform And Breast":
+                    hand = new ChineseOnline();
+                    hand.setPath("Uniform-Breast.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "明星专区 | Popular Stars":
+                    hand = new ChineseOnline();
+                    hand.setPath("Popular-Stars.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "影吧聊天活动室 | Communication":
                     break;
                 case "华人网友自拍区 | Self-Shooting Video":
                     hand = new ChineseOnline();
+                    hand.setUrl("Self-Shooting.txt");
                     tacticsPaserDom(node, hand);
                     break;
                 case "华人AV女优馆 | Chinese AV Actress":
+                    hand = new ChineseOnline();
+                    hand.setPath("Chinese-Actress.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "另类视频区 | Special Video":
+                    hand = new ChineseOnline();
+                    hand.setPath("Special-Video.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "亚洲无码区 | Asian Non-mosaic Video":
+                    hand = new ChineseOnline();
+                    hand.setPath("Asian-mosaic.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "亚洲有码区 | Asian Mosaic Video":
+                    hand = new ChineseOnline();
+                    hand.setPath("Asian-MosaicVideos.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "欧美性爱区 | Western Video":
+                    hand = new ChineseOnline();
+                    hand.setPath("Western-Video.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "卡通动漫区 | Cartoon Video":
+                    hand = new ChineseOnline();
+                    hand.setPath("Cartoon-Video.txt");
+                    tacticsPaserDom(node, hand);
                     break;
                 case "华人精品原创下载分享区 | Chinese Original Classic Videos":
+
                     break;
                 case "无码BT原创下载分享区 | Asian Non-mosaic Original Movies":
                     break;

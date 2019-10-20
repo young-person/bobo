@@ -10,6 +10,7 @@ import java.util.Map;
  */
 public class ChineseOnline extends ChineseTables{
 
+
 	/* (non-Javadoc)
 	 * @see com.app.crawler.video.sexforum.ChineseTables#doFilter(java.util.List)
 	 */
@@ -18,5 +19,20 @@ public class ChineseOnline extends ChineseTables{
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	@Override
+	public String getSql(List<String> keys, List<String> values) {
+		StringBuilder builder = new StringBuilder("insert into crawlerurl (");
+		builder.append(String.join(",",keys));
+		builder.append(") values (");
+		for(int index = 0; index < values.size(); index ++){
+			values.set(index,"'"+values.get(index)+"'");
+		}
+		builder.append(String.join(",",values));
+		builder.append(")");
+		return builder.toString();
+	}
+
 
 }

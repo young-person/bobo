@@ -28,12 +28,8 @@ public class MainParse implements CrawlerDown {
 
     private static final String LOGIN_URL = "https://www.dd18ll.info/member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes";
 
-    public static void main(String[] args) {
-        MainParse p = new MainParse();
-        p.parseHome();
-    }
     private void parseHome() {
-       // this.login();
+        this.login();
 
         String content = HttpUtil.doGetRequest(String.format(DOMIAN, "portal.html"));
 

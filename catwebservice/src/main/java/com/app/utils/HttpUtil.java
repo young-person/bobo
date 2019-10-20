@@ -1,25 +1,7 @@
 package com.app.utils;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.net.ssl.SSLContext;
-
+import com.app.crawler.CFilter;
+import com.bobo.base.BaseClass;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -39,19 +21,23 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.app.crawler.CFilter;
+import javax.net.ssl.SSLContext;
+import java.io.*;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.util.*;
+import java.util.Map.Entry;
 
 /** 
  * @Description: TODO
  * @date 2019年6月19日 下午2:45:05 
  * @ClassName: HttpUtil 
  */
-public class HttpUtil {
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(HttpUtil.class);
+public class HttpUtil extends BaseClass {
 	
 	public static String doGetRequest(String url) {
 		return doGetRequest(url,new BasicCookieStore(),"UTF-8");
@@ -67,7 +53,6 @@ public class HttpUtil {
 	}
 	
 	public static String doGetRequest(String url,CookieStore cookieStore,String charset) {
-		LOGGER.info("请求地址:【{}】",url);
 		CloseableHttpClient httpClient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
 		HttpGet get = new HttpGet(url);
 		get.addHeader("Accept", "*/*");
@@ -77,6 +62,7 @@ public class HttpUtil {
 		
 		HttpResponse response;
 		try {
+			LOGGER.info("请求地址:【{}】",url);
 			response = httpClient.execute(get);
 			int statusCode = response.getStatusLine().getStatusCode();
 			if (statusCode == HttpStatus.SC_OK) {
@@ -86,27 +72,6 @@ public class HttpUtil {
 			LOGGER.error("【{}】下载失败,错误信息:【{}】",url,e);
 		}
 		return null;
-	}
-	
-	public static void writeToErrorTxt(String cxt) {
-		FileWriter fw = null;
-		try {
-			// 如果文件存在，则追加内容；如果文件不存在，则创建文件
-			File f = new File("C:\\error.txt");
-			fw = new FileWriter(f, true);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		PrintWriter pw = new PrintWriter(fw);
-		pw.println(cxt);
-		pw.flush();
-		try {
-			fw.flush();
-			pw.close();
-			fw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public static HttpResult doPostGetgetHttpResult(String url, Map<String, String> headParamsMap,Map<String, String> formMap) {
@@ -205,11 +170,7 @@ public class HttpUtil {
 
 			return HttpClients.custom().setSSLSocketFactory(sslsf).build();
 
-		} catch (KeyManagementException e) {
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		} catch (KeyStoreException e) {
+		} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException e) {
 			e.printStackTrace();
 		}
 

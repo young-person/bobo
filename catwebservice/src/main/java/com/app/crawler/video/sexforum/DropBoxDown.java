@@ -1,14 +1,7 @@
 package com.app.crawler.video.sexforum;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
-
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-
+import com.app.utils.HttpUtil;
+import com.app.utils.HttpUtil.HttpResult;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -24,8 +17,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.app.utils.HttpUtil;
-import com.app.utils.HttpUtil.HttpResult;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * @Description: TODO
@@ -72,6 +67,19 @@ public class DropBoxDown extends ChineseTables {
 			}
 		}
 
+	}
+
+	@Override
+	public String getSql(List<String> keys, List<String> values) {
+		StringBuilder builder = new StringBuilder("insert into crawlerurl (");
+		builder.append(String.join(",",keys));
+		builder.append(") values (");
+		for(int index = 0; index < values.size(); index ++){
+			values.set(index,"'"+values.get(index)+"'");
+		}
+		builder.append(String.join(",",values));
+		builder.append(")");
+		return builder.toString();
 	}
 
 	private static final String regex = "(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]";
