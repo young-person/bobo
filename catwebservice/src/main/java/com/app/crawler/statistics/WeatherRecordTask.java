@@ -23,11 +23,15 @@ import java.util.concurrent.Executors;
  */
 public class WeatherRecordTask implements CrawlerDown {
 
+	public static void main(String[] args) {
+		WeatherRecordTask task = new WeatherRecordTask();
+		task.initCityUrls();
+	}
 	public void initCityUrls(){
 		String content = HttpUtil.doGetRequest(Linking.WEATHERURL.getUrl());
 		List<Map<String, String>> list = new ArrayList<Map<String,String>>();
 		try {
-			content = new String(content.getBytes("ISO-8859-1"),"UTF-8");
+			content = new String(content.getBytes("UTF-8"),"UTF-8");
 			
 			Document document = Jsoup.parse(content);
 			Elements links = document.select("div.lqcontentBoxheader a[href]"); 
@@ -64,9 +68,8 @@ public class WeatherRecordTask implements CrawlerDown {
 	
 	private void paramContent(String content,String url){
 		if (null != content) {
-			
 			try {
-				content = new String(content.getBytes("ISO-8859-1"),"UTF-8");
+				content = new String(content.getBytes("UTF-8"),"UTF-8");
 				if (null !=content) {
 					Document document = Jsoup.parse(content);
 					Element conMidtab = document.select("div.hanml div.conMidtab").get(0);
@@ -88,8 +91,7 @@ public class WeatherRecordTask implements CrawlerDown {
 								if (null!=as &&as.size()==1) {
 									Element a = as.get(0);
 									String href = a.attr("href");
-									String html = HttpUtil.doGetRequest(href);//访问详情页面
-									this.paramHtml(mc,html);
+									this.paramHtml(mc,href);
 								}
 							}
 						}
@@ -98,13 +100,14 @@ public class WeatherRecordTask implements CrawlerDown {
 				}
 				
 			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
+				LOGGER.error("页面编码转换失败",e);
 			}
 		}
 	}
 	
-	public void paramHtml(String mc, String html) throws UnsupportedEncodingException{
-		html = new String(html.getBytes("ISO-8859-1"),"UTF-8");
+	public void paramHtml(String mc, String href) throws UnsupportedEncodingException{
+		String html = HttpUtil.doGetRequest(href);//访问详情页面
+		html = new String(html.getBytes("UTF-8"),"UTF-8");
 		Document doc = Jsoup.parse(html);
 		Elements uls = doc.select("ul.t.clearfix li");
 		if (null!=uls&&uls.size()>0) {
@@ -134,9 +137,20 @@ public class WeatherRecordTask implements CrawlerDown {
 							direction2 = em2.attr("title");
 						}
 					}
+					List<String> values = new ArrayList<>();
+					values.add(mc);
+					values.add(rq);
+					values.add(hightemperature);
+					values.add(lowtemperature);
+					values.add(status);
+					values.add(wind);
+					values.add(direction1);
+					values.add(direction2);
+					CrawlerDown.writeToTxt(String.join(SPACE, values), "/app/datas/weather.txt");
 					String sql = "insert into weather(cityname,date,high,low,status,wind,direction1,direction2) values('"+mc+"','"+rq+"','"+hightemperature+"','"+lowtemperature+"','"+status+"','"+wind+"','"+direction1+"','"+direction2+"')";
+					CrawlerDown.writeToTxt(sql, "/app/datas/weather.sql");
 				} catch (Exception e) {
-					e.printStackTrace();
+					LOGGER.error("解析天气详情页获取数据失败页面地址:[{}]",href,e);
 				}
 
 			}
