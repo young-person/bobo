@@ -3,7 +3,7 @@
     <!-- 模块名称， 影响日志配置名，日志文件名 --> 
     <property name="appName" value="catcenter"/>
     <!--rootPath 日志路径，这里是相对路径，web项目eclipse下会输出到eclipse的安装目录下，如果部署到linux上的tomcat下，会输出到tomcat/bin目录 下 -->  
-    <property name="rootPath" value="/app/catcenter/logs"/>
+    <property name="rootPath" value="/app/cat/logs"/>
     <contextName>${appName}</contextName>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -76,7 +76,7 @@
     <logger name="java.sql.PreparedStatement" level="TRACE"/>
 
 
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="INFO-file" />
         <appender-ref ref="STDOUT" />
     </root>
