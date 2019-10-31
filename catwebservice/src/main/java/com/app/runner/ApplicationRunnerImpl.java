@@ -17,17 +17,17 @@ import java.util.TimerTask;
 public class ApplicationRunnerImpl implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            public void run() {
-                CrawlerDown down1 = new Department();
-                down1.start();
-                CrawlerDown down2 = new WeatherRecordTask();
-                down2.start();
-                CrawlerDown down3 = new MainParse();
-                down3.start();
-            }
-        }, 0,PERIOD_TIME);
+//        Timer timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            public void run() {
+//                CrawlerDown down1 = new Department();
+//                down1.start();
+//                CrawlerDown down2 = new WeatherRecordTask();
+//                down2.start();
+//                CrawlerDown down3 = new MainParse();
+//                down3.start();
+//            }
+//        }, 0,PERIOD_TIME);
     }
 
     /**

@@ -23,10 +23,6 @@ import java.util.concurrent.Executors;
  */
 public class WeatherRecordTask implements CrawlerDown {
 
-	public static void main(String[] args) {
-		WeatherRecordTask task = new WeatherRecordTask();
-		task.initCityUrls();
-	}
 	public void initCityUrls(){
 		String content = HttpUtil.doGetRequest(Linking.WEATHERURL.getUrl());
 		List<Map<String, String>> list = new ArrayList<Map<String,String>>();

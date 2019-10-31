@@ -32,179 +32,187 @@ import java.security.cert.X509Certificate;
 import java.util.*;
 import java.util.Map.Entry;
 
-/** 
+/**
  * @Description: TODO
- * @date 2019年6月19日 下午2:45:05 
- * @ClassName: HttpUtil 
+ * @date 2019年6月19日 下午2:45:05
+ * @ClassName: HttpUtil
  */
 public class HttpUtil extends BaseClass {
-	
-	public static String doGetRequest(String url) {
-		return doGetRequest(url,new BasicCookieStore(),"UTF-8");
-	}
-	
-	
-	public static String doGetRequest(String url,String charset) {
-		return doGetRequest(url,new BasicCookieStore(),charset);
-	}
-	
-	public static String doGetRequest(String url,CookieStore cookieStore) {
-		return doGetRequest(url,new BasicCookieStore(),"UTF-8");
-	}
-	
-	public static String doGetRequest(String url,CookieStore cookieStore,String charset) {
-		CloseableHttpClient httpClient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
-		HttpGet get = new HttpGet(url);
-		get.addHeader("Accept", "*/*");
-		get.addHeader("Accept-Language", "zh-CN,zh;q=0.8");
-		get.addHeader("Connection", "keep-alive");
-		get.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
-		
-		HttpResponse response;
-		try {
-			LOGGER.info("请求地址:【{}】",url);
-			response = httpClient.execute(get);
-			int statusCode = response.getStatusLine().getStatusCode();
-			if (statusCode == HttpStatus.SC_OK) {
-				return EntityUtils.toString(response.getEntity(), charset);
-			}
-		} catch (IOException e) {
-			LOGGER.error("【{}】下载失败,错误信息:【{}】",url,e);
-		}
-		return null;
-	}
-	
-	public static HttpResult doPostGetgetHttpResult(String url, Map<String, String> headParamsMap,Map<String, String> formMap) {
-		return doPostGetgetHttpResult(url,headParamsMap,formMap,"UTF-8");
-	}
-	
-	public static HttpResult doPostGetgetHttpResult(String url, Map<String, String> headParamsMap, Map<String, String> formMap,
-			String charset) {
-		LOGGER.info("POST请求地址:【{}】,参数：【{}】",url,formMap);
-		CloseableHttpClient httpClient = null;
-		HttpPost httpPost = null;
-		HttpResult result = new HttpResult();
-		try {
-			CookieStore cookieStore = new BasicCookieStore();
-			httpClient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
-			httpPost = new HttpPost(url);
-			// 设置请求体参数
-			List<NameValuePair> list = new ArrayList<NameValuePair>();
-			Iterator<Entry<String, String>> iterator = formMap.entrySet().iterator();
-			while (iterator.hasNext()) {
-				Entry<String, String> elem = (Entry<String, String>) iterator.next();
-				list.add(new BasicNameValuePair(elem.getKey(), elem.getValue()));
-			}
 
-			if (list.size() > 0) {
-				UrlEncodedFormEntity entity = new UrlEncodedFormEntity(list, charset);
-				httpPost.setEntity(entity);
+    public static String doGetRequest(String url) {
+        return doGetRequest(url, new BasicCookieStore(), "UTF-8");
+    }
+
+
+    public static String doGetRequest(String url, String charset) {
+        return doGetRequest(url, new BasicCookieStore(), charset);
+    }
+
+    public static String doGetRequest(String url, CookieStore cookieStore) {
+        return doGetRequest(url, cookieStore, "UTF-8");
+    }
+
+    public static String doGetRequest(String url, CookieStore cookieStore, String charset) {
+        CloseableHttpClient httpClient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
+        HttpGet get = new HttpGet(url);
+        get.addHeader("Accept", "*/*");
+        get.addHeader("Accept-Language", "zh-CN,zh;q=0.8");
+        get.addHeader("Connection", "keep-alive");
+        get.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
+
+        HttpResponse response;
+        try {
+            LOGGER.info("请求地址:【{}】", url);
+            response = httpClient.execute(get);
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == HttpStatus.SC_OK) {
+                return EntityUtils.toString(response.getEntity(), charset);
+            }
+        } catch (IOException e) {
+            LOGGER.error("【{}】下载失败,错误信息:【{}】", url, e);
+        }
+        return null;
+    }
+
+    public static HttpResult doPostGetgetHttpResult(String url, Map<String, String> headParamsMap, Map<String, String> formMap) {
+        CookieStore cookieStore = new BasicCookieStore();
+        return doPostGetgetHttpResult(url, headParamsMap, formMap, "UTF-8", cookieStore);
+    }
+
+    public static HttpResult doPostGetgetHttpResult(String url, Map<String, String> headParamsMap, Map<String, String> formMap, CookieStore cookieStore) {
+        return doPostGetgetHttpResult(url, headParamsMap, formMap, "UTF-8", cookieStore);
+    }
+
+    public static HttpResult doPostGetgetHttpResult(String url, Map<String, String> headParamsMap, Map<String, String> formMap, String charset, CookieStore cookieStore) {
+        LOGGER.info("POST请求地址:【{}】,参数：【{}】", url, formMap);
+        CloseableHttpClient httpClient = null;
+        HttpPost httpPost = null;
+        HttpResult result = new HttpResult();
+        try {
+        	if (Objects.nonNull(cookieStore)){
+				httpClient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
+			}else{
+				httpClient = HttpClients.custom().build();
 			}
 
-			// 设置请求头通用信息
-			httpPost.addHeader("Accept", "*/*");
-			httpPost.addHeader("Accept-Language", "zh-CN,zh;q=0.8");
-			httpPost.addHeader("Connection", "keep-alive");
-			httpPost.addHeader("User-Agent","Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
+            httpPost = new HttpPost(url);
+            // 设置请求体参数
+            List<NameValuePair> list = new ArrayList<>();
+            Iterator<Entry<String, String>> iterator = formMap.entrySet().iterator();
+            while (iterator.hasNext()) {
+                Entry<String, String> elem = iterator.next();
+                list.add(new BasicNameValuePair(elem.getKey(), elem.getValue()));
+            }
 
-			Set<Entry<String, String>> entrySet = headParamsMap.entrySet();
-			for (Entry<String, String> entry : entrySet) {
-				httpPost.addHeader(entry.getKey(), entry.getValue());
-			}
-			HttpResponse response = httpClient.execute(httpPost);
-			if (response != null) {
-				int statusCode = response.getStatusLine().getStatusCode();
-				if (statusCode == HttpStatus.SC_OK) {
-					String content = EntityUtils.toString(response.getEntity(), charset);
-					result.setCookies(cookieStore.getCookies());
-					result.setDocument(Jsoup.parse(content));
-					result.setCookieStore(cookieStore);
-				}
-			}
-		} catch (Exception e) {
-			LOGGER.error("【{}】下载失败,错误信息:【{}】",url,e);
-		} finally {
-			httpPost.abort();
-		}
-		return result;
-	}
-	
-	public static void doGetByUrlSsl(String url,CFilter<InputStream> cfilter) {
-		LOGGER.info("SSL请求地址:【{}】",url);
-		CloseableHttpClient httpClient = createSSLClientDefault();
-		HttpGet get = new HttpGet(url);
-		get.addHeader("Accept", "*/*");
-		get.addHeader("Accept-Language", "zh-CN,zh;q=0.8");
-		get.addHeader("Connection", "keep-alive");
-		get.addHeader("User-Agent","Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
+            if (list.size() > 0) {
+                UrlEncodedFormEntity entity = new UrlEncodedFormEntity(list, charset);
+                httpPost.setEntity(entity);
+            }
 
-		HttpResponse response;
-		try {
-			response = httpClient.execute(get);
-			int statusCode = response.getStatusLine().getStatusCode();
-			if (statusCode == HttpStatus.SC_OK) {
-				HttpEntity entity = response.getEntity();
-				InputStream is = entity.getContent();
-				if (null!=cfilter) {
-					cfilter.excute(is);
-				}
-			}
-		} catch (IOException e) {
-			LOGGER.error("【{}】下载失败,错误信息:【{}】",url,e);
-		}
-	}
+            // 设置请求头通用信息
+            httpPost.addHeader("Accept", "*/*");
+            httpPost.addHeader("Accept-Language", "zh-CN,zh;q=0.8");
+            httpPost.addHeader("Connection", "keep-alive");
+            httpPost.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
 
-	public static CloseableHttpClient createSSLClientDefault() {
+            Set<Entry<String, String>> entrySet = headParamsMap.entrySet();
+            for (Entry<String, String> entry : entrySet) {
+                httpPost.addHeader(entry.getKey(), entry.getValue());
+            }
+            HttpResponse response = httpClient.execute(httpPost);
+            if (response != null) {
+                int statusCode = response.getStatusLine().getStatusCode();
+                if (statusCode == HttpStatus.SC_OK) {
+                    String content = EntityUtils.toString(response.getEntity(), charset);
+                    result.setCookies(cookieStore.getCookies());
+                    result.setDocument(Jsoup.parse(content));
+                    result.setCookieStore(cookieStore);
+                }
+            }
+        } catch (Exception e) {
+            LOGGER.error("【{}】下载失败,错误信息:【{}】", url, e);
+        } finally {
+            httpPost.abort();
+        }
+        return result;
+    }
 
-		try {
+    public static void doGetByUrlSsl(String url, CFilter<InputStream> cfilter) {
+        LOGGER.info("SSL请求地址:【{}】", url);
+        CloseableHttpClient httpClient = createSSLClientDefault();
+        HttpGet get = new HttpGet(url);
+        get.addHeader("Accept", "*/*");
+        get.addHeader("Accept-Language", "zh-CN,zh;q=0.8");
+        get.addHeader("Connection", "keep-alive");
+        get.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
 
-			@SuppressWarnings("deprecation")
-			SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
-				// 信任所有
-				public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-					return true;
-				}
-			}).build();
+        HttpResponse response;
+        try {
+            response = httpClient.execute(get);
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == HttpStatus.SC_OK) {
+                HttpEntity entity = response.getEntity();
+                InputStream is = entity.getContent();
+                if (null != cfilter) {
+                    cfilter.excute(is);
+                }
+            }
+        } catch (IOException e) {
+            LOGGER.error("【{}】下载失败,错误信息:【{}】", url, e);
+        }
+    }
 
-			SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext);
+    public static CloseableHttpClient createSSLClientDefault() {
 
-			return HttpClients.custom().setSSLSocketFactory(sslsf).build();
+        try {
 
-		} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException e) {
-			e.printStackTrace();
-		}
+            @SuppressWarnings("deprecation")
+            SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
+                // 信任所有
+                public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                    return true;
+                }
+            }).build();
 
-		return HttpClients.createDefault();
-	}
-	
-	public static class HttpResult {
-		private List<Cookie> cookies = null;
-		private Document document = null;
-		private CookieStore cookieStore;
+            SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext);
 
-		public List<Cookie> getCookies() {
-			return cookies;
-		}
+            return HttpClients.custom().setSSLSocketFactory(sslsf).build();
 
-		public void setCookies(List<Cookie> cookies) {
-			this.cookies = cookies;
-		}
+        } catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException e) {
+            e.printStackTrace();
+        }
 
-		public Document getDocument() {
-			return document;
-		}
+        return HttpClients.createDefault();
+    }
 
-		public void setDocument(Document document) {
-			this.document = document;
-		}
+    public static class HttpResult {
+        private List<Cookie> cookies = null;
+        private Document document = null;
+        private CookieStore cookieStore;
 
-		public CookieStore getCookieStore() {
-			return cookieStore;
-		}
+        public List<Cookie> getCookies() {
+            return cookies;
+        }
 
-		public void setCookieStore(CookieStore cookieStore) {
-			this.cookieStore = cookieStore;
-		}
+        public void setCookies(List<Cookie> cookies) {
+            this.cookies = cookies;
+        }
 
-	}
+        public Document getDocument() {
+            return document;
+        }
+
+        public void setDocument(Document document) {
+            this.document = document;
+        }
+
+        public CookieStore getCookieStore() {
+            return cookieStore;
+        }
+
+        public void setCookieStore(CookieStore cookieStore) {
+            this.cookieStore = cookieStore;
+        }
+
+    }
 }
