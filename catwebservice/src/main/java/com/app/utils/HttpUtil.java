@@ -1,7 +1,22 @@
 package com.app.utils;
 
-import com.app.crawler.CFilter;
-import com.bobo.base.BaseClass;
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Set;
+
+import javax.net.ssl.SSLContext;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -22,15 +37,8 @@ import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import javax.net.ssl.SSLContext;
-import java.io.*;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-import java.util.*;
-import java.util.Map.Entry;
+import com.app.crawler.CFilter;
+import com.bobo.base.BaseClass;
 
 /**
  * @Description: TODO
@@ -53,24 +61,36 @@ public class HttpUtil extends BaseClass {
     }
 
     public static String doGetRequest(String url, CookieStore cookieStore, String charset) {
-        CloseableHttpClient httpClient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
-        HttpGet get = new HttpGet(url);
-        get.addHeader("Accept", "*/*");
-        get.addHeader("Accept-Language", "zh-CN,zh;q=0.8");
-        get.addHeader("Connection", "keep-alive");
-        get.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
-
-        HttpResponse response;
+    	 LOGGER.info("请求地址:【{}】", url);
+    	 CloseableHttpClient httpClient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
         try {
-            LOGGER.info("请求地址:【{}】", url);
-            response = httpClient.execute(get);
+            
+            HttpGet get = new HttpGet(url);
+            get.addHeader("Accept", "*/*");
+            get.addHeader("Accept-Language", "zh-CN,zh;q=0.8");
+            get.addHeader("Connection", "keep-alive");
+            get.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
+
+            HttpResponse response = httpClient.execute(get);
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == HttpStatus.SC_OK) {
                 return EntityUtils.toString(response.getEntity(), charset);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOGGER.error("【{}】下载失败,错误信息:【{}】", url, e);
-        }
+            try {
+				Thread.sleep(1000 * 5);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+        }finally {
+        	try {
+				httpClient.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
         return null;
     }
 
@@ -132,7 +152,14 @@ public class HttpUtil extends BaseClass {
         } catch (Exception e) {
             LOGGER.error("【{}】下载失败,错误信息:【{}】", url, e);
         } finally {
-            httpPost.abort();
+//            httpPost.abort();
+            if (Objects.nonNull(httpClient)) {
+            	try {
+					httpClient.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
         }
         return result;
     }
@@ -157,7 +184,7 @@ public class HttpUtil extends BaseClass {
                     cfilter.excute(is);
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOGGER.error("【{}】下载失败,错误信息:【{}】", url, e);
         }
     }

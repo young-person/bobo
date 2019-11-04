@@ -12,11 +12,11 @@
         <module name="rpcservice" />
         <module name="catcenter" />
         <module name="catinterface" />
+        <module name="catconfig" />
         <module name="rpcclient" />
         <module name="catmain" />
         <module name="catwebservice" />
         <module name="catmapper" />
-        <module name="catconfig" />
         <module name="catcommon" />
         <module name="catupload" />
         <module name="catpay" />
