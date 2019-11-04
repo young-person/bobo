@@ -1,28 +1,27 @@
 package com.app.crawler.riches.pojo;
 
-/** 
+/**
  * @Description: TODO
- * @date 2019年11月3日 下午5:05:01 
+ * @date 2019年11月3日 下午5:05:01
  * @ClassName: ShareInfo 股票每天信息 写入excel数据表
  */
 public class ShareInfo {
-	
+
 	/**
 	 * 日期
 	 */
-    private String date;
-    
+	private String date;
+
 	/**
 	 * 换手率
 	 */
 	private String hand;
-	
+
 	/**
 	 * 涨跌幅度比例
 	 */
 	private String risePrice;
 
-	
 	/**
 	 * 开盘价
 	 */
@@ -30,90 +29,129 @@ public class ShareInfo {
 	/**
 	 * 收盘价
 	 */
-    private String closePrice;
-    
-    /**
-          * 昨日收盘价
-     */
-    
-    private String prevClose;
-    
+	private String closePrice;
+
+	/**
+	 * 昨日收盘价
+	 */
+
+	private String prevClose;
+
 	/**
 	 * 今日最高价
 	 */
-    private String maxPrice;
+	private String maxPrice;
 	/**
 	 * 今日最低价
 	 */
-    private String minPrice;
+	private String minPrice;
 	/**
 	 * 成交总量
 	 */
-    private String total;
+	private String total;
 	/**
 	 * 总金额
 	 */
-    private String money;
+	private String money;
+
 	public String getDate() {
 		return date;
 	}
+
 	public void setDate(String date) {
 		this.date = date;
 	}
+
 	public String getHand() {
 		return hand;
 	}
+
 	public void setHand(String hand) {
 		this.hand = hand;
 	}
+
 	public String getRisePrice() {
 		return risePrice;
 	}
+
 	public void setRisePrice(String risePrice) {
 		this.risePrice = risePrice;
 	}
+
 	public String getOpenPrice() {
 		return openPrice;
 	}
+
 	public void setOpenPrice(String openPrice) {
 		this.openPrice = openPrice;
 	}
+
 	public String getClosePrice() {
 		return closePrice;
 	}
+
 	public void setClosePrice(String closePrice) {
 		this.closePrice = closePrice;
 	}
+
 	public String getPrevClose() {
 		return prevClose;
 	}
+
 	public void setPrevClose(String prevClose) {
 		this.prevClose = prevClose;
 	}
+
 	public String getMaxPrice() {
 		return maxPrice;
 	}
+
 	public void setMaxPrice(String maxPrice) {
 		this.maxPrice = maxPrice;
 	}
+
 	public String getMinPrice() {
 		return minPrice;
 	}
+
 	public void setMinPrice(String minPrice) {
 		this.minPrice = minPrice;
 	}
+
 	public String getTotal() {
 		return total;
 	}
+
 	public void setTotal(String total) {
 		this.total = total;
 	}
+
 	public String getMoney() {
 		return money;
 	}
+
 	public void setMoney(String money) {
 		this.money = money;
 	}
+
+	public ShareInfo() {
+	}
+
+	public ShareInfo(String date, String hand, String risePrice, String openPrice, String closePrice, String prevClose,
+			String maxPrice, String minPrice, String total, String money) {
+		super();
+		this.date = date;
+		this.hand = hand;
+		this.risePrice = risePrice;
+		this.openPrice = openPrice;
+		this.closePrice = closePrice;
+		this.prevClose = prevClose;
+		this.maxPrice = maxPrice;
+		this.minPrice = minPrice;
+		this.total = total;
+		this.money = money;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -130,6 +168,7 @@ public class ShareInfo {
 		result = prime * result + ((total == null) ? 0 : total.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -191,12 +230,12 @@ public class ShareInfo {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return "ShareInfo [date=" + date + ", hand=" + hand + ", risePrice=" + risePrice + ", openPrice=" + openPrice
 				+ ", closePrice=" + closePrice + ", prevClose=" + prevClose + ", maxPrice=" + maxPrice + ", minPrice="
 				+ minPrice + ", total=" + total + ", money=" + money + "]";
 	}
-    
 
 }

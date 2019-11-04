@@ -1,5 +1,11 @@
 package com.app.crawler.riches;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -8,105 +14,149 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ThreadPoolExecutor;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.util.WorkbookUtil;
+import org.apache.poi.util.IOUtils;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.app.crawler.CrawlerDown;
+import com.app.crawler.CrawlerMain;
+import com.app.crawler.riches.pojo.HistoryBean;
 import com.app.crawler.riches.pojo.HistoryResult;
 import com.app.crawler.riches.pojo.RicheBean;
 import com.app.crawler.riches.pojo.RicheResult;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.app.crawler.riches.pojo.ShareInfo;
 
 public class BRiches implements CrawlerDown {
-	
+
 	/**
 	 * Excel 数据模板路径地址
 	 */
 	private String dataPath;
-	
-	private final ObjectMapper mapper = new ObjectMapper();
-	
+
 	public static void main(String[] args) {
-		BRiches bRiches = new BRiches();
-		RicheComputeAbstract richeCompute = new RicheComputeAbstract();
-		richeCompute.setNum(20);
-		bRiches.setRicheCompute(richeCompute);
-		bRiches.start();
+
+//		BRiches bRiches = new BRiches();
+//		RicheComputeAbstract richeCompute = new RicheComputeAbstract();
+//		richeCompute.setNum(20);
+//		bRiches.setRicheCompute(richeCompute);
+//		bRiches.start();
 	}
 
 	/**
 	 * 平安证券
 	 */
-	private String stockUrl = "https://m.stock.pingan.com/";
-	
 	private String stockAppUrl = "https://m.stock.pingan.com/h5quote/quote/getReportData";
-	
-	private final String num = "600";
-	
+
 	private Map<String, String> commonMap = new HashMap<String, String>() {
 		private static final long serialVersionUID = -6545149106686379462L;
-	{
-		put("random", "0.35715587574136154");
-		put("thirdAccount", "");
-		put("rdm", "");
-		put("timestamp", "");
-		put("tokenId", "");
-		put("signature", "");
-		put("key", "");
-		put("chnl", "");
-		put("requestId", "");
-		
-		put("type", "shsz");
-	}};
-	
-	///restapi/servicecenter/option/homeIcon/customIconById
+		{
+			put("random", "0.35715587574136154");
+			put("thirdAccount", "");
+			put("rdm", "");
+			put("timestamp", "");
+			put("tokenId", "");
+			put("signature", "");
+			put("key", "");
+			put("chnl", "");
+			put("requestId", "");
+
+			put("type", "shsz");
+		}
+	};
+
+	/// restapi/servicecenter/option/homeIcon/customIconById
 	/**
 	 * 月线
 	 */
-	//https://m.stock.pingan.com/h5quote/quote/getDayDataBigInt?random=0.060092707195325445&thirdAccount=&rdm=&timestamp=&tokenId=&signature=&key=&chnl=&requestId=&stockCode=300797&codeType=4621&period=month&day=50
+	// https://m.stock.pingan.com/h5quote/quote/getDayDataBigInt?random=0.060092707195325445&thirdAccount=&rdm=&timestamp=&tokenId=&signature=&key=&chnl=&requestId=&stockCode=300797&codeType=4621&period=month&day=50
 	/**
 	 * 周线
 	 */
-	//https://m.stock.pingan.com/h5quote/quote/getDayDataBigInt?random=0.8903233738548277&thirdAccount=&rdm=&timestamp=&tokenId=&signature=&key=&chnl=&requestId=&stockCode=000917&codeType=4609&period=week&day=50
+	// https://m.stock.pingan.com/h5quote/quote/getDayDataBigInt?random=0.8903233738548277&thirdAccount=&rdm=&timestamp=&tokenId=&signature=&key=&chnl=&requestId=&stockCode=000917&codeType=4609&period=week&day=50
 	/**
 	 * 日线
 	 */
 	private String dayUrl = "https://m.stock.pingan.com/h5quote/quote/getDayDataBigInt?random=0.5947266470674488&thirdAccount=&rdm=&timestamp=&tokenId=&signature=&key=&chnl=&requestId=&stockCode=%s&codeType=%s&period=day&day=%s";
-	 
+
 	private RicheCompute richeCompute;
-	
+
 	public RicheCompute getRicheCompute() {
 		return richeCompute;
 	}
-
 
 	public void setRicheCompute(RicheCompute richeCompute) {
 		this.richeCompute = richeCompute;
 	}
 
-
 	public void init() {
-		
-		
+
+		File file = new File(this.dataPath);
+		if (file.listFiles().length > 0) {
+			ThreadPoolExecutor executor = CrawlerMain.newThreadPool("readRicheExcel", 8);
+
+			for (File f : file.listFiles()) {
+				executor.execute(new Runnable() {
+					@Override
+					public void run() {
+						InputStream inputStream = null;
+						Workbook workbook = null;
+						try {
+							inputStream = this.getClass().getClassLoader().getResourceAsStream(f.getAbsolutePath());
+							workbook = WorkbookFactory.create(inputStream);
+							Sheet sheet = workbook.getSheetAt(0);
+							int lastNum = sheet.getLastRowNum();
+							List<ShareInfo> datas = new ArrayList<>(lastNum);
+							for (int k = 0; k < lastNum; k++) {
+								Row row = sheet.getRow(k);
+								ShareInfo info = new ShareInfo(row.getCell(1).getStringCellValue(),
+										row.getCell(2).getStringCellValue(), row.getCell(3).getStringCellValue(),
+										row.getCell(4).getStringCellValue(), row.getCell(5).getStringCellValue(),
+										row.getCell(6).getStringCellValue(), row.getCell(7).getStringCellValue(),
+										row.getCell(8).getStringCellValue(), row.getCell(9).getStringCellValue(),
+										row.getCell(10).getStringCellValue());
+								datas.add(info);
+							}
+						} catch (IOException e) {
+							e.printStackTrace();
+						} catch (InvalidFormatException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+			executor.shutdown();
+
+		}
 	}
+
 	RestTemplate restTemplate = new RestTemplate();
-	
+
 	/**
 	 * 股票类型
 	 */
-	final Map<String, String> typeName = new HashMap<String, String>(){
+	final Map<String, String> typeName = new HashMap<String, String>() {
 		private static final long serialVersionUID = 6893069965305064089L;
-	{
-		put("4621", "创业");
-		put("4614", "深证");
-		put("4353", "沪A");
-		put("4609", "深A");
-	}};
+		{
+			put("4621", "创业");
+			put("4614", "深证");
+			put("4353", "沪A");
+			put("4609", "深A");
+		}
+	};
+
 	/**
 	 * 换手率
-	 * @throws URISyntaxException 
-	 * @throws RestClientException 
+	 * 
+	 * @throws URISyntaxException
+	 * @throws RestClientException
 	 */
 	private RicheResult getTurnoverRate() throws RestClientException, URISyntaxException {
 		Map<String, String> param = new HashMap<>();
@@ -116,18 +166,19 @@ public class BRiches implements CrawlerDown {
 		param.put("count", "5000");
 		param.put("begin", "0");
 		param.put("marketType", "shsz");
-		
+
 		String url = this.getUrl(param, stockAppUrl);
-		LOGGER.info("换手率请求URL:[{}]",url);
+		LOGGER.info("换手率请求URL:[{}]", url);
 		RicheResult handResult = restTemplate.getForObject(new URI(url), RicheResult.class);
 
 		return handResult;
 	}
-	
+
 	/**
 	 * 获取所有股票今日数据
-	 * @throws URISyntaxException 
-	 * @throws RestClientException 
+	 * 
+	 * @throws URISyntaxException
+	 * @throws RestClientException
 	 */
 	private RicheResult getTodayDatas() throws RestClientException, URISyntaxException {
 		Map<String, String> param = new HashMap<>();
@@ -137,22 +188,53 @@ public class BRiches implements CrawlerDown {
 		param.put("count", "5000");
 		param.put("begin", "0");
 		param.put("marketType", "shsz");
-		
+
 		String url = this.getUrl(param, stockAppUrl);
-		LOGGER.info("获取所有股票今日数据请求URL:[{}]",url);
+		LOGGER.info("获取所有股票今日数据请求URL:[{}]", url);
 		RicheResult handResult = restTemplate.getForObject(new URI(url), RicheResult.class);
 
 		return handResult;
 	}
-	
+
+	private Map<String, File> sureMkdirFolder() {
+		File file = new File(this.dataPath);
+		typeName.forEach((k, v) -> {
+			boolean flag = true;
+			for (File f : file.listFiles()) {
+				if (f.getName().contentEquals(v)) {
+					flag = false;
+				}
+			}
+			if (flag) {
+				File childFile = new File(file, v);
+				if (!childFile.exists()) {
+					childFile.mkdir();
+				}
+			}
+		});
+		Map<String, File> resultMap = new HashMap<String, File>(file.listFiles().length);
+		for (File f : file.listFiles()) {
+			if (!f.isDirectory()) {
+				continue;
+			}
+			for (File e : f.listFiles()) {
+				resultMap.put(e.getName(), f);
+			}
+		}
+		return resultMap;
+	}
+
 	@Override
 	public void start() {
+
+		Map<String, File> resultMap = this.sureMkdirFolder();
+
 		Map<String, String> handMap = new HashMap<>();
-		
+
 		try {
 			RicheResult handResult = getTurnoverRate();
 
-			for(RicheBean bean : handResult.getResults()) {
+			for (RicheBean bean : handResult.getResults()) {
 				handMap.put(bean.getCode(), bean.getHand());
 			}
 			RicheResult result = this.getTodayDatas();
@@ -161,57 +243,184 @@ public class BRiches implements CrawlerDown {
 			/**
 			 * 获取所有股票
 			 */
-			for(RicheBean bean : result.getResults()) {
+			for (RicheBean bean : result.getResults()) {
 				/**
-				 * 4353 沪A
-				 * 4614 深证
-				 * 4609 深A
+				 * 4353 沪A 4614 深证 4609 深A
 				 */
-				if (!Arrays.asList("4353","4614","4609").contains(bean.getCodeType())) {
+				if (!Arrays.asList("4353", "4614", "4609").contains(bean.getCodeType())) {
 					continue;
 				}
 				bean.setHand(handMap.get(bean.getCode()));
-				boolean sure = this.mindTrend(this.num, bean.getCode(), bean.getCodeType(),bean.getStockName());
-				if (sure) {
-					names.add(bean.getStockName());
+				this.mindTrend(bean, resultMap);
+			}
+		} catch (RestClientException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public void mindTrend(RicheBean bean, Map<String, File> resultMap) {
+
+		if (resultMap.size() == 0) {
+			// 历史数据全部写入
+			String url = String.format(dayUrl, bean.getCode(), bean.getCodeType(), 60000);
+			LOGGER.info("股票：【{}】,获取历史数据URL：【{}】", bean.getStockName(), url);
+			try {
+				RestTemplate restTemplate = new RestTemplate();
+				HistoryResult historyResult = restTemplate.getForObject(new URI(url), HistoryResult.class);
+				this.writeHistoryDataToExcel(bean, historyResult.getResults());
+
+				RicheTarget target = richeCompute.compute(historyResult, bean.getStockName());
+				if (target.getL() > 0.5) {
 				}
-				
+			} catch (RestClientException e) {
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
 			}
-		} catch (RestClientException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
+		}else {
+			// 进行动态添加 今日数据写入
+			String url = String.format(dayUrl, bean.getCode(), bean.getCodeType(), 1);
+			LOGGER.info("股票：【{}】,获取今日数据URL：【{}】", bean.getStockName(), url);
+			try {
+				RestTemplate restTemplate = new RestTemplate();
+				HistoryResult historyResult = restTemplate.getForObject(new URI(url), HistoryResult.class);
+				this.insertDataByExcel(bean, historyResult.getResults());
+			} catch (RestClientException e) {
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
 		}
-		
+
 	}
-	public boolean mindTrend(String days,String stockCode,String codeType,String name) {
-		boolean sure = false;
-		String url = String.format(dayUrl, stockCode,codeType,days);
-		LOGGER.info("股票：【{}】,获取历史数据URL：【{}】",name,url);
-		
+	
+	private void insertDataByExcel(RicheBean bean, List<HistoryBean> datas) {
+		InputStream inputStream = null;
+		OutputStream outputStream = null;
 		try {
-			RestTemplate restTemplate = new RestTemplate();
-			HistoryResult historyResult = restTemplate.getForObject(new URI(url), HistoryResult.class);
-			RicheTarget target = richeCompute.compute(historyResult,name);
-			if (target.getL() > 0.5) {
-				sure = true;
+			if (Objects.nonNull(datas) && datas.size() > 0) {
+				StringBuilder builder = new StringBuilder(this.dataPath);
+				builder.append(File.separatorChar);
+				builder.append(this.typeName.get(bean.getCodeType()));
+				builder.append(File.separatorChar);
+				builder.append(bean.getCode());
+				builder.append("_");
+				builder.append(bean.getStockName());
+				builder.append(".xlsx");
+				
+				inputStream = new FileInputStream(new File(builder.toString()));
+				Workbook workbook = WorkbookFactory.create(inputStream);
+				Sheet sheet = workbook.getSheetAt(0);
+				sheet.shiftRows(2, sheet.getLastRowNum(), datas.size(),true,false);
+				
+				for (int i = 0; i < datas.size(); i++) {
+					sheet.createRow(i + 1);
+					Row row = sheet.getRow(i + 1);
+					row.createCell(0).setCellValue(datas.get(i).getDate());
+					if (i == (datas.size() - 1)) {
+						row.createCell(1).setCellValue(bean.getHand());
+						row.createCell(2).setCellValue(bean.getRisePrice());
+					} else {
+						row.createCell(1).setCellValue("");
+						row.createCell(2).setCellValue("");
+					}
+					row.createCell(3).setCellValue(datas.get(i).getOpenPrice());
+					row.createCell(4).setCellValue(datas.get(i).getClosePrice());
+					if (i == 0) {
+						row.createCell(5).setCellValue("");
+					} else {
+						row.createCell(5).setCellValue(datas.get(i - 1).getClosePrice());
+					}
+					row.createCell(6).setCellValue(datas.get(i).getMaxPrice());
+					row.createCell(7).setCellValue(datas.get(i).getMinPrice());
+					row.createCell(8).setCellValue(datas.get(i).getTotal());
+					row.createCell(9).setCellValue(datas.get(i).getMoney());
+				}
+
+
+				outputStream = new FileOutputStream(new File(builder.toString()));
+				workbook.write(outputStream);
+				LOGGER.info("创建excel文件---->[{}]", builder.toString());
 			}
-		} catch (RestClientException e) {
+
+		} catch (InvalidFormatException e) {
 			e.printStackTrace();
-		} catch (URISyntaxException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			IOUtils.closeQuietly(outputStream);
+			IOUtils.closeQuietly(inputStream);
 		}
-		return sure;
 	}
-	private String getUrl(Map<String, String> parmas,String url) {
-		StringBuilder builder =  new StringBuilder(url);
+
+	private void writeHistoryDataToExcel(RicheBean bean, List<HistoryBean> datas) {
+		InputStream inputStream = null;
+		OutputStream outputStream = null;
+		try {
+			if (Objects.nonNull(datas) && datas.size() > 0) {
+				inputStream = new FileInputStream(new File(this.dataPath, "share.xlsx"));
+				Workbook workbook = WorkbookFactory.create(inputStream);
+				workbook.setSheetName(0, bean.getStockName());
+				Sheet sheet = workbook.getSheetAt(0);
+				for (int i = 0; i < datas.size(); i++) {
+					sheet.createRow(i + 1);
+					Row row = sheet.getRow(i + 1);
+					row.createCell(0).setCellValue(datas.get(i).getDate());
+					if (i == (datas.size() - 1)) {
+						row.createCell(1).setCellValue(bean.getHand());
+						row.createCell(2).setCellValue(bean.getRisePrice());
+					} else {
+						row.createCell(1).setCellValue("");
+						row.createCell(2).setCellValue("");
+					}
+					row.createCell(3).setCellValue(datas.get(i).getOpenPrice());
+					row.createCell(4).setCellValue(datas.get(i).getClosePrice());
+					if (i == 0) {
+						row.createCell(5).setCellValue("");
+					} else {
+						row.createCell(5).setCellValue(datas.get(i - 1).getClosePrice());
+					}
+					row.createCell(6).setCellValue(datas.get(i).getMaxPrice());
+					row.createCell(7).setCellValue(datas.get(i).getMinPrice());
+					row.createCell(8).setCellValue(datas.get(i).getTotal());
+					row.createCell(9).setCellValue(datas.get(i).getMoney());
+				}
+
+				StringBuilder builder = new StringBuilder(this.dataPath);
+				builder.append(File.separatorChar);
+				builder.append(this.typeName.get(bean.getCodeType()));
+				builder.append(File.separatorChar);
+				builder.append(bean.getCode());
+				builder.append("_");
+				builder.append(bean.getStockName());
+				builder.append(".xlsx");
+				outputStream = new FileOutputStream(new File(builder.toString()));
+				workbook.write(outputStream);
+				LOGGER.info("创建excel文件---->[{}]", builder.toString());
+			}
+
+		} catch (InvalidFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			IOUtils.closeQuietly(outputStream);
+			IOUtils.closeQuietly(inputStream);
+		}
+	}
+
+	private String getUrl(Map<String, String> parmas, String url) {
+		StringBuilder builder = new StringBuilder(url);
 		boolean flag = true;
 		if (Objects.nonNull(parmas)) {
-			for(String key : parmas.keySet()) {
+			for (String key : parmas.keySet()) {
 				if (flag) {
 					builder.append("?");
 					flag = false;
-				}else {
+				} else {
 					builder.append("&");
 				}
 				builder.append(key);
@@ -245,6 +454,13 @@ public class BRiches implements CrawlerDown {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+	public String getDataPath() {
+		return dataPath;
+	}
+
+	public void setDataPath(String dataPath) {
+		this.dataPath = dataPath;
+	}
 
 }
