@@ -2,8 +2,7 @@ package com.app.crawler.riches;
 
 import java.util.List;
 
-import com.app.crawler.riches.pojo.HistoryBean;
-import com.app.crawler.riches.pojo.RicheMsg;
+import com.app.crawler.riches.pojo.ShareInfo;
 
 /** 
  * @Description: TODO
@@ -17,5 +16,5 @@ public interface RicheCompute {
 	 *  @Description: compute
 	 *  @date 2019年11月2日 上午10:51:55
 	 */
-	RicheTarget compute(RicheMsg<List<HistoryBean>> datas,String name);
+	RicheTarget compute(List<ShareInfo> datas,String name);
 }
