@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -33,22 +34,16 @@ import com.app.crawler.riches.pojo.HistoryResult;
 import com.app.crawler.riches.pojo.RicheBean;
 import com.app.crawler.riches.pojo.RicheResult;
 import com.app.crawler.riches.pojo.ShareInfo;
+import com.app.crawler.riches.producer.Producer.CallBack;
 
 public class BRiches implements CrawlerDown {
 
+	public static final Map<String, Boolean> CODESTATUS = new ConcurrentHashMap<String, Boolean>();
+	
 	/**
 	 * Excel 数据模板路径地址
 	 */
 	private String dataPath = "C:\\env\\bobo\\catwebservice\\src\\main\\resources\\datas\\share";
-
-	public static void main(String[] args) {
-
-		BRiches bRiches = new BRiches();
-		RicheComputeAbstract richeCompute = new RicheComputeAbstract();
-		richeCompute.setNum(20);
-		bRiches.setRicheCompute(richeCompute);
-		bRiches.start();
-	}
 
 	/**
 	 * 平安证券
@@ -96,8 +91,26 @@ public class BRiches implements CrawlerDown {
 		this.richeCompute = richeCompute;
 	}
 
-	public void calculate() {
-
+	public boolean multiplexThead() {
+		while(true) {
+			int size = 0;
+			for (String key : CODESTATUS.keySet()) {
+				if (CODESTATUS.get(key)) {
+					size ++;
+				}
+			}
+			if (size == CODESTATUS.size()) {
+				break;
+			}
+		}
+		return true;
+	}
+	
+	public void calculate(CallBack<RicheTarget> callBack) {
+		boolean sure = this.multiplexThead();
+		if (!sure) {
+			return;
+		}
 		File file = new File(this.dataPath);
 		if (file.listFiles().length > 0) {
 			ThreadPoolExecutor executor = CrawlerMain.newThreadPool("readRicheExcel", 8);
@@ -129,6 +142,10 @@ public class BRiches implements CrawlerDown {
 								 	String name = e.getName();
 								 	String[] arr = name.replace(".xlsx", "").split("_");
 									RicheTarget target = richeCompute.compute(datas, arr[1]);
+									CODESTATUS.put(arr[0], false);
+									if (Objects.nonNull(callBack)) {
+										callBack.add(target);
+									}
 								} catch (IOException e) {
 									e.printStackTrace();
 								} catch (InvalidFormatException e) {
@@ -140,9 +157,6 @@ public class BRiches implements CrawlerDown {
 				}
 			}
 			executor.shutdown();
-			while(executor.isTerminating()) {
-				
-			}
 		}
 	}
 
@@ -248,22 +262,25 @@ public class BRiches implements CrawlerDown {
 			}
 			RicheResult result = this.getTodayDatas();
 
-			int index = 0;
 			/**
 			 * 获取所有股票
 			 */
+			ThreadPoolExecutor executor = CrawlerMain.newThreadPool("crawlerRicheExcel", 8);
 			for (RicheBean bean : result.getResults()) {
 				if (!Arrays.asList("4353", "4614", "4609").contains(bean.getCodeType())) {
 					continue;
 				}
-				if (index > 1) {
-					break;
-				}
-				bean.setHand(handMap.get(bean.getCode()));
-				this.mindTrend(bean, resultMap);
-
-				index++;
+				executor.execute(new Runnable() {
+					@Override
+					public void run() {
+						bean.setHand(handMap.get(bean.getCode()));
+						mindTrend(bean, resultMap);
+						
+					}
+				});
+				CODESTATUS.put(bean.getCode(), true);
 			}
+			executor.shutdown();
 		} catch (RestClientException e) {
 			e.printStackTrace();
 		} catch (URISyntaxException e) {

@@ -1,9 +1,14 @@
 package com.app.runner;
 
 import com.app.crawler.CrawlerDown;
+import com.app.crawler.riches.BRiches;
+import com.app.crawler.riches.RicheComputeAbstract;
 import com.app.crawler.statistics.Department;
 import com.app.crawler.statistics.WeatherRecordTask;
 import com.app.crawler.video.sexforum.MainParse;
+import com.corundumstudio.socketio.SocketIOServer;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -15,19 +20,26 @@ import java.util.TimerTask;
 
 @Component
 public class ApplicationRunnerImpl implements ApplicationRunner {
+	
+    @Autowired
+    private SocketIOServer server;
+    
     @Override
     public void run(ApplicationArguments args) throws Exception {
-//        Timer timer = new Timer();
-//        timer.schedule(new TimerTask() {
-//            public void run() {
-//                CrawlerDown down1 = new Department();
-//                down1.start();
-//                CrawlerDown down2 = new WeatherRecordTask();
-//                down2.start();
-//                CrawlerDown down3 = new MainParse();
-//                down3.start();
-//            }
-//        }, 0,PERIOD_TIME);
+    	server.start();
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            public void run() {
+                CrawlerDown down1 = new Department();
+                down1.start();
+                CrawlerDown down2 = new WeatherRecordTask();
+                down2.start();
+                CrawlerDown down3 = new MainParse();
+                down3.start();
+    			BRiches bRiches = new BRiches();
+    			bRiches.start();
+            }
+        }, 0,PERIOD_TIME);
     }
 
     /**
