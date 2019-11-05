@@ -115,6 +115,7 @@
 		<jna.version>4.2.1</jna.version>
 		<selenium.version>3.4.0</selenium.version>
 		<slf4j.version>1.7.25</slf4j.version>
+		<netty-socketio.version>1.7.7</netty-socketio.version>
 	</properties>
 
 	<dependencyManagement>
@@ -496,7 +497,11 @@
 				<artifactId>jna</artifactId>
 				<version>${jna.version}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>com.corundumstudio.socketio</groupId>
+				<artifactId>netty-socketio</artifactId>
+				<version>${netty-socketio.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<!-- maven 依赖管理 -->
