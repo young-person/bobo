@@ -1,22 +1,21 @@
 package com.app.runner;
 
-import com.app.crawler.CrawlerDown;
-import com.app.crawler.riches.BRiches;
-import com.app.crawler.riches.RicheComputeAbstract;
-import com.app.crawler.statistics.Department;
-import com.app.crawler.statistics.WeatherRecordTask;
-import com.app.crawler.video.sexforum.MainParse;
-import com.corundumstudio.socketio.SocketIOServer;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
+import com.app.crawler.CrawlerDown;
+import com.app.crawler.riches.BRiches;
+import com.app.crawler.statistics.Department;
+import com.app.crawler.statistics.WeatherRecordTask;
+import com.app.crawler.video.sexforum.MainParse;
+import com.corundumstudio.socketio.SocketIOServer;
 
 @Component
 public class ApplicationRunnerImpl implements ApplicationRunner {
@@ -30,14 +29,14 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             public void run() {
-                CrawlerDown down1 = new Department();
-                down1.start();
-                CrawlerDown down2 = new WeatherRecordTask();
-                down2.start();
-                CrawlerDown down3 = new MainParse();
-                down3.start();
-    			BRiches bRiches = new BRiches();
-    			bRiches.start();
+//                CrawlerDown down1 = new Department();
+//                down1.start();
+//                CrawlerDown down2 = new WeatherRecordTask();
+//                down2.start();
+//                CrawlerDown down3 = new MainParse();
+//                down3.start();
+//    			BRiches bRiches = new BRiches();
+//    			bRiches.start();
             }
         }, 0,PERIOD_TIME);
     }

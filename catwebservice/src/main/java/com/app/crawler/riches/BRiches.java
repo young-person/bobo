@@ -455,25 +455,21 @@ public class BRiches implements CrawlerDown {
 	}
 	@Override
 	public boolean stop() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean suspend() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean isRuning() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public String executeTimeFormat() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -483,6 +479,14 @@ public class BRiches implements CrawlerDown {
 
 	public void setDataPath(String dataPath) {
 		this.dataPath = dataPath;
+	}
+
+	/**
+	 * 开启多线程
+	 */
+	@Override
+	public void run() {
+		start();
 	}
 
 }

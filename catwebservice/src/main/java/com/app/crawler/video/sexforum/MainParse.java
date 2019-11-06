@@ -138,4 +138,10 @@ public class MainParse implements CrawlerDown {
     public String executeTimeFormat() {
         return null;
     }
+
+
+	@Override
+	public void run() {
+		start();
+	}
 }

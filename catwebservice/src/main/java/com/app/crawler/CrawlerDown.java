@@ -12,7 +12,7 @@ import java.util.Objects;
 /**
  * 下载
  */
-public interface CrawlerDown {
+public interface CrawlerDown extends Runnable{
     /**
      * 开始执行
      */

@@ -61,7 +61,10 @@
 			<groupId>bobo</groupId>
 			<artifactId>catcommon</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>bobo</groupId>
+			<artifactId>catresource</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
@@ -167,6 +170,23 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<overlays>
+						<overlays>
+							<overlay>
+								<groupId>bobo</groupId>
+								<artifactId>catresource</artifactId>
+								<excludes>
+									<exclude>static/lib/*</exclude>
+								</excludes>
+							</overlay>
+						</overlays>
+					</overlays>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

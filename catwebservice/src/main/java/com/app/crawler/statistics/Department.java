@@ -244,6 +244,10 @@ public class Department implements CrawlerDown {
         CrawlerDown.writeToTxt(sql, "/app/datas/china.sql");
     }
 
+    public static void main(String[] args) {
+		Department department = new Department();
+		department.start();
+	}
     @Override
     public void start() {
         if (!isRuning()) {
@@ -271,4 +275,9 @@ public class Department implements CrawlerDown {
     public String executeTimeFormat() {
         return null;
     }
+
+	@Override
+	public void run() {
+		start();
+	}
 }
