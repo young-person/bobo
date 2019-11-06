@@ -35,8 +35,8 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
 //                down2.start();
 //                CrawlerDown down3 = new MainParse();
 //                down3.start();
-//    			BRiches bRiches = new BRiches();
-//    			bRiches.start();
+    			BRiches bRiches = new BRiches();
+    			bRiches.start();
             }
         }, 0,PERIOD_TIME);
     }

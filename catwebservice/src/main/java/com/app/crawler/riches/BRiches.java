@@ -24,11 +24,15 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.util.IOUtils;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.app.crawler.CrawlerDown;
 import com.app.crawler.CrawlerMain;
+import com.app.crawler.request.DefaultRestRequest;
+import com.app.crawler.request.RestRequest;
+import com.app.crawler.request.RestRequestFactory;
 import com.app.crawler.riches.pojo.HistoryBean;
 import com.app.crawler.riches.pojo.HistoryResult;
 import com.app.crawler.riches.pojo.RicheBean;
@@ -160,7 +164,6 @@ public class BRiches implements CrawlerDown {
 		}
 	}
 
-	RestTemplate restTemplate = new RestTemplate();
 
 	/**
 	 * 股票类型
@@ -192,9 +195,10 @@ public class BRiches implements CrawlerDown {
 
 		String url = this.getUrl(param, stockAppUrl);
 		LOGGER.info("换手率请求URL:[{}]", url);
-		RicheResult handResult = restTemplate.getForObject(new URI(url), RicheResult.class);
+		RestRequest restTemplate = RestRequestFactory.createRestRequest(new DefaultRestRequest());
+		ResponseEntity<RicheResult> handResult = restTemplate.getForEntity(new URI(url), RicheResult.class); 
 
-		return handResult;
+		return handResult.getBody();
 	}
 
 	/**
@@ -214,9 +218,10 @@ public class BRiches implements CrawlerDown {
 
 		String url = this.getUrl(param, stockAppUrl);
 		LOGGER.info("获取所有股票今日数据请求URL:[{}]", url);
-		RicheResult handResult = restTemplate.getForObject(new URI(url), RicheResult.class);
+		RestRequest restTemplate = RestRequestFactory.createRestRequest(new DefaultRestRequest());
+		ResponseEntity<RicheResult> handResult = restTemplate.getForEntity(new URI(url), RicheResult.class); 
 
-		return handResult;
+		return handResult.getBody();
 	}
 
 	private Map<String, File> sureMkdirFolder() {
