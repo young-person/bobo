@@ -149,16 +149,16 @@ public class LoginController implements LoginActionFeign {
             meta.failure("密码不能为空");
             return new ResponseEntity<ResultMeta>(meta, HttpStatus.OK);
         }
-        List<SysUser> list = loginService.validateAuthUser(user);
-        if (list.size()==0){
-            meta.failure("用户或密码不匹配");
-            return new ResponseEntity<ResultMeta>(meta, HttpStatus.OK);
-        }
+//        List<SysUser> list = loginService.validateAuthUser(user);
+//        if (list.size()==0){
+//            meta.failure("用户或密码不匹配");
+//            return new ResponseEntity<ResultMeta>(meta, HttpStatus.OK);
+//        }
         //用户存在
         token = loginService.queryUserToToken(user);
         JSONObject object = new JSONObject();
         object.put(Measure.head_Authorization,token);
-        object.put("user",list.get(0));
+        object.put("user","111");
         meta.success(object);
         return new ResponseEntity<ResultMeta>(meta, HttpStatus.OK);
     }

@@ -11,7 +11,7 @@ import com.app.crawler.riches.BRiches;
 import com.app.crawler.riches.producer.Producer;
 import com.bobo.base.BaseClass;
 
-@Controller("riche")
+@Controller
 public class RicheController extends BaseClass{
 
 	

@@ -116,6 +116,7 @@
 		<selenium.version>3.4.0</selenium.version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<netty-socketio.version>1.7.7</netty-socketio.version>
+		<servlet-api.version>2.5</servlet-api.version>
 	</properties>
 
 	<dependencyManagement>
@@ -154,6 +155,13 @@
 				<artifactId>slf4j-api</artifactId>
 				<version>${slf4j.version}</version>
 			</dependency>
+			<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>${servlet-api.version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>com.oracle</groupId>
 				<artifactId>ojdbc7</artifactId>
