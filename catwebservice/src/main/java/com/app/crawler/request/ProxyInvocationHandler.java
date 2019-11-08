@@ -38,7 +38,7 @@ public class ProxyInvocationHandler implements InvocationHandler {
 					}
 				}
 			} catch (Exception e) {
-				LOGGER.error("代理请求失败，方法名称：【{}】参数：【{}】",method.getName(),args,e);
+				LOGGER.error("第{}次代理请求失败，方法名称：【{}】参数：【{}】",count,method.getName(),args,e);
 			}
 			count++;
 		} while (!flag & count < num);

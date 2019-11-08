@@ -53,19 +53,58 @@ public class RicheComputeAbstract implements RicheCompute{
 			});
 			List<ShareInfo> tmpList = datas.subList(datas.size() - num, datas.size());
 			float l = this.getRippleValue(name, tmpList, limit);
+			ShareInfo shareInfo = datas.get(datas.size() - 1 );
 			target.setL(l);
+			target.setHand(shareInfo.getHand());
+			target.setStockName(name);
 		}
 		return target;
 	}
 	
-	/**
-	 * 如何找出黄金周期值 预判走势
-	 * @param datas
-	 */
-	private void compute(List<ShareInfo> datas) {
-		
-	}
 
+	/**
+	 * 根据 斜率来划分 范围
+	 * 
+	 * 斜率正值越大 则当日涨幅数越大
+	 * 
+	 * -0.1*360 - 0.1*360
+	 * 
+	 * 斜率负值越大则当日跌幅数越大
+	 * 
+	 * 设置 斜率区间值 且 连续斜率总和大于一定值这 出现峰回路转 之势
+	 */
+
+	private void compute(List<ShareInfo> datas) {
+		String min = null;
+		String max = null;
+		String day1 = null;
+		String day2 = null;
+		
+		boolean flag = true;
+		for(ShareInfo bean : datas) {
+			if (flag) {
+				min = bean.getClosePrice();
+				max = bean.getClosePrice();
+				flag = false;
+			}
+			if (bean.getClosePrice().compareTo(min) < 0) {
+				min = bean.getClosePrice();
+				day1 = bean.getDate();
+			}
+			if (bean.getClosePrice().compareTo(max) > 0) {
+				max = bean.getClosePrice();
+				day2 = bean.getDate();
+			}
+		}
+		//斜率  计算波动浮动
+		float k = (Float.valueOf(max) - Float.valueOf(min)) / Float.valueOf(day2) - Float.valueOf(day1);
+		
+		if (k > 0) {
+			
+		}else {
+			
+		}
+	}
 
 	/**
 	 * 如果小 给 0等于给 0  大于给1 
