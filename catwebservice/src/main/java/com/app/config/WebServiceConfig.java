@@ -37,7 +37,7 @@ public class WebServiceConfig {
         ServletRegistrationBean registrationBean = new ServletRegistrationBean(disp);
         registrationBean.setLoadOnStartup(1);
         //映射路径自定义,必须设置一个不重复的名称
-        registrationBean.addUrlMappings("/rest/*");
+        registrationBean.addUrlMappings("/*");
         registrationBean.setName("catwebservice");
         return registrationBean;
     }

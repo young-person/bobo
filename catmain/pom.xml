@@ -149,15 +149,13 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<overlays>
-						<overlays>
-							<overlay>
-								<groupId>bobo</groupId>
-								<artifactId>catresource</artifactId>
-								<excludes>
-									<exclude>static/lib/*</exclude>
-								</excludes>
-							</overlay>
-						</overlays>
+						<overlay>
+							<groupId>bobo</groupId>
+							<artifactId>catresource</artifactId>
+							<excludes>
+								<exclude>static/lib/*</exclude>
+							</excludes>
+						</overlay>
 					</overlays>
 				</configuration>
 			</plugin>

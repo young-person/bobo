@@ -12,6 +12,11 @@
 	<artifactId>catwebservice</artifactId>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
 		<!--测试包 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -176,15 +181,13 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<overlays>
-						<overlays>
-							<overlay>
-								<groupId>bobo</groupId>
-								<artifactId>catresource</artifactId>
-								<excludes>
-									<exclude>static/lib/*</exclude>
-								</excludes>
-							</overlay>
-						</overlays>
+						<overlay>
+							<groupId>bobo</groupId>
+							<artifactId>catresource</artifactId>
+							<excludes>
+								<exclude>static/lib/*</exclude>
+							</excludes>
+						</overlay>
 					</overlays>
 				</configuration>
 			</plugin>
