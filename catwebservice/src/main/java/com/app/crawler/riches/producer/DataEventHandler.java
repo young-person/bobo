@@ -1,27 +1,114 @@
 package com.app.crawler.riches.producer;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.corundumstudio.socketio.AckRequest;
+import com.corundumstudio.socketio.SocketIOClient;
+import com.corundumstudio.socketio.SocketIOServer;
+import com.corundumstudio.socketio.annotation.OnConnect;
+import com.corundumstudio.socketio.annotation.OnDisconnect;
+import com.corundumstudio.socketio.annotation.OnEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.corundumstudio.socketio.SocketIOClient;
-import com.corundumstudio.socketio.annotation.OnEvent;
+import java.util.Collection;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
-public class DataEventHandler extends AbstractEventHandler {
-    @Autowired
-    private MessageEventHandler messageEventHandler;
-	@Override
-	protected Object reloadKeyData(String key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+public class DataEventHandler {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DataEventHandler.class);
 
-	@Override
-	protected MessageEventHandler getMessageEventHandler() {
-		return messageEventHandler;
-	}
-    @OnEvent(value = "refreshData")
-    public void initData(SocketIOClient socketIOClient, Object data) {
-        socketIOClient.sendEvent("", "");
+    @Autowired
+    private SocketIOServer socketIOServer;
+    public final String typeName = "refreshData";
+
+    //统计在线客户端数量
+    private static AtomicInteger onlineCount = new AtomicInteger(0);
+
+    Producer producer = new Producer();
+
+    @OnEvent(value = typeName)
+    public void initData(SocketIOClient socketIOClient, AckRequest request, Object data) {
+        if (Objects.isNull(data)) {
+            socketIOClient.sendEvent(typeName, producer.get());
+        } else {
+            JSONObject obj = JSONObject.parseObject(JSON.toJSONString(data));
+            int num = obj.getInteger("num");
+            int limit = obj.getInteger("limit");
+            producer.repeatCalculate(num, limit);
+        }
+
+    }
+
+    /**
+     * connect事件，客户端发起连接时调用
+     *
+     * @param socketIOClient
+     */
+    @OnConnect
+    public void onConnect(SocketIOClient socketIOClient) {
+        UUID uuid = socketIOClient.getSessionId();
+        if (socketIOClient != null) {
+            addOnlineCount();
+            socketIOClient.sendEvent(typeName, producer.get());
+            LOGGER.info("客服端sessionID：{}已经连接, client ip : {} ,online count : {} ", uuid, socketIOClient.getRemoteAddress(), getOnlineCount());
+        } else {
+            LOGGER.error("nettty-socketio client is null...");
+        }
+    }
+
+    /**
+     * disconnect事件，客户端断开连接时调用
+     *
+     * @param socketIOClient
+     */
+    @OnDisconnect
+    public void onDisconnect(SocketIOClient socketIOClient) {
+        UUID uuid = socketIOClient.getSessionId();
+        if (socketIOClient != null) {
+            subOnlineCount();
+            socketIOClient.disconnect();
+            LOGGER.info("客服端sessionID：{}已经连接, client ip : {} ,online count : {} : ", uuid, socketIOClient.getRemoteAddress(), getOnlineCount());
+        } else {
+            LOGGER.error("nettty-socketio client is null...");
+        }
+    }
+
+    /**
+     * @param type    前台根据类型接收消息，所以接收的消息类型不同，收到的通知就不同 推送的事件类型
+     * @param content 推送的内容
+     * @Title: pushMsg
+     * @Description: 全体消息推送
+     */
+    public void pushMsg(String type, Object content) {
+        // 获取全部客户端
+        Collection<SocketIOClient> allClients = socketIOServer.getAllClients();
+        for (SocketIOClient socket : allClients) {
+            socket.sendEvent(type, content);
+        }
+    }
+
+    public void pushMsg() {
+        // 获取全部客户端
+        Collection<SocketIOClient> allClients = socketIOServer.getAllClients();
+        for (SocketIOClient socket : allClients) {
+            socket.sendEvent(typeName, producer.get());
+        }
+    }
+
+    public static int getOnlineCount() {
+        return onlineCount.get();
+    }
+
+    public static void addOnlineCount() {
+        DataEventHandler.onlineCount.getAndIncrement();
+    }
+
+    public static void subOnlineCount() {
+        DataEventHandler.onlineCount.getAndDecrement();
     }
 }

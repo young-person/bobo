@@ -12,11 +12,6 @@
 	<artifactId>catwebservice</artifactId>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<optional>true</optional>
-		</dependency>
 		<!--测试包 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

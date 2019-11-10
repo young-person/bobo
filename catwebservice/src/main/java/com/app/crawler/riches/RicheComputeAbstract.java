@@ -1,11 +1,12 @@
 package com.app.crawler.riches;
 
+import com.app.crawler.riches.pojo.ShareInfo;
+import org.apache.commons.collections.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import com.app.crawler.riches.pojo.ShareInfo;
 
 /** 
  * @Description: TODO
@@ -46,17 +47,18 @@ public class RicheComputeAbstract implements RicheCompute{
 	public RicheTarget compute(List<ShareInfo> datas,String name) {
 		RicheTarget target = new RicheTarget();
 		if (datas.size() > num) {
+			if (limit <= num){
+				limit = 7;
+				num = 30;
+			}
 			Collections.sort(datas, new Comparator<ShareInfo>() {
 				public int compare(ShareInfo o1, ShareInfo o2) {
 					return o1.getDate().compareTo(o2.getDate());
 				};
 			});
 			List<ShareInfo> tmpList = datas.subList(datas.size() - num, datas.size());
-			float l = this.getRippleValue(name, tmpList, limit);
-			ShareInfo shareInfo = datas.get(datas.size() - 1 );
+			float l = this.getRippleValue(tmpList, limit);
 			target.setL(l);
-			target.setHand(shareInfo.getHand());
-			target.setStockName(name);
 		}
 		return target;
 	}
@@ -75,24 +77,24 @@ public class RicheComputeAbstract implements RicheCompute{
 	 */
 
 	private void compute(List<ShareInfo> datas) {
-		String min = null;
-		String max = null;
+		float min = 0f;
+		float max = 0f;
 		String day1 = null;
 		String day2 = null;
 		
 		boolean flag = true;
 		for(ShareInfo bean : datas) {
 			if (flag) {
-				min = bean.getClosePrice();
-				max = bean.getClosePrice();
+				min = Float.valueOf(bean.getClosePrice());
+				max = Float.valueOf(bean.getClosePrice());
 				flag = false;
 			}
-			if (bean.getClosePrice().compareTo(min) < 0) {
-				min = bean.getClosePrice();
+			if (Float.valueOf(bean.getClosePrice()) < min) {
+				min = Float.valueOf(bean.getClosePrice());
 				day1 = bean.getDate();
 			}
-			if (bean.getClosePrice().compareTo(max) > 0) {
-				max = bean.getClosePrice();
+			if (Float.valueOf(bean.getClosePrice()) > max) {
+				max = Float.valueOf(bean.getClosePrice());
 				day2 = bean.getDate();
 			}
 		}
@@ -114,21 +116,22 @@ public class RicheComputeAbstract implements RicheCompute{
 	 *  @Description: getRippleValue
 	 *  @date 2019年11月2日 下午1:42:51
 	 */
-	private float getRippleValue(String name, List<ShareInfo> datas,int n) {
+	private float getRippleValue(List<ShareInfo> datas,int n) {
 		float l = 0f;
 		int m = 1;
+		String var = "0";
 		for(int k = datas.size() -1; k > 0 ; k --) {
 			ShareInfo bean1 = datas.get(k);
 			if(m > n) {
 				break;
 			}
 			m ++;
-			List<Integer> results = new ArrayList<Integer>(datas.size()- n);
+			List<Integer> results = new ArrayList<Integer>();
 			for(int j = 0; j < datas.size(); j++) {
 				if ((datas.size() - j - 1) > n) {
 					ShareInfo bean2 = datas.get(j);
 					int r = 0;
-					if (bean2.getClosePrice().compareTo(bean1.getClosePrice()) > 0) {
+					if (Float.valueOf(bean2.getClosePrice()) > Float.valueOf(bean1.getClosePrice())) {
 						r = 1;
 					}else if(bean2.getClosePrice().compareTo(bean1.getClosePrice()) == 0) {
 						r = 0;
@@ -138,6 +141,7 @@ public class RicheComputeAbstract implements RicheCompute{
 			}
 			l += this.getTrendValue(results);
 		}
+
 
 		return l / n;
 	}
@@ -150,10 +154,12 @@ public class RicheComputeAbstract implements RicheCompute{
 	 */
 	private float getTrendValue(List<Integer> results) {
 		int sum = 0;
+		if (CollectionUtils.isEmpty(results))
+			return 0f;
 		for(Integer v : results) {
 			sum += v;
 		}
-		return (float)sum  /results.size();
+		return (float)sum;
 	}
 
 }

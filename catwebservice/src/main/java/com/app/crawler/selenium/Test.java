@@ -21,11 +21,9 @@ public class Test {
 
 		
 		WebElement element = driver.findElement(By.cssSelector(".down_btn"));
-		System.out.println(element);
 		element.click();
 		Set<String> names = driver.getWindowHandles();
 		for (String s : names) {
-			System.err.println(s);
 			driver.switchTo().window(s);
 			String url = driver.getCurrentUrl();
 			if (url.indexOf("down2") > -1) {
@@ -33,7 +31,6 @@ public class Test {
 			}
 		}
 		WebElement element2 = driver.findElement(By.cssSelector(".down_btn"));
-		System.out.println(element2);
 		element2.click();
 //        driver.quit();
 //        driver.close();

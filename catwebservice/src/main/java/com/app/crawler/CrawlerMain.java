@@ -1,14 +1,8 @@
 package com.app.crawler;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.RejectedExecutionHandler;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+
+import java.util.concurrent.*;
 
 /**
  * 所有爬虫抓取
@@ -28,7 +22,7 @@ public class CrawlerMain {
 
     public static ThreadPoolExecutor newThreadPool(String threadPoolName, int maxPoolSize) {
         int corePoolSize = Math.max(Math.round(maxPoolSize / 2), 1);
-        return newThreadPool(threadPoolName, corePoolSize, maxPoolSize, 1L, TimeUnit.SECONDS,new LinkedBlockingQueue<Runnable>(1024), new ThreadPoolExecutor.AbortPolicy());
+        return newThreadPool(threadPoolName, corePoolSize, maxPoolSize, 1L, TimeUnit.SECONDS,new LinkedBlockingQueue<Runnable>(100), new ThreadPoolExecutor.CallerRunsPolicy());
     }
 
     public static ThreadPoolExecutor newScheduledThreadPool(String threadPoolName, int corePoolSize,RejectedExecutionHandler handler) {

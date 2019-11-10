@@ -54,6 +54,45 @@ public class HistoryBean implements Serializable{
 	 * 
 	 */
     private String ma30;
+
+	/**
+	 * 换手率
+	 */
+	private String hand;
+
+	/**
+	 * 涨跌幅度比例
+	 */
+	private String risePrice;
+	/**
+	 * 涨跌额度
+	 */
+	private String riseMoney;
+
+	public String getRiseMoney() {
+		return riseMoney;
+	}
+
+	public void setRiseMoney(String riseMoney) {
+		this.riseMoney = riseMoney;
+	}
+
+	public String getRisePrice() {
+		return risePrice;
+	}
+
+	public void setRisePrice(String risePrice) {
+		this.risePrice = risePrice;
+	}
+
+	public String getHand() {
+		return hand;
+	}
+
+	public void setHand(String hand) {
+		this.hand = hand;
+	}
+
 	public String getOpenPrice() {
 		return openPrice;
 	}

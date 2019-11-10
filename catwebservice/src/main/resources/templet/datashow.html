@@ -18,16 +18,16 @@
     	<div class="col-xs-12">
  		    <table class="table table-striped table-bordered table-hover">
                 <tr>
-                    <th class="center">连续天数</th><td><input name= "limit" value="7" /></td>
-                    <th class="center">对比天数</th><td><input name= "num" value="30" /></td>
-                    <th class="center">查询</th>
+                    <th class="center">连续天数</th><td><input type="text" class="form-control" name= "num" value="7" ></td>
+                    <th class="center">对比天数</th><td><input type="text" class="form-control" name= "limit" value="30" ></td>
+                    <th class="center"><button type="button" class="btn btn-primary" onclick="send()">查询</button></th>
                 </tr>
              </table>
     	</div>
         <div class="col-xs-12">
             <h3 class="header smaller lighter blue">数据面板</h3>
             <div>
-                <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+                <table id="dataTable" class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
                             <th class="center">名称</th>
@@ -38,7 +38,7 @@
                             <th class="center">详情</th>
                         </tr>
                     </thead>
-                    <tbody id="data">
+                    <tbody>
                     </tbody>
                 </table>
             </div>
@@ -57,7 +57,6 @@
 
     function connect() {
         if(firstconnect) {
-
             socket.on('reconnect', function(){ status_update("Reconnected to Server"); });
             socket.on('reconnecting', function( nextRetry ){ status_update("Reconnecting in "
             + nextRetry + " seconds"); });
@@ -69,37 +68,51 @@
     }
 
     //监听服务器连接事件
-    socket.on('connect', function(){ status_update("Connected to Server"); });
+    socket.on('connect', function(){});
     //监听服务器关闭服务事件
-    socket.on('disconnect', function(){ status_update("Disconnected from Server"); });
+    socket.on('disconnect', function(){});
     //监听服务器端发送消息事件
     socket.on('refreshData', function(data) {
-        message(data)
-        //console.log("服务器发送的消息是："+data);
+        console.log("服务器发送的消息是："+data);
+        var html = [];
+        for(var k = 0; k < data.length; k++){
+            var e = data[k];
+            html.push("<tr>");
+            html.push("<td class=\"center\">");
+            html.push(e['stockName']);
+            html.push("</td>");
+            html.push("<td class=\"center\">");
+            html.push(e['risePrice']);
+            html.push("</td>");
+            html.push("<td class=\"center\">");
+            html.push(e['hand']);
+            html.push("</td>");
+            html.push("<td class=\"center\">");
+            html.push(e['l']);
+            html.push("</td>");
+            html.push("<td class=\"center\">");
+            html.push("<a target=\"_blank\" class='btn btn-outline-success btn-sm' href='"+e["detailUrl"]+"'>查看详情</a>");
+            html.push("</td>");
+            html.push("<td class=\"center\">");
+            html.push(e['stockName']);
+            html.push("</td>");
+            html.push("</tr>");
+        }
+        $("#dataTable tbody").html(html.join(""));
     });
 
     //断开连接
     function disconnect() {
         socket.disconnect();
     }
-
-    function message(data) {
-        console.log(data);
-    }
-
-    function status_update(txt){
-        console.log(txt);
-    }
-
-    function esc(msg){
-        return msg.replace(/</g, '<').replace(/>/g, '>');
-    }
     //点击发送消息触发
     function send() {
-        console.log("点击了发送消息，开始向服务器发送消息")
-        var msg = "我很好的,是的．";
-        socket.emit('refreshData', {msgContent: msg});
-    };
+        var limit = $("input[name='limit']").val();
+        var num = $("input[name='num']").val();
+        var obj = {"limit":limit,"num":num};
+        socket.emit('refreshData', obj);
+    }
+    send();
 </script>
 </html>
 

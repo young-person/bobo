@@ -16,11 +16,32 @@ public class RicheTarget implements Serializable{
 
 	private float l;
 	
-	private String hand;
+	private String hand = "0";
 	
 	private String stockName;
 	
 	private String code;
+
+	private String risePrice;
+
+	private String detailUrl;
+
+	public String getDetailUrl() {
+		return detailUrl;
+	}
+
+	public void setDetailUrl(String detailUrl) {
+		this.detailUrl = detailUrl;
+	}
+
+	public String getRisePrice() {
+		return risePrice;
+	}
+
+	public void setRisePrice(String risePrice) {
+		this.risePrice = risePrice;
+	}
+
 
 
 	public String getStockName() {
