@@ -3,6 +3,8 @@ package com.app.runner;
 import com.app.crawler.riches.BRiches;
 import com.app.crawler.riches.producer.DataEventHandler;
 import com.corundumstudio.socketio.SocketIOServer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -16,7 +18,7 @@ import java.util.TimerTask;
 @Component
 public class ApplicationRunnerImpl implements ApplicationRunner {
 
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationRunnerImpl.class);
     @Autowired
     private SocketIOServer server;
     @Autowired
@@ -24,7 +26,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-
+        LOGGER.debug("springboot 启动成功开始执行...");
         server.start();
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -45,7 +47,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
             public void run() {
                 dataEventHandler.pushMsg();
             }
-        },0,5 * 1000);
+        }, 0, 5 * 1000);
     }
 
     /**

@@ -131,6 +131,7 @@ public class BRiches implements CrawlerDown {
      * @param callBack
      */
     public void calculate(CallBack<RicheTarget> callBack) throws IOException, URISyntaxException {
+        LOGGER.debug("开始股市数据计算任务");
         boolean sure = this.multiplexThead();
         if (!sure) {
             return;
@@ -201,11 +202,12 @@ public class BRiches implements CrawlerDown {
             }
 //            executor.shutdown();
         }
+        LOGGER.debug("结束此次股市数据计算任务");
     }
 
     @Override
     public void start() {
-
+        LOGGER.debug("开始抓取股市数据");
         synchronized (BRiches.class) {
 
             Map<String, String> handMap = new HashMap<>();
@@ -265,6 +267,7 @@ public class BRiches implements CrawlerDown {
                 e.printStackTrace();
             }
         }
+        LOGGER.debug("结束此次抓取股市数据任务");
     }
 
     /**
