@@ -136,9 +136,11 @@ public class BRiches implements CrawlerDown {
         if (!sure) {
             return;
         }
-        InputStream ins = this.getClass().getClassLoader().getResourceAsStream(dataPath);
 
         File file = ResourceUtils.getFile(dataPath);
+        if (!file.exists()){
+            file.mkdirs();
+        }
         if (file.listFiles().length > 0) {
 //            ThreadPoolExecutor executor = CrawlerMain.newThreadPool("readRicheExcel", 8);
 
@@ -641,7 +643,10 @@ public class BRiches implements CrawlerDown {
      */
     private Map<String, File> sureMkdirFolder() throws FileNotFoundException {
         File file = ResourceUtils.getFile(dataPath);
-
+        LOGGER.info("文件路径为：【{}】",file.getAbsolutePath());
+        if(!file.exists()){
+            file.mkdirs();
+        }
         typeName.forEach((k, v) -> {
             boolean flag = true;
             for (File f : file.listFiles()) {
