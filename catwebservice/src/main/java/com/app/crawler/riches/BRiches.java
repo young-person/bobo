@@ -1,6 +1,5 @@
 package com.app.crawler.riches;
 
-import com.CatwebserviceApplication;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -11,6 +10,7 @@ import com.app.crawler.request.RestRequest;
 import com.app.crawler.request.RestRequestFactory;
 import com.app.crawler.riches.pojo.*;
 import com.app.crawler.riches.producer.Producer.CallBack;
+import com.app.runner.ApplicationRunnerImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
@@ -42,7 +42,7 @@ public class BRiches implements CrawlerDown {
     /**
      * Excel 数据模板路径地址
      */
-    private String dataPath = CatwebserviceApplication.CAT_CACHE.get("dataPath").getValue();
+    private String dataPath = ApplicationRunnerImpl.CAT_CACHE.get("dataPath").getValue();
 
     /**
      * 平安证券
@@ -221,7 +221,7 @@ public class BRiches implements CrawlerDown {
                 /**
                  * 支持东方财富数据今日获取 适用于增量数据
                  */
-                if ("false".equals(CatwebserviceApplication.CAT_CACHE.get("request").getValue())) {
+                if ("false".equals(ApplicationRunnerImpl.CAT_CACHE.get("request").getValue())) {
 
                     List<HistoryBean> datas = new ArrayList<>();
                     List<RicheBean> list = new ArrayList<>();

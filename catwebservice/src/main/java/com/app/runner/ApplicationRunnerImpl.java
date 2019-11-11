@@ -1,7 +1,10 @@
 package com.app.runner;
 
+import com.app.config.CatWebServiceProperty;
 import com.app.crawler.riches.BRiches;
 import com.app.crawler.riches.producer.DataEventHandler;
+import com.app.pojo.Cat;
+import com.app.pojo.Property;
 import com.corundumstudio.socketio.SocketIOServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,11 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class ApplicationRunnerImpl implements ApplicationRunner {
@@ -23,9 +30,16 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
     private SocketIOServer server;
     @Autowired
     private DataEventHandler dataEventHandler;
+    @Autowired
+    private CatWebServiceProperty catWebServiceProperty;
 
+    /**
+     * 配置缓存
+     */
+    public static final Map<String, Property> CAT_CACHE = new ConcurrentHashMap<>();
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        this.loadCatConfig();
         LOGGER.debug("springboot 启动成功开始执行...");
         server.start();
         Timer timer = new Timer();
@@ -81,6 +95,31 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
         startDT.setTime(date);
         startDT.add(Calendar.DAY_OF_MONTH, num);
         return startDT.getTime();
+    }
+
+    /**
+     * 加载配置文件
+     */
+    private void loadCatConfig() {
+        try {
+            LOGGER.debug("开始加载配置文件");
+            File file = ResourceUtils.getFile(catWebServiceProperty.getCollocation());
+            JAXBContext context = JAXBContext.newInstance(Cat.class);
+            Unmarshaller unMar = context.createUnmarshaller();
+            Cat cat = (Cat) unMar.unmarshal(file);
+            List<Property> list = cat.getProperties();
+            for (Property property : list) {
+                CAT_CACHE.put(property.getName(), property);
+                LOGGER.debug("加载配置项key：【】---》value：【】", property.getName(), property);
+            }
+            LOGGER.debug("加载配置文件完毕，配置项数量：【{}】", CAT_CACHE.size());
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

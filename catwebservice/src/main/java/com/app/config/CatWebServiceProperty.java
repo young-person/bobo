@@ -9,6 +9,17 @@ public class CatWebServiceProperty {
     @Value("${catwebservice.crawler.path}")
     private String crawlerPath;
 
+    @Value("${catwebservice.cat.collocation}")
+    private String collocation;
+
+    public String getCollocation() {
+        return collocation;
+    }
+
+    public void setCollocation(String collocation) {
+        this.collocation = collocation;
+    }
+
     public String getCrawlerPath() {
         return crawlerPath;
     }
