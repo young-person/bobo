@@ -1,17 +1,17 @@
 package com.app.service.impl;
 
+import com.app.pojo.RicheTarget;
+import com.app.runner.ApplicationRunnerImpl;
+import com.app.service.ExcelService;
+import com.app.service.ReceiveRiches;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
-
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.springframework.stereotype.Service;
-
-import com.app.riches.pojo.RicheTarget;
-import com.app.service.ExcelService;
-import com.app.service.ExcelService.CallBack;
-import com.app.service.ReceiveRiches;
 
 @Service
 public class ReceiveRichesImpl implements ReceiveRiches {
@@ -23,16 +23,26 @@ public class ReceiveRichesImpl implements ReceiveRiches {
 			
 			@Override
 			public File getOutFile() {
+				try {
+					return ResourceUtils.getFile(ApplicationRunnerImpl.CAT_CACHE.get("sharePath").getValue());
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
 				return null;
 			}
 			
 			@Override
 			public String getName() {
-				return null;
+				return ApplicationRunnerImpl.CAT_CACHE.get("shareName").getValue();
 			}
 			
 			@Override
 			public File getInPath() {
+				try {
+					return ResourceUtils.getFile(ApplicationRunnerImpl.CAT_CACHE.get("sharePath").getValue());
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
 				return null;
 			}
 		});
@@ -40,13 +50,8 @@ public class ReceiveRichesImpl implements ReceiveRiches {
 
 	private void receiveRichesData(List<RicheTarget> datas,ExcelService excelService) {
 		try {
-			excelService.writeDataToExcel(datas, new CallBack<RicheTarget>() {
+			excelService.writeDataToExcel(datas, (index, bean, sheet) -> {
 
-				@Override
-				public void writeExcel(int index, RicheTarget bean, Sheet sheet) {
-					
-				}
-				
 			});
 		} catch (InvalidFormatException e) {
 			e.printStackTrace();

@@ -747,10 +747,10 @@ public class BRiches implements CrawlerDown {
 
         File f1 = new File(file, this.typeName.get(bean.getCodeType()));
         if (!f1.exists()) {
+            LOGGER.info("创建excel文件---->[{}.{}]", f1.getAbsolutePath(),builder.toString());
             f1.mkdirs();
         }
         File f2 = new File(f1, builder.toString());
-        LOGGER.info("创建excel文件---->[{}]", f2.getAbsolutePath());
         return f2;
     }
 

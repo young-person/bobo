@@ -1,8 +1,9 @@
 package com.app.service;
 
+import com.app.pojo.RicheTarget;
+
 import java.util.List;
 
-import com.app.riches.pojo.RicheTarget;
 
 public interface ReceiveRiches {
 

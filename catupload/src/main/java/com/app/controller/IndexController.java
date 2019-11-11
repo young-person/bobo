@@ -1,7 +1,8 @@
 package com.app.controller;
 
-import java.util.List;
-
+import com.app.pojo.RicheTarget;
+import com.app.service.ReceiveRiches;
+import com.bobo.domain.ResultMeta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.app.riches.pojo.RicheTarget;
-import com.app.service.ReceiveRiches;
-import com.bobo.domain.ResultMeta;
+import java.util.List;
 
 @Controller
 public class IndexController {

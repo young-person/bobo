@@ -1,4 +1,4 @@
-package com.app.riches.pojo;
+package com.app.pojo;
 
 import java.io.Serializable;
 
