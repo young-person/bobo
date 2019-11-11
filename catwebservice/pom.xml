@@ -125,9 +125,9 @@
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
-				<excludes>
+<!-- 				<excludes>
 					<exclude>**/*.properties</exclude>
-				</excludes>
+				</excludes> -->
 			</resource>
 		</resources>
 

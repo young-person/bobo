@@ -1,48 +1,18 @@
 package com.test;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.mybatis.pojo.China;
-import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.codec.binary.Base64;
-import org.junit.Test;
-
-import java.io.*;
-import java.lang.reflect.InvocationTargetException;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Map;
+
+import org.apache.commons.codec.binary.Base64;
+import org.junit.Test;
 
 public class GjsonTest {
-
-    public static void main(String[] args) {
-        Gson gson = new Gson();
-        int num = gson.fromJson("100", int.class);
-        String json = "{\"success\":false, \"message\":\"can't create new file!\"}";
-        Map<String,String> m = gson.fromJson(json, Map.class);
-        System.out.printf(m.toString());
-        JsonObject o = new JsonObject();
-
-        China china = new China();
-        try {
-//            PropertyUtils.setNestedProperty(china,"bpbp","bobo");
-//            PropertyUtils.setIndexedProperty(china,"cccc","cccc");
-//            PropertyUtils.setMappedProperty(china,"cccc","cccc");
-//            PropertyUtils.setSimpleProperty(china,"cccc","cccc");
-            PropertyUtils.setProperty(china,"cccc","cccc");
-            System.out.printf(china.toString());
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
 
 
     @Test
