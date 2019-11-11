@@ -281,10 +281,10 @@ public class BRiches implements CrawlerDown {
         String year = dateFormat.format(new Date());
         Integer start = 1990;
         Integer end = Integer.valueOf(year);
-        ThreadPoolExecutor executor = CrawlerMain.newThreadPool("crawlerRicheExcel", 8);
+//        ThreadPoolExecutor executor = CrawlerMain.newThreadPool("crawlerRicheExcel", 8);
         for (int index = 0; index < list.size(); index++) {
             RicheBean richeBean = list.get(index);
-            executor.execute(() -> {
+//            executor.execute(() -> {
                 List<HistoryBean> beans = new ArrayList<>();
                 for (int k = start; k <= end; k++) {
                     for (int j = 1; j <= 4; j++) {
@@ -320,9 +320,9 @@ public class BRiches implements CrawlerDown {
                     }
                 }
                 writeHistoryDataToExcel(richeBean, beans);
-            });
+//            });
         }
-        executor.shutdown();
+//        executor.shutdown();
     }
 
     /**
