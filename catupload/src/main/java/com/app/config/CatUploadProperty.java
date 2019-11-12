@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CatUploadProperty {
 
-    @Value("${catwebservice.cat.collocation}")
+    @Value("${catupload.cat.collocation}")
     private String collocation;
 
     public String getCollocation() {

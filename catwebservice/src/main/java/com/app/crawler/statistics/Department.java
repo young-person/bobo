@@ -275,9 +275,4 @@ public class Department implements CrawlerDown {
     public String executeTimeFormat() {
         return null;
     }
-
-	@Override
-	public void run() {
-		start();
-	}
 }

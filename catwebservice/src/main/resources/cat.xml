@@ -6,4 +6,5 @@
 
     <property name="request" mark="抓取历史数据是否通过平安银行" value="false"/>
 
+ 	<property name="sendEmailAddress" mark="发送邮件接口地址信息" value="122.112.242.78:9007/richesData"/>
 </cat>

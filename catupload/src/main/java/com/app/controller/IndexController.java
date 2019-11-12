@@ -44,7 +44,6 @@ public class IndexController {
 	@ResponseBody
 	public ResponseEntity<ResultMeta> receiveRichesData(@RequestBody List<RicheTarget> datas){
 		receiveRiches.receiveRichesData(datas);
-		
 		return new ResponseEntity<ResultMeta>(HttpStatus.OK);
 	}
 }

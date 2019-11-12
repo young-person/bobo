@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Email</title>
+</head>
+<body>
+<img src='cid:boot'>
+<h4><span th:text="${title}"></span></h4>
+<table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th>名称</th>
+                <th>涨幅</th>
+                <th>推荐指数</th>
+                <th>换手率</th>
+                <th>详情</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="target:${datas}">
+                <td th:text="${target.stockName}"></td>
+                <td th:text="${target.risePrice}"></td>
+                <td th:text="${target.l}"></td>
+                <td th:text="${target.hand}"></td>
+                <td>
+                    <a class="btn btn-sm btn-primary" th:href="${target.detailUrl}">详情</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+</body>
+</html>
