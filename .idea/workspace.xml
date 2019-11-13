@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="98e5d1de-2a84-414a-8cee-2522ea44d4bf" name="Default Changelist" comment="新增资源目录">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catwebservice/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catwebservice/src/main/resources/logback.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/catmapper/target/" />
     <ignored path="$PROJECT_DIR$/catresource/target/" />
@@ -65,11 +65,83 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/service/impl/WeatherDataServiceImpl.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/BRiches.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="44" column="32" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
+            <state relative-caret-position="826">
+              <caret line="765" column="27" selection-start-line="765" selection-start-column="27" selection-end-line="765" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catupload/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catwebservice/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="537">
+              <caret line="198" column="18" selection-start-line="123" selection-start-column="8" selection-end-line="198" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/catupload/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="503">
+              <caret line="167" column="57" selection-start-line="167" selection-start-column="57" selection-end-line="167" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cattask/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1530" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catmain/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1275" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catwebservice/src/main/resources/logback.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1037">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catupload/src/main/java/com/app/service/impl/ReceiveRichesImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1003">
+              <caret line="83" column="69" selection-start-line="83" selection-start-column="69" selection-end-line="83" selection-end-column="69" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catwebservice/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="36" column="32" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -91,36 +163,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>createInheritedMap</find>
-      <find>threadLocals</find>
-      <find>logger</find>
-      <find>commons-lang</find>
-      <find>ok</find>
-      <find>org.apache.curator</find>
-      <find>dubbo</find>
-      <find />
-      <find>catma</find>
-      <find>bcpg-jdk15on</find>
-      <find>CHINA_URL</find>
-      <find>MAIN_URL</find>
-      <find>public static final</find>
-      <find>catmain</find>
-      <find>172.30.0.4</find>
-      <find>datas</find>
-      <find>getTextByElements</find>
-      <find>oneTempChilds</find>
-      <find>writeToChinaTxt</find>
-      <find>paramContent</find>
-      <find>trimSplit</find>
-      <find>main_url</find>
-      <find>switch</find>
-      <find>图吧聊天活动室 | Communication</find>
-      <find>网盘下载区 | Disk Download</find>
-      <find>华人网友自拍区 | Self-Shooting Video</find>
-      <find>ch.qos.logback.core.ConsoleAppender</find>
-      <find>STDOUT</find>
-      <find>原创视频区|Original video</find>
-      <find>doGetRequest</find>
+      <find>HistoryBean</find>
+      <find>getHistoryDataByWy</find>
+      <find>requestData</find>
+      <find>parseContentData</find>
+      <find>catWebServiceProperty</find>
+      <find>dataPath</find>
+      <find>status_update</find>
+      <find>start</find>
+      <find>get</find>
+      <find>multiplexThead</find>
+      <find>错误原因:</find>
+      <find>devtools</find>
+      <find>WorkbookFactory</find>
+      <find>insertDataByExcel</find>
+      <find>historyBean.setRiseMoney</find>
+      <find>&quot;0&quot;</find>
+      <find>rise</find>
+      <find>RicheTarget</find>
+      <find>writeValueToCell</find>
+      <find>0.8</find>
+      <find>compareTo</find>
+      <find>add</find>
+      <find>CODESTATUS</find>
+      <find>main</find>
+      <find>System</find>
+      <find>CAT_CACHE</find>
+      <find>创建excel</find>
+      <find>getExcelPath</find>
+      <find>redis</find>
+      <find>catwebservice</find>
     </findStrings>
     <replaceStrings>
       <replace>@{</replace>
@@ -136,6 +208,7 @@
       <replace>CONTEXTKPATH</replace>
       <replace>LOGGER</replace>
       <replace>catcenter</replace>
+      <replace>catupload</replace>
     </replaceStrings>
     <dirStrings>
       <dir>D:\bobo\bobo\fintech-back</dir>
@@ -148,6 +221,9 @@
       <dir>D:\code\repertory\bobo\catmain\src\main\java\com</dir>
       <dir>D:\code\repertory\bobo\cattask</dir>
       <dir>D:\code\repertory\bobo</dir>
+      <dir>D:\code\repertory\bobo\catwebservice\src\main\java\com\app\crawler\riches</dir>
+      <dir>D:\code\repertory\bobo\catwebservice\src\main\java\com\app\crawler</dir>
+      <dir>D:\code\repertory\bobo\catwebservice</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -174,36 +250,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/config/RedisConfig.java" />
-        <option value="$PROJECT_DIR$/catwebservice/pom.xml" />
-        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/utils/ExcelParserUtil.java" />
-        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/weather/WeatherRecordTask.java" />
-        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/url/CrawlerUrl.java" />
-        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/url/Linking.java" />
-        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/dictionary/handler/QueryRepertory.java" />
-        <option value="$PROJECT_DIR$/catcloud/catcenter/pom.xml" />
-        <option value="$PROJECT_DIR$/catcommon/pom.xml" />
-        <option value="$PROJECT_DIR$/catcloud/catcenter/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/catupload/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/cattask/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/catcloud/catconfig/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/catcloud/catgateway/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/catmain/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/catcloud/catcenter/src/main/resources/logback.xml" />
-        <option value="$PROJECT_DIR$/catcloud/catconfig/src/main/resources/logback.xml" />
-        <option value="$PROJECT_DIR$/catcloud/catgateway/src/main/resources/logback.xml" />
-        <option value="$PROJECT_DIR$/catmain/src/main/resources/logback.xml" />
-        <option value="$PROJECT_DIR$/cattask/src/main/resources/logback.xml" />
-        <option value="$PROJECT_DIR$/catupload/src/main/resources/logback.xml" />
-        <option value="$PROJECT_DIR$/catwebservice/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/config/CatWebServiceProperty.java" />
-        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/ProxyFactory.java" />
-        <option value="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/ProxyFactory.java" />
-        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/CrawlerMain.java" />
         <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/loader/ChinaText.java" />
         <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/statistics/WeatherRecordTask.java" />
         <option value="$PROJECT_DIR$/catcommon/src/main/java/com/bobo/base/BaseClass.java" />
-        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/CrawlerDown.java" />
         <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/statistics/Department.java" />
         <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/video/sexforum/ChineseOnline.java" />
         <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/video/sexforum/DropBoxDown.java" />
@@ -212,9 +261,46 @@
         <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/video/sexforum/Forum.java" />
         <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/utils/HttpUtil.java" />
         <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/video/sexforum/MainParse.java" />
-        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/runner/ApplicationRunnerImpl.java" />
         <option value="$PROJECT_DIR$/catwebservice/src/main/resources/logback.xml" />
         <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/service/impl/WeatherDataServiceImpl.java" />
+        <option value="$PROJECT_DIR$/catmain/src/main/java/com/app/controller/LoginController.java" />
+        <option value="$PROJECT_DIR$/catmapper/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/catcommon/pom.xml" />
+        <option value="$PROJECT_DIR$/catresource/pom.xml" />
+        <option value="$PROJECT_DIR$/catmain/pom.xml" />
+        <option value="$PROJECT_DIR$/cattask/pom.xml" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/config/WebServiceConfig.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/producer/MessageEventHandler.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/utils/SpringContextUtil.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/CrawlerMain.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/request/ProxyInvocationHandler.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/pojo/HistoryBean.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/pojo/Cat.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/CrawlerDown.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/producer/DataEventHandler.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/RicheTarget.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/resources/templet/datashow.html" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/RicheComputeAbstract.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/producer/Producer.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/selenium/Test.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/controller/TestController.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/pojo/Property.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/resources/cat.xml" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/CatwebserviceApplication.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/config/CatWebServiceProperty.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/runner/ApplicationRunnerImpl.java" />
+        <option value="$PROJECT_DIR$/catwebservice/pom.xml" />
+        <option value="$PROJECT_DIR$/catupload/src/main/java/com/app/service/ExcelService.java" />
+        <option value="$PROJECT_DIR$/catupload/src/main/java/com/app/pojo/RicheTarget.java" />
+        <option value="$PROJECT_DIR$/catupload/src/main/java/com/app/service/ReceiveRiches.java" />
+        <option value="$PROJECT_DIR$/catupload/src/main/java/com/app/controller/IndexController.java" />
+        <option value="$PROJECT_DIR$/catupload/src/main/java/com/app/runner/ApplicationRunnerImpl.java" />
+        <option value="$PROJECT_DIR$/catupload/src/main/java/com/app/config/CatUploadProperty.java" />
+        <option value="$PROJECT_DIR$/catupload/src/main/java/com/app/service/impl/ReceiveRichesImpl.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/BRiches.java" />
+        <option value="$PROJECT_DIR$/catwebservice/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/catupload/pom.xml" />
       </list>
     </option>
   </component>
@@ -256,7 +342,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="width" value="1932" />
-    <option name="height" value="1048" />
+    <option name="height" value="1051" />
   </component>
   <component name="ProjectId" id="1QROs4asv39MqA2cJ7oeDqZvY5n" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -265,10 +351,11 @@
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <autoscrollToSource ProjectPane="true" />
+      <autoscrollFromSource ProjectPane="true" />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -279,25 +366,35 @@
             <path>
               <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
               <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
+              <item name="catmain" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
               <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
+              <item name="cattask" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bobo" type="462c0819:PsiDirectoryNode" />
+              <item name="catupload" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bobo" type="462c0819:PsiDirectoryNode" />
+              <item name="catupload" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
               <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
+              <item name="catupload" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
               <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
+              <item name="catupload" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -305,7 +402,7 @@
             <path>
               <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
               <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
+              <item name="catupload" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -314,7 +411,7 @@
             <path>
               <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
               <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
+              <item name="catupload" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -324,7 +421,40 @@
             <path>
               <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
               <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
+              <item name="catupload" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bobo" type="462c0819:PsiDirectoryNode" />
+              <item name="catupload" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bobo" type="462c0819:PsiDirectoryNode" />
+              <item name="catupload" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="pojo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bobo" type="462c0819:PsiDirectoryNode" />
+              <item name="catupload" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -335,7 +465,7 @@
             <path>
               <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
               <item name="bobo" type="462c0819:PsiDirectoryNode" />
-              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
+              <item name="catupload" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -344,11 +474,24 @@
               <item name="service" type="462c0819:PsiDirectoryNode" />
               <item name="impl" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bobo" type="462c0819:PsiDirectoryNode" />
+              <item name="catupload" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bobo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bobo" type="462c0819:PsiDirectoryNode" />
+              <item name="catwebservice" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -363,7 +506,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/catwebservice/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/catupload/src/main/resources" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -372,32 +515,32 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
+    <property name="settings.editor.selected.configurable" value="Console" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\code\repertory\bobo\catwebservice\src\main\resources" />
-      <recent name="D:\code\repertory\bobo\catupload\src\main\resources" />
-      <recent name="D:\code\repertory\bobo\cattask\src\main\resources" />
-      <recent name="D:\code\repertory\bobo\catcloud\catgateway\src\main\resources" />
-      <recent name="D:\code\repertory\bobo\catcloud\catconfig\src\main\resources" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.app.crawler" />
-      <recent name="com.app.utils" />
-      <recent name="com.app.dictionary.handler" />
-      <recent name="com.mybatis.pojo" />
-      <recent name="com.app.cattask.controller" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\code\repertory\bobo\catresource\src\main\resources\static\lib\particleground" />
       <recent name="D:\code\repertory\bobo\catwebservice\src\main\resources\dictionary\json" />
       <recent name="D:\code\repertory\bobo\cattask\src\main\resources" />
       <recent name="D:\code\repertory\bobo\cattask\src\main\java\com\app\cattask" />
       <recent name="D:\code\repertory\bobo\cattask\src\main\java\com\app\cattask\config" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.app.config" />
+      <recent name="com.app.pojo" />
+      <recent name="com.app.runner" />
+      <recent name="com.app.utils" />
+      <recent name="com.app.crawler" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\code\repertory\bobo\catupload\src\main\resources" />
+      <recent name="D:\code\repertory\bobo\catwebservice\src\main\resources" />
+      <recent name="D:\code\repertory\bobo\catwebservice\src\main\resources\datas\share" />
+      <recent name="D:\code\repertory\bobo\cattask\src\main\resources" />
+      <recent name="D:\code\repertory\bobo\catcloud\catgateway\src\main\resources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -412,13 +555,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Test">
-    <configuration name="Algorithm_sort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.bobo.algorithm.Algorithm_sort" />
-      <module name="catcommon" />
+  <component name="RunManager" selected="Application.CatwebserviceApplication">
+    <configuration name="ApplicationRunnerImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.app.runner.ApplicationRunnerImpl" />
+      <module name="catwebservice" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.bobo.algorithm.*" />
+          <option name="PATTERN" value="com.app.runner.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -426,12 +569,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Department" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.app.crawler.statistics.Department" />
+    <configuration name="BRiches" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.app.crawler.riches.BRiches" />
       <module name="catwebservice" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.app.crawler.statistics.*" />
+          <option name="PATTERN" value="com.app.crawler.riches.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -439,12 +582,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainParse" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.app.crawler.video.sexforum.MainParse" />
+    <configuration name="CatwebserviceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.CatwebserviceApplication" />
       <module name="catwebservice" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.app.crawler.video.sexforum.*" />
+          <option name="PATTERN" value="com.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -572,22 +715,22 @@
     </configuration>
     <list>
       <item itemvalue="Application.Test" />
-      <item itemvalue="Application.Algorithm_sort" />
-      <item itemvalue="Application.Department" />
-      <item itemvalue="Application.MainParse" />
+      <item itemvalue="Application.BRiches" />
       <item itemvalue="Spring Boot.Application" />
       <item itemvalue="Spring Boot.CatMainApplication" />
       <item itemvalue="Spring Boot.CenterApplication" />
       <item itemvalue="Spring Boot.GatewayApplication" />
       <item itemvalue="Spring Boot.CatwebserviceApplication" />
+      <item itemvalue="Application.ApplicationRunnerImpl" />
+      <item itemvalue="Application.CatwebserviceApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Test" />
+        <item itemvalue="Application.CatwebserviceApplication" />
         <item itemvalue="Spring Boot.CatwebserviceApplication" />
-        <item itemvalue="Application.MainParse" />
-        <item itemvalue="Application.Department" />
-        <item itemvalue="Application.Algorithm_sort" />
+        <item itemvalue="Application.ApplicationRunnerImpl" />
+        <item itemvalue="Application.BRiches" />
+        <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
   </component>
@@ -733,83 +876,10 @@
       <workItem from="1571494214023" duration="7110000" />
       <workItem from="1571544851675" duration="19010000" />
       <workItem from="1572516468257" duration="5855000" />
-    </task>
-    <task id="LOCAL-00005" summary="服务接口包">
-      <created>1547301268442</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1547301268442</updated>
-    </task>
-    <task id="LOCAL-00006" summary="ace">
-      <created>1547302423017</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1547302423017</updated>
-    </task>
-    <task id="LOCAL-00007" summary="ace前端">
-      <created>1547302478880</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1547302478880</updated>
-    </task>
-    <task id="LOCAL-00008" summary="基础web页面初始化">
-      <created>1547455650548</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1547455650548</updated>
-    </task>
-    <task id="LOCAL-00009" summary="新增创建文件夹">
-      <created>1548815639416</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1548815639416</updated>
-    </task>
-    <task id="LOCAL-00010" summary="添加新modules工程">
-      <created>1548837234281</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1548837234281</updated>
-    </task>
-    <task id="LOCAL-00011" summary="添加新modules工程">
-      <created>1548837337120</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1548837337120</updated>
-    </task>
-    <task id="LOCAL-00012" summary="添加新modules工程">
-      <created>1548837374191</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1548837374191</updated>
-    </task>
-    <task id="LOCAL-00013" summary="添加新modules工程&#10;&#10;Signed-off-by: bobo &lt;1243434698@qq.com&gt;">
-      <created>1548837466959</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1548837466959</updated>
-    </task>
-    <task id="LOCAL-00014" summary="添加新modules工程&#10;&#10;Signed-off-by: bobo &lt;1243434698@qq.com&gt;">
-      <created>1548837486193</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1548837486193</updated>
-    </task>
-    <task id="LOCAL-00015" summary="添加新modules工程&#10;&#10;Signed-off-by: bobo &lt;1243434698@qq.com&gt;">
-      <created>1548837511813</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1548837511813</updated>
+      <workItem from="1572836198388" duration="1337000" />
+      <workItem from="1573050911042" duration="15779000" />
+      <workItem from="1573261088861" duration="37399000" />
+      <workItem from="1573345369939" duration="47563000" />
     </task>
     <task id="LOCAL-00016" summary="添加新modules工程">
       <created>1548837561829</created>
@@ -1077,7 +1147,84 @@
       <option name="project" value="LOCAL" />
       <updated>1571583069888</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="新增资源目录">
+      <created>1572837682386</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1572837682386</updated>
+    </task>
+    <task id="LOCAL-00055" summary="新增资源目录">
+      <created>1573089691644</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1573089691645</updated>
+    </task>
+    <task id="LOCAL-00056" summary="新增资源目录">
+      <created>1573090144760</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1573090144760</updated>
+    </task>
+    <task id="LOCAL-00057" summary="新增资源目录">
+      <created>1573093595535</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1573093595535</updated>
+    </task>
+    <task id="LOCAL-00058" summary="新增资源目录">
+      <created>1573094424854</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1573094424854</updated>
+    </task>
+    <task id="LOCAL-00059" summary="新增资源目录">
+      <created>1573094921162</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1573094921162</updated>
+    </task>
+    <task id="LOCAL-00060" summary="新增资源目录">
+      <created>1573222969320</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1573222969320</updated>
+    </task>
+    <task id="LOCAL-00061" summary="新增资源目录">
+      <created>1573390215489</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1573390215489</updated>
+    </task>
+    <task id="LOCAL-00062" summary="新增资源目录">
+      <created>1573393436068</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1573393436068</updated>
+    </task>
+    <task id="LOCAL-00063" summary="新增资源目录">
+      <created>1573447778933</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1573447778933</updated>
+    </task>
+    <task id="LOCAL-00064" summary="新增资源目录">
+      <created>1573514539711</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1573514539711</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1113,7 +1260,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40149000" />
+    <option name="totallyTimeSpent" value="142227000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1125,18 +1272,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1932" height="1048" extended-state="0" />
+    <frame x="-8" y="0" width="1932" height="1051" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25801283" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Designer" order="2" />
-      <window_info id="UI Designer" order="3" />
-      <window_info id="Favorites" order="4" side_tool="true" />
-      <window_info id="Web" order="5" side_tool="true" />
+      <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="1" />
+      <window_info id="UI Designer" order="2" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Web" order="4" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.2681624" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32996634" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.38832772" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.36363637" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32885906" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.303132" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.24496645" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -1144,20 +1292,52 @@
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32996634" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32885906" />
       <window_info anchor="bottom" id="Problems" order="12" />
       <window_info anchor="bottom" id="Java Enterprise" order="13" />
       <window_info anchor="bottom" id="Database Changes" order="14" />
-      <window_info anchor="bottom" id="Version Control" order="15" weight="0.32996634" />
+      <window_info anchor="bottom" id="Version Control" order="15" visible="true" weight="0.26398212" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" weight="0.18803419" />
+      <window_info anchor="right" id="Maven" order="3" visible="true" weight="0.18803419" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Database" order="5" weight="0.32959402" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="right" id="Bean Validation" order="7" />
+      <window_info anchor="right" id="Bean Validation" order="7" weight="0.32959402" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="1" />
+      <window_info id="UI Designer" order="2" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Web" order="4" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.2681624" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32885906" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.303132" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.24496645" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Spring" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32885906" />
+      <window_info anchor="bottom" id="Problems" order="12" />
+      <window_info anchor="bottom" id="Java Enterprise" order="13" />
+      <window_info anchor="bottom" id="Database Changes" order="14" />
+      <window_info anchor="bottom" id="Version Control" order="15" weight="0.26621923" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" visible="true" weight="0.18803419" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Database" order="5" weight="0.32959402" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Bean Validation" order="7" weight="0.32959402" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -1326,12 +1506,6 @@
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/selenium/Test.java</url>
-          <line>59</line>
-          <properties />
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
           <url>jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.1.0/druid-1.1.0-sources.jar!/com/alibaba/druid/util/JdbcUtils.java</url>
           <line>560</line>
           <properties />
@@ -1342,18 +1516,6 @@
           <line>549</line>
           <properties />
           <option name="timeStamp" value="58" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/runner/ApplicationRunnerImpl.java</url>
-          <line>19</line>
-          <properties />
-          <option name="timeStamp" value="72" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/runner/ApplicationRunnerImpl.java</url>
-          <line>23</line>
-          <properties />
-          <option name="timeStamp" value="73" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/statistics/Department.java</url>
@@ -1369,7 +1531,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/statistics/Department.java</url>
-          <line>248</line>
+          <line>252</line>
           <properties />
           <option name="timeStamp" value="76" />
         </line-breakpoint>
@@ -1378,6 +1540,24 @@
           <line>34</line>
           <properties />
           <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/producer/Producer.java</url>
+          <line>33</line>
+          <properties />
+          <option name="timeStamp" value="124" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/BRiches.java</url>
+          <line>823</line>
+          <properties />
+          <option name="timeStamp" value="127" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/BRiches.java</url>
+          <line>141</line>
+          <properties />
+          <option name="timeStamp" value="130" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1399,396 +1579,415 @@
     <SUITE FILE_PATH="coverage/bobo$Application.ic" NAME="Application Coverage Results" MODIFIED="1555223534903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/bobo$All_in_cattask.ic" NAME="All in cattask Coverage Results" MODIFIED="1556182356248" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>CODESTATUS.containsValue(true);</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="jar://D:/environment/java8/jdk/src.zip!/java/lang/reflect/Method.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/fastjson/1.2.42/fastjson-1.2.42-sources.jar!/com/alibaba/fastjson/JSON.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="483" column="18" selection-start-line="483" selection-start-column="18" selection-end-line="483" selection-end-column="18" />
+        <state relative-caret-position="288">
+          <caret line="450" column="24" selection-start-line="450" selection-start-column="24" selection-end-line="450" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/table/handler/ProxyFactory.java">
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/request/ProxyInvocationHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1031#1032#0" expanded="true" />
-            <element signature="e#1117#1118#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="330">
+          <caret line="49" selection-start-line="49" selection-end-line="49" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/CrawlerMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/environment/java8/jdk/src.zip!/java/nio/file/Files.java">
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/request/RestRequestFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
-          <caret line="626" column="23" selection-start-line="626" selection-start-column="23" selection-end-line="626" selection-end-column="23" />
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catmain/src/main/resources/mybatis/ChinaMapper.xml">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.3.10.RELEASE/spring-core-4.3.10.RELEASE-sources.jar!/org/springframework/util/ResourceUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="169" selection-start-line="169" selection-end-line="169" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/pojo/ShareInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="139" column="11" selection-start-line="139" selection-start-column="11" selection-end-line="139" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/config/WebServiceConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="38" column="30" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/controller/RicheController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/environment/java8/jdk/src.zip!/java/util/concurrent/atomic/AtomicBoolean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="126" column="22" selection-start-line="126" selection-start-column="22" selection-end-line="126" selection-end-column="22" />
+          <folding>
+            <element signature="e#3250#3251#0" expanded="true" />
+            <element signature="e#3290#3291#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="122" column="30" selection-start-line="122" selection-start-column="25" selection-end-line="122" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/loader/TextToDb.java" />
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/loader/ChinaText.java" />
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/pojo/CNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/bobo/base/BaseClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/url/Linking.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/environment/java8/jdk/src.zip!/java/util/Comparator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="108" column="17" selection-start-line="108" selection-start-column="17" selection-end-line="108" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/environment/java8/jdk/src.zip!/java/util/Arrays.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="1430" column="43" selection-start-line="1430" selection-start-column="43" selection-end-line="1430" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/utils/HttpUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="64" column="41" selection-start-line="64" selection-start-column="41" selection-end-line="64" selection-end-column="41" />
-          <folding>
-            <element signature="e#1434#1435#0" expanded="true" />
-            <element signature="e#1496#1497#0" expanded="true" />
-            <element signature="e#6248#6280#1" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/video/sexforum/Forum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6392">
-          <caret line="376" column="45" lean-forward="true" selection-start-line="376" selection-start-column="45" selection-end-line="376" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/video/sexforum/DropBoxDown.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="82" column="5" selection-start-line="82" selection-start-column="5" selection-end-line="82" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot/1.5.6.RELEASE/spring-boot-1.5.6.RELEASE-sources.jar!/org/springframework/boot/ApplicationRunner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+          <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/CrawlerDown.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
-          <caret line="52" column="16" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="119">
+          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/video/sexforum/MainParse.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/corundumstudio/socketio/netty-socketio/1.7.7/netty-socketio-1.7.7-sources.jar!/com/corundumstudio/socketio/SocketIOClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="634">
+          <caret line="74" column="9" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/pojo/RicheBean.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="24" column="22" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="22" />
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/statistics/Department.java">
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/RicheCompute.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1292">
-          <caret line="87" selection-start-line="87" selection-end-line="87" />
+        <state relative-caret-position="272">
+          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/RicheTarget.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="32" column="16" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
+          <folding>
+            <element signature="e#475#476#0" expanded="true" />
+            <element signature="e#498#499#0" expanded="true" />
+            <element signature="e#545#546#0" expanded="true" />
+            <element signature="e#578#579#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/resources/templet/datashow.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="93" column="43" selection-start-line="93" selection-start-column="43" selection-end-line="93" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/RicheComputeAbstract.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="137" column="21" selection-start-line="137" selection-start-column="21" selection-end-line="137" selection-end-column="21" />
+          <folding>
+            <element signature="e#972#973#0" expanded="true" />
+            <element signature="e#1028#1029#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/producer/DataEventHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-585">
+          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/pom.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/resources/logback.xml">
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/producer/Producer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="76" column="21" selection-start-line="76" selection-start-column="21" selection-end-line="76" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/statistics/WeatherRecordTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="23" column="30" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="30" />
+        <state relative-caret-position="292">
+          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4791#4792#0" expanded="true" />
-            <element signature="e#4809#4810#0" expanded="true" />
+            <element signature="e#589#602#0" expanded="true" />
+            <element signature="e#1672#1673#0" expanded="true" />
+            <element signature="e#1697#1698#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/controller/TestController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-127">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+        <state relative-caret-position="323">
+          <caret line="24" column="1" lean-forward="true" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/controller/ThirdController.java">
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/utils/HttpUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        <state relative-caret-position="-1870">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/controller/WeatherController.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/ch/qos/logback/logback-core/1.1.11/logback-core-1.1.11-sources.jar!/ch/qos/logback/core/spi/ContextAware.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="16" column="25" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="25" />
+          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/resources/application.properties">
+    <entry file="jar://$MAVEN_REPOSITORY$/ch/qos/logback/logback-core/1.1.11/logback-core-1.1.11-sources.jar!/ch/qos/logback/core/spi/ContextAwareBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="20" lean-forward="true" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+        <state relative-caret-position="187">
+          <caret line="28" column="49" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/controller/DictionaryController.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/ch/qos/logback/logback-core/1.1.11/logback-core-1.1.11-sources.jar!/ch/qos/logback/core/joran/spi/ConfigurationWatchList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-221">
-          <caret line="39" column="26" lean-forward="true" selection-start-line="39" selection-start-column="26" selection-end-line="39" selection-end-column="26" />
+        <state relative-caret-position="34">
+          <caret line="26" column="53" selection-start-line="26" selection-start-column="53" selection-end-line="26" selection-end-column="53" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/controller/FileUploadController.java">
+    <entry file="jar://D:/environment/java8/jdk/src.zip!/java/io/File.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="32" column="32" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.3.10.RELEASE/spring-web-4.3.10.RELEASE-sources.jar!/org/springframework/http/ResponseEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1382">
-          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.3.10.RELEASE/spring-web-4.3.10.RELEASE-sources.jar!/org/springframework/http/StreamingHttpOutputMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
+        <state relative-caret-position="198">
+          <caret line="471" column="17" selection-start-line="471" selection-start-column="11" selection-end-line="471" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/config/Config.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" selection-start-line="10" selection-end-line="10" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/BRiches.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="20" column="27" lean-forward="true" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/video/StartDown.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/video/sexforum/ChineseDown.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1156">
-          <caret line="70" column="90" lean-forward="true" selection-start-line="70" selection-start-column="90" selection-end-line="70" selection-end-column="90" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/runner/ApplicationRunnerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-107">
-          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/webservice/impl/DemoServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/utils/RedisLockUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-663">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/selenium/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="26" column="32" lean-forward="true" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/video/sexforum/ChineseOnline.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/video/sexforum/ChineseTables.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="114" column="17" lean-forward="true" selection-start-line="114" selection-start-column="17" selection-end-line="114" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/dictionary/handler/AutomationDict.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/dictionary/handler/manager/DefaultAutomationDict.java">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="43" column="17" lean-forward="true" selection-start-line="43" selection-start-column="17" selection-end-line="43" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/dictionary/templet/model/Form.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-171">
-          <caret line="21" column="20" lean-forward="true" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/CatwebserviceApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catupload/src/main/java/com/app/service/ExcelService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catcommon/src/main/java/com/app/riches/pojo/RicheTarget.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="26" column="28" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catupload/src/main/java/com/app/pojo/RicheTarget.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catupload/src/main/java/com/app/service/ReceiveRiches.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catupload/src/main/java/com/app/controller/IndexController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="44" column="80" selection-start-line="44" selection-start-column="80" selection-end-line="44" selection-end-column="80" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/resources/cat.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="73" selection-start-line="4" selection-start-column="51" selection-end-line="4" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catupload/src/main/resources/cat.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="28" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/runner/ApplicationRunnerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="119" column="12" selection-start-line="119" selection-start-column="12" selection-end-line="119" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1455#1883#0" expanded="true" />
+            <element signature="e#1882#1883#0" expanded="true" />
+            <element signature="e#1926#2065#0" expanded="true" />
+            <element signature="e#2064#2065#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/pojo/Cat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="37" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catupload/src/main/java/com/app/pojo/Cat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/pojo/Property.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="43" column="18" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catupload/src/main/java/com/app/pojo/Property.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/config/CatWebServiceProperty.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
+        <state relative-caret-position="102">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#345#346#0" expanded="true" />
-            <element signature="e#399#400#0" expanded="true" />
-            <element signature="e#445#446#0" expanded="true" />
+            <element signature="e#391#392#0" expanded="true" />
+            <element signature="e#425#426#0" expanded="true" />
+            <element signature="e#479#480#0" expanded="true" />
+            <element signature="e#525#526#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-core/3.1.8/cxf-core-3.1.8-sources.jar!/org/apache/cxf/Bus.java">
+    <entry file="file://$PROJECT_DIR$/catupload/src/main/java/com/app/config/CatUploadProperty.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="38" column="11" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
+        <state relative-caret-position="221">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/config/WebServiceConfig.java">
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/resources/logback.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="41" column="32" lean-forward="true" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
+        <state relative-caret-position="-1037">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/utils/ExcelParserUtil.java">
+    <entry file="file://$PROJECT_DIR$/catupload/src/main/java/com/app/runner/ApplicationRunnerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-572">
-          <caret line="33" column="41" lean-forward="true" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
+        <state relative-caret-position="-41">
+          <caret line="32" column="46" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/utils/FreeMakerUtils.java">
+    <entry file="file://$PROJECT_DIR$/catupload/src/main/java/com/app/service/impl/ReceiveRichesImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="26" column="52" lean-forward="true" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
+        <state relative-caret-position="1003">
+          <caret line="83" column="69" selection-start-line="83" selection-start-column="69" selection-end-line="83" selection-end-column="69" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/resources/dictionary/word/datadictionary.ftl">
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/crawler/riches/BRiches.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="59" lean-forward="true" selection-start-line="23" selection-start-column="59" selection-end-line="23" selection-end-column="59" />
+        <state relative-caret-position="826">
+          <caret line="765" column="27" selection-start-line="765" selection-start-column="27" selection-end-line="765" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/java/com/app/service/impl/WeatherDataServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/catwebservice/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="44" column="32" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
+        <state relative-caret-position="289">
+          <caret line="36" column="32" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catupload/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cattask/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1530" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catmain/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1275" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catwebservice/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="198" column="18" selection-start-line="123" selection-start-column="8" selection-end-line="198" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catupload/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="503">
+          <caret line="167" column="57" selection-start-line="167" selection-start-column="57" selection-end-line="167" selection-end-column="57" />
         </state>
       </provider>
     </entry>

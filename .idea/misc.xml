@@ -3,6 +3,7 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$USER_HOME$/Downloads/springboot_mybatisplus" />
+    <file type="web" url="file://$PROJECT_DIR$/catresource" />
     <file type="web" url="file://$PROJECT_DIR$/cattask" />
     <file type="web" url="file://$PROJECT_DIR$/demo" />
     <file type="web" url="file://$PROJECT_DIR$/fintech-back/ace-job/xxl-job-admin" />

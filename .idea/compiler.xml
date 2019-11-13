@@ -12,17 +12,17 @@
         <module name="rpcservice" />
         <module name="catcenter" />
         <module name="catinterface" />
-        <module name="catconfig" />
         <module name="rpcclient" />
         <module name="catmain" />
         <module name="catwebservice" />
-        <module name="catmapper" />
+        <module name="catconfig" />
+        <module name="catpayclient" />
         <module name="catcommon" />
         <module name="catupload" />
         <module name="catpay" />
         <module name="cattask" />
         <module name="catlock" />
-        <module name="catpayclient" />
+        <module name="catmapper" />
         <module name="catcore" />
       </profile>
     </annotationProcessing>

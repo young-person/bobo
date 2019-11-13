@@ -13,6 +13,7 @@ import javax.mail.internet.MimeMessage;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,6 @@ import org.springframework.util.ResourceUtils;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 
-import com.app.config.EmailConfig;
 import com.app.pojo.ExcelUser;
 import com.app.pojo.RicheTarget;
 import com.app.runner.ApplicationRunnerImpl;
@@ -33,11 +33,11 @@ import com.bobo.base.BaseClass;
 public class ReceiveRichesImpl extends BaseClass implements ReceiveRiches {
 
 	@Autowired
-	private JavaMailSender mailSender;
-	@Autowired
 	private SpringTemplateEngine templateEngine;
 	@Autowired
-	private EmailConfig emailConfig;
+	private JavaMailSender javaMailSender;
+	@Value("${mail.from}")
+	private String from;
 
 	@Override
 	public void receiveRichesData(List<RicheTarget> datas) {
@@ -152,9 +152,9 @@ public class ReceiveRichesImpl extends BaseClass implements ReceiveRiches {
 	private void contextLoads(List<ExcelUser> list,List<RicheTarget> datas) {
 		for(ExcelUser excelUser : list) {
 			try {
-				MimeMessage mimeMessage = mailSender.createMimeMessage();
+				MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 				MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
-				mimeMessageHelper.setFrom(emailConfig.getFrom());
+				mimeMessageHelper.setFrom(from);
 				mimeMessageHelper.setTo(excelUser.getEmail());
 				mimeMessageHelper.setSubject(ApplicationRunnerImpl.CAT_CACHE.get("sendEmailSubject").getValue());
 				Context ctx = new Context();
@@ -162,7 +162,7 @@ public class ReceiveRichesImpl extends BaseClass implements ReceiveRiches {
 				ctx.setVariable("title", ApplicationRunnerImpl.CAT_CACHE.get("sendEmailSubject").getValue());
 				String emailText = templateEngine.process(ApplicationRunnerImpl.CAT_CACHE.get("emailSubjectTemplate").getValue(), ctx);
 				mimeMessageHelper.setText(emailText, true);
-				mailSender.send(mimeMessage);
+				javaMailSender.send(mimeMessage);
 			} catch (MessagingException e) {
 				LOGGER.error("发送邮件失败：接收人地址：【】",excelUser.getEmail(),e);
 			}

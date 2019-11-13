@@ -8,5 +8,5 @@
  	<property name="sendEmailAddress" mark="发送邮件接口地址信息" value="122.112.242.78:9007/richesData"/>
  	<property name="sendEmailSubject" mark="发送邮件主题名称" value="每日精选推荐"/>
  	<property name="emailSubjectTemplate" mark="发送邮件主题名称" value="/email/email"/>
- 	
+ 	<!-- http://data.eastmoney.com/bbsj/yjbb/002961.html 业绩数据 -->
 </cat>
