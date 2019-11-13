@@ -1,21 +1,26 @@
 package com.app.crawler.riches;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.app.crawler.CrawlerDown;
-import com.app.crawler.CrawlerMain;
-import com.app.crawler.request.DefaultRestRequest;
-import com.app.crawler.request.RestRequest;
-import com.app.crawler.request.RestRequestFactory;
-import com.app.crawler.riches.pojo.*;
-import com.app.crawler.riches.producer.Producer.CallBack;
-import com.app.runner.ApplicationRunnerImpl;
-import com.bobo.domain.ResultMeta;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -34,13 +39,23 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.*;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ThreadPoolExecutor;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.app.crawler.CrawlerDown;
+import com.app.crawler.CrawlerMain;
+import com.app.crawler.request.DefaultRestRequest;
+import com.app.crawler.request.RestRequest;
+import com.app.crawler.request.RestRequestFactory;
+import com.app.crawler.riches.pojo.HistoryBean;
+import com.app.crawler.riches.pojo.HistoryResult;
+import com.app.crawler.riches.pojo.RicheBean;
+import com.app.crawler.riches.pojo.RicheResult;
+import com.app.crawler.riches.pojo.ShareInfo;
+import com.app.crawler.riches.producer.Producer.CallBack;
+import com.app.runner.ApplicationRunnerImpl;
+import com.bobo.domain.ResultMeta;
 
 public class BRiches implements CrawlerDown {
 
@@ -186,8 +201,6 @@ public class BRiches implements CrawlerDown {
 						callBack.add(target);
 					}
 				} catch (IOException e1) {
-					e1.printStackTrace();
-				} catch (InvalidFormatException e1) {
 					e1.printStackTrace();
 				}finally {
 					if (Objects.nonNull(inputStream)) {
@@ -478,8 +491,6 @@ public class BRiches implements CrawlerDown {
 				this.writeHistoryData(bean);
 			}
 
-		} catch (InvalidFormatException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -515,8 +526,6 @@ public class BRiches implements CrawlerDown {
 				workbook.write(outputStream);
 			}
 
-		} catch (InvalidFormatException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

@@ -6,16 +6,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.common.usermodel.HyperlinkType;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.usermodel.HSSFHyperlink;
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Hyperlink;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -28,6 +31,9 @@ import com.app.dictionary.templet.model.Table;
 import com.bobo.dbconnection.DBType;
 
 public class ExcelExportDictionary extends ExportDictionary {
+	
+	short color = 5;
+	
     @Override
     public void doExport(AbstractRepertory<DBType> repertory, DBType dbs, OutputStream outputStream) throws IOException {
 
@@ -37,6 +43,9 @@ public class ExcelExportDictionary extends ExportDictionary {
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("测试Excel");
         workbook.setSheetName(0, "目录");
+        
+        CreationHelper createHelper = workbook.getCreationHelper();
+        Hyperlink hyperlink = createHelper.createHyperlink(HyperlinkType.DOCUMENT);
         int index = 0, sheetNum = 1;
         Row row1 = sheet.createRow(index++);
         sheet.addMergedRegion(new CellRangeAddress(0,0,0,2));
@@ -71,7 +80,6 @@ public class ExcelExportDictionary extends ExportDictionary {
 
             String cname = getSimpleName(table.getTableName());
 
-            Hyperlink hyperlink = new HSSFHyperlink(Hyperlink.LINK_DOCUMENT);
             hyperlink.setAddress("#"+cname+"!A1");
             cell1.setHyperlink(hyperlink);
             if (cname.indexOf("（未被使用）") > -1){
@@ -134,7 +142,8 @@ public class ExcelExportDictionary extends ExportDictionary {
 
         HSSFRow row0 = sheet.createRow(0);
 
-        Hyperlink hyperlink = new HSSFHyperlink(Hyperlink.LINK_DOCUMENT);
+        CreationHelper createHelper = workbook.getCreationHelper();
+        Hyperlink hyperlink = createHelper.createHyperlink(HyperlinkType.DOCUMENT);
         hyperlink.setAddress("#目录!A"+(sheetNum+2));
         Cell backcell = row0.createCell(0);
         backcell.setHyperlink(hyperlink);
@@ -206,18 +215,17 @@ public class ExcelExportDictionary extends ExportDictionary {
     }
     private HSSFCellStyle getStyle(HSSFWorkbook workbook){
         HSSFCellStyle style = workbook.createCellStyle();
-        style.setFillForegroundColor(HSSFColor.GREY_25_PERCENT.index );
+        style.setFillForegroundColor(color);
 
-        style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
-        style.setBorderBottom(HSSFCellStyle.BORDER_THIN);
-        style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
-        style.setBorderRight(HSSFCellStyle.BORDER_THIN);
-        style.setBorderTop(HSSFCellStyle.BORDER_THIN);
-        style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setBorderBottom(BorderStyle.NONE);
+        style.setBorderLeft(BorderStyle.NONE);
+        style.setBorderRight(BorderStyle.NONE);
+        style.setBorderTop(BorderStyle.NONE);
+        style.setAlignment(HorizontalAlignment.CENTER);
         HSSFFont font = workbook.createFont();
-        font.setColor(HSSFColor.BLACK.index);
+        font.setColor(color);
         font.setFontHeightInPoints((short) 12);
-        font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
         style.setFont(font);
         style.setWrapText(true);
         return style;
@@ -226,24 +234,22 @@ public class ExcelExportDictionary extends ExportDictionary {
 
     private HSSFCellStyle getSimpleStyle(HSSFWorkbook workbook){
         HSSFCellStyle style = workbook.createCellStyle();
-        style.setAlignment(HSSFCellStyle.ALIGN_LEFT);
+        style.setAlignment(HorizontalAlignment.LEFT);
         HSSFFont font = workbook.createFont();
         font.setFontHeightInPoints((short) 12);
-        font.setBoldweight(HSSFFont.BOLDWEIGHT_NORMAL);
         style.setFont(font);
         return style;
     }
 
     private HSSFCellStyle getStyleBorder(HSSFWorkbook workbook){
         HSSFCellStyle style = workbook.createCellStyle();
-        style.setBorderBottom(HSSFCellStyle.BORDER_THIN);
-        style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
-        style.setBorderRight(HSSFCellStyle.BORDER_THIN);
-        style.setBorderTop(HSSFCellStyle.BORDER_THIN);
-        style.setAlignment(HSSFCellStyle.ALIGN_LEFT);
+        style.setBorderBottom(BorderStyle.NONE);
+        style.setBorderLeft(BorderStyle.NONE);
+        style.setBorderRight(BorderStyle.NONE);
+        style.setBorderTop(BorderStyle.NONE);
+        style.setAlignment(HorizontalAlignment.LEFT);
         HSSFFont font = workbook.createFont();
         font.setFontHeightInPoints((short) 14);
-        font.setBoldweight(HSSFFont.BOLDWEIGHT_NORMAL);
         style.setFont(font);
         return style;
     }
@@ -252,7 +258,7 @@ public class ExcelExportDictionary extends ExportDictionary {
         HSSFCellStyle style = workbook.createCellStyle();
         HSSFFont cellFont= workbook.createFont();
         cellFont.setUnderline((byte) 1);
-        cellFont.setColor(HSSFColor.BLUE.index);
+        cellFont.setColor(color);
         style.setFont(cellFont);
         return style;
     }

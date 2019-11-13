@@ -7,7 +7,12 @@ import java.io.Serializable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Property implements Serializable {
-    @XmlAttribute(name = "name")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2010384545646581010L;
+
+	@XmlAttribute(name = "name")
     private String name;
 
     @XmlAttribute(name = "value")

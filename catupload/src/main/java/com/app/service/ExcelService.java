@@ -81,7 +81,7 @@ public interface ExcelService {
 			}
 			outputStream = new FileOutputStream(getOutFile());
 			workbook.write(outputStream);
-		} catch (InvalidFormatException | IOException e) {
+		} catch (IOException e) {
 			IOUtils.closeQuietly(outputStream);
 			IOUtils.closeQuietly(inputStream);
 		}
@@ -112,7 +112,7 @@ public interface ExcelService {
 			for (int k = 1; k <= lastNum; k++) {
 				callBack.writeExcel(k, null, sheet);
 			}
-		} catch (InvalidFormatException | IOException e) {
+		} catch (IOException e) {
 			LOGGER.error("写入数据到excel失败", e);
 		} finally {
 			IOUtils.closeQuietly(inputStream);

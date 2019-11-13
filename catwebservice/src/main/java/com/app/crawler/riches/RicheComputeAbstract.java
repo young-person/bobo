@@ -1,12 +1,14 @@
 package com.app.crawler.riches;
 
-import com.app.crawler.riches.pojo.ShareInfo;
-import org.apache.commons.collections.CollectionUtils;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
+
+import com.app.crawler.riches.pojo.RShareInfo;
+import com.app.crawler.riches.pojo.ShareInfo;
 
 /** 
  * @Description: TODO
@@ -56,6 +58,7 @@ public class RicheComputeAbstract implements RicheCompute{
 					return o1.getDate().compareTo(o2.getDate());
 				};
 			});
+			
 			List<ShareInfo> tmpList = datas.subList(datas.size() - num, datas.size());
 			float l = this.getRippleValue(tmpList, limit);
 			target.setL(l);
@@ -119,31 +122,54 @@ public class RicheComputeAbstract implements RicheCompute{
 	private float getRippleValue(List<ShareInfo> datas,int n) {
 		float l = 0f;
 		int m = 1;
-		String var = "0";
 		for(int k = datas.size() -1; k > 0 ; k --) {
-			ShareInfo bean1 = datas.get(k);
+			RShareInfo bean1 = this.conveRShareInfo(datas.get(k));
 			if(m > n) {
 				break;
 			}
 			m ++;
+			
+			if (bean1.getRisePrice() <= 5f) {
+				
+			}
+			if (bean1.getRisePrice() >= 5f && bean1.getRisePrice() <= 7f) {
+				
+			}
+			if (bean1.getRisePrice() >= 7f) {
+				
+			}
 			List<Integer> results = new ArrayList<Integer>();
 			for(int j = 0; j < datas.size(); j++) {
 				if ((datas.size() - j - 1) > n) {
-					ShareInfo bean2 = datas.get(j);
+					RShareInfo bean2 = this.conveRShareInfo(datas.get(j));
 					int r = 0;
-					if (Float.valueOf(bean2.getClosePrice()) > Float.valueOf(bean1.getClosePrice())) {
+					if (bean2.getClosePrice() > bean1.getClosePrice()) {
 						r = 1;
-					}else if(bean2.getClosePrice().compareTo(bean1.getClosePrice()) == 0) {
-						r = 0;
 					}
 					results.add(r);
 				}
 			}
-			l += this.getTrendValue(results);
+			l += this.getTrendValue(results);//如果不等于1就说明有有大于之前的数据
 		}
 
 
 		return l / n;
+	}
+
+	private RShareInfo conveRShareInfo(ShareInfo shareInfo) {
+		
+		RShareInfo r = new RShareInfo(shareInfo.getDate(),
+				Float.valueOf(shareInfo.getHand()).floatValue(),
+				Float.valueOf(shareInfo.getRisePrice()).floatValue(),
+				Float.valueOf(shareInfo.getOpenPrice()).floatValue(),
+				Float.valueOf(shareInfo.getClosePrice()).floatValue(),
+				Float.valueOf(shareInfo.getPrevClose()).floatValue(),
+				Float.valueOf(shareInfo.getMaxPrice()).floatValue(),
+				Float.valueOf(shareInfo.getMinPrice()).floatValue(),
+				Integer.valueOf(shareInfo.getTotal()).intValue(),
+				Double.valueOf(shareInfo.getMoney()).intValue());
+		
+		return r;
 	}
 	/**
 	 * 0 - 1 值越大 则持续下跌
@@ -159,7 +185,7 @@ public class RicheComputeAbstract implements RicheCompute{
 		for(Integer v : results) {
 			sum += v;
 		}
-		return (float)sum;
+		return (float)sum/results.size();
 	}
 
 }

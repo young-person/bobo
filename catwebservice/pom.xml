@@ -40,8 +40,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-scratchpad</artifactId>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml-schemas</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
