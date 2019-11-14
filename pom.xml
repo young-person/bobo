@@ -42,6 +42,7 @@
 		<module>catmain</module>
 		<module>catresource</module>
 		<module>catmapper</module>
+		<module>catcrawler</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
