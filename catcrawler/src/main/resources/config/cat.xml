@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cat scan="true" scanPeriod="60">
+	<!-- 用来定义当前app 需要的配置属性-->
+	<!-- dataPath share的相对位置 -->
+	<property name="dataPath" mark="数据模板位置" value="C:\env\bobo\catcrawler\src\main\resources\datas\share\"/>
+
+    <property name="periodTime" mark="调度执行时间一天" value="86400000"/>
+
+    <property name="request" mark="抓取历史数据是否通过平安银行" value="false"/>
+
+ 	<property name="sendEmailAddress" mark="发送邮件接口地址信息" value="122.112.242.78:9007/richesData"/>
+ 	
+</cat>
