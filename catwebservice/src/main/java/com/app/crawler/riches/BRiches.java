@@ -1,25 +1,18 @@
 package com.app.crawler.riches;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ThreadPoolExecutor;
-
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.app.crawler.CrawlerDown;
+import com.app.crawler.CrawlerMain;
+import com.app.crawler.request.DefaultRestRequest;
+import com.app.crawler.request.RestRequest;
+import com.app.crawler.request.RestRequestFactory;
+import com.app.crawler.riches.pojo.*;
+import com.app.crawler.riches.producer.Producer.CallBack;
+import com.app.runner.ApplicationRunnerImpl;
+import com.bobo.domain.ResultMeta;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -39,23 +32,13 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.app.crawler.CrawlerDown;
-import com.app.crawler.CrawlerMain;
-import com.app.crawler.request.DefaultRestRequest;
-import com.app.crawler.request.RestRequest;
-import com.app.crawler.request.RestRequestFactory;
-import com.app.crawler.riches.pojo.HistoryBean;
-import com.app.crawler.riches.pojo.HistoryResult;
-import com.app.crawler.riches.pojo.RicheBean;
-import com.app.crawler.riches.pojo.RicheResult;
-import com.app.crawler.riches.pojo.ShareInfo;
-import com.app.crawler.riches.producer.Producer.CallBack;
-import com.app.runner.ApplicationRunnerImpl;
-import com.bobo.domain.ResultMeta;
+import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class BRiches implements CrawlerDown {
 
@@ -125,10 +108,6 @@ public class BRiches implements CrawlerDown {
 	private String wyUrl = "http://quotes.money.163.com/trade/lsjysj_%s.html?year=%s&season=%s";
 
 	private RicheCompute richeCompute;
-
-	public RicheCompute getRicheCompute() {
-		return richeCompute;
-	}
 
 	public void setRicheCompute(RicheCompute richeCompute) {
 		this.richeCompute = richeCompute;
@@ -203,9 +182,8 @@ public class BRiches implements CrawlerDown {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}finally {
-					if (Objects.nonNull(inputStream)) {
-						inputStream.close();
-					}
+					IOUtils.closeQuietly(workbook);
+					IOUtils.closeQuietly(inputStream);
 				}
 			}
 
@@ -283,13 +261,7 @@ public class BRiches implements CrawlerDown {
 					this.requestData(result.getResults(), resultMap);
 				}
 
-			} catch (RestClientException e) {
-				e.printStackTrace();
-			} catch (URISyntaxException e) {
-				e.printStackTrace();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
+			} catch (RestClientException | URISyntaxException | IOException e) {
 				e.printStackTrace();
 			}
 		}
@@ -358,11 +330,10 @@ public class BRiches implements CrawlerDown {
 	 * @param datas
 	 * @param list
 	 * @param handResult
-	 * @throws IOException
 	 * @throws URISyntaxException
 	 */
 	private void parseContentData(List<HistoryBean> datas, List<RicheBean> list, RicheResult handResult)
-			throws IOException, URISyntaxException {
+			throws URISyntaxException {
 		Map<String, RicheBean> map = new HashMap<>();
 		for (RicheBean bean : handResult.getResults()) {
 			map.put(bean.getCode(), bean);
@@ -442,6 +413,7 @@ public class BRiches implements CrawlerDown {
 	private void insertDataByExcel(RicheBean bean, List<HistoryBean> datas) {
 		InputStream inputStream = null;
 		OutputStream outputStream = null;
+		Workbook workbook = null;
 		try {
 			if (Objects.nonNull(datas) && datas.size() > 0) {
 				File file = this.getExcelPath(bean);
@@ -451,7 +423,7 @@ public class BRiches implements CrawlerDown {
 					return;
 				}
 				inputStream = new FileInputStream(file);
-				Workbook workbook = WorkbookFactory.create(inputStream);
+				workbook = WorkbookFactory.create(inputStream);
 				Sheet sheet = workbook.getSheetAt(0);
 				int first = sheet.getFirstRowNum();
 				Row preDayRow = sheet.getRow(first + 1);
@@ -494,6 +466,7 @@ public class BRiches implements CrawlerDown {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
+			IOUtils.closeQuietly(workbook);
 			IOUtils.closeQuietly(outputStream);
 			IOUtils.closeQuietly(inputStream);
 		}
@@ -508,11 +481,12 @@ public class BRiches implements CrawlerDown {
 	private void writeHistoryDataToExcel(RicheBean bean, List<HistoryBean> datas) {
 		InputStream inputStream = null;
 		OutputStream outputStream = null;
+		Workbook workbook = null;
 		try {
 			if (Objects.nonNull(datas) && datas.size() > 0) {
 				datas.sort((o1, o2) -> o2.getDate().compareTo(o1.getDate()));
 				inputStream = new FileInputStream(new File(ResourceUtils.getFile(dataPath), "share.xlsx"));
-				Workbook workbook = WorkbookFactory.create(inputStream);
+				workbook = WorkbookFactory.create(inputStream);
 				workbook.setSheetName(0, bean.getCode());
 				Sheet sheet = workbook.getSheetAt(0);
 				for (int i = 0; i < datas.size(); i++) {
@@ -529,6 +503,7 @@ public class BRiches implements CrawlerDown {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
+			IOUtils.closeQuietly(workbook);
 			IOUtils.closeQuietly(outputStream);
 			IOUtils.closeQuietly(inputStream);
 		}
@@ -568,9 +543,7 @@ public class BRiches implements CrawlerDown {
 			HistoryResult historyResult = restTemplate.getForObject(new URI(url), HistoryResult.class);
 			this.writeHistoryDataToExcel(bean, historyResult.getResults());
 
-		} catch (RestClientException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
+		} catch (RestClientException | URISyntaxException e) {
 			e.printStackTrace();
 		}
 	}
@@ -592,9 +565,7 @@ public class BRiches implements CrawlerDown {
 				RestTemplate restTemplate = new RestTemplate();
 				HistoryResult historyResult = restTemplate.getForObject(new URI(url), HistoryResult.class);
 				this.insertDataByExcel(bean, historyResult.getResults());
-			} catch (RestClientException e) {
-				e.printStackTrace();
-			} catch (URISyntaxException e) {
+			} catch (RestClientException | URISyntaxException e) {
 				e.printStackTrace();
 			}
 		}
@@ -817,9 +788,7 @@ public class BRiches implements CrawlerDown {
 					}
 				}
 				return sure && CODESTATUS.size() == result.getResults().size();
-			} catch (URISyntaxException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
+			} catch (URISyntaxException | IOException e) {
 				e.printStackTrace();
 			}
 		}
@@ -829,14 +798,6 @@ public class BRiches implements CrawlerDown {
 	@Override
 	public String executeTimeFormat() {
 		return null;
-	}
-
-	public String getDataPath() {
-		return dataPath;
-	}
-
-	public void setDataPath(String dataPath) {
-		this.dataPath = dataPath;
 	}
 
 }

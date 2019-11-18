@@ -1,18 +1,13 @@
 package com.app.crawler;
 
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.RejectedExecutionHandler;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.app.crawler.base.RCache;
 import com.app.crawler.riches.BRiches;
+
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 所有爬虫抓取
@@ -20,25 +15,27 @@ import com.app.crawler.riches.BRiches;
 public class CrawlerMain {
 	
 	public static void main(String[] args) {
+		System.out.println("开始启动程序.....");
 		RCache rCache = new RCache();
 		rCache.loadCatConfig();
-		
+		System.out.println("完成配置加载.....");
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				System.out.println("任务正在运行:"+(new Date().getTime()));
+			}
+		},0,1000*10);
+        timer.schedule(new TimerTask() {
             public void run() {
-//                CrawlerDown down1 = new Department();
-//                down1.start();
-//                CrawlerDown down2 = new WeatherRecordTask();
-//                down2.start();
-//                CrawlerDown down3 = new MainParse();
-//                down3.start();
+            	
             	BRiches bRiches = new BRiches();
             	if (!bRiches.isRuning()) {
+            		System.out.println("开始执行任务......");
             		bRiches.start();
 				}
             }
         }, 0, Integer.valueOf(RCache.CAT_CACHE.get("periodTime").getValue()));
-        
 	}
 	
 	

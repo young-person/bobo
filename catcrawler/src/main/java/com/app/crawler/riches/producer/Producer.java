@@ -9,7 +9,6 @@ import com.app.crawler.riches.RicheTarget;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -62,8 +61,6 @@ public class Producer extends BaseClass{
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
 	}
