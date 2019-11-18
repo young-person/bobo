@@ -1,15 +1,22 @@
 package com.app.crawler.riches;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.app.crawler.base.CrawlerDown;
-import com.app.crawler.base.RCache;
-import com.app.crawler.pojo.RichesData;
-import com.app.crawler.request.RestRequest;
-import com.app.crawler.riches.pojo.*;
-import com.app.crawler.riches.producer.Producer.CallBack;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -20,11 +27,20 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.*;
-import java.net.URISyntaxException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.app.crawler.base.CrawlerDown;
+import com.app.crawler.base.RCache;
+import com.app.crawler.pojo.RichesData;
+import com.app.crawler.request.RestRequest;
+import com.app.crawler.riches.pojo.HistoryBean;
+import com.app.crawler.riches.pojo.HistoryResult;
+import com.app.crawler.riches.pojo.RicheBean;
+import com.app.crawler.riches.pojo.RicheResult;
+import com.app.crawler.riches.pojo.ShareInfo;
+import com.app.crawler.riches.producer.Producer.CallBack;
 
 public class BRiches implements CrawlerDown {
 
@@ -251,7 +267,7 @@ public class BRiches implements CrawlerDown {
 			for (int k = start; k <= end; k++) {
 				for (int j = 1; j <= 4; j++) {
 					String url = String.format(wyUrl, richeBean.getCode(), k, j);
-					LOGGER.info("股票代码：【{}】,获取历史数据URL：【{}】", richeBean.getCode(), url);
+					LOGGER.info("股票代码：【{}】,获取历史数据URL：【{}】，总共有【{}】行，已经抓取到第【{}】行", richeBean.getCode(), url,list.size(),index);
 					String content = request.doGet(url);
 					Document bs = Jsoup.parse(content);
 					Elements data = bs.select("table.table_bg001").select(".border_box").select(".limit_sale")
@@ -421,6 +437,7 @@ public class BRiches implements CrawlerDown {
 
 				outputStream = new FileOutputStream(this.getExcelPath(bean));
 				workbook.write(outputStream);
+				outputStream.flush();
 			} else {
 				this.writeHistoryData(bean);
 			}
@@ -460,6 +477,7 @@ public class BRiches implements CrawlerDown {
 				}
 				outputStream = new FileOutputStream(this.getExcelPath(bean));
 				workbook.write(outputStream);
+				outputStream.flush();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -590,12 +608,19 @@ public class BRiches implements CrawlerDown {
 			if (!file.exists()) {
 				file.createNewFile();
 			}
-			FileOutputStream os = new FileOutputStream(file);
-			JSON.writeJSONString(os, handResult, SerializerFeature.QuoteFieldNames);
+			FileOutputStream os = null;
+			try {
+				os = new FileOutputStream(file);
+				JSON.writeJSONString(os, handResult, SerializerFeature.QuoteFieldNames);
 
-			for (RicheBean bean : handResult.getResults()) {
-				CODESTATUS.put(bean.getCode(), false);
+				for (RicheBean bean : handResult.getResults()) {
+					CODESTATUS.put(bean.getCode(), false);
+				}
+				os.flush();
+			} finally {
+				IOUtils.closeQuietly(os);
 			}
+			
 		}
 		return handResult;
 	}

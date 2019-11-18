@@ -57,9 +57,10 @@ public abstract class ExcelService extends BaseClass {
 
 		InputStream inputStream = null;
 		OutputStream outputStream = null;
+		Workbook workbook = null;
 		try {
 			inputStream = new FileInputStream(getInPath());
-			Workbook workbook = WorkbookFactory.create(inputStream);
+			workbook = WorkbookFactory.create(inputStream);
 			if (Objects.nonNull(getName())) {
 				workbook.setSheetName(0, getName());
 			}
@@ -74,6 +75,7 @@ public abstract class ExcelService extends BaseClass {
 			outputStream = new FileOutputStream(getOutFile());
 			workbook.write(outputStream);
 		} catch (IOException e) {
+			IOUtils.closeQuietly(workbook);
 			IOUtils.closeQuietly(outputStream);
 			IOUtils.closeQuietly(inputStream);
 		}
@@ -94,10 +96,11 @@ public abstract class ExcelService extends BaseClass {
 			return;
 		}
 		InputStream inputStream = null;
+		Workbook workbook = null;
 		try {
 			File file = getInPath();
 			inputStream = new FileInputStream(file);
-			Workbook workbook = WorkbookFactory.create(inputStream);
+			workbook = WorkbookFactory.create(inputStream);
 
 			Sheet sheet = workbook.getSheetAt(0);
 			int lastNum = sheet.getLastRowNum();
@@ -107,12 +110,17 @@ public abstract class ExcelService extends BaseClass {
 		} catch (IOException e) {
 			LOGGER.error("写入数据到excel失败", e);
 		} finally {
+			IOUtils.closeQuietly(workbook);
 			IOUtils.closeQuietly(inputStream);
 		}
 
 	}
 
+	
 	public interface CallBack<T> {
 		void writeExcel(int index, T bean, Sheet sheet);
 	}
+	
+	
+	
 }
