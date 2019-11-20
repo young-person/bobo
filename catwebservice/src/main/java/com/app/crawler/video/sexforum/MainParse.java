@@ -2,6 +2,7 @@ package com.app.crawler.video.sexforum;
 
 import com.app.crawler.base.CFilter;
 import com.app.crawler.base.CrawlerDown;
+import com.app.crawler.base.RCache;
 import com.app.crawler.pojo.CNode;
 import com.app.crawler.request.RestRequest;
 import org.apache.commons.lang3.StringUtils;
@@ -20,7 +21,7 @@ import java.util.List;
  */
 public class MainParse implements CrawlerDown {
 
-    public static final String DOMIAN = "https://www.dd18ll.space/%s";
+    public static final String DOMIAN = RCache.CAT_CACHE.get("DOMIAN").getValue();
 
     private static final String LOGIN_URL = "https://www.dd18ll.info/member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes";
 

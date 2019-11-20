@@ -1,21 +1,12 @@
 package com.app.crawler.pojo;
 
-import java.io.Serializable;
-
-
 /**
  * @Description: TODO
  * @date 2019年11月12日 下午10:39:58
  * @ClassName: RichesData  东方财富网数据
  */
-public class RichesData implements Serializable {
+public class RichesData {
 
-	/**
-	 * @Fields serialVersionUID : TODO
-	 * @data 2019年11月12日 下午10:40:31
-	 */
-	private static final long serialVersionUID = -7983215252778254005L;
-	
 	private String f1;
 	@RName(value="昨收")
 	private String f2;
@@ -35,8 +26,10 @@ public class RichesData implements Serializable {
 	private String f9;
 	private String f10;
 	private String f11;
+	@RName(value="代码")
 	private String f12;
 	private String f13;
+	@RName(value="名称")
 	private String f14;
 	private String f15;
 	private String f16;
@@ -134,11 +127,15 @@ public class RichesData implements Serializable {
 	private String f97;
 	private String f98;
 	private String f99;
+	@RName(value="行业类型")
 	private String f100;
+	@RName(value="名称")
 	private String f101;
+	@RName(value="所属板块地区")
 	private String f102;
 	@RName(value="关联板块")
 	private String f103;
+	@RName(value="代码")
 	private String f104;
 	private String f105;
 	private String f106;

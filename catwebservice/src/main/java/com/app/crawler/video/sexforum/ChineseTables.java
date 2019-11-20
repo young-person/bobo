@@ -1,6 +1,7 @@
 package com.app.crawler.video.sexforum;
 
 import com.app.crawler.base.CrawlerDown;
+import com.app.crawler.base.RCache;
 import com.app.crawler.request.RestRequest;
 import com.app.crawler.video.StartDown;
 import com.bobo.base.BaseClass;
@@ -31,7 +32,7 @@ public abstract class ChineseTables extends BaseClass implements StartDown {
 
     protected String path;
 
-    protected String folder = "/app/datas/sexforum/";
+    protected String folder = RCache.CAT_CACHE.get("sexforumPath").getValue();
 
     @Override
     public void startMode() {

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.*;
 import java.lang.reflect.Field;
@@ -23,6 +24,29 @@ public class RLoadXml implements RLoad<Data> {
     private static final Logger LOGGER = LoggerFactory.getLogger(RLoadXml.class);
     private Object bean;
 
+    public String convertToXml(Object obj,String path) {
+        // 创建输出流
+        StringWriter sw = new StringWriter();
+        FileOutputStream outputStream = null;
+        try {
+            // 利用jdk中自带的转换类实现
+            JAXBContext context = JAXBContext.newInstance(obj.getClass());
+
+            Marshaller marshaller = context.createMarshaller();
+            // 格式化xml输出的格式
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
+            // 将对象转换成输出流形式的xml
+            marshaller.marshal(obj, sw);
+            StringBuilder builder = new StringBuilder(path);
+            builder.append("schedule.xml");
+            outputStream = new FileOutputStream(new File(builder.toString()));
+
+            outputStream.write(sw.toString().getBytes(),0,sw.toString().getBytes().length);
+        } catch (JAXBException | IOException e) {
+            e.printStackTrace();
+        }
+        return sw.toString();
+    }
     public <T> List<String> getBeanValues(T bean) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         Field[] fields = bean.getClass().getDeclaredFields();
         List<String> values = new ArrayList<>(fields.length);
@@ -95,9 +119,6 @@ public class RLoadXml implements RLoad<Data> {
         return t;
     }
 
-    public static void main(String[] args) {
-
-    }
     @Override
     public Data getDataFromXml(String path) {
         Data data = null;

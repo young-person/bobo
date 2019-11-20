@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <title>数据通知界面界面</title>
+    <#include "common/include.html" />
+    <script src="https://cdn.bootcss.com/socket.io/2.2.0/socket.io.js"></script>
+</head>
+
+<body class="no-skin">
+<div class="main-container ace-save-state" id="main-container">
+    <div class="main-content">
+    	<div class="col-xs-12">
+ 		    <table class="table table-striped table-bordered table-hover">
+                <tr>
+                    <th class="center">类型搜索</th><td><input type="text" class="form-control" name= "num" value="7" ></td>
+                    <th class="center"><button type="button" class="btn btn-primary" onclick="send()">查询</button></th>
+                </tr>
+             </table>
+    	</div>
+        <div class="col-xs-12">
+            <h3 class="header smaller lighter blue">数据面板</h3>
+            <div>
+                <table id="dataTable" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th class="center">名称</th>
+                            <th class="center">涨幅</th>
+                            <th class="center">换手率</th>
+                            <th class="center">推荐指数</th>
+                            <th class="center">操作</th>
+                            <th class="center">详情</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+    /**
+     * 前端js的 socket.emit("事件名","参数数据")方法，是触发后端自定义消息事件的时候使用的,
+     * 前端js的 socket.on("事件名",匿名函数(服务器向客户端发送的数据))为监听服务器端的事件
+     **/
+    var socket = io.connect("http://localhost:10001?mac=2");
+    var firstconnect = true;
+
+    function connect() {
+        if(firstconnect) {
+            socket.on('reconnect', function(){ status_update("Reconnected to Server"); });
+            socket.on('reconnecting', function( nextRetry ){ status_update("Reconnecting in "
+            + nextRetry + " seconds"); });
+            socket.on('reconnect_failed', function(){ message("Reconnect Failed"); });
+            firstconnect = false;
+        } else {
+            socket.socket.reconnect();
+        }
+    }
+
+    //监听服务器连接事件
+    socket.on('connect', function(){});
+    //监听服务器关闭服务事件
+    socket.on('disconnect', function(){});
+    //监听服务器端发送消息事件
+    socket.on('refreshData', function(data) {
+        console.log("服务器发送的消息是："+data);
+        var html = [];
+        for(var k = 0; k < data.length; k++){
+            var e = data[k];
+            html.push("<tr>");
+            html.push("<td class=\"center\">");
+            html.push(e['stockName']);
+            html.push("</td>");
+            html.push("<td class=\"center\">");
+            html.push(e['risePrice']);
+            html.push("</td>");
+            html.push("<td class=\"center\">");
+            html.push(e['hand']);
+            html.push("</td>");
+            html.push("<td class=\"center\">");
+            html.push(e['l']);
+            html.push("</td>");
+            html.push("<td class=\"center\">");
+            html.push("<a target=\"_blank\" class='btn btn-outline-success btn-sm' href='"+e["detailUrl"]+"'>查看详情</a>");
+            html.push("</td>");
+            html.push("<td class=\"center\">");
+            html.push(e['stockName']);
+            html.push("</td>");
+            html.push("</tr>");
+        }
+        $("#dataTable tbody").html(html.join(""));
+    });
+
+    //断开连接
+    function disconnect() {
+        socket.disconnect();
+    }
+    //点击发送消息触发
+    function send() {
+        var limit = $("input[name='limit']").val();
+        var num = $("input[name='num']").val();
+        var obj = {"limit":limit,"num":num};
+        socket.emit('refreshData', obj);
+    }
+    send();
+</script>
+</html>
+
+

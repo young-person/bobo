@@ -26,13 +26,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class BRiches extends BRichesBase implements CrawlerDown {
 
 	private RestRequest request = new RestRequest();
 
-	public static final Map<String, Boolean> CODESTATUS = new ConcurrentHashMap<String, Boolean>();
+	private static AtomicBoolean ISRUN = new AtomicBoolean(false);
 
 	/**
 	 * 通用请求参数数据
@@ -84,6 +84,11 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	 */
 	private String wyUrl = "http://quotes.money.163.com/trade/lsjysj_%s.html?year=%s&season=%s";
 
+	/**
+	 * 同花顺详情
+	 */
+	private String stockPageUrl = "http://stockpage.10jqka.com.cn/%s/";
+
 	private RicheCompute richeCompute;
 
 	public void setRicheCompute(RicheCompute richeCompute) {
@@ -96,9 +101,8 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	 * @param callBack
 	 */
 	public void calculate(CallBack<RicheTarget> callBack) throws IOException, IllegalAccessException, InvocationTargetException {
-		LOGGER.info("开始股市数据计算任务");
-		boolean sure = this.multiplexThead();
-		if (!sure) {
+		LOGGER.info("开始股市数据计算任务,计算状态；【{}】",isRuning());
+		if (!isRuning()) {
 			return;
 		}
 		File file = new File(dataPath);
@@ -111,7 +115,6 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 				String name = e.getName();
 				String[] arr = name.replace(".xlsx", "").split("_");
 				RicheTarget target = richeCompute.compute(convertHistory(datas), arr[1]);
-				CODESTATUS.put(arr[0], true);
 				String code_type = null;
 				for (String key : typeName.keySet()) {
 					if (typeName.get(key).equals(f.getName())) {
@@ -126,6 +129,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 			}
 		}
 		sendData();
+		ISRUN.set(false);
 		LOGGER.info("结束此次股市数据计算任务");
 	}
 
@@ -169,6 +173,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	@Override
 	public void start() {
 		LOGGER.info("开始抓取股市数据");
+		ISRUN.set(true);
 		try {
 			this.sureMkdirFolder();
 			RicheResult handResult = getAllRicheBeans();
@@ -343,11 +348,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	 * @date 2019年11月16日 上午11:27:49
 	 */
 	private void writeAllTipData(String today) throws IOException {
-		String allResult = request.doGet(allUrl);
-
-		JSONObject object = JSONObject.parseObject(this.trimJquery(allResult).toString());
-
-		JSONArray array = object.getJSONArray("data");
+		JSONArray array = this.getAllTips();
 
 		File file = new File(RCache.CAT_CACHE.get("dataPath").getValue() +today+ ".json");
 		if (file.exists()) {
@@ -355,6 +356,15 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 		}
 		file.createNewFile();
 		JSON.writeJSONString(new FileOutputStream(file), array, SerializerFeature.QuoteFieldNames);
+	}
+
+	public JSONArray getAllTips(){
+		String allResult = request.doGet(allUrl);
+
+		JSONObject object = JSONObject.parseObject(this.trimJquery(allResult).toString());
+
+		JSONArray array = object.getJSONArray("data");
+		return array;
 	}
 
 	/**
@@ -444,10 +454,6 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 			try {
 				os = new FileOutputStream(file);
 				JSON.writeJSONString(os, handResult, SerializerFeature.QuoteFieldNames);
-
-				for (RicheBean bean : handResult.getResults()) {
-					CODESTATUS.put(bean.getCode(), false);
-				}
 				os.flush();
 			} finally {
 				IOUtils.closeQuietly(os);
@@ -475,26 +481,6 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 		}
 		return builder.toString();
 	}
-	/**
-	 * 根据所有加载的数据来判断 是否文件可以被进行读了
-	 *
-	 * @return
-	 */
-	private boolean multiplexThead() throws IOException {
-		RicheResult result = this.getAllRicheBeans();
-		while (true) {
-			int size = 0;
-			for (String key : CODESTATUS.keySet()) {
-				if (!CODESTATUS.get(key)) {
-					size++;
-				}
-			}
-			if (size == CODESTATUS.size() && CODESTATUS.size() == result.getResults().size()) {
-				break;
-			}
-		}
-		return true;
-	}
 
 	@Override
 	public boolean stop() {
@@ -508,21 +494,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 
 	@Override
 	public boolean isRuning() {
-		try {
-			boolean sure = false;
-			RicheResult result = getAllRicheBeans();
-			for (String key : CODESTATUS.keySet()) {
-				if (CODESTATUS.get(key)) {
-					sure = CODESTATUS.get(key);
-					break;
-				}
-			}
-			LOGGER.info("是否正在运行：{}",sure && CODESTATUS.size() == result.getResults().size());
-			return sure && CODESTATUS.size() == result.getResults().size();
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
-		return false;
+		return ISRUN.get();
 	}
 
 	@Override

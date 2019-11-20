@@ -27,10 +27,9 @@ public class Producer extends BaseClass{
 
 	private final float hand = 0.5f;
 
-	public Producer(){
-	}
+	public Producer(){}
 
-	public static interface CallBack<T>{
+	public interface CallBack<T>{
 		T add(T t);
 	}
 	public void repeatCalculate(Integer limit,Integer num) {

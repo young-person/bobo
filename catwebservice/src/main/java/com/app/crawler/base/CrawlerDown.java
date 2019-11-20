@@ -1,5 +1,6 @@
 package com.app.crawler.base;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -7,7 +8,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Objects;
 
 /**
  * 下载
@@ -68,16 +68,8 @@ public interface CrawlerDown{
         } catch (IOException e) {
             LOGGER.error("数据写入到目录:[{}]失败:[{}]", path, str, e);
         }finally {
-            if (Objects.nonNull(printWriter)){
-                printWriter.close();
-            }
-            if (Objects.nonNull(writer)){
-                try {
-                    writer.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            IOUtils.closeQuietly(printWriter);
+            IOUtils.closeQuietly(writer);
         }
     }
 }

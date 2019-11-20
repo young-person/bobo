@@ -4,6 +4,7 @@ import com.app.config.CatWebServiceProperty;
 import com.app.crawler.base.RCache;
 import com.app.crawler.riches.BRiches;
 import com.app.crawler.riches.producer.DataEventHandler;
+import com.app.crawler.video.sexforum.MainParse;
 import com.corundumstudio.socketio.SocketIOServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         RCache rCache = new RCache();
+        rCache.setPath(catWebServiceProperty.getCollocation());
         rCache.loadCatConfig();
 
         server.start();
@@ -44,6 +46,8 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
         timer.schedule(new TimerTask() {
             public void run() {
 
+                MainParse parse = new MainParse();
+                parse.start();
                 BRiches bRiches = new BRiches();
                 if (!bRiches.isRuning()) {
                     System.out.println("开始执行任务......");
