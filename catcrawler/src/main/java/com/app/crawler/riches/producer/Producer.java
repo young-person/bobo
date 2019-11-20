@@ -8,6 +8,7 @@ import com.app.crawler.riches.RicheComputeAbstract;
 import com.app.crawler.riches.RicheTarget;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -57,7 +58,7 @@ public class Producer extends BaseClass{
 				}
 				return t;
 			});
-		} catch (IllegalAccessException | IOException e) {
+		} catch (IllegalAccessException | IOException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
 	}

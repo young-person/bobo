@@ -6,6 +6,7 @@ import com.app.crawler.pojo.Property;
 import com.app.crawler.pojo.RName;
 import com.app.crawler.riches.pojo.Bean;
 import com.app.crawler.riches.pojo.Data;
+import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +15,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.*;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public class RLoadXml implements RLoad<Data> {
@@ -21,22 +23,18 @@ public class RLoadXml implements RLoad<Data> {
     private static final Logger LOGGER = LoggerFactory.getLogger(RLoadXml.class);
     private Object bean;
 
-    public <T> List<String> getBeanValues(T bean){
+    public <T> List<String> getBeanValues(T bean) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         Field[] fields = bean.getClass().getDeclaredFields();
         List<String> values = new ArrayList<>(fields.length);
         for(int index = 0; index < fields.length; index ++){
             Field field = fields[index];
             field.setAccessible(true);
             String value = null;
-            try {
-                Object o = field.get(field.getName());
-                if (Objects.nonNull(o)){
-                    value = o.toString();
-                }else{
-                    value = "";
-                }
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
+            Object o = BeanUtils.getProperty(bean, field.getName());
+            if (Objects.nonNull(o)){
+                value = o.toString();
+            }else{
+                value = "";
             }
             values.add(value);
         }
@@ -48,7 +46,7 @@ public class RLoadXml implements RLoad<Data> {
      * @param <T>
      * @return
      */
-    public <T> List<Property> converClassToModel(T bean){
+    public <T> List<Property> converClassToModel(T bean) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         Field[] fields = bean.getClass().getDeclaredFields();
         List<Property> datas = new ArrayList<>(fields.length);
         for(int index = 0; index < fields.length; index ++){
@@ -62,15 +60,11 @@ public class RLoadXml implements RLoad<Data> {
                 RName rname = rName[0];
                 mark = rname.value();
             }
-            try {
-                Object o = field.get(name);
-                if (Objects.nonNull(o)){
-                    value = o.toString();
-                }else{
-                    value = "";
-                }
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
+            Object o = BeanUtils.getProperty(bean, name);
+            if (Objects.nonNull(o)){
+                value = o.toString();
+            }else{
+                value = "";
             }
             Property p = new Property();
             p.setMark(mark);
@@ -81,7 +75,7 @@ public class RLoadXml implements RLoad<Data> {
         return datas;
     }
 
-    public <T> T convertModelToClass(T t,List<Property> properties){
+    public <T> T convertModelToClass(T t,List<Property> properties) throws InvocationTargetException, IllegalAccessException {
         Field[] fields = bean.getClass().getDeclaredFields();
         for(int index = 0; index < fields.length; index ++){
             Field field = fields[index];
@@ -92,11 +86,7 @@ public class RLoadXml implements RLoad<Data> {
                 if (name.equals(property.getName())){
                     property.getName();
                     property.getMark();
-                    try {
-                        field.set(t,property.getValue());
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
+                    BeanUtils.setProperty(t, name,property.getValue());
                     break;
                 }
             }

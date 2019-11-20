@@ -3,9 +3,11 @@ package com.app.crawler.riches.producer;
 import com.app.crawler.riches.BRichesBase;
 import com.app.crawler.riches.pojo.HistoryBean;
 import com.app.crawler.riches.pojo.RicheBean;
+import org.apache.commons.beanutils.BeanUtils;
 
 import java.io.*;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,7 +17,7 @@ import static com.app.crawler.base.CrawlerDown.SPACE;
 public class PersistTxt extends BRichesBase implements Persist {
 
     @Override
-    public void writeHistoryDataToFile(RicheBean bean, List<HistoryBean> datas) throws IOException {
+    public void writeHistoryDataToFile(RicheBean bean, List<HistoryBean> datas) throws IOException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         File file = this.getExcelPath(bean,".txt");
         if (file.exists()){
             file.delete();
@@ -31,7 +33,7 @@ public class PersistTxt extends BRichesBase implements Persist {
     }
 
     @Override
-    public List<HistoryBean> readHistoryFromFile(File file) throws IOException, IllegalAccessException {
+    public List<HistoryBean> readHistoryFromFile(File file) throws IOException, IllegalAccessException, InvocationTargetException {
         FileInputStream inputStream = new FileInputStream(file);
         InputStreamReader streamReader = new InputStreamReader(inputStream, "UTF-8");
         BufferedReader bufferedReader = new BufferedReader(streamReader);
@@ -45,8 +47,7 @@ public class PersistTxt extends BRichesBase implements Persist {
                     Field[] fields = bean.getClass().getFields();
                     for(int index = 0; index < fields.length; index ++){
                         Field field = fields[index];
-                        field.setAccessible(true);
-                        field.set(bean, values[index]);
+                        BeanUtils.setProperty(bean,field.getName(),values[index]);
                     }
                     result.add(bean);
                 }

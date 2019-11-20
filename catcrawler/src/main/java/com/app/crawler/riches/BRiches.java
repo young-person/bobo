@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -95,7 +96,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	 *
 	 * @param callBack
 	 */
-	public void calculate(CallBack<RicheTarget> callBack) throws IOException, IllegalAccessException {
+	public void calculate(CallBack<RicheTarget> callBack) throws IOException, IllegalAccessException, InvocationTargetException {
 		LOGGER.info("开始股市数据计算任务");
 		boolean sure = this.multiplexThead();
 		if (!sure) {
@@ -182,7 +183,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 			List<RicheBean> list = new ArrayList<>();
 			parseContentData(datas, list, handResult);
 			this.getHistoryDataByWy(list);//每次都全量
-		} catch (IOException e) {
+		} catch (IOException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
 			LOGGER.error("抓取出现错误", e);
 		}
 		LOGGER.info("结束此次抓取股市数据任务");
@@ -193,7 +194,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	 *
 	 * @param list
 	 */
-	private void getHistoryDataByWy(List<RicheBean> list) throws IOException {
+	private void getHistoryDataByWy(List<RicheBean> list) throws IOException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
 		String year = dateFormat.format(new Date());
@@ -324,7 +325,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	 *
 	 * @param bean
 	 */
-	private void writeHistoryData(RicheBean bean) throws IOException {
+	private void writeHistoryData(RicheBean bean) throws IOException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
 		String url = String.format(dayUrl, bean.getCode(), bean.getCodeType(), 18000);
 		LOGGER.info("股票：【{}】,获取历史数据URL：【{}】", bean.getStockName(), url);
 		String content = request.doGet(url);
