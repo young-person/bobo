@@ -1,0 +1,61 @@
+package com.app.crawler.riches.producer;
+
+import com.app.crawler.riches.BRichesBase;
+import com.app.crawler.riches.pojo.HistoryBean;
+import com.app.crawler.riches.pojo.RicheBean;
+
+import java.io.*;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import static com.app.crawler.base.CrawlerDown.SPACE;
+
+public class PersistTxt extends BRichesBase implements Persist {
+
+    @Override
+    public void writeHistoryDataToFile(RicheBean bean, List<HistoryBean> datas) throws IOException {
+        File file = this.getExcelPath(bean,".txt");
+        if (file.exists()){
+            file.delete();
+        }
+        file.createNewFile();
+        RLoadXml loadXml = new RLoadXml();
+        for (int i = 0; i < datas.size(); i++) {
+            HistoryBean historyBean = datas.get(i);
+            List<String> values = loadXml.getBeanValues(historyBean);
+            String content = String.join(SPACE, values);
+            loadXml.writeFile(file,content);
+        }
+    }
+
+    @Override
+    public List<HistoryBean> readHistoryFromFile(File file) throws IOException, IllegalAccessException {
+        FileInputStream inputStream = new FileInputStream(file);
+        InputStreamReader streamReader = new InputStreamReader(inputStream, "UTF-8");
+        BufferedReader bufferedReader = new BufferedReader(streamReader);
+        String line = null;
+        List<HistoryBean> result = new ArrayList<>();
+        try{
+            while ((line = bufferedReader.readLine()) != null) {
+                if (Objects.nonNull(line)){
+                    String[] values = line.split(SPACE);
+                    HistoryBean bean = new HistoryBean();
+                    Field[] fields = bean.getClass().getFields();
+                    for(int index = 0; index < fields.length; index ++){
+                        Field field = fields[index];
+                        field.setAccessible(true);
+                        field.set(bean, values[index]);
+                    }
+                    result.add(bean);
+                }
+            }
+        }finally {
+            bufferedReader.close();
+            streamReader.close();
+            inputStream.close();
+        }
+        return result;
+    }
+}

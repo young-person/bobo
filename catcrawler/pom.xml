@@ -52,7 +52,6 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
 		</dependency>
-
 	</dependencies>
 	<build>
 		<finalName>catcrawler</finalName>

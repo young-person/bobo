@@ -7,7 +7,6 @@ import com.app.crawler.riches.BRiches;
 import com.app.crawler.riches.RicheComputeAbstract;
 import com.app.crawler.riches.RicheTarget;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -58,9 +57,7 @@ public class Producer extends BaseClass{
 				}
 				return t;
 			});
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (IllegalAccessException | IOException e) {
 			e.printStackTrace();
 		}
 	}

@@ -15,6 +15,11 @@ public class HistoryBean implements Serializable{
 	 */ 
 	private static final long serialVersionUID = -4601440188712801008L;
 	/**
+	 * 日期
+	 */
+	private String date;
+
+	/**
 	 * 开盘价
 	 */
 	private String openPrice;
@@ -38,10 +43,6 @@ public class HistoryBean implements Serializable{
 	 * 总金额
 	 */
     private String money;
-	/**
-	 * 日期
-	 */
-    private String date;
 	/**
 	 * 
 	 */

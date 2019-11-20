@@ -1,10 +1,8 @@
 package com.app.crawler.request;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Objects;
-
+import com.app.crawler.base.BaseClass;
+import com.app.crawler.request.client.DefaultHttpRequestRetryHandler;
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
@@ -25,8 +23,10 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.util.EntityUtils;
 
-import com.app.crawler.base.BaseClass;
-import com.app.crawler.request.client.DefaultHttpRequestRetryHandler;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Objects;
 
 public class RestRequest extends BaseClass {
 	private PoolingHttpClientConnectionManager clientConnectionManager;
@@ -35,13 +35,6 @@ public class RestRequest extends BaseClass {
 	private HttpClientContext context = HttpClientContext.adapt(new BasicHttpContext());
 
 	private String charset = "UTF-8";
-	
-	
-	public String getCharset() {
-		return charset;
-	}
-
-
 	public void setCharset(String charset) {
 		this.charset = charset;
 	}
@@ -55,7 +48,7 @@ public class RestRequest extends BaseClass {
 	public RestRequest() {
 		this.clientConnectionManager = new PoolingHttpClientConnectionManager();
 		clientConnectionManager.setValidateAfterInactivity(3 * 1000);// 提交请求前测试连接是否可用
-		
+
 		httpClient = HttpClientBuilder.create().setConnectionManager(clientConnectionManager).setRetryHandler(new DefaultHttpRequestRetryHandler());
 		
 	}
@@ -85,17 +78,11 @@ public class RestRequest extends BaseClass {
 		} catch (UnsupportedOperationException | IOException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				// 当不再需要HttpClient实例时,关闭连接管理器以确保释放所有占用的系统资源
-				if (Objects.nonNull(inputStream)) {
-					inputStream.close();
-				}
-				request.reset();
-				request.releaseConnection();
-				httpResponse.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			// 当不再需要HttpClient实例时,关闭连接管理器以确保释放所有占用的系统资源
+			request.reset();
+			request.releaseConnection();
+			IOUtils.closeQuietly(inputStream);
+			IOUtils.closeQuietly(httpResponse);
 		}
 		return result;
 	}
@@ -120,13 +107,7 @@ public class RestRequest extends BaseClass {
 			// 当不再需要HttpClient实例时,关闭连接管理器以确保释放所有占用的系统资源
 			request.reset();
 			request.releaseConnection();
-			if (Objects.nonNull(httpResponse)) {
-				try {
-					httpResponse.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+			IOUtils.closeQuietly(httpResponse);
 		}
 		return result;
 	}
@@ -155,14 +136,10 @@ public class RestRequest extends BaseClass {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				// 当不再需要HttpClient实例时,关闭连接管理器以确保释放所有占用的系统资源
-				request.reset();
-				request.releaseConnection();
-				httpResponse.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			// 当不再需要HttpClient实例时,关闭连接管理器以确保释放所有占用的系统资源
+			request.reset();
+			request.releaseConnection();
+			IOUtils.closeQuietly(httpResponse);
 		}
 		return result;
 	}
@@ -179,7 +156,6 @@ public class RestRequest extends BaseClass {
 			}
 
 			httpResponse = httpClient.build().execute(request, context);
-
 			int statusCode = httpResponse.getStatusLine().getStatusCode();
 			if (statusCode == HttpStatus.SC_OK) {
 				this.forEachCookies(httpResponse);
@@ -196,16 +172,10 @@ public class RestRequest extends BaseClass {
 			e.printStackTrace();
 		} finally {
 			// 当不再需要HttpClient实例时,关闭连接管理器以确保释放所有占用的系统资源
-			try {
-				if (Objects.nonNull(inputStream)) {
-					inputStream.close();
-				}
-				request.reset();
-				request.releaseConnection();
-				httpResponse.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			request.reset();
+			request.releaseConnection();
+			IOUtils.closeQuietly(inputStream);
+			IOUtils.closeQuietly(httpResponse);
 		}
 		return result;
 	}

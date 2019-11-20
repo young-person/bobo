@@ -121,6 +121,13 @@ public class RicheComputeAbstract implements RicheCompute{
 	private float getRippleValue(List<ShareInfo> datas,int n) {
 		float l = 0f;
 		int m = 1;
+		int rn = 0;
+		boolean[] b1 = new boolean[datas.size()];
+		boolean[] b2 = new boolean[datas.size()];
+		boolean[] b3 = new boolean[datas.size()];
+		boolean[] b4 = new boolean[datas.size()];
+		boolean[] b5 = new boolean[datas.size()];
+		
 		for(int k = datas.size() -1; k > 0 ; k --) {
 			RShareInfo bean1 = this.conveRShareInfo(datas.get(k));
 			if(m > n) {
@@ -128,15 +135,15 @@ public class RicheComputeAbstract implements RicheCompute{
 			}
 			m ++;
 			
-			if (bean1.getRisePrice() <= 5f) {
-				
+			if (bean1.getRisePrice() >= 0) {
+				rn += 1;
+			}else {
+				rn -= 1;
 			}
-			if (bean1.getRisePrice() >= 5f && bean1.getRisePrice() <= 7f) {
-				
-			}
-			if (bean1.getRisePrice() >= 7f) {
-				
-			}
+			b1[k] = bean1.getRisePrice() <= 5f;
+			b2[k] = bean1.getRisePrice() >= 5f && bean1.getRisePrice() <= 7f;
+			b3[k] = bean1.getRisePrice() >= 7f;
+			
 			List<Integer> results = new ArrayList<Integer>();
 			for(int j = 0; j < datas.size(); j++) {
 				if ((datas.size() - j - 1) > n) {

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data scan="true" scanPeriod="60">
+    <bean name="" mark="数据模板位置">
+        <property name="dataPath" mark="数据模板位置" value="\datas\share\" />
+    </bean>
+</data>
