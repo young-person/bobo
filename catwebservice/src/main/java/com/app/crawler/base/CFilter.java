@@ -1,4 +1,4 @@
-package com.app.crawler;
+package com.app.crawler.base;
 
 /** 
  * @Description: TODO

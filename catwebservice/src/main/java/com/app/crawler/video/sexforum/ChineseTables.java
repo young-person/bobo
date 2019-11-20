@@ -1,8 +1,8 @@
 package com.app.crawler.video.sexforum;
 
-import com.app.crawler.CrawlerDown;
+import com.app.crawler.base.CrawlerDown;
+import com.app.crawler.request.RestRequest;
 import com.app.crawler.video.StartDown;
-import com.app.utils.HttpUtil;
 import com.bobo.base.BaseClass;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.app.crawler.CrawlerDown.SPACE;
+import static com.app.crawler.base.CrawlerDown.SPACE;
 
 /**
  * @Description: TODO
@@ -24,6 +24,8 @@ import static com.app.crawler.CrawlerDown.SPACE;
  * @ClassName: ChineseTables
  */
 public abstract class ChineseTables extends BaseClass implements StartDown {
+
+    RestRequest restRequest = new RestRequest();
 
     private String url;
 
@@ -34,7 +36,7 @@ public abstract class ChineseTables extends BaseClass implements StartDown {
     @Override
     public void startMode() {
         LOGGER.info("请求地址为：【{}】",this.url);
-        String content = HttpUtil.doGetRequest(this.url);
+        String content = restRequest.doGet(this.url);
 
         Document document = Jsoup.parse(content);
         this.appendContentByDocument(document);
@@ -49,7 +51,7 @@ public abstract class ChineseTables extends BaseClass implements StartDown {
                     String url = nxtElement.attr("href");
                     if (StringUtils.isNoneBlank(url)) {
                         String nextUrl = String.format(MainParse.DOMIAN, trimSplit(url));
-                        content = HttpUtil.doGetRequest(nextUrl);
+                        content = restRequest.doGet(nextUrl);
                         document = Jsoup.parse(content);
                         appendContentByDocument(document);
                     } else {

@@ -2,24 +2,24 @@ package com.app.crawler.riches;
 
 import java.io.Serializable;
 
-/** 
+/**
  * @Description: TODO
  * @date 2019年11月2日 下午8:00:16 
- * @ClassName: RicheTarget 
+ * @ClassName: RicheTarget
  */
 public class RicheTarget implements Serializable{
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 650682697475506235L;
 
 	private float l;
-	
+
 	private String hand = "0";
-	
+
 	private String stockName;
-	
+
 	private String code;
 
 	private String risePrice;
@@ -105,5 +105,5 @@ public class RicheTarget implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 }

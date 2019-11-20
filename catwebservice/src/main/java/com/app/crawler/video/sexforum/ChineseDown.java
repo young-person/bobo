@@ -1,14 +1,16 @@
 package com.app.crawler.video.sexforum;
 
-import com.app.crawler.CFilter;
-import com.app.utils.HttpUtil;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +27,7 @@ public class ChineseDown extends ChineseTables{
 		for(Map<String, String> map: datas) {
 			String url = map.get("url");
 			String pageUrl = String.format(MainParse.DOMIAN,trimSplit(url));
-			String content = HttpUtil.doGetRequest(pageUrl);
+			String content = restRequest.doGet(pageUrl);
 			Document document = Jsoup.parse(content);
 			
 			Elements ts = document.select("span[id*=attach_]");
@@ -80,27 +82,19 @@ public class ChineseDown extends ChineseTables{
 	}
 	
 	private void downTorrent(String url,final String fileName) {
-		HttpUtil.doGetByUrlSsl(url, new CFilter<InputStream>() {
-			
-			@Override
-			public void excute(InputStream is) {
-				try {
-					File file = new File(folder+"torrent"+File.separator+fileName);
-					FileOutputStream fos = new FileOutputStream(file);
-					byte[] buffer = new byte[4096];
-					int len = -1;
-					while ((len = is.read(buffer)) != -1) {
-						fos.write(buffer, 0, len);
-					}
-					fos.close();
-					is.close();
-				} catch (FileNotFoundException e) {
-					LOGGER.error("文件：【{}】创建异常：【{}】",fileName,e);
-				} catch (IOException e) {
-					LOGGER.error("请求地址：【{}】异常：【{}】",url,e);
-				}
+		byte[] bytes = restRequest.doGetByte(url);
+		File file = new File(folder+"torrent"+File.separator+fileName);
+		FileOutputStream outputStream = null;
+		try {
+			outputStream = new FileOutputStream(file);
+			outputStream.write(bytes, 0, bytes.length);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			IOUtils.closeQuietly(outputStream);
+		}
 
-			}
-		});
 	}
 }

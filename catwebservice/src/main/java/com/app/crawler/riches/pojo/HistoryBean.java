@@ -1,19 +1,17 @@
 package com.app.crawler.riches.pojo;
 
-import java.io.Serializable;
-
-/** 
+/**
  * @Description: TODO
  * @date 2019年11月2日 上午8:15:49 
  * @ClassName: HistoryBean 
  */
-public class HistoryBean implements Serializable{
+public class HistoryBean{
 
-	/** 
-	 * @Fields serialVersionUID : TODO
-	 * @data 2019年11月2日 上午8:28:19 
-	 */ 
-	private static final long serialVersionUID = -4601440188712801008L;
+	/**
+	 * 日期
+	 */
+	private String date;
+
 	/**
 	 * 开盘价
 	 */
@@ -38,10 +36,6 @@ public class HistoryBean implements Serializable{
 	 * 总金额
 	 */
     private String money;
-	/**
-	 * 日期
-	 */
-    private String date;
 	/**
 	 * 
 	 */

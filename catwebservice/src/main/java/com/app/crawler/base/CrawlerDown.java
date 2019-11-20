@@ -1,4 +1,4 @@
-package com.app.crawler;
+package com.app.crawler.base;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

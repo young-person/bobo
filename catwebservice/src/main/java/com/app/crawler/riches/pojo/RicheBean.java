@@ -1,15 +1,12 @@
 package com.app.crawler.riches.pojo;
 
-import java.io.Serializable;
-
-/** 
+/**
  * @Description: TODO 每一股的当前详情情况
  * @date 2019年11月1日 下午10:29:46 
  * @ClassName: RicheBean 
  */
-public class RicheBean implements Serializable{
+public class RicheBean{
 
-	private static final long serialVersionUID = -2591538990263384052L;
 	private String code;
 	/**
 	 * 股票类型

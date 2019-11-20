@@ -1,11 +1,9 @@
 package com.app.crawler.video.sexforum;
 
-import com.app.crawler.CFilter;
-import com.app.crawler.CrawlerDown;
+import com.app.crawler.base.CFilter;
+import com.app.crawler.base.CrawlerDown;
 import com.app.crawler.pojo.CNode;
-import com.app.utils.HttpUtil;
-import com.app.utils.HttpUtil.HttpResult;
-import org.apache.commons.codec.digest.DigestUtils;
+import com.app.crawler.request.RestRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -13,9 +11,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Description: TODO
@@ -28,10 +24,11 @@ public class MainParse implements CrawlerDown {
 
     private static final String LOGIN_URL = "https://www.dd18ll.info/member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes";
 
+    RestRequest restRequest = new RestRequest();
     private void parseHome() {
-        this.login();
+//        this.login();
 
-        String content = HttpUtil.doGetRequest(String.format(DOMIAN, "portal.html"));
+        String content = restRequest.doGet(String.format(DOMIAN, "portal.html"));
 
         Document document = Jsoup.parse(content);
 
@@ -80,20 +77,20 @@ public class MainParse implements CrawlerDown {
         }
     }
 
-    private HttpResult login() {
-        Map<String, String> headParamsMap = new HashMap<String, String>();
-        Map<String, String> formMap = new HashMap<String, String>();
-
-        formMap.put("username", "fhaiwo");
-        formMap.put("password", DigestUtils.md5Hex("czb199345"));
-        formMap.put("fingerprint", "3942835952");
-        formMap.put("referer", "portal.html");
-        formMap.put("quickforward", "yes");
-        formMap.put("handlekey", "ls");
-        formMap.put("sectouchpoint", "0");
-
-        return HttpUtil.doPostGetgetHttpResult(LOGIN_URL, headParamsMap, formMap);
-    }
+//    private HttpResult login() {
+//        Map<String, String> headParamsMap = new HashMap<String, String>();
+//        Map<String, String> formMap = new HashMap<String, String>();
+//
+//        formMap.put("username", "fhaiwo");
+//        formMap.put("password", DigestUtils.md5Hex("czb199345"));
+//        formMap.put("fingerprint", "3942835952");
+//        formMap.put("referer", "portal.html");
+//        formMap.put("quickforward", "yes");
+//        formMap.put("handlekey", "ls");
+//        formMap.put("sectouchpoint", "0");
+//
+//        return HttpUtil.doPostGetgetHttpResult(LOGIN_URL, headParamsMap, formMap);
+//    }
 
     /**
      * 删除以/开头的字符串

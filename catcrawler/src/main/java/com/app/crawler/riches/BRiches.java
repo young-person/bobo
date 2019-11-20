@@ -6,7 +6,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.app.crawler.base.CrawlerDown;
 import com.app.crawler.base.RCache;
-import com.app.crawler.pojo.RichesData;
 import com.app.crawler.request.RestRequest;
 import com.app.crawler.riches.pojo.*;
 import com.app.crawler.riches.producer.Persist;
@@ -172,17 +171,15 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 		LOGGER.info("开始抓取股市数据");
 		try {
 			this.sureMkdirFolder();
-			/**
-			 * 基于平安银行数据获取 适用于IP没被加入到黑名单的时候 当开始的时候 进行模拟轮询 100次的ping 平安银行接口
-			 */
 			RicheResult handResult = getAllRicheBeans();
+
 			/**
 			 * 支持东方财富数据今日获取 适用于增量数据
 			 */
-			List<HistoryBean> datas = new ArrayList<>();
-			List<RicheBean> list = new ArrayList<>();
-			parseContentData(datas, list, handResult);
-			this.getHistoryDataByWy(list);//每次都全量
+//			List<HistoryBean> datas = new ArrayList<>();
+//			List<RicheBean> list = new ArrayList<>();
+//			parseContentData(datas, list, handResult);
+			this.getHistoryDataByWy(handResult.getResults());//每次都全量
 		} catch (IOException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
 			LOGGER.error("抓取出现错误", e);
 		}
@@ -200,6 +197,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 		String year = dateFormat.format(new Date());
 		Integer start = 1990;
 		Integer end = Integer.valueOf(year);
+		String today = "0";
 		for (int index = 0; index < list.size(); index++) {
 			RicheBean richeBean = list.get(index);
 			List<HistoryBean> beans = new ArrayList<>();
@@ -216,6 +214,9 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 							Elements tds = element.select("td");
 							HistoryBean historyBean = new HistoryBean();
 							historyBean.setDate(tds.get(0).text().replace("-", ""));
+							if (Integer.valueOf(historyBean.getDate()) > Integer.valueOf(today)){
+								today = historyBean.getDate();
+							}
 							historyBean.setOpenPrice(tds.get(1).text());
 							historyBean.setMaxPrice(tds.get(2).text());
 							historyBean.setMinPrice(tds.get(3).text());
@@ -232,6 +233,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 			}
             persist.writeHistoryDataToFile(richeBean, beans);
 		}
+		this.writeAllTipData(today);
 	}
 
 	/**
@@ -259,7 +261,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	}
 
 	/**
-	 * 解析网易数据
+	 * 通过东方财富网获取今日数据指标
 	 *
 	 * @param datas
 	 * @param list
@@ -340,22 +342,19 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	 * @Description: writeAllTipData
 	 * @date 2019年11月16日 上午11:27:49
 	 */
-	private void writeAllTipData() {
+	private void writeAllTipData(String today) throws IOException {
 		String allResult = request.doGet(allUrl);
 
 		JSONObject object = JSONObject.parseObject(this.trimJquery(allResult).toString());
 
 		JSONArray array = object.getJSONArray("data");
 
-		List<RichesData> list = JSON.parseArray(array.toJSONString(), RichesData.class);
-		File file = new File(RCache.CAT_CACHE.get("dataPath").getValue() + "dataShare.xlsx");
-		if (file.exists()) {// 进行追加
-
+		File file = new File(RCache.CAT_CACHE.get("dataPath").getValue() +today+ ".json");
+		if (file.exists()) {
+			file.delete();
 		}
-		for (int index = 0; index < list.size(); index++) {
-			RichesData bean = list.get(index);
-
-		}
+		file.createNewFile();
+		JSON.writeJSONString(new FileOutputStream(file), array, SerializerFeature.QuoteFieldNames);
 	}
 
 	/**

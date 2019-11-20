@@ -1,12 +1,7 @@
 package com.app.crawler.video.sexforum;
 
-import com.app.utils.HttpUtil;
-import com.app.utils.HttpUtil.HttpResult;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.Header;
 import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -39,7 +34,7 @@ public class DropBoxDown extends ChineseTables {
 		for (Map<String, String> map : datas) {
 			String url = map.get("url");
 			String pageUrl = String.format(MainParse.DOMIAN, trimSplit(url));
-			String content = HttpUtil.doGetRequest(pageUrl);
+			String content = restRequest.doGet(pageUrl);
 			Document document = Jsoup.parse(content);
 
 			Elements ts = document.select("div.t_fsz tr a");
@@ -124,34 +119,4 @@ public class DropBoxDown extends ChineseTables {
 		return html;
 	}
 
-	public static HttpResult doGetRequest(String url, CookieStore cookieStore) {
-		LOGGER.info("请求地址:【{}】", url);
-		HttpResult result = new HttpResult();
-		String charset = "UTF-8";
-		CloseableHttpClient httpClient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
-		HttpGet get = new HttpGet(url);
-		get.addHeader("Accept",
-				"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
-		get.addHeader("Accept-Language", "zh-CN,zh;q=0.9");
-		get.addHeader("Accept-Encoding", "gzip, deflate");
-		get.addHeader("Connection", "keep-alive");
-		get.addHeader("User-Agent",
-				"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
-
-		HttpResponse response;
-		try {
-			response = httpClient.execute(get);
-			int statusCode = response.getStatusLine().getStatusCode();
-			Header[] headers = response.getAllHeaders();
-			if (statusCode == HttpStatus.SC_OK) {
-				String content = EntityUtils.toString(response.getEntity(), charset);
-				result.setCookies(cookieStore.getCookies());
-				result.setDocument(Jsoup.parse(content));
-				result.setCookieStore(cookieStore);
-			}
-		} catch (IOException e) {
-			LOGGER.error("【{}】下载失败,错误信息:【{}】", url, e);
-		}
-		return result;
-	}
 }

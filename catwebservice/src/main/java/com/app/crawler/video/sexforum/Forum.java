@@ -1,8 +1,8 @@
 package com.app.crawler.video.sexforum;
 
 import com.app.crawler.pojo.CNode;
+import com.app.crawler.request.RestRequest;
 import com.app.crawler.video.StartDown;
-import com.app.utils.HttpUtil;
 import com.bobo.base.BaseClass;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -19,9 +19,11 @@ import java.util.List;
  */
 public class Forum extends BaseClass {
 
+    RestRequest restRequest = new RestRequest();
+
     public void parseAllTable(String url) {
 
-        String content = HttpUtil.doGetRequest(url);
+        String content = restRequest.doGet(url);
 
         Document document = Jsoup.parse(content);
 
@@ -492,7 +494,7 @@ public class Forum extends BaseClass {
     }
 
     private void tacticsPaserDom(CNode node, StartDown hand) {
-        String content = HttpUtil.doGetRequest(node.getUrl());
+        String content = restRequest.doGet(node.getUrl());
         Document document = Jsoup.parse(content);
         Elements ts = document.select("ul.ttp.bm.cl li");
 

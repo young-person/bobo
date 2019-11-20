@@ -8,7 +8,7 @@ import java.util.Optional;
  * 抓取链接定义
  */
 public enum Linking {
-
+	SYSTEMPATH("/config/","系统配置文件夹"),
     WEATHERURL("http://www.weather.com.cn/textFC/hb.shtml","天气数据抓取链接"),
     DEPARTMENT("http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2017/index.html","行政区划统计分析"),
     MEDICINE("https://db.yaozh.com/zhongyaocai","中国中医药材数据");
@@ -19,7 +19,7 @@ public enum Linking {
     private String name;
 
 
-    Linking(String url,String name) {
+    Linking(String url, String name) {
         this.url = url;
         this.name = name;
     }

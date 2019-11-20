@@ -7,15 +7,18 @@ import com.app.crawler.riches.RicheComputeAbstract;
 import com.app.crawler.riches.RicheTarget;
 import com.bobo.base.BaseClass;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 public class Producer extends BaseClass{
 
 	private final CopyOnWriteArraySet<RicheTarget> RICHETARGET = new CopyOnWriteArraySet<RicheTarget>();
+
+	public CopyOnWriteArraySet<RicheTarget> get() {
+		return RICHETARGET;
+	}
 
 	/**
 	 * 均衡值
@@ -59,16 +62,9 @@ public class Producer extends BaseClass{
 				}
 				return t;
 			});
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
+		} catch (IllegalAccessException | IOException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public CopyOnWriteArraySet<RicheTarget> get() {
-		return RICHETARGET;
-	}
 }

@@ -1,9 +1,9 @@
 package com.app.crawler.statistics;
 
-import com.app.crawler.CrawlerDown;
+import com.app.crawler.base.CrawlerDown;
 import com.app.crawler.pojo.CNode;
+import com.app.crawler.request.RestRequest;
 import com.app.crawler.url.Linking;
-import com.app.utils.HttpUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
@@ -24,6 +24,8 @@ public class Department implements CrawlerDown {
     private final String MAIN_URL = "http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2017/";
 
 
+    RestRequest restRequest = new RestRequest();
+
     /**
      * 区划代码
      *
@@ -31,8 +33,9 @@ public class Department implements CrawlerDown {
      * @date 2019年6月26日 上午11:53:58
      */
     public void statisticsDistrictsCode() {
+        restRequest.setCharset("gb2312");
 
-        String content = HttpUtil.doGetRequest(Linking.DEPARTMENT.getUrl(), "gb2312");
+        String content = restRequest.doGet(Linking.DEPARTMENT.getUrl());
         Document bs = Jsoup.parse(content);
 
         Elements tr_as = bs.select("tr.provincetr a");
@@ -85,7 +88,7 @@ public class Department implements CrawlerDown {
             for (int index = 0; index < clen; index++) {
                 String url = cUrls.get(index);
                 LOGGER.info("请求地址：【{}】", url);
-                String content = HttpUtil.doGetRequest(url, "gb2312");
+                String content = restRequest.doGet(url);
                 if (StringUtils.isBlank(content)) {
                     continue;
                 }
