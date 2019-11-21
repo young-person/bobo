@@ -350,7 +350,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	private void writeAllTipData(String today) throws IOException {
 		JSONArray array = this.getAllTips();
 
-		File file = new File(RCache.CAT_CACHE.get("dataPath").getValue() +today+ ".json");
+		File file = new File(RCache.CAT_CACHE.get("tipsDataPath").getValue() +today+ ".json");
 		if (file.exists()) {
 			file.delete();
 		}

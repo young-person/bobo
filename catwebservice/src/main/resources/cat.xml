@@ -5,6 +5,7 @@
 	<!--nohup java -jar catcrawler.jar -Xmx=256m -Xms=64m -XX:PermSize=64m -XX:MaxPermSize=256m -Xss=256k &-->
 
 	<property name="dataPath" mark="数据模板位置" value="classpath:datas/share/"/>
+	<property name="tipsDataPath" mark="数据模板位置" value="classpath:datas/tips/"/>
 
 	<property name="periodTime" mark="调度执行时间一天" value="86400000" />
 
@@ -14,6 +15,9 @@
 	<property name="sexforumPath" mark="保存地址" value="C://app//datas//sexforum//" />
 	<property name="DOMIAN" mark="首页" value="https://www.sohux8b.club/%s" />
 
+	<property name="sendEmailSubject" mark="发送邮件主题名称" value="每日精选推荐"/>
+	<property name="emailSubjectTemplate" mark="发送邮件主题名称" value="/email/email.html"/>
+	<property name="usersPath" mark="数据推荐模板" value="classpath:datas/share/users.xml"/>
 
 
 	<!--http://data.10jqka.com.cn/financial/yjyg/ 业绩-->

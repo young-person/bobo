@@ -25,6 +25,10 @@ public class RLoadXml implements RLoad<Data> {
     private Object bean;
 
     public String convertToXml(Object obj,String path) {
+        return this.convertToXml(obj, path,"schedule.xml");
+    }
+
+    public String convertToXml(Object obj,String path,String name) {
         // 创建输出流
         StringWriter sw = new StringWriter();
         FileOutputStream outputStream = null;
@@ -38,7 +42,7 @@ public class RLoadXml implements RLoad<Data> {
             // 将对象转换成输出流形式的xml
             marshaller.marshal(obj, sw);
             StringBuilder builder = new StringBuilder(path);
-            builder.append("schedule.xml");
+            builder.append(name);
             outputStream = new FileOutputStream(new File(builder.toString()));
 
             outputStream.write(sw.toString().getBytes(),0,sw.toString().getBytes().length);
@@ -47,6 +51,7 @@ public class RLoadXml implements RLoad<Data> {
         }
         return sw.toString();
     }
+
     public <T> List<String> getBeanValues(T bean) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         Field[] fields = bean.getClass().getDeclaredFields();
         List<String> values = new ArrayList<>(fields.length);

@@ -13,14 +13,21 @@ import com.app.crawler.riches.producer.Producer;
 import com.app.crawler.riches.producer.RLoadXml;
 import com.bobo.base.BaseClass;
 import com.bobo.domain.ResultMeta;
+import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class RicheController extends BaseClass{
@@ -52,6 +59,72 @@ public class RicheController extends BaseClass{
 		return buffer.toString();
 	}
 
+	/**
+	 * 存在就删除
+	 * @param code
+	 * @return
+	 */
+	@GetMapping(value = "deleteStock/{code}")
+	public ResponseEntity<ResultMeta> deleteListenerStock(@PathVariable String code){
+		RLoadXml loadXml = new RLoadXml();
+		ResultMeta meta = new ResultMeta();
+		try{
+			Data data = loadXml.getDataFromXml(RCache.CAT_CACHE.get("dataPath").getValue());
+			for(Bean bean1 :data.getBeans()){
+				if (bean1.getCode().equals(code)){
+					data.getBeans().remove(bean1);
+					break;
+				}
+			}
+			loadXml.convertToXml(data,RCache.CAT_CACHE.get("dataPath").getValue());
+			meta.isSuccess();
+		}catch (Exception e){
+			meta.failure();
+		}
+
+		return new ResponseEntity<>(meta,HttpStatus.OK);
+	}
+
+	@GetMapping(value = "addStock/{type}")
+	public ResponseEntity<ResultMeta> getTypeStock(@PathVariable String type){
+		ResultMeta meta = new ResultMeta();
+
+		File file = new File(RCache.CAT_CACHE.get("tipsDataPath").getValue());
+
+		String tmpName = null;
+		for(File f : file.listFiles()){
+			if(Objects.isNull(tmpName)){
+				tmpName = f.getName();
+			}else{
+
+				if (tmpName.compareTo(f.getName()) <= 0){
+					tmpName = f.getName();
+				}
+			}
+		}
+		List<RichesData> r = new ArrayList<>();
+		if (Objects.nonNull(tmpName)){
+			File f = new File(file,tmpName);
+			InputStream inputStream = null;
+			try {
+				inputStream = new FileInputStream(f);
+				List<RichesData> data = JSON.parseObject(inputStream, RichesData.class);
+				for(RichesData richesData :data){
+					if (richesData.getF100().indexOf(type) > -1 || richesData.getF103().indexOf(type) > -1){
+						r.add(richesData);
+					}
+				}
+				meta.success(JSONArray.toJSON(r));
+			} catch (IOException e) {
+				e.printStackTrace();
+				meta.failure();
+			}finally {
+				IOUtils.closeQuietly(inputStream);
+			}
+		}
+		return new ResponseEntity<>(meta,HttpStatus.OK);
+	}
+
 	@GetMapping(value = "addStock/{code}/{value}")
 	public ResponseEntity<ResultMeta> addListenerStock(@PathVariable String code,@PathVariable String value){
 		RichesData bean = getChooice(code);
@@ -65,8 +138,18 @@ public class RicheController extends BaseClass{
 			b.setName(bean.getF14());
 			b.setMark(value);//监听值
 			b.setProperties(list);
+			b.setCode(bean.getF12());
 			Data data = loadXml.getDataFromXml(RCache.CAT_CACHE.get("dataPath").getValue());
-			data.getBeans().add(b);
+			boolean flag = true;
+			for(Bean bean1 :data.getBeans()){
+				if (bean1.getCode().equals(code)){
+					flag = false;
+					break;
+				}
+			}
+			if (flag){
+				data.getBeans().add(b);
+			}
 			loadXml.convertToXml(data,RCache.CAT_CACHE.get("dataPath").getValue());
 
 			meta.isSuccess();
@@ -76,13 +159,17 @@ public class RicheController extends BaseClass{
 		}
 		return new ResponseEntity<>(meta,HttpStatus.OK);
 	}
+
+	/**
+	 * 获取状态类型
+	 * @return
+	 */
 	@GetMapping(value = "findStock")
 	public ResponseEntity<ResultMeta> findListenerStock(){
 		ResultMeta meta = new ResultMeta();
 		RLoadXml loadXml = new RLoadXml();
 		Data data = loadXml.getDataFromXml(RCache.CAT_CACHE.get("dataPath").getValue());
 		List<Bean> beans = data.getBeans();
-
 		try {
 
 			JSONArray array = new JSONArray();
@@ -90,10 +177,23 @@ public class RicheController extends BaseClass{
 				RichesData richesData = new RichesData();
 				richesData = loadXml.convertModelToClass(richesData,b.getProperties());
 				JSONObject object = new JSONObject();
+
+				String[] mark = b.getMark().split("-");
+				Float preV = Float.valueOf(richesData.getF1());
+				Float minV = Float.valueOf(mark[0]);
+				Float maxV = Float.valueOf(mark[1]);
+				int status = 0;
+				if (preV >= minV && preV <= maxV){
+					status = 1;
+				}else if(preV > maxV){
+					status = 2;
+				}
+				object.put("code", b.getCode());
 				object.put("name",b.getName());
 				object.put("mark",b.getMark());
 				object.put("bean",richesData);
-				object.put("status","");
+				object.put("status",status);
+				array.add(object);
 			}
 			meta.success(array);
 		} catch (IllegalAccessException | InvocationTargetException e) {

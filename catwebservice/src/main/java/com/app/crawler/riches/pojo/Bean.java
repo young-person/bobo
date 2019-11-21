@@ -14,6 +14,8 @@ public class Bean {
 	private String name;
 	@XmlAttribute(name = "mark")
 	private String mark;
+	@XmlAttribute(name = "code")
+	private String code;
 	@XmlElement(name = "property")
 	private List<Property> properties;
 	public String getName() {
@@ -35,5 +37,12 @@ public class Bean {
 		this.properties = properties;
 	}
 
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
 
 }
