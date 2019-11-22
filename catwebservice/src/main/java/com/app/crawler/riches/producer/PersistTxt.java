@@ -4,6 +4,7 @@ import com.app.crawler.riches.BRichesBase;
 import com.app.crawler.riches.pojo.HistoryBean;
 import com.app.crawler.riches.pojo.RicheBean;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -53,9 +54,9 @@ public class PersistTxt extends BRichesBase implements Persist {
                 }
             }
         }finally {
-            bufferedReader.close();
-            streamReader.close();
-            inputStream.close();
+            IOUtils.closeQuietly(bufferedReader);
+            IOUtils.closeQuietly(streamReader);
+            IOUtils.closeQuietly(inputStream);
         }
         return result;
     }

@@ -13,7 +13,6 @@ import com.app.crawler.riches.BRiches;
 import com.app.crawler.riches.pojo.Bean;
 import com.app.crawler.riches.pojo.Data;
 import com.app.crawler.riches.pojo.ExcelUser;
-import com.app.crawler.riches.producer.Producer;
 import com.app.crawler.riches.producer.RLoadXml;
 import com.app.service.impl.ReceiveRichesImpl;
 import com.bobo.base.BaseClass;
@@ -47,8 +46,8 @@ public class RicheController extends BaseClass{
 	@GetMapping(value = "calculate")
 	@ResponseBody
 	public void queryWealthSource(@RequestParam(defaultValue = "21") Integer num,@RequestParam(defaultValue = "7") Integer limit) {
-		Producer producer = new Producer();
-		producer.repeatCalculate(limit, num);
+		BRiches briches = new BRiches();
+		briches.calculate(limit, num);
 	}
 	@GetMapping(value = "start")
 	@ResponseBody

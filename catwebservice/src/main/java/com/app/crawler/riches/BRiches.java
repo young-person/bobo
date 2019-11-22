@@ -10,7 +10,6 @@ import com.app.crawler.riches.pojo.*;
 import com.app.crawler.riches.producer.Persist;
 import com.app.crawler.riches.producer.PersistExcel;
 import com.app.crawler.riches.producer.PersistTxt;
-import com.app.crawler.riches.producer.Producer.CallBack;
 import org.apache.poi.util.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -25,6 +24,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class BRiches extends BRichesBase implements CrawlerDown {
@@ -96,46 +96,74 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	 */
 	private String stockPageUrl = "http://stockpage.10jqka.com.cn/%s/";
 
-	private RicheCompute richeCompute;
+	private RicheComputeAbstract richeCompute = new RicheComputeAbstract();;
 
-	public void setRicheCompute(RicheCompute richeCompute) {
+	public void setRicheCompute(RicheComputeAbstract richeCompute) {
 		this.richeCompute = richeCompute;
 	}
 
+
+	/**
+	 * 均衡值
+	 */
+	private final float avg = 0.5f;
+
+	private final float hand = 0.5f;
+
+	private final CopyOnWriteArraySet<RicheTarget> RICHETARGET = new CopyOnWriteArraySet<RicheTarget>();
+
+	public CopyOnWriteArraySet<RicheTarget> get() {
+		return RICHETARGET;
+	}
+
+
 	/**
 	 * 开始计算 excel数据
-	 *
-	 * @param callBack
 	 */
-	public void calculate(CallBack<RicheTarget> callBack) throws IOException, IllegalAccessException, InvocationTargetException {
+	public void calculate(Integer limit,Integer num) {
 		LOGGER.info("开始股市数据计算任务,计算状态；【{}】",isRuning());
 		if (!isRuning()) {
 			return;
 		}
+		if (Objects.isNull(limit) || limit == 0)
+			limit= 30;
+		if (Objects.isNull(num) || num == 0)
+			num = 7;
+		richeCompute.setLimit(limit);
+		richeCompute.setNum(num);
+
 		File file = new File(catXml.getDataPath());
 		for (File f : file.listFiles()) {
 			if (!f.isDirectory()) {
 				continue;
 			}
 			for (File e : f.listFiles()) {
-				List<HistoryBean> datas = persist.readHistoryFromFile(e);
-				String name = e.getName();
-				String[] arr = name.replace(".txt", "").split("_");
-				RicheTarget target = richeCompute.compute(convertHistory(datas), arr[1]);
-				String code_type = null;
-				for (String key : typeName.keySet()) {
-					if (typeName.get(key).equals(f.getName())) {
-						code_type = key;
-						break;
+				try{
+					List<HistoryBean> datas = persist.readHistoryFromFile(e);
+					String name = e.getName();
+					String[] arr = name.replace(".txt", "").split("_");
+					RicheTarget target = richeCompute.compute(convertHistory(datas), arr[1]);
+					String code_type = null;
+					for (String key : typeName.keySet()) {
+						if (typeName.get(key).equals(f.getName())) {
+							code_type = key;
+							break;
+						}
 					}
+					target.setDetailUrl(String.format(detailUrl, arr[0], code_type));
+					if (!"创业".equals(f.getName())) {
+						if (Float.valueOf(target.getHand()) >= hand && !target.getStockName().contains("ST") && target.getL() > avg) {
+							RICHETARGET.add(target);
+						}else if(Float.valueOf(target.getHand()) >= hand && target.getStockName().contains("ST")) {
+							LOGGER.trace("ST系列：----->{}",JSONObject.toJSONString(target));
+						}
+					}
+				} catch (IllegalAccessException | IOException | InvocationTargetException ex) {
+					ex.printStackTrace();
 				}
-				target.setDetailUrl(String.format(detailUrl, arr[0], code_type));
-				if (Objects.nonNull(callBack) && !"创业".equals(f.getName())) {
-					callBack.add(target);
-				}
+
 			}
 		}
-		sendData();
 		ISRUN.set(false);
 		LOGGER.info("结束此次股市数据计算任务");
 	}
@@ -156,23 +184,6 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 			info.setMoney(bean.getMoney());
 		}
 		return result;
-	}
-
-	private void sendData() {
-//		try {
-//			HttpHeaders headers = new HttpHeaders();
-//			headers.add("Content-Type", "application/x-www-form-urlencoded");
-//			MultiValueMap<String, Object> postParameters = new LinkedMultiValueMap<>();
-//			postParameters.add("datas", CODESTATUS);
-//			HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(postParameters, headers);
-//			RestRequest restTemplate = RestRequestFactory.createRestRequest(new DefaultRestRequest());
-//			ResponseEntity<ResultMeta> result = restTemplate.postForEntity(
-//					new URI(RCache.CAT_CACHE.get("sendEmailAddress").getValue()), request,
-//					ResultMeta.class);
-//			LOGGER.info("将数据发送给远程结果：【{}】", result);
-//		} catch (Exception e) {
-//			LOGGER.error("发送远程失败");
-//		}
 	}
 
 	private Persist persist = new PersistTxt();
@@ -462,10 +473,10 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 		}
 		if (Objects.isNull(handResult)) {
 
-			handResult = JSON.parseObject(new FileInputStream(new File(pFile, "archive.json")), RicheResult.class);
+			handResult = JSON.parseObject(new FileInputStream(new File(pFile, catXml.getArchive())), RicheResult.class);
 		}
 		if (Objects.nonNull(handResult)) {
-			File file = new File(pFile, "archive.json");
+			File file = new File(pFile, catXml.getArchive());
 			if (!file.exists()) {
 				file.createNewFile();
 			}

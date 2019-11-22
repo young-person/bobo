@@ -1,22 +1,22 @@
 package com.app.crawler.riches.producer;
 
-import java.util.Collection;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.app.crawler.riches.BRiches;
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.OnConnect;
 import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.Collection;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
 public class DataEventHandler {
@@ -29,17 +29,17 @@ public class DataEventHandler {
     //统计在线客户端数量
     private static AtomicInteger onlineCount = new AtomicInteger(0);
 
-    Producer producer = new Producer();
+    BRiches briches = new BRiches();
 
     @OnEvent(value = typeName)
     public void initData(SocketIOClient socketIOClient, AckRequest request, Object data) {
         if (Objects.isNull(data)) {
-            socketIOClient.sendEvent(typeName, producer.get());
+            socketIOClient.sendEvent(typeName, briches.get());
         } else {
             JSONObject obj = JSONObject.parseObject(JSON.toJSONString(data));
             int num = obj.getInteger("num");
             int limit = obj.getInteger("limit");
-            producer.repeatCalculate(num, limit);
+            briches.calculate(num, limit);
         }
 
     }
@@ -53,7 +53,7 @@ public class DataEventHandler {
     public void onConnect(SocketIOClient socketIOClient) {
         if (socketIOClient != null) {
             addOnlineCount();
-            socketIOClient.sendEvent(typeName, producer.get());
+            socketIOClient.sendEvent(typeName, briches.get());
             LOGGER.info("客服端sessionID：{}已经连接, client ip : {} ,online count : {} ", socketIOClient.getSessionId(), socketIOClient.getRemoteAddress(), getOnlineCount());
         }
     }
@@ -90,7 +90,7 @@ public class DataEventHandler {
         // 获取全部客户端
         Collection<SocketIOClient> allClients = socketIOServer.getAllClients();
         for (SocketIOClient socket : allClients) {
-            socket.sendEvent(typeName, producer.get());
+            socket.sendEvent(typeName, briches.get());
         }
     }
 

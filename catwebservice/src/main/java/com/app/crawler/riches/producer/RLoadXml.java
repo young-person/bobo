@@ -7,6 +7,7 @@ import com.app.crawler.pojo.RName;
 import com.app.crawler.riches.pojo.Bean;
 import com.app.crawler.riches.pojo.Data;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,6 +48,9 @@ public class RLoadXml implements RLoad<Data> {
             outputStream.write(sw.toString().getBytes(),0,sw.toString().getBytes().length);
         } catch (JAXBException | IOException e) {
             e.printStackTrace();
+        }finally {
+            IOUtils.closeQuietly(outputStream);
+            IOUtils.closeQuietly(sw);
         }
         return sw.toString();
     }

@@ -13,6 +13,12 @@ public class CatXml {
     private String emailSubjectTemplate = RCache.CAT_CACHE.get("emailSubjectTemplate").getValue();
     private String usersPath;
 
+    private String archive = "archive.json";
+
+    public String getArchive() {
+        return archive;
+    }
+
     public String getDataPath() {
         return dataPath;
     }

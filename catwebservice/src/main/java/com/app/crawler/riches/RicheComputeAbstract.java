@@ -10,7 +10,7 @@ import java.util.*;
  * @date 2019年11月2日 上午11:11:25
  * @ClassName: RicheCompute30
  */
-public class RicheComputeAbstract implements RicheCompute{
+public class RicheComputeAbstract {
 
 	protected int num = 30;
 
@@ -37,10 +37,6 @@ public class RicheComputeAbstract implements RicheCompute{
 	}
 
 
-	/* (non-Javadoc)
-	 * @see com.app.crawler.riches.RicheCompute#compute(com.app.crawler.riches.pojo.RicheMsg)
-	 */
-	@Override
 	public RicheTarget compute(List<ShareInfo> datas,String name) {
 		RicheTarget target = new RicheTarget();
 		if (datas.size() > num) {
