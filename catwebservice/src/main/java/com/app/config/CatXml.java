@@ -5,14 +5,12 @@ import com.app.crawler.base.RCache;
 public class CatXml {
 
     private String dataPath = RCache.CAT_CACHE.get("dataPath").getValue();;
-    private String tipsDataPath;
+    private String tipsDataPath = RCache.CAT_CACHE.get("tipsDataPath").getValue();
     private String periodTime;
-    private String request;
-    private String sendEmailAddress;
     private String sexforumPath;
     private String DOMIAN;
     private String sendEmailSubject = RCache.CAT_CACHE.get("sendEmailSubject").getValue();
-    private String emailSubjectTemplate;
+    private String emailSubjectTemplate = RCache.CAT_CACHE.get("emailSubjectTemplate").getValue();
     private String usersPath;
 
     public String getDataPath() {
@@ -25,14 +23,6 @@ public class CatXml {
 
     public String getPeriodTime() {
         return periodTime;
-    }
-
-    public String getRequest() {
-        return request;
-    }
-
-    public String getSendEmailAddress() {
-        return sendEmailAddress;
     }
 
     public String getSexforumPath() {

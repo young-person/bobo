@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.app.crawler.base.CrawlerDown;
-import com.app.crawler.base.RCache;
 import com.app.crawler.request.RestRequest;
 import com.app.crawler.riches.pojo.*;
 import com.app.crawler.riches.producer.Persist;
@@ -113,7 +112,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 		if (!isRuning()) {
 			return;
 		}
-		File file = new File(dataPath);
+		File file = new File(catXml.getDataPath());
 		for (File f : file.listFiles()) {
 			if (!f.isDirectory()) {
 				continue;
@@ -365,7 +364,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	private void writeAllTipData(String today) throws IOException {
 		JSONArray array = this.getAllTips();
 
-		File f = new File(RCache.CAT_CACHE.get("tipsDataPath").getValue());
+		File f = new File(catXml.getTipsDataPath());
 		if (!f.exists()){
 			f.mkdirs();
 		}
@@ -417,7 +416,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	 * @return
 	 */
 	private Map<String, File> sureMkdirFolder() {
-		File file = new File(dataPath);
+		File file = new File(catXml.getDataPath());
 		if (!file.exists()) {
 			LOGGER.info("第一次请求文件路径为：【{}】", file.getAbsolutePath());
 			file.mkdirs();
@@ -457,7 +456,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	 */
 	private RicheResult getAllRicheBeans() throws IOException {
 		RicheResult handResult = getTurnoverRate();
-		File pFile = new File(dataPath);
+		File pFile = new File(catXml.getDataPath());
 		if (!pFile.exists()) {
 			pFile.mkdirs();
 		}

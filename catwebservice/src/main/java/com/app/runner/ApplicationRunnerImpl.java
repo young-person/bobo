@@ -1,6 +1,7 @@
 package com.app.runner;
 
 import com.app.config.CatWebServiceProperty;
+import com.app.config.CatXml;
 import com.app.crawler.base.RCache;
 import com.app.crawler.riches.BRiches;
 import com.app.crawler.riches.producer.DataEventHandler;
@@ -35,7 +36,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
         rCache.loadCatConfig();
 
         server.start();
-
+        CatXml catXml = new CatXml();
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -54,7 +55,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
                     bRiches.start();
                 }
             }
-        }, 0, Integer.valueOf(RCache.CAT_CACHE.get("periodTime").getValue()));
+        }, 0, Integer.valueOf(catXml.getPeriodTime()));
 
         timer.schedule(new TimerTask() {
             @Override

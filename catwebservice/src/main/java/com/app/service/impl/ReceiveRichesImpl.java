@@ -2,7 +2,6 @@ package com.app.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.app.config.CatXml;
-import com.app.crawler.base.RCache;
 import com.app.crawler.riches.BRiches;
 import com.app.crawler.riches.RicheTarget;
 import com.app.crawler.riches.pojo.Bean;
@@ -58,13 +57,13 @@ public class ReceiveRichesImpl extends BaseClass implements ReceiveRiches {
 				StringBuilder builder = new StringBuilder("【");
 				builder.append(LocalDate.now());
 				builder.append("-");
-				builder.append(RCache.CAT_CACHE.get("sendEmailSubject").getValue());
+				builder.append(catXml.getSendEmailSubject());
 				helper.setSubject(builder.toString());
 
 				Map<String, Object> model = new HashMap<>();
 				model.put("datas", datas);
-				model.put("title", RCache.CAT_CACHE.get("sendEmailSubject").getValue());
-				Template template = templateEngine.getConfiguration().getTemplate(RCache.CAT_CACHE.get("emailSubjectTemplate").getValue());
+				model.put("title",catXml.getSendEmailSubject());
+				Template template = templateEngine.getConfiguration().getTemplate(catXml.getEmailSubjectTemplate());
 				String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
 				helper.setText(text, true);
 				javaMailSender.send(mimeMessage);

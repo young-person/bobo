@@ -1,7 +1,6 @@
 package com.app.crawler.riches;
 
 import com.app.config.CatXml;
-import com.app.crawler.base.RCache;
 import com.app.crawler.riches.pojo.HistoryBean;
 import com.app.crawler.riches.pojo.RicheBean;
 import org.apache.poi.ss.usermodel.Row;
@@ -13,12 +12,6 @@ import java.util.Map;
 public class BRichesBase {
 
     protected CatXml catXml = new CatXml();
-
-    /**
-     * Excel 数据模板路径地址
-     */
-    protected String dataPath = catXml.getDataPath();
-
 
     /**
      * 股票类型
@@ -48,7 +41,7 @@ public class BRichesBase {
         }
 
         builder.append(type);
-        File file = new File(dataPath);
+        File file = new File(catXml.getDataPath());
 
         File f1 = new File(file, this.typeName.get(bean.getCodeType()));
         if (!f1.exists()) {

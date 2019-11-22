@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.app.config.CatXml;
 import com.app.crawler.base.RCache;
 import com.app.crawler.pojo.Property;
+import com.app.crawler.pojo.RName;
 import com.app.crawler.pojo.RichesData;
 import com.app.crawler.riches.BRiches;
 import com.app.crawler.riches.pojo.Bean;
@@ -24,14 +26,18 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.*;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Controller
+@RequestMapping(value = "riche")
 public class RicheController extends BaseClass{
 
+	private CatXml catXml = new CatXml();
 	
 	@RequestMapping(value = "view")
 	public ModelAndView initView() {
@@ -47,7 +53,7 @@ public class RicheController extends BaseClass{
 	@GetMapping(value = "start")
 	@ResponseBody
 	public String handToCrawlerRicheData() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		try {
 			BRiches bRiches = new BRiches();
 			bRiches.start();
@@ -69,62 +75,27 @@ public class RicheController extends BaseClass{
 		RLoadXml loadXml = new RLoadXml();
 		ResultMeta meta = new ResultMeta();
 		try{
-			Data data = loadXml.getDataFromXml(RCache.CAT_CACHE.get("dataPath").getValue());
+			Data data = loadXml.getDataFromXml(catXml.getDataPath());
 			for(Bean bean1 :data.getBeans()){
 				if (bean1.getCode().equals(code)){
 					data.getBeans().remove(bean1);
 					break;
 				}
 			}
-			loadXml.convertToXml(data,RCache.CAT_CACHE.get("dataPath").getValue());
+			loadXml.convertToXml(data,catXml.getDataPath());
 			meta.isSuccess();
 		}catch (Exception e){
 			meta.failure();
 		}
-
 		return new ResponseEntity<>(meta,HttpStatus.OK);
 	}
 
-	@GetMapping(value = "addStock/{type}")
-	public ResponseEntity<ResultMeta> getTypeStock(@PathVariable String type){
-		ResultMeta meta = new ResultMeta();
-
-		File file = new File(RCache.CAT_CACHE.get("tipsDataPath").getValue());
-
-		String tmpName = null;
-		for(File f : file.listFiles()){
-			if(Objects.isNull(tmpName)){
-				tmpName = f.getName();
-			}else{
-
-				if (tmpName.compareTo(f.getName()) <= 0){
-					tmpName = f.getName();
-				}
-			}
-		}
-		List<RichesData> r = new ArrayList<>();
-		if (Objects.nonNull(tmpName)){
-			File f = new File(file,tmpName);
-			InputStream inputStream = null;
-			try {
-				inputStream = new FileInputStream(f);
-				List<RichesData> data = JSON.parseObject(inputStream, RichesData.class);
-				for(RichesData richesData :data){
-					if (richesData.getF100().indexOf(type) > -1 || richesData.getF103().indexOf(type) > -1){
-						r.add(richesData);
-					}
-				}
-				meta.success(JSONArray.toJSON(r));
-			} catch (IOException e) {
-				e.printStackTrace();
-				meta.failure();
-			}finally {
-				IOUtils.closeQuietly(inputStream);
-			}
-		}
-		return new ResponseEntity<>(meta,HttpStatus.OK);
-	}
-
+	/**
+	 * 添加一个需要监听得数据指标
+	 * @param code
+	 * @param value
+	 * @return
+	 */
 	@GetMapping(value = "addStock/{code}/{value}")
 	public ResponseEntity<ResultMeta> addListenerStock(@PathVariable String code,@PathVariable String value){
 		RichesData bean = getChooice(code);
@@ -132,14 +103,13 @@ public class RicheController extends BaseClass{
 
 		ResultMeta meta = new ResultMeta();
 		try {
-
 			List<Property> list = loadXml.converClassToModel(bean);
 			Bean b = new Bean();
 			b.setName(bean.getF14());
 			b.setMark(value);//监听值
 			b.setProperties(list);
 			b.setCode(bean.getF12());
-			Data data = loadXml.getDataFromXml(RCache.CAT_CACHE.get("dataPath").getValue());
+			Data data = loadXml.getDataFromXml(catXml.getDataPath());
 			boolean flag = true;
 			for(Bean bean1 :data.getBeans()){
 				if (bean1.getCode().equals(code)){
@@ -150,7 +120,7 @@ public class RicheController extends BaseClass{
 			if (flag){
 				data.getBeans().add(b);
 			}
-			loadXml.convertToXml(data,RCache.CAT_CACHE.get("dataPath").getValue());
+			loadXml.convertToXml(data,catXml.getDataPath());
 
 			meta.isSuccess();
 		} catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -168,11 +138,20 @@ public class RicheController extends BaseClass{
 	public ResponseEntity<ResultMeta> findListenerStock(){
 		ResultMeta meta = new ResultMeta();
 		RLoadXml loadXml = new RLoadXml();
-		Data data = loadXml.getDataFromXml(RCache.CAT_CACHE.get("dataPath").getValue());
+		Data data = loadXml.getDataFromXml(catXml.getDataPath());
 		List<Bean> beans = data.getBeans();
 		try {
-
 			JSONArray array = new JSONArray();
+			Field[] fields = RichesData.class.getFields();
+			List<String> headers = new ArrayList<>();
+			for(Field field : fields){
+				field.getName();
+				RName rName = field.getAnnotation(RName.class);
+				if (Objects.nonNull(rName)){
+					String name = rName.value();
+					headers.add(name);
+				}
+			}
 			for(Bean b : beans){
 				RichesData richesData = new RichesData();
 				richesData = loadXml.convertModelToClass(richesData,b.getProperties());
@@ -195,7 +174,10 @@ public class RicheController extends BaseClass{
 				object.put("status",status);
 				array.add(object);
 			}
-			meta.success(array);
+			JSONObject r = new JSONObject();
+			r.put("headers",headers);
+			r.put("datas",array);
+			meta.success(r);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 			meta.failure();
@@ -203,16 +185,16 @@ public class RicheController extends BaseClass{
 		return new ResponseEntity<>(meta,HttpStatus.OK);
 	}
 	@GetMapping(value = "findUser")
-	public ResponseEntity<ResultMeta> findUsers(){
-		ResultMeta meta = new ResultMeta();
+	public ModelAndView findUsers(){
+		ModelAndView view = new ModelAndView("users");
 		ReceiveRichesImpl receiveRiches = new ReceiveRichesImpl();
 		List<ExcelUser> users = receiveRiches.getAllUsers();
-		meta.success(users);
-		return new ResponseEntity<>(meta,HttpStatus.OK);
+		view.addObject("datas", users);
+		return view;
 	}
 
 	@PostMapping(value = "addUser")
-	public ResponseEntity<ResultMeta> findUsers(@RequestBody ExcelUser user){
+	public ModelAndView findUsers(@RequestBody ExcelUser user){
 		ResultMeta meta = new ResultMeta();
 		ReceiveRichesImpl receiveRiches = new ReceiveRichesImpl();
 		List<ExcelUser> users = receiveRiches.getAllUsers();
@@ -221,6 +203,7 @@ public class RicheController extends BaseClass{
 		for(ExcelUser excelUser :users){
 			if (excelUser.getAccount().equals(user.getAccount())){
 				//更新
+				excelUser.setId(UUID.randomUUID().toString());
 				excelUser.setEmail(user.getEmail());
 				excelUser.setForbidden(user.getForbidden());
 				excelUser.setUserName(user.getUserName());
@@ -233,11 +216,12 @@ public class RicheController extends BaseClass{
 			users.add(user);
 		}
 		meta.success(users);
-		return new ResponseEntity<>(meta,HttpStatus.OK);
+		ModelAndView view = new ModelAndView("redirect:findUser");
+		return view;
 	}
 
 	@GetMapping(value = "deleteUser/{id}")
-	public ResponseEntity<ResultMeta> findUsers(@PathVariable String id){
+	public ModelAndView findUsers(@PathVariable String id){
 		ResultMeta meta = new ResultMeta();
 		ReceiveRichesImpl receiveRiches = new ReceiveRichesImpl();
 		List<ExcelUser> users = receiveRiches.getAllUsers();
@@ -260,8 +244,8 @@ public class RicheController extends BaseClass{
 		} finally {
 			IOUtils.closeQuietly(stream);
 		}
-
-		return new ResponseEntity<>(meta,HttpStatus.OK);
+		ModelAndView view = new ModelAndView("redirect:findUser");
+		return view;
 	}
 
 	private RichesData getChooice(String code){
