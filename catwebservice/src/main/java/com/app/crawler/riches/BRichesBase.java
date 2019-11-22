@@ -1,5 +1,6 @@
 package com.app.crawler.riches;
 
+import com.app.config.CatXml;
 import com.app.crawler.base.RCache;
 import com.app.crawler.riches.pojo.HistoryBean;
 import com.app.crawler.riches.pojo.RicheBean;
@@ -11,11 +12,13 @@ import java.util.Map;
 
 public class BRichesBase {
 
+    protected CatXml catXml = new CatXml();
 
     /**
      * Excel 数据模板路径地址
      */
-    protected String dataPath = RCache.CAT_CACHE.get("dataPath").getValue();
+    protected String dataPath = catXml.getDataPath();
+
 
     /**
      * 股票类型

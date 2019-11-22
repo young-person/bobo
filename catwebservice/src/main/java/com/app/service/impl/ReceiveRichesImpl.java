@@ -1,11 +1,14 @@
 package com.app.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.app.config.CatXml;
 import com.app.crawler.base.RCache;
+import com.app.crawler.riches.BRiches;
 import com.app.crawler.riches.RicheTarget;
 import com.app.crawler.riches.pojo.Bean;
 import com.app.crawler.riches.pojo.Data;
 import com.app.crawler.riches.pojo.ExcelUser;
+import com.app.crawler.riches.pojo.OnlineBean;
 import com.app.crawler.riches.producer.RLoadXml;
 import com.app.service.ReceiveRiches;
 import com.bobo.base.BaseClass;
@@ -28,12 +31,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ReceiveRichesImpl extends BaseClass implements ReceiveRiches {
+
+	private CatXml catXml = new CatXml();
 
     @Autowired
     private JavaMailSender javaMailSender;
@@ -45,22 +48,7 @@ public class ReceiveRichesImpl extends BaseClass implements ReceiveRiches {
 
     @Override
     public void receiveRichesData(List<RicheTarget> datas) {
-		List<ExcelUser> users = null;
-		File pFile = new File(RCache.CAT_CACHE.get("dataPath").getValue());
-		InputStream stream = null;
-		try {
-			File file = new File(pFile, "users.json");
-			if (!file.exists()){
-				file.createNewFile();
-			}
-			stream = new FileInputStream(file);
-			users = JSON.parseObject(stream, ExcelUser.class);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}finally {
-			IOUtils.closeQuietly(stream);
-		}
-
+		List<ExcelUser> users = this.getAllUsers();
 		for (ExcelUser user : users) {
 			try {
 				MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -86,15 +74,73 @@ public class ReceiveRichesImpl extends BaseClass implements ReceiveRiches {
 		}
     }
 
+    public List<ExcelUser> getAllUsers(){
+		List<ExcelUser> users = null;
+		File pFile = new File(catXml.getDataPath());
+		InputStream stream = null;
+		try {
+			File file = new File(pFile, "users.json");
+			if (!file.exists()){
+				file.createNewFile();
+			}
+			stream = new FileInputStream(file);
+			users = JSON.parseObject(stream, ExcelUser.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+			users = new ArrayList<>();
+		}finally {
+			IOUtils.closeQuietly(stream);
+		}
+		return users;
+	}
 	/**
 	 * 发送监控数据
 	 */
 	@Override
 	public void sendScheduleData() {
 		RLoadXml loadXml = new RLoadXml();
-		Data data = loadXml.getDataFromXml(RCache.CAT_CACHE.get("dataPath").getValue());
-		for(Bean bean :data.getBeans()){
+		Data data = loadXml.getDataFromXml(catXml.getDataPath());
+		BRiches bRiches = new BRiches();
 
+		List<ExcelUser> users = this.getAllUsers();
+		for (ExcelUser user : users) {
+			try {
+				MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+				MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+				helper.setFrom(from);
+				helper.setTo(InternetAddress.parse(user.getEmail()));
+				StringBuilder builder = new StringBuilder("【");
+				builder.append(LocalDate.now());
+				builder.append("-");
+				builder.append(catXml.getSendEmailSubject());
+				helper.setSubject(builder.toString());
+
+				for(Bean bean :data.getBeans()){
+					OnlineBean onlineBean = bRiches.reloadOnlineData(bean.getCode());
+					String price = onlineBean.getNewPrice();
+					String minV = bean.getMark().split("-")[0];
+					String maxV = bean.getMark().split("-")[1];
+					String msg = null;
+					if (Float.valueOf(price) > Float.valueOf(minV) && Float.valueOf(price) <= Float.valueOf(maxV)){
+						msg = "已经符合您的预期，您可以查看此条数据详细情况！";
+					}else if(Float.valueOf(price) > Float.valueOf(maxV)){
+						msg = "此数据已经超过您设定的预期，请及时关注操作！";
+					}else if(Float.valueOf(price)*1.1 > Float.valueOf(minV) ){
+						msg = "此数据还有不到10%的增长就达到您的预期，请您近期注意观察！";
+					}
+					if (Objects.nonNull(msg)){
+						helper.setText(msg);
+						javaMailSender.send(mimeMessage);
+					}
+				}
+
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
 		}
+
+
+
+
 	}
 }

@@ -33,7 +33,10 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	private RestRequest request = new RestRequest();
 
 	private static AtomicBoolean ISRUN = new AtomicBoolean(false);
-
+	/**
+	 *股票对应的类型
+	 */
+	private Map<String,String> codeTypeMap = new HashMap<>();
 	/**
 	 * 通用请求参数数据
 	 */
@@ -53,6 +56,11 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 			put("type", "shsz");
 		}
 	};
+
+	/**
+	 * 实时数据
+	 */
+	private String onlineUrl = "https://m.stock.pingan.com/h5quote/quote/getRealTimeData?random=0.24647713895668777&thirdAccount=&rdm=&timestamp=&tokenId=&signature=&key=&chnl=&requestId=&stockCode=%s&codeType=%s&type=shsz";
 
 	/**
 	 * 平安证券
@@ -113,7 +121,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 			for (File e : f.listFiles()) {
 				List<HistoryBean> datas = persist.readHistoryFromFile(e);
 				String name = e.getName();
-				String[] arr = name.replace(".xlsx", "").split("_");
+				String[] arr = name.replace(".txt", "").split("_");
 				RicheTarget target = richeCompute.compute(convertHistory(datas), arr[1]);
 				String code_type = null;
 				for (String key : typeName.keySet()) {
@@ -241,6 +249,13 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 		this.writeAllTipData(today);
 	}
 
+
+	public OnlineBean reloadOnlineData(String code){
+		String content = request.doGet(String.format(onlineUrl,code,codeTypeMap.get(code)));
+		OnlineResult result = JSONObject.parseObject(content,OnlineResult.class);
+		return result.getResults();
+	}
+
 	/**
 	 * 去除jquery前面字符串获取json对象
 	 *
@@ -350,7 +365,12 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	private void writeAllTipData(String today) throws IOException {
 		JSONArray array = this.getAllTips();
 
-		File file = new File(RCache.CAT_CACHE.get("tipsDataPath").getValue() +today+ ".json");
+		File f = new File(RCache.CAT_CACHE.get("tipsDataPath").getValue());
+		if (!f.exists()){
+			f.mkdirs();
+		}
+
+		File file = new File(f, today+ ".json");
 		if (file.exists()) {
 			file.delete();
 		}
@@ -460,8 +480,13 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 			}
 
 		}
+		for(RicheBean r : handResult.getResults()){
+			codeTypeMap.put(r.getCodeType(),r.getCode());
+		}
 		return handResult;
 	}
+
+
 
 	private String getUrl(Map<String, String> parmas, String url) {
 		StringBuilder builder = new StringBuilder(url);

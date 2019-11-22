@@ -3,14 +3,17 @@ package com.app.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.app.crawler.base.RCache;
 import com.app.crawler.pojo.Property;
 import com.app.crawler.pojo.RichesData;
 import com.app.crawler.riches.BRiches;
 import com.app.crawler.riches.pojo.Bean;
 import com.app.crawler.riches.pojo.Data;
+import com.app.crawler.riches.pojo.ExcelUser;
 import com.app.crawler.riches.producer.Producer;
 import com.app.crawler.riches.producer.RLoadXml;
+import com.app.service.impl.ReceiveRichesImpl;
 import com.bobo.base.BaseClass;
 import com.bobo.domain.ResultMeta;
 import org.apache.commons.io.IOUtils;
@@ -20,10 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -202,6 +202,68 @@ public class RicheController extends BaseClass{
 		}
 		return new ResponseEntity<>(meta,HttpStatus.OK);
 	}
+	@GetMapping(value = "findUser")
+	public ResponseEntity<ResultMeta> findUsers(){
+		ResultMeta meta = new ResultMeta();
+		ReceiveRichesImpl receiveRiches = new ReceiveRichesImpl();
+		List<ExcelUser> users = receiveRiches.getAllUsers();
+		meta.success(users);
+		return new ResponseEntity<>(meta,HttpStatus.OK);
+	}
+
+	@PostMapping(value = "addUser")
+	public ResponseEntity<ResultMeta> findUsers(@RequestBody ExcelUser user){
+		ResultMeta meta = new ResultMeta();
+		ReceiveRichesImpl receiveRiches = new ReceiveRichesImpl();
+		List<ExcelUser> users = receiveRiches.getAllUsers();
+
+		boolean flag = true;
+		for(ExcelUser excelUser :users){
+			if (excelUser.getAccount().equals(user.getAccount())){
+				//更新
+				excelUser.setEmail(user.getEmail());
+				excelUser.setForbidden(user.getForbidden());
+				excelUser.setUserName(user.getUserName());
+				excelUser.setPassWord(user.getPassWord());
+				flag =false;
+				break;
+			}
+		}
+		if (flag){
+			users.add(user);
+		}
+		meta.success(users);
+		return new ResponseEntity<>(meta,HttpStatus.OK);
+	}
+
+	@GetMapping(value = "deleteUser/{id}")
+	public ResponseEntity<ResultMeta> findUsers(@PathVariable String id){
+		ResultMeta meta = new ResultMeta();
+		ReceiveRichesImpl receiveRiches = new ReceiveRichesImpl();
+		List<ExcelUser> users = receiveRiches.getAllUsers();
+		for(ExcelUser excelUser :users){
+			if (excelUser.getId().equals(id)){
+				users.remove(excelUser);
+				break;
+			}
+		}
+		File pFile = new File(RCache.CAT_CACHE.get("dataPath").getValue());
+		FileOutputStream stream = null;
+		try {
+			File file = new File(pFile, "users.json");
+			stream = new FileOutputStream(file);
+			JSON.writeJSONString(stream, users, SerializerFeature.QuoteFieldNames);
+			meta.success(users);
+		} catch (IOException e) {
+			e.printStackTrace();
+			meta.failure();
+		} finally {
+			IOUtils.closeQuietly(stream);
+		}
+
+		return new ResponseEntity<>(meta,HttpStatus.OK);
+	}
+
 	private RichesData getChooice(String code){
 		BRiches bRiches = new BRiches();
 		JSONArray array = bRiches.getAllTips();
@@ -215,4 +277,6 @@ public class RicheController extends BaseClass{
 		}
 		return result;
 	}
+
+
 }

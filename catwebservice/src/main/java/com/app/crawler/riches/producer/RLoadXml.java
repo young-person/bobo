@@ -22,7 +22,6 @@ import java.util.*;
 public class RLoadXml implements RLoad<Data> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RLoadXml.class);
-    private Object bean;
 
     public String convertToXml(Object obj,String path) {
         return this.convertToXml(obj, path,"schedule.xml");
@@ -105,7 +104,7 @@ public class RLoadXml implements RLoad<Data> {
     }
 
     public <T> T convertModelToClass(T t,List<Property> properties) throws InvocationTargetException, IllegalAccessException {
-        Field[] fields = bean.getClass().getDeclaredFields();
+        Field[] fields = t.getClass().getDeclaredFields();
         for(int index = 0; index < fields.length; index ++){
             Field field = fields[index];
             String name = field.getName();
