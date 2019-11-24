@@ -1,13 +1,19 @@
 package com.app.crawler.riches;
 
+import com.alibaba.fastjson.JSON;
 import com.app.config.CatXml;
+import com.app.crawler.request.RestRequest;
 import com.app.crawler.riches.pojo.HistoryBean;
 import com.app.crawler.riches.pojo.RicheBean;
+import com.app.crawler.riches.pojo.RicheResult;
 import org.apache.poi.ss.usermodel.Row;
+import org.springframework.util.ResourceUtils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class BRichesBase {
 
@@ -52,6 +58,22 @@ public class BRichesBase {
      */
     protected String stockPageUrl = "http://stockpage.10jqka.com.cn/%s/";
 
+    /**
+     *股票对应的类型
+     */
+    protected static Map<String,String> codeTypeMap = new ConcurrentHashMap<>();
+
+
+    static {
+        RestRequest restRequest = new RestRequest();
+        String content = restRequest.doGet("https://m.stock.pingan.com/h5quote/quote/getReportData?descOrAsc=desc&thirdAccount=&tokenId=&signature=&columnId=hand&count=5000&type=shsz&chnl=&marketType=shsz&random=0.35715587574136154&requestId=&rdm=&begin=0&key=&timestamp=");
+
+        RicheResult handResult = JSON.parseObject(content, RicheResult.class);
+        for(RicheBean r : handResult.getResults()){
+            codeTypeMap.put(r.getCode(),r.getCodeType());
+        }
+    }
+
     protected CatXml catXml = new CatXml();
 
     /**
@@ -82,7 +104,13 @@ public class BRichesBase {
         }
 
         builder.append(type);
-        File file = new File(catXml.getDataPath());
+//        File file = new File(catXml.getDataPath());
+        File file = null;
+        try {
+            file = ResourceUtils.getFile(catXml.getDataPath());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         File f1 = new File(file, this.typeName.get(bean.getCodeType()));
         if (!f1.exists()) {

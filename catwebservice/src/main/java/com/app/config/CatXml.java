@@ -4,47 +4,51 @@ import com.app.crawler.base.RCache;
 
 public class CatXml {
 
-    private String dataPath = RCache.CAT_CACHE.get("dataPath").getValue();;
-    private String tipsDataPath = RCache.CAT_CACHE.get("tipsDataPath").getValue();
-    private String periodTime;
-    private String sexforumPath;
+    private String dataPath ;
+    private String tipsDataPath;
+    private String periodTime ;
+    private String sexforumPath ;
     private String DOMIAN;
-    private String sendEmailSubject = RCache.CAT_CACHE.get("sendEmailSubject").getValue();
-    private String emailSubjectTemplate = RCache.CAT_CACHE.get("emailSubjectTemplate").getValue();
-    private String usersPath;
+    private String sendEmailSubject;
+    private String emailSubjectTemplate;
 
     private String archive = "archive.json";
+
+    private String usersPath = "users.json";
+
+    public CatXml() {}
+
 
     public String getArchive() {
         return archive;
     }
 
     public String getDataPath() {
-        return dataPath;
+        return RCache.CAT_CACHE.get("dataPath").getValue();
     }
 
     public String getTipsDataPath() {
-        return tipsDataPath;
+        return RCache.CAT_CACHE.get("tipsDataPath").getValue();
     }
 
     public String getPeriodTime() {
-        return periodTime;
+        return RCache.CAT_CACHE.get("periodTime").getValue();
     }
 
     public String getSexforumPath() {
-        return sexforumPath;
+        return RCache.CAT_CACHE.get("sexforumPath").getValue();
     }
 
     public String getDOMIAN() {
-        return DOMIAN;
+        return RCache.CAT_CACHE.get("DOMIAN").getValue();
     }
 
     public String getSendEmailSubject() {
-        return sendEmailSubject;
+        return RCache.CAT_CACHE.get("sendEmailSubject").getValue();
     }
 
     public String getEmailSubjectTemplate() {
-        return emailSubjectTemplate;
+        return RCache.CAT_CACHE.get("emailSubjectTemplate").getValue();
     }
 
     public String getUsersPath() {

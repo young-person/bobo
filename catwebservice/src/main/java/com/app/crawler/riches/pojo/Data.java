@@ -1,11 +1,10 @@
 package com.app.crawler.riches.pojo;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
 @XmlRootElement(name="data")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Data {
     @XmlAttribute(name="scan")
     private Boolean scan = false;

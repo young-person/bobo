@@ -1,7 +1,6 @@
 package com.app.crawler.riches.producer;
 
 import com.app.crawler.base.RCache;
-import com.app.crawler.pojo.Cat;
 import com.app.crawler.pojo.Property;
 import com.app.crawler.pojo.RName;
 import com.app.crawler.riches.pojo.Bean;
@@ -10,6 +9,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.ResourceUtils;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -43,7 +43,8 @@ public class RLoadXml implements RLoad<Data> {
             marshaller.marshal(obj, sw);
             StringBuilder builder = new StringBuilder(path);
             builder.append(name);
-            outputStream = new FileOutputStream(new File(builder.toString()));
+            File file = ResourceUtils.getFile(builder.toString());
+            outputStream = new FileOutputStream(file);
 
             outputStream.write(sw.toString().getBytes(),0,sw.toString().getBytes().length);
         } catch (JAXBException | IOException e) {
@@ -133,10 +134,11 @@ public class RLoadXml implements RLoad<Data> {
         try {
             StringBuilder builder = new StringBuilder(path);
             builder.append("schedule.xml");
-            JAXBContext context = JAXBContext.newInstance(Cat.class);
+            JAXBContext context = JAXBContext.newInstance(Data.class);
             Unmarshaller unMar = context.createUnmarshaller();
-            data = (Data) unMar.unmarshal(new File(builder.toString()));
-        } catch (JAXBException e) {
+            File file = ResourceUtils.getFile(builder.toString());
+            data = (Data) unMar.unmarshal(file);
+        } catch (FileNotFoundException | JAXBException e) {
             LOGGER.error("加载xml错误", e);
         }
         return data;

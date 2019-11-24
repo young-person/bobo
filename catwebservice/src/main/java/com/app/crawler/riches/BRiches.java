@@ -15,11 +15,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.util.ResourceUtils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
@@ -32,10 +30,8 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	private RestRequest request = new RestRequest();
 
 	private static AtomicBoolean ISRUN = new AtomicBoolean(false);
-	/**
-	 *股票对应的类型
-	 */
-	private Map<String,String> codeTypeMap = new HashMap<>();
+	private static AtomicBoolean ISCALCULATE = new AtomicBoolean(false);
+
 	/**
 	 * 通用请求参数数据
 	 */
@@ -58,10 +54,6 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 
 	private RicheComputeAbstract richeCompute = new RicheComputeAbstract();;
 
-	public void setRicheCompute(RicheComputeAbstract richeCompute) {
-		this.richeCompute = richeCompute;
-	}
-
 
 	/**
 	 * 均衡值
@@ -70,9 +62,9 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 
 	private final float hand = 0.5f;
 
-	private final CopyOnWriteArraySet<RicheTarget> RICHETARGET = new CopyOnWriteArraySet<RicheTarget>();
+	private static final CopyOnWriteArraySet<RicheTarget> RICHETARGET = new CopyOnWriteArraySet<RicheTarget>();
 
-	public CopyOnWriteArraySet<RicheTarget> get() {
+	public static CopyOnWriteArraySet<RicheTarget> get() {
 		return RICHETARGET;
 	}
 
@@ -82,9 +74,10 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	 */
 	public void calculate(Integer limit,Integer num) {
 		LOGGER.info("开始股市数据计算任务,计算状态；【{}】",isRuning());
-		if (!isRuning()) {
+		if (isRuning() || ISCALCULATE.get()) {
 			return;
 		}
+		ISCALCULATE.set(true);
 		if (Objects.isNull(limit) || limit == 0)
 			limit= 30;
 		if (Objects.isNull(num) || num == 0)
@@ -92,7 +85,12 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 		richeCompute.setLimit(limit);
 		richeCompute.setNum(num);
 
-		File file = new File(catXml.getDataPath());
+		File file = null;
+		try {
+			file = ResourceUtils.getFile(catXml.getDataPath());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		for (File f : file.listFiles()) {
 			if (!f.isDirectory()) {
 				continue;
@@ -124,8 +122,8 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 
 			}
 		}
-		ISRUN.set(false);
 		LOGGER.info("结束此次股市数据计算任务");
+		ISCALCULATE.set(false);
 	}
 
 	private List<ShareInfo> convertHistory(List<HistoryBean> datas){
@@ -167,6 +165,9 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 			LOGGER.error("抓取出现错误", e);
 		}
 		LOGGER.info("结束此次抓取股市数据任务");
+		ISRUN.set(false);
+		this.calculate(null,null);
+
 	}
 
 	/**
@@ -221,6 +222,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 
 
 	public OnlineBean reloadOnlineData(String code){
+		LOGGER.info("加载当前实时数据地址：[{}]",String.format(onlineUrl,code,codeTypeMap.get(code)));
 		String content = request.doGet(String.format(onlineUrl,code,codeTypeMap.get(code)));
 		OnlineResult result = JSONObject.parseObject(content,OnlineResult.class);
 		return result.getResults();
@@ -262,6 +264,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 		for (RicheBean bean : handResult.getResults()) {
 			map.put(bean.getCode(), bean);
 		}
+		LOGGER.info("通过东方财富网获取今日数据指标：[{}]",dfUrl);
 		String result = request.doGet(dfUrl);
 
 		JSONObject object = JSONObject.parseObject(this.trimJquery(result).toString());
@@ -349,12 +352,12 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	}
 
 	public JSONArray getAllTips(){
+		LOGGER.info("获取【{}】今日所有指标数据：【{}】",Calendar.getInstance().get(Calendar.DATE),allUrl);
 		String allResult = request.doGet(allUrl);
 
 		JSONObject object = JSONObject.parseObject(this.trimJquery(allResult).toString());
 
-		JSONArray array = object.getJSONArray("data");
-		return array;
+		return object.getJSONObject("data").getJSONArray("diff");
 	}
 
 	/**
@@ -387,33 +390,40 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	 * @return
 	 */
 	private Map<String, File> sureMkdirFolder() {
-		File file = new File(catXml.getDataPath());
-		if (!file.exists()) {
-			LOGGER.info("第一次请求文件路径为：【{}】", file.getAbsolutePath());
-			file.mkdirs();
-		}
-		typeName.forEach((k, v) -> {
-			boolean flag = true;
+		Map<String, File> resultMap = new HashMap<String, File>();
+		try {
+			File file = ResourceUtils.getFile(catXml.getDataPath());
+
+			if (!file.exists()) {
+				LOGGER.info("第一次请求文件路径为：【{}】", file.getAbsolutePath());
+				file.mkdirs();
+			}
+			typeName.forEach((k, v) -> {
+				boolean flag = true;
+				for (File f : file.listFiles()) {
+					if (f.getName().contentEquals(v)) {
+						flag = false;
+					}
+				}
+				if (flag) {
+					File childFile = new File(file, v);
+					if (!childFile.exists()) {
+						childFile.mkdir();
+					}
+				}
+			});
+
 			for (File f : file.listFiles()) {
-				if (f.getName().contentEquals(v)) {
-					flag = false;
+				if (!f.isDirectory()) {
+					continue;
+				}
+				for (File e : f.listFiles()) {
+					resultMap.put(e.getName(), f);
 				}
 			}
-			if (flag) {
-				File childFile = new File(file, v);
-				if (!childFile.exists()) {
-					childFile.mkdir();
-				}
-			}
-		});
-		Map<String, File> resultMap = new HashMap<String, File>(file.listFiles().length);
-		for (File f : file.listFiles()) {
-			if (!f.isDirectory()) {
-				continue;
-			}
-			for (File e : f.listFiles()) {
-				resultMap.put(e.getName(), f);
-			}
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
 		return resultMap;
 	}
@@ -427,12 +437,11 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	 */
 	private RicheResult getAllRicheBeans() throws IOException {
 		RicheResult handResult = getTurnoverRate();
-		File pFile = new File(catXml.getDataPath());
+		File pFile = ResourceUtils.getFile(catXml.getDataPath());
 		if (!pFile.exists()) {
 			pFile.mkdirs();
 		}
 		if (Objects.isNull(handResult)) {
-
 			handResult = JSON.parseObject(new FileInputStream(new File(pFile, catXml.getArchive())), RicheResult.class);
 		}
 		if (Objects.nonNull(handResult)) {
@@ -451,7 +460,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 
 		}
 		for(RicheBean r : handResult.getResults()){
-			codeTypeMap.put(r.getCodeType(),r.getCode());
+			codeTypeMap.put(r.getCode(),r.getCodeType());
 		}
 		return handResult;
 	}

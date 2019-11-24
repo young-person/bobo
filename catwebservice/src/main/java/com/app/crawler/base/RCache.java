@@ -52,7 +52,6 @@ public class RCache extends BaseClass {
             List<Property> list = cat.getProperties();
             for (Property property : list) {
                 CAT_CACHE.put(property.getName(), property);
-                System.out.println(property.getName()+"------------"+property.getValue());
                 LOGGER.debug("加载配置项key：【】---》value：【】", property.getName(), property);
             }
             LOGGER.debug("加载配置文件完毕，配置项数量：【{}】", CAT_CACHE.size());

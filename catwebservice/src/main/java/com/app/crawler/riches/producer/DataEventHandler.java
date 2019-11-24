@@ -34,7 +34,7 @@ public class DataEventHandler {
     @OnEvent(value = typeName)
     public void initData(SocketIOClient socketIOClient, AckRequest request, Object data) {
         if (Objects.isNull(data)) {
-            socketIOClient.sendEvent(typeName, briches.get());
+            socketIOClient.sendEvent(typeName, BRiches.get());
         } else {
             JSONObject obj = JSONObject.parseObject(JSON.toJSONString(data));
             int num = obj.getInteger("num");
@@ -53,7 +53,7 @@ public class DataEventHandler {
     public void onConnect(SocketIOClient socketIOClient) {
         if (socketIOClient != null) {
             addOnlineCount();
-            socketIOClient.sendEvent(typeName, briches.get());
+            socketIOClient.sendEvent(typeName, BRiches.get());
             LOGGER.info("客服端sessionID：{}已经连接, client ip : {} ,online count : {} ", socketIOClient.getSessionId(), socketIOClient.getRemoteAddress(), getOnlineCount());
         }
     }
@@ -90,7 +90,7 @@ public class DataEventHandler {
         // 获取全部客户端
         Collection<SocketIOClient> allClients = socketIOServer.getAllClients();
         for (SocketIOClient socket : allClients) {
-            socket.sendEvent(typeName, briches.get());
+            socket.sendEvent(typeName, BRiches.get());
         }
     }
 

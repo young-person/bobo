@@ -109,7 +109,7 @@
     function send() {
         var limit = $("input[name='limit']").val();
         var num = $("input[name='num']").val();
-        var obj = {"limit":limit,"num":num};
+        var obj = {"limit":Number(limit),"num":Number(num)};
         socket.emit('refreshData', obj);
     }
     send();

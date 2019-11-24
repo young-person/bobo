@@ -1,6 +1,7 @@
 package com.app.crawler.riches.pojo;
 
-import com.bobo.annotation.RName;
+
+import com.app.crawler.pojo.RName;
 
 public class ExcelUser{
 

@@ -2,8 +2,6 @@ package com.app.pojo;
 
 import java.io.Serializable;
 
-import com.bobo.annotation.RName;
-
 /**
  * @Description: TODO
  * @date 2019年11月12日 下午10:39:58
@@ -18,21 +16,13 @@ public class RichesData implements Serializable {
 	private static final long serialVersionUID = -7983215252778254005L;
 	
 	private String f1;
-	@RName(value="昨收")
 	private String f2;
-	@RName(value="涨跌比例")
 	private String f3;
-	@RName(value="涨跌金额")
 	private String f4;
-	@RName(value="成交量")
 	private String f5;
-	@RName(value="成交额")
 	private String f6;
-	@RName(value="振幅")
 	private String f7;
-	@RName(value="换手率")
 	private String f8;
-	@RName(value="量比")
 	private String f9;
 	private String f10;
 	private String f11;
@@ -44,12 +34,9 @@ public class RichesData implements Serializable {
 	private String f17;
 	private String f18;
 	private String f19;
-	@RName(value="总市值")
 	private String f20;
-	@RName(value="流通市值")
 	private String f21;
 	private String f22;
-	@RName(value="市净率")
 	private String f23;
 	private String f24;
 	private String f25;
@@ -64,26 +51,18 @@ public class RichesData implements Serializable {
 	private String f34;
 	private String f35;
 	private String f36;
-	@RName(value="净资产收益率")
 	private String f37;
-	@RName(value="总股本")
 	private String f38;
-	@RName(value="流通股本")
 	private String f39;
-	@RName(value="营业收入")
 	private String f40;
-	@RName(value="营收同比")
 	private String f41;
 	private String f42;
 	private String f43;
 	private String f44;
-	@RName(value="净利润")
 	private String f45;
-	@RName(value="净利润同比")
 	private String f46;
 	private String f47;
 	private String f48;
-	@RName(value="毛利率")
 	private String f49;
 	private String f50;
 	private String f51;
@@ -138,7 +117,6 @@ public class RichesData implements Serializable {
 	private String f100;
 	private String f101;
 	private String f102;
-	@RName(value="关联板块")
 	private String f103;
 	private String f104;
 	private String f105;
@@ -148,9 +126,7 @@ public class RichesData implements Serializable {
 	private String f109;
 	private String f110;
 	private String f111;
-	@RName(value="每股权益")
 	private String f112;
-	@RName(value="每股净资产")
 	private String f113;
 	private String f114;
 	private String f115;
@@ -167,7 +143,6 @@ public class RichesData implements Serializable {
 	private String f126;
 	private String f127;
 	private String f128;
-	@RName(value="净利率")
 	private String f129;
 	private String f130;
 	private String f131;

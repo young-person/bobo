@@ -45,7 +45,7 @@ public class PersistTxt extends BRichesBase implements Persist {
                 if (Objects.nonNull(line)){
                     String[] values = line.split(SPACE);
                     HistoryBean bean = new HistoryBean();
-                    Field[] fields = bean.getClass().getFields();
+                    Field[] fields = bean.getClass().getDeclaredFields();
                     for(int index = 0; index < fields.length; index ++){
                         Field field = fields[index];
                         BeanUtils.setProperty(bean,field.getName(),values[index]);

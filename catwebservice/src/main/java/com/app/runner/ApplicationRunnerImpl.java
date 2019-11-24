@@ -5,7 +5,7 @@ import com.app.config.CatXml;
 import com.app.crawler.base.RCache;
 import com.app.crawler.riches.BRiches;
 import com.app.crawler.riches.producer.DataEventHandler;
-import com.app.crawler.video.sexforum.MainParse;
+import com.app.service.ReceiveRiches;
 import com.corundumstudio.socketio.SocketIOServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +28,8 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
     private DataEventHandler dataEventHandler;
     @Autowired
     private CatWebServiceProperty catWebServiceProperty;
+    @Autowired
+    private ReceiveRiches receiveRiches;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -47,8 +49,8 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
         timer.schedule(new TimerTask() {
             public void run() {
 
-                MainParse parse = new MainParse();
-                parse.start();
+//                MainParse parse = new MainParse();
+//                parse.start();
                 BRiches bRiches = new BRiches();
                 if (!bRiches.isRuning()) {
                     System.out.println("开始执行任务......");
@@ -63,7 +65,28 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
                 dataEventHandler.pushMsg();
             }
         }, 0, 5 * 1000);
+        this.sendMessage();
     }
 
+    /**
+     * 发送通知
+     */
+    private void sendMessage(){
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                receiveRiches.sendScheduleData();
+            }
+        }, 0, 30 * 60 * 1000);
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                receiveRiches.receiveRichesData(BRiches.get());
+            }
+        }, 0, 12 * 60 * 60 * 1000);
+
+    }
 
 }
