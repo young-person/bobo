@@ -57,14 +57,14 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
                     bRiches.start();
                 }
             }
-        }, 0, Integer.valueOf(catXml.getPeriodTime()));
+        }, 60 * 1000, Integer.valueOf(catXml.getPeriodTime()));
 
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 dataEventHandler.pushMsg();
             }
-        }, 0, 5 * 1000);
+        }, 30 * 60 * 1000, 5 * 1000);
         this.sendMessage();
     }
 
@@ -78,14 +78,14 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
             public void run() {
                 receiveRiches.sendScheduleData();
             }
-        }, 0, 30 * 60 * 1000);
+        }, 30 * 60 * 1000, 30 * 60 * 1000);
 
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 receiveRiches.receiveRichesData(BRiches.get());
             }
-        }, 0, 12 * 60 * 60 * 1000);
+        }, 30 * 60 * 1000, 12 * 60 * 60 * 1000);
 
     }
 
