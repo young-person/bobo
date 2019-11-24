@@ -94,7 +94,7 @@ public class ReceiveRichesImpl extends BaseClass implements ReceiveRiches {
     }
 
     public List<ExcelUser> getAllUsers(){
-		List<ExcelUser> users = new ArrayList<>();
+		List<ExcelUser> users = null;
 
 		InputStream stream = null;
 		try {
@@ -116,6 +116,9 @@ public class ReceiveRichesImpl extends BaseClass implements ReceiveRiches {
 			e.printStackTrace();
 		}finally {
 			IOUtils.closeQuietly(stream);
+		}
+		if (Objects.isNull(users)){
+			users = new ArrayList<>();
 		}
 		return users;
 	}

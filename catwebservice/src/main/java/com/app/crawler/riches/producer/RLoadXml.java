@@ -1,9 +1,7 @@
 package com.app.crawler.riches.producer;
 
-import com.app.crawler.base.RCache;
 import com.app.crawler.pojo.Property;
 import com.app.crawler.pojo.RName;
-import com.app.crawler.riches.pojo.Bean;
 import com.app.crawler.riches.pojo.Data;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.io.IOUtils;
@@ -18,7 +16,9 @@ import javax.xml.bind.Unmarshaller;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class RLoadXml implements RLoad<Data> {
 
@@ -142,27 +142,6 @@ public class RLoadXml implements RLoad<Data> {
             LOGGER.error("加载xml错误", e);
         }
         return data;
-    }
-
-    /**
-     * 数据服务
-     */
-    public void dataService() {
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                String path = RCache.CAT_CACHE.get("dataPath").getValue();
-                Data data = getDataFromXml(path);
-                List<Bean> beans = data.getBeans();
-                for (Bean bean : beans) {
-                    List<Property> propertyList = bean.getProperties();
-                    for (Property property : propertyList) {
-
-                    }
-                }
-            }
-        }, 5 * 1000, 10 * 1000);
     }
 
     public List<String> readFile(String path) throws IOException {
