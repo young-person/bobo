@@ -14,7 +14,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -41,23 +40,17 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
         CatXml catXml = new CatXml();
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println("任务正在运行:"+(new Date().getTime()));
-            }
-        },0,1000*10);
-        timer.schedule(new TimerTask() {
             public void run() {
 
-//                MainParse parse = new MainParse();
-//                parse.start();
                 BRiches bRiches = new BRiches();
+                System.out.println("准备执行任务......");
                 if (!bRiches.isRuning()) {
                     System.out.println("开始执行任务......");
-                    bRiches.start();
+                    bRiches.calculate(null,null);
+                    System.out.println("结束执行任务......");
                 }
             }
-        }, 60 * 1000, Integer.valueOf(catXml.getPeriodTime()));
+        }, 60 * 1000, 2 * 60 * 60 * 1000);
 
         timer.schedule(new TimerTask() {
             @Override
