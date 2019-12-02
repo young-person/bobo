@@ -27,7 +27,7 @@ public class PersistExcel extends BRichesBase implements Persist {
                 existFile.delete();//先全部增量
 
                 if (!existFile.exists()) {
-                    inputStream = new FileInputStream(new File(new File(dataPath), "share.xlsx"));
+                    inputStream = new FileInputStream(new File(new File(catXml.getDataPath()), "share.xlsx"));
                     workbook = WorkbookFactory.create(inputStream);
                     workbook.setSheetName(0, bean.getCode());
                     Sheet sheet = workbook.getSheetAt(0);

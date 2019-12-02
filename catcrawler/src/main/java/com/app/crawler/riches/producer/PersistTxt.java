@@ -4,6 +4,7 @@ import com.app.crawler.riches.BRichesBase;
 import com.app.crawler.riches.pojo.HistoryBean;
 import com.app.crawler.riches.pojo.RicheBean;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.compress.utils.IOUtils;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -44,7 +45,7 @@ public class PersistTxt extends BRichesBase implements Persist {
                 if (Objects.nonNull(line)){
                     String[] values = line.split(SPACE);
                     HistoryBean bean = new HistoryBean();
-                    Field[] fields = bean.getClass().getFields();
+                    Field[] fields = bean.getClass().getDeclaredFields();
                     for(int index = 0; index < fields.length; index ++){
                         Field field = fields[index];
                         BeanUtils.setProperty(bean,field.getName(),values[index]);
@@ -53,9 +54,9 @@ public class PersistTxt extends BRichesBase implements Persist {
                 }
             }
         }finally {
-            bufferedReader.close();
-            streamReader.close();
-            inputStream.close();
+            IOUtils.closeQuietly(bufferedReader);
+            IOUtils.closeQuietly(streamReader);
+            IOUtils.closeQuietly(inputStream);
         }
         return result;
     }

@@ -1,26 +1,22 @@
 package com.app.crawler.riches;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-
 import com.app.crawler.riches.pojo.RShareInfo;
 import com.app.crawler.riches.pojo.ShareInfo;
 
-/** 
+import java.util.*;
+
+/**
  * @Description: TODO
- * @date 2019年11月2日 上午11:11:25 
- * @ClassName: RicheCompute30 
+ * @date 2019年11月2日 上午11:11:25
+ * @ClassName: RicheCompute30
  */
-public class RicheComputeAbstract implements RicheCompute{
+public class RicheComputeAbstract {
 
 	protected int num = 30;
-	
+
 	private int limit = 7;
-	
-	
+
+
 	public int getLimit() {
 		return limit;
 	}
@@ -41,10 +37,6 @@ public class RicheComputeAbstract implements RicheCompute{
 	}
 
 
-	/* (non-Javadoc)
-	 * @see com.app.crawler.riches.RicheCompute#compute(com.app.crawler.riches.pojo.RicheMsg)
-	 */
-	@Override
 	public RicheTarget compute(List<ShareInfo> datas,String name) {
 		RicheTarget target = new RicheTarget();
 		if (datas.size() > num) {
@@ -57,24 +49,24 @@ public class RicheComputeAbstract implements RicheCompute{
 					return o1.getDate().compareTo(o2.getDate());
 				};
 			});
-			
+
 			List<ShareInfo> tmpList = datas.subList(datas.size() - num, datas.size());
 			float l = this.getRippleValue(tmpList, limit);
 			target.setL(l);
 		}
 		return target;
 	}
-	
+
 
 	/**
 	 * 根据 斜率来划分 范围
-	 * 
+	 *
 	 * 斜率正值越大 则当日涨幅数越大
-	 * 
+	 *
 	 * -0.1*360 - 0.1*360
-	 * 
+	 *
 	 * 斜率负值越大则当日跌幅数越大
-	 * 
+	 *
 	 * 设置 斜率区间值 且 连续斜率总和大于一定值这 出现峰回路转 之势
 	 */
 
@@ -83,7 +75,7 @@ public class RicheComputeAbstract implements RicheCompute{
 		float max = 0f;
 		String day1 = null;
 		String day2 = null;
-		
+
 		boolean flag = true;
 		for(ShareInfo bean : datas) {
 			if (flag) {
@@ -102,16 +94,16 @@ public class RicheComputeAbstract implements RicheCompute{
 		}
 		//斜率  计算波动浮动
 		float k = (Float.valueOf(max) - Float.valueOf(min)) / Float.valueOf(day2) - Float.valueOf(day1);
-		
+
 		if (k > 0) {
-			
+
 		}else {
-			
+
 		}
 	}
 
 	/**
-	 * 如果小 给 0等于给 0  大于给1 
+	 * 如果小 给 0等于给 0  大于给1
 	 *  @param datas
 	 *  @param n 最近n天是否低于或者有低于之前数据
 	 *  @return
@@ -127,14 +119,14 @@ public class RicheComputeAbstract implements RicheCompute{
 		boolean[] b3 = new boolean[datas.size()];
 		boolean[] b4 = new boolean[datas.size()];
 		boolean[] b5 = new boolean[datas.size()];
-		
+
 		for(int k = datas.size() -1; k > 0 ; k --) {
 			RShareInfo bean1 = this.conveRShareInfo(datas.get(k));
 			if(m > n) {
 				break;
 			}
 			m ++;
-			
+
 			if (bean1.getRisePrice() >= 0) {
 				rn += 1;
 			}else {
@@ -143,7 +135,7 @@ public class RicheComputeAbstract implements RicheCompute{
 			b1[k] = bean1.getRisePrice() <= 5f;
 			b2[k] = bean1.getRisePrice() >= 5f && bean1.getRisePrice() <= 7f;
 			b3[k] = bean1.getRisePrice() >= 7f;
-			
+
 			List<Integer> results = new ArrayList<Integer>();
 			for(int j = 0; j < datas.size(); j++) {
 				if ((datas.size() - j - 1) > n) {
@@ -163,7 +155,7 @@ public class RicheComputeAbstract implements RicheCompute{
 	}
 
 	private RShareInfo conveRShareInfo(ShareInfo shareInfo) {
-		
+
 		RShareInfo r = new RShareInfo(shareInfo.getDate(),
 				Float.valueOf(shareInfo.getHand()).floatValue(),
 				Float.valueOf(shareInfo.getRisePrice()).floatValue(),
@@ -174,7 +166,7 @@ public class RicheComputeAbstract implements RicheCompute{
 				Float.valueOf(shareInfo.getMinPrice()).floatValue(),
 				Integer.valueOf(shareInfo.getTotal()).intValue(),
 				Double.valueOf(shareInfo.getMoney()).intValue());
-		
+
 		return r;
 	}
 	/**

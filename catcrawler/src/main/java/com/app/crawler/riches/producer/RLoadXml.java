@@ -1,27 +1,59 @@
 package com.app.crawler.riches.producer;
 
-import com.app.crawler.base.RCache;
-import com.app.crawler.pojo.Cat;
 import com.app.crawler.pojo.Property;
 import com.app.crawler.pojo.RName;
-import com.app.crawler.riches.pojo.Bean;
 import com.app.crawler.riches.pojo.Data;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.compress.utils.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class RLoadXml implements RLoad<Data> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RLoadXml.class);
-    private Object bean;
+
+    public String convertToXml(Object obj,String path) {
+        return this.convertToXml(obj, path,"schedule.xml");
+    }
+
+    public String convertToXml(Object obj,String path,String name) {
+        // 创建输出流
+        StringWriter sw = new StringWriter();
+        FileOutputStream outputStream = null;
+        try {
+            // 利用jdk中自带的转换类实现
+            JAXBContext context = JAXBContext.newInstance(obj.getClass());
+
+            Marshaller marshaller = context.createMarshaller();
+            // 格式化xml输出的格式
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
+            // 将对象转换成输出流形式的xml
+            marshaller.marshal(obj, sw);
+            StringBuilder builder = new StringBuilder(path);
+            builder.append(name);
+            File file = new File(builder.toString());
+            outputStream = new FileOutputStream(file);
+
+            outputStream.write(sw.toString().getBytes(),0,sw.toString().getBytes().length);
+        } catch (JAXBException | IOException e) {
+            e.printStackTrace();
+        }finally {
+            IOUtils.closeQuietly(outputStream);
+            IOUtils.closeQuietly(sw);
+        }
+        return sw.toString();
+    }
 
     public <T> List<String> getBeanValues(T bean) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         Field[] fields = bean.getClass().getDeclaredFields();
@@ -76,7 +108,7 @@ public class RLoadXml implements RLoad<Data> {
     }
 
     public <T> T convertModelToClass(T t,List<Property> properties) throws InvocationTargetException, IllegalAccessException {
-        Field[] fields = bean.getClass().getDeclaredFields();
+        Field[] fields = t.getClass().getDeclaredFields();
         for(int index = 0; index < fields.length; index ++){
             Field field = fields[index];
             String name = field.getName();
@@ -95,43 +127,20 @@ public class RLoadXml implements RLoad<Data> {
         return t;
     }
 
-    public static void main(String[] args) {
-
-    }
     @Override
     public Data getDataFromXml(String path) {
         Data data = null;
         try {
             StringBuilder builder = new StringBuilder(path);
             builder.append("schedule.xml");
-            JAXBContext context = JAXBContext.newInstance(Cat.class);
+            JAXBContext context = JAXBContext.newInstance(Data.class);
             Unmarshaller unMar = context.createUnmarshaller();
-            data = (Data) unMar.unmarshal(new File(builder.toString()));
+            File file = new File(builder.toString());
+            data = (Data) unMar.unmarshal(file);
         } catch (JAXBException e) {
             LOGGER.error("加载xml错误", e);
         }
         return data;
-    }
-
-    /**
-     * 数据服务
-     */
-    public void dataService() {
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                String path = RCache.CAT_CACHE.get("dataPath").getValue();
-                Data data = getDataFromXml(path);
-                List<Bean> beans = data.getBeans();
-                for (Bean bean : beans) {
-                    List<Property> propertyList = bean.getProperties();
-                    for (Property property : propertyList) {
-
-                    }
-                }
-            }
-        }, 5 * 1000, 10 * 1000);
     }
 
     public List<String> readFile(String path) throws IOException {

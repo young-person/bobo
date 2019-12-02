@@ -3,7 +3,6 @@ package com.app.crawler;
 import com.app.crawler.base.RCache;
 import com.app.crawler.riches.BRiches;
 
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.*;
@@ -21,18 +20,14 @@ public class CrawlerMain {
 		System.out.println("完成配置加载.....");
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				System.out.println("任务正在运行:"+(new Date().getTime()));
-			}
-		},0,1000*10);
-        timer.schedule(new TimerTask() {
             public void run() {
             	
             	BRiches bRiches = new BRiches();
+				System.out.println("准备执行任务......");
             	if (!bRiches.isRuning()) {
             		System.out.println("开始执行任务......");
             		bRiches.start();
+					System.out.println("介绍执行任务......");
 				}
             }
         }, 0, Integer.valueOf(RCache.CAT_CACHE.get("periodTime").getValue()));
