@@ -227,13 +227,13 @@ public interface IFTPClient {
     /**
      * 上传文件夹到远程目录
      * @param remoteFile	远程目录
-     * @param localFile	本地目录
+     * @param localDirectoryPath	本地目录
      */
     void uploadFileByFolder(String remoteFile, String localDirectoryPath);
     /**
      * 上传文件夹到远程目录
      * @param remoteFile	远程目录
-     * @param localFile	本地目录
+     * @param localDirectoryPath	本地目录
      * @param listener 上传监听 重写FileTransportAdapter 调用方法  uploadFolderProgressListener(String remoteFile,File local,boolean status);
      */
     void  uploadFileByFolder(String remoteFile, String localDirectoryPath, FileTransportListener listener);

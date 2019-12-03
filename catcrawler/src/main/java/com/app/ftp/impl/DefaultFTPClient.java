@@ -20,8 +20,8 @@ public class DefaultFTPClient implements IFTPClient {
 	
 	protected final FTPConfig ftpconfig ;
 	protected final FTPClient ftpClient;
-	protected String SERVER_CHARSET = "ISO-8859-1";
-	protected String LOCAL_CHARSET = "GBK";
+	protected String SERVER_CHARSET = "UTF-8";
+	protected String LOCAL_CHARSET = "UTF-8";
 	protected String FTPEnvironment = null;//服务器类型 
 	protected boolean debugListener = false;
 	protected final ProtocolCommandListener  default_listener;
