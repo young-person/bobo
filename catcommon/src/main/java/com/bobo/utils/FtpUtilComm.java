@@ -1,33 +1,29 @@
 package com.bobo.utils;
 
-import com.app.ftp.config.FtpConfig;
+import com.app.ftp.FTPConfig;
 import com.bobo.base.BaseClass;
-
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.net.SocketException;
-import java.util.StringTokenizer;
 
 
 public class FtpUtilComm extends  BaseClass{
 
 	private FTPClient ftpClient = new FTPClient();
-	private FtpConfig config;
+	private FTPConfig config;
 
-	public FtpConfig getConfig() {
+	public FTPConfig getConfig() {
 		return config;
 	}
 
-	public void setConfig(FtpConfig config) {
+	public void setConfig(FTPConfig config) {
 		this.config = config;
 	}
 
-	public FtpUtilComm(FtpConfig config) {
+	public FtpUtilComm(FTPConfig config) {
 		this.config = config;
 	}
 
@@ -36,18 +32,11 @@ public class FtpUtilComm extends  BaseClass{
 	}
 
 	public boolean connect() throws IOException {
-		this.ftpClient.connect(this.config.getAddress(),this.config.getPort());
-		this.ftpClient.setControlEncoding("gb2312");
+		this.ftpClient.connect(this.config.getHost(),Integer.valueOf(this.config.getPort()));
+		this.ftpClient.setControlEncoding("UTF-8");
 		if ((FTPReply.isPositiveCompletion(this.ftpClient.getReplyCode()))
 				&& (this.ftpClient.login(this.config.getUsername(),
 						this.config.getPassword()))) {
-			if ((!changeWorkingDirectory(this.config.getRoot()))
-					&& (makeDirectory(this.config.getRoot()))) {
-				if (!changeWorkingDirectory(this.config.getRoot())) {
-					return false;
-				}
-				return true;
-			}
 			return true;
 		}
 
@@ -68,29 +57,7 @@ public class FtpUtilComm extends  BaseClass{
 			}
 		}
 	}
-	public String switchingPath(String path){
-		path = path.replace(config.getFtpFileSeparator(),config.getFtpObliqueLine());
-		StringTokenizer s = new StringTokenizer(path, config.getFtpObliqueLine()); //sign
-		StringBuffer pathName = new StringBuffer();
-		while (s.hasMoreElements()) {
-			Object element = s.nextElement();
-			if(element!= null && !"".equals(String.valueOf(element).trim())){
-				pathName.append(config.getFtpObliqueLine()).append(element);
-			}
-        }
-		if(path.endsWith(config.getFtpObliqueLine())){
-			pathName.append(config.getFtpObliqueLine());
-		}
-		if(path.startsWith(config.getFtpObliqueLine())){
-			return pathName.toString();
-		}else{
-			if(pathName.length()>0){
-				return pathName.toString().substring(1);
-			}else{
-				return pathName.toString();
-			}
-		}
-	}
+
 	public String pwd() throws IOException {
 		String pwd = this.ftpClient.printWorkingDirectory();
 		return iso2Gbk(pwd);
@@ -126,62 +93,7 @@ public class FtpUtilComm extends  BaseClass{
 		return path;
 	}
 
-	public boolean changeWorkingDirectory(String pathname) throws IOException {
-		return this.ftpClient.changeWorkingDirectory(gbk2Iso(pathname));
-	}
 
-	public boolean changeToRootDirectory() throws IOException {
-		if (FTPReply.isPositiveCompletion(this.ftpClient.sendCommand(3, "//"))) {
-			if (changeWorkingDirectory(this.config.getRoot()))
-				System.out.println(pwd());
-			return true;
-		}
-		return false;
-	}
-
-	public boolean makeDirectory(String pathname) throws IOException {
-		try {
-			pathname = toLinuxPath(pathname);
-			if (!pathname.endsWith("/"))
-				pathname = pathname + "/";
-			String directory = pathname.substring(0,
-					pathname.lastIndexOf("/") + 1);
-			if ((!directory.equalsIgnoreCase("/"))
-					&& (!this.ftpClient
-							.changeWorkingDirectory(gbk2Iso(directory)))) {
-				int start = 0;
-				int end = 0;
-				if (directory.startsWith("/"))
-					start = 1;
-				else {
-					start = 0;
-				}
-				end = directory.indexOf("/", start);
-				do {
-					String subDirectory = new String(pathname.substring(start,
-							end).getBytes("GB2312"), "iso-8859-1");
-					if (!this.ftpClient.changeWorkingDirectory(subDirectory)) {
-						if (this.ftpClient.makeDirectory(subDirectory)) {
-							this.ftpClient.changeWorkingDirectory(subDirectory);
-						} else {
-							LOGGER.error("创建目录失败");
-							return false;
-						}
-					}
-
-					start = end + 1;
-					end = directory.indexOf("/", start);
-				}
-
-				while (end > start);
-			}
-
-			return true;
-		} catch (IOException e) {
-			LOGGER.error("切换目录出错：" + pathname);
-		}
-		return false;
-	}
 
 	public boolean deleteFile(String pathname) throws IOException {
 		pathname = gbk2Iso(toLinuxPath(pathname));
@@ -403,19 +315,8 @@ public class FtpUtilComm extends  BaseClass{
 	 * @param remote
 	 * @param local
 	 * @return
-	 * @throws IOException
 	 */
-	public String downloadUp(String remote, String local) throws IOException {
-		
-		//文件名不以/开头时，加上根目录
-		if(!remote.startsWith("/") ) {
-			if(!config.getRoot().endsWith("/")){
-				remote = config.getRoot()+"/"+remote;
-			}else{
-				remote = config.getRoot()+remote;
-			}
-		}
-		
+	public String downloadUp(String remote, String local) {
 		String filename = remote;
 		String ftppath = "/";
 		if(remote.indexOf("/") > -1) {
@@ -439,11 +340,7 @@ public class FtpUtilComm extends  BaseClass{
 			localpath = local.substring(0, ind);
 			local_filename = local.substring(ind+1);
 		}
-		
-		
 		downloadFtpFile(ftppath,localpath,filename,local_filename);
-		
-		
 		return "Success";
 	}
 
@@ -547,41 +444,4 @@ public class FtpUtilComm extends  BaseClass{
         }  
     }
 
-	public static void main(String[] args) {
-//		FtpConfig config = new FtpConfig();
-//		config.setAddr("192.168.0.181");
-//		config.setPort("21");
-//		config.setUsername("ftp");
-//		config.setPassword("123456");
-//		config.setRoot("/to杨航/");
-		FtpConfig config = new FtpConfig();
-		config.setAddress("218.94.150.251");
-		config.setPort(21);
-		config.setUsername("tdhftp");
-		config.setPassword("tdh51887505");
-		config.setRoot("/to杨航");
-		try {
-			FtpUtilComm ftp = new FtpUtilComm(config);
-			ftp.connect();
-			System.out.println(ftp.pwd());
-//			ftp.makeDirectory("/");
-			System.out.println(ftp.pwd());
-
-//			for (int i = 0; i < 1; i++) {
-//				ftp.upload("/Users/lijj/Documents/webservice接口接收大文件优化.docx", i + ".doc");
-//			}
-
-			//ftp.downloadUp(remote, local);//使用公司的ftp服务器下载失败，提示找不到对应的路径，问题出在指定LOCAL_CHARSET=UTF-8,屏蔽后可以
-			ftp.downloadUp("测试.doc", "/Users/lijj/Documents/develop/temp/AJ/AJQL/测试xx.doc");
-
-			ftp.disconnect();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-//		String remotefile = "Users\\lijj\\Documents\\webservice接口接收大文件优化.docx";
-//		int index = remotefile.lastIndexOf("\\");
-//		System.out.println("ml:"+index);
-//		System.out.println("-->"+remotefile.substring(0,index));
-	}
 }

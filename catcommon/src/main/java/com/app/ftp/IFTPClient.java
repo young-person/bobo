@@ -1,6 +1,5 @@
 package com.app.ftp;
 
-import org.apache.commons.net.ProtocolCommandListener;
 import org.apache.commons.net.ftp.FTPCmd;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPFileFilter;
@@ -9,10 +8,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
+/**
+ * Created by 寿继伟 on 2018/12/24.
+ */
 public interface IFTPClient {
-	// 获取 FTP配置信息
-	FTPConfig getFTPConfig();
 
 	// 主动
 	void enterLocalActiveMode();
@@ -79,39 +78,8 @@ public interface IFTPClient {
      */
     boolean downloadFtpFile(String remotePath, OutputStream output);
 
-    /**
-     * 下载FTP 文件夹
-     * @param remotePath 远程目录
-     * @param loaclPath 本地路径
-     * @return
-     */
-    void downloadFtpFolder(String remotePath, String loaclPath);
     
-    /**
-     * 下载FTP 文件夹 并监听进度
-     * @param remotePath 远程目录
-     * @param loaclPath 本地路径
-     * @param listener 重写FileTransportAdapter调用downloadFolderProgressListener(String remotePath,File local,boolean status)
-     * @return
-     */
-    void downloadFtpFolder(String remotePath, String loaclPath, FileTransportListener listener);
-    
-    /***
-     * 下载FTP文件夹
-     * @param remotePath 远程目录
-     * @param loaclFile 本地目录
-     * @return
-     */
-    void downloadFtpFolder(String remotePath, File loaclFile);
-    /**
-     * 下载FTP 文件夹 并监听进度
-     * @param remotePath 远程目录
-     * @param loaclFile 本地目录
-     * @param listener 重写FileTransportAdapter调用downloadFolderProgressListener(String remotePath,File local,boolean status)
-     * @return
-     */
-    void downloadFtpFolder(String remotePath, File loaclFile, FileTransportListener listener);
-    
+
     /***
      * 获取本地路径
      * @return
@@ -177,20 +145,7 @@ public interface IFTPClient {
      */
     boolean sendNoOp();
     
-    /**
-     * 查看文件列表
-     * @param ftpPath
-     * @param filter FTPFileFilters 过滤
-     * @return
-     */
-    FTPFile[] listFiles(String ftpPath, FTPFileFilter filter);
-    
-    /**
-     * 查看列表	
-     * @param ftpPath
-     * @return
-     */
-    FTPFile[]  listAllFile(String ftpPath);
+ 
     
     /**
      * 上传本地文件到FTP远程路径
@@ -224,33 +179,8 @@ public interface IFTPClient {
      */
     boolean uploadFile(String remoteFile, InputStream inputStream);
     
-    /**
-     * 上传文件夹到远程目录
-     * @param remoteFile	远程目录
-     * @param localFile	本地目录
-     */
-    void uploadFileByFolder(String remoteFile, String localDirectoryPath);
-    /**
-     * 上传文件夹到远程目录
-     * @param remoteFile	远程目录
-     * @param localFile	本地目录
-     * @param listener 上传监听 重写FileTransportAdapter 调用方法  uploadFolderProgressListener(String remoteFile,File local,boolean status);
-     */
-    void  uploadFileByFolder(String remoteFile, String localDirectoryPath, FileTransportListener listener);
-    /**
-     * 上传文件夹到远程目录
-     * @param remoteFile	远程目录
-     * @param localFile	本地目录
-     */
-    void uploadFileByFolder(String remoteFile, File localFile);
+
     
-    /**
-     *  上传文件夹到远程目录
-     * @param remoteFile	远程目录
-     * @param localFile	本地目录
-     * @param listener 上传监听 重写FileTransportAdapter 调用方法  uploadFolderProgressListener(String remoteFile,File local,boolean status);
-     */
-    void uploadFileByFolder(String remoteFile, File localFile, FileTransportListener listener);
     /**
      * 删除文件夹 以及文件夹内所有文件
      * @param dir 远程目录
@@ -258,13 +188,7 @@ public interface IFTPClient {
      */
     boolean deleteDirectory(String dir);
     
-    /**
-     * 删除文件夹 以及文件夹内所有文件
-     * @param dir 远程目录
-     * @param listener 删除监听 重写FileTransportAdapter 调用  deleteFolderProgressListener(FTPFile ftpFile,String remotePath,String remoteFileName,boolean isDirectory,boolean status)
-     * @return
-     */
-    boolean deleteDirectory(String dir, FileTransportListener listener);
+   
     
     /***
      *	删除远程文件 
@@ -300,18 +224,7 @@ public interface IFTPClient {
      * @return
      */
     boolean rename(String from, String to);
-    
-    /**
-     * 添加FTP协议命令监听
-     * @param listener
-     */
-    void addCommandListener(ProtocolCommandListener listener);
-    
-    /***
-     * 移除FTP协议命令监听
-     * @param listener
-     */
-    void removeCommandListener(ProtocolCommandListener listener);
+
     
     /**
      * 是否开启默认协议命令监听
@@ -328,45 +241,19 @@ public interface IFTPClient {
      * 移除默认协议命令监听
      */
     void removeDefaultCommandDebug();
-    
+
     /**
-     * 断点恢复文件上传
-     * @param remote
-     * @param local
+     * 查看文件列表
+     * @param ftpPath
+     * @param filter FTPFileFilters 过滤
      * @return
      */
-    boolean breakpointResumeFileUpload(String remote, String local);
+    FTPFile[] listFiles(String ftpPath, FTPFileFilter filter);
     
     /**
-     *  断点恢复文件上传
-     * @param remote
-     * @param local
-     * @param progress 重写FileTransportAdapter调用 uploadProgressListener(long nowSize,long buf,long totalSize);
+     * 查看列表	
+     * @param ftpPath
      * @return
      */
-    boolean breakpointResumeFileUpload(String remote, String local, FileTransportListener progress);
-    
-    boolean breakpointResumeFileUpload(String remote, File local, FileTransportListener progress);
-    
-    boolean breakpointResumeFileUpload(String remote, File local) ;
-    
-    /**
-     * 断点恢复文件下载
-     * @param remote
-     * @param local
-     * @return
-     */
-    boolean breakpointResumeFileDownload(String remote, String local);
-    
-    boolean breakpointResumeFileDownload(String remote, File local);
-    /**
-     * 断点恢复文件下载
-     * @param remote
-     * @param local
-     * @param progress 重写FileTransportAdapter 调用 downloadProgressListener(long nowSize,long buf,long totalSize);
-     * @return
-     */
-    boolean breakpointResumeFileDownload(String remote, String local, FileTransportListener progress);
-    
-    boolean breakpointResumeFileDownload(String remote, File local, FileTransportListener progress);
+    FTPFile[]  listAllFile(String ftpPath);
 }
