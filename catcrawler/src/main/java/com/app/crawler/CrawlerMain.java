@@ -12,7 +12,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 所有爬虫抓取
  */
 public class CrawlerMain {
-	
+
+	private static ScheduledExecutorService ExecutorService = Executors.newScheduledThreadPool(2);
+
 	public static void main(String[] args) {
 		System.out.println("开始启动程序.....");
 		RCache rCache = new RCache();

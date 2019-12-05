@@ -24,11 +24,11 @@ public class RLoadXml implements RLoad<Data> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RLoadXml.class);
 
-    public String convertToXml(Object obj,String path) {
-        return this.convertToXml(obj, path,"schedule.xml");
+    public String convertToXml(Object obj, String path) {
+        return this.convertToXml(obj, path, "schedule.xml");
     }
 
-    public String convertToXml(Object obj,String path,String name) {
+    public String convertToXml(Object obj, String path, String name) {
         // 创建输出流
         StringWriter sw = new StringWriter();
         FileOutputStream outputStream = null;
@@ -38,7 +38,7 @@ public class RLoadXml implements RLoad<Data> {
 
             Marshaller marshaller = context.createMarshaller();
             // 格式化xml输出的格式
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             // 将对象转换成输出流形式的xml
             marshaller.marshal(obj, sw);
             StringBuilder builder = new StringBuilder(path);
@@ -46,10 +46,10 @@ public class RLoadXml implements RLoad<Data> {
             File file = ResourceUtils.getFile(builder.toString());
             outputStream = new FileOutputStream(file);
 
-            outputStream.write(sw.toString().getBytes(),0,sw.toString().getBytes().length);
+            outputStream.write(sw.toString().getBytes(), 0, sw.toString().getBytes().length);
         } catch (JAXBException | IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             IOUtils.closeQuietly(outputStream);
             IOUtils.closeQuietly(sw);
         }
@@ -59,22 +59,24 @@ public class RLoadXml implements RLoad<Data> {
     public <T> List<String> getBeanValues(T bean) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         Field[] fields = bean.getClass().getDeclaredFields();
         List<String> values = new ArrayList<>(fields.length);
-        for(int index = 0; index < fields.length; index ++){
+        for (int index = 0; index < fields.length; index++) {
             Field field = fields[index];
             field.setAccessible(true);
             String value = null;
             Object o = BeanUtils.getProperty(bean, field.getName());
-            if (Objects.nonNull(o)){
+            if (Objects.nonNull(o)) {
                 value = o.toString();
-            }else{
+            } else {
                 value = "";
             }
             values.add(value);
         }
         return values;
     }
+
     /**
      * 将类型转为 数据模型
+     *
      * @param bean
      * @param <T>
      * @return
@@ -82,21 +84,21 @@ public class RLoadXml implements RLoad<Data> {
     public <T> List<Property> converClassToModel(T bean) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         Field[] fields = bean.getClass().getDeclaredFields();
         List<Property> datas = new ArrayList<>(fields.length);
-        for(int index = 0; index < fields.length; index ++){
+        for (int index = 0; index < fields.length; index++) {
             Field field = fields[index];
             field.setAccessible(true);
             RName[] rName = field.getAnnotationsByType(RName.class);
             String mark = null;
             String value = null;
             String name = field.getName();
-            if(Objects.nonNull(rName) && rName.length == 1){
+            if (Objects.nonNull(rName) && rName.length == 1) {
                 RName rname = rName[0];
                 mark = rname.value();
             }
             Object o = BeanUtils.getProperty(bean, name);
-            if (Objects.nonNull(o)){
+            if (Objects.nonNull(o)) {
                 value = o.toString();
-            }else{
+            } else {
                 value = "";
             }
             Property p = new Property();
@@ -108,18 +110,18 @@ public class RLoadXml implements RLoad<Data> {
         return datas;
     }
 
-    public <T> T convertModelToClass(T t,List<Property> properties) throws InvocationTargetException, IllegalAccessException {
+    public <T> T convertModelToClass(T t, List<Property> properties) throws InvocationTargetException, IllegalAccessException {
         Field[] fields = t.getClass().getDeclaredFields();
-        for(int index = 0; index < fields.length; index ++){
+        for (int index = 0; index < fields.length; index++) {
             Field field = fields[index];
             String name = field.getName();
             field.setAccessible(true);
 
-            for(Property property : properties){
-                if (name.equals(property.getName())){
+            for (Property property : properties) {
+                if (name.equals(property.getName())) {
                     property.getName();
                     property.getMark();
-                    BeanUtils.setProperty(t, name,property.getValue());
+                    BeanUtils.setProperty(t, name, property.getValue());
                     break;
                 }
             }
@@ -177,6 +179,45 @@ public class RLoadXml implements RLoad<Data> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 获取最后一行数据
+     * @param file
+     * @return
+     * @throws IOException
+     */
+    public String readLastLine(File file) throws IOException {
+        String result = null;
+        if (!file.exists() || file.isDirectory() || !file.canRead()) {
+            return result;
+        }
+        RandomAccessFile raf = null;
+        try {
+            raf = new RandomAccessFile(file, "r");
+            long len = raf.length();
+            if (len == 0L) {
+                return null;
+            } else {
+                long pos = len - 1;
+                while (pos > 0) {
+                    pos--;
+                    raf.seek(pos);
+                    if (raf.readByte() == '\n') {
+                        break;
+                    }
+                }
+                if (pos == 0) {
+                    raf.seek(0);
+                }
+                byte[] bytes = new byte[(int) (len - pos)];
+                raf.read(bytes);
+                result = new String(bytes);
+            }
+        } finally {
+            IOUtils.closeQuietly(raf);
+        }
+        return result;
     }
 
 }

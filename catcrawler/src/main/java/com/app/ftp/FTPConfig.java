@@ -22,6 +22,15 @@ public class FTPConfig {
     private String obliqueLine = "\\".equals(ftpLineSeparator)?"/":"\\" ;
     private String workingDirectory = ftpLineSeparator;
     private String description ;
+    public FTPConfig() {}
+    public FTPConfig(String host, int port, String username, String password) {
+        this.host = host;
+        this.port = port;
+        this.username = username;
+        this.password = password;
+    }
+
+
     public String getHost() {
         return host;
     }

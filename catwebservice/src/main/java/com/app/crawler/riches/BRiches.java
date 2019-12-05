@@ -170,6 +170,21 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 
 	}
 
+	public static void main(String[] args) {
+		List<Integer> na =new ArrayList<>();
+		na.add(2);
+		na.add(12);
+		na.add(22);
+		na.add(21);
+		na.add(20);
+		na.add(11);
+		Collections.sort(na, new Comparator<Integer>() {
+			public int compare(Integer o1, Integer o2) {
+				return o1 - o2;
+			};
+		});
+System.out.println(na);
+	}
 	/**
 	 * 通过网易抓取历史数据
 	 *
@@ -182,44 +197,68 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 		Integer start = 1990;
 		Integer end = Integer.valueOf(year);
 		String today = "0";
+
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMM");
+		String now = format.format(date);
+
+		String month = now.substring(4);
+		int quarter = Integer.valueOf(month) / 3 + 1;
+
 		for (int index = 0; index < list.size(); index++) {
 			RicheBean richeBean = list.get(index);
+			//判断当前是否存在
+			File file = this.getExcelPath(richeBean,".txt");
 			List<HistoryBean> beans = new ArrayList<>();
-			for (int k = start; k <= end; k++) {
-				for (int j = 1; j <= 4; j++) {
-					String url = String.format(wyUrl, richeBean.getCode(), k, j);
-					LOGGER.info("股票代码：【{}】,获取历史数据URL：【{}】，总共有【{}】行，已经抓取到第【{}】行", richeBean.getCode(), url,list.size(),index);
-					String content = request.doGet(url);
-					Document bs = Jsoup.parse(content);
-					Elements data = bs.select("table.table_bg001").select(".border_box").select(".limit_sale").select("tbody");
-					if (Objects.nonNull(data)) {
-						Elements trs = data.select("tr");
-						for (Element element : trs) {
-							Elements tds = element.select("td");
-							HistoryBean historyBean = new HistoryBean();
-							historyBean.setDate(tds.get(0).text().replace("-", ""));
-							if (Integer.valueOf(historyBean.getDate()) > Integer.valueOf(today)){
-								today = historyBean.getDate();
-							}
-							historyBean.setOpenPrice(tds.get(1).text());
-							historyBean.setMaxPrice(tds.get(2).text());
-							historyBean.setMinPrice(tds.get(3).text());
-							historyBean.setClosePrice(tds.get(4).text());
-							historyBean.setRiseMoney(tds.get(5).text());
-							historyBean.setRisePrice(tds.get(6).text());
-							historyBean.setTotal(tds.get(7).text());
-							historyBean.setMoney(tds.get(8).text());
-							historyBean.setHand(tds.get(10).text());
-							beans.add(historyBean);
-						}
+			if (file.exists()){
+				today = this.writeData(richeBean,list,index,Integer.valueOf(year),quarter,beans,today);
+
+			}else{
+				for (int k = start; k <= end; k++) {
+					for (int j = 1; j <= 4; j++) {
+						today = this.writeData(richeBean,list,index,k,j,beans,today);
 					}
 				}
 			}
+			Collections.sort(beans, new Comparator<HistoryBean>() {
+				public int compare(HistoryBean o1, HistoryBean o2) {
+					return Integer.valueOf(o1.getDate()) - Integer.valueOf(o2.getDate());
+				};
+			});
 			persist.writeHistoryDataToFile(richeBean, beans);
 		}
 		this.writeAllTipData(today);
 	}
 
+	private String writeData(RicheBean richeBean,List<RicheBean> list,int index,int k, int j,List<HistoryBean> beans,String today){
+		String url = String.format(wyUrl, richeBean.getCode(), k, j);
+		LOGGER.info("股票代码：【{}】,获取历史数据URL：【{}】，总共有【{}】行，已经抓取到第【{}】行", richeBean.getCode(), url,list.size(),index);
+		String content = request.doGet(url);
+		Document bs = Jsoup.parse(content);
+		Elements data = bs.select("table.table_bg001").select(".border_box").select(".limit_sale").select("tbody");
+		if (Objects.nonNull(data)) {
+			Elements trs = data.select("tr");
+			for (Element element : trs) {
+				Elements tds = element.select("td");
+				HistoryBean historyBean = new HistoryBean();
+				historyBean.setDate(tds.get(0).text().replace("-", ""));
+				if (Integer.valueOf(historyBean.getDate()) > Integer.valueOf(today)){
+					today = historyBean.getDate();
+				}
+				historyBean.setOpenPrice(tds.get(1).text());
+				historyBean.setMaxPrice(tds.get(2).text());
+				historyBean.setMinPrice(tds.get(3).text());
+				historyBean.setClosePrice(tds.get(4).text());
+				historyBean.setRiseMoney(tds.get(5).text());
+				historyBean.setRisePrice(tds.get(6).text());
+				historyBean.setTotal(tds.get(7).text());
+				historyBean.setMoney(tds.get(8).text());
+				historyBean.setHand(tds.get(10).text());
+				beans.add(historyBean);
+			}
+		}
+		return today;
+	}
 
 	public OnlineBean reloadOnlineData(String code){
 		LOGGER.info("加载当前实时数据地址：[{}]",String.format(onlineUrl,code,codeTypeMap.get(code)));

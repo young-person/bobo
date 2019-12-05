@@ -9,9 +9,7 @@ import org.apache.commons.io.IOUtils;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static com.app.crawler.base.CrawlerDown.SPACE;
 
@@ -20,11 +18,10 @@ public class PersistTxt extends BRichesBase implements Persist {
     @Override
     public void writeHistoryDataToFile(RicheBean bean, List<HistoryBean> datas) throws IOException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         File file = this.getExcelPath(bean,".txt");
-        if (file.exists()){
-            file.delete();
+        if (!file.exists()){
+            file.createNewFile();
         }
-        file.createNewFile();
-        RLoadXml loadXml = new RLoadXml();
+        RLoadXml loadXml = new RLoadXml();//如何判断这个日期数据是否有写入
         for (int i = 0; i < datas.size(); i++) {
             HistoryBean historyBean = datas.get(i);
             List<String> values = loadXml.getBeanValues(historyBean);
