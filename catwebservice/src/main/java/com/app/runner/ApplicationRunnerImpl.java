@@ -1,12 +1,12 @@
 package com.app.runner;
 
 import com.app.config.CatWebServiceProperty;
-import com.app.config.CatXml;
 import com.app.crawler.base.RCache;
 import com.app.crawler.riches.BRiches;
 import com.app.crawler.riches.producer.DataEventHandler;
 import com.app.service.ReceiveRiches;
 import com.corundumstudio.socketio.SocketIOServer;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,9 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class ApplicationRunnerImpl implements ApplicationRunner {
@@ -30,6 +31,11 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
     @Autowired
     private ReceiveRiches receiveRiches;
 
+    /**
+     * 定时刷新调度线程池
+     */
+    private static final ScheduledExecutorService EXECUTORS = new ScheduledThreadPoolExecutor(4, new ThreadFactoryBuilder().setNameFormat("showdata-refresh-pool-%d").build());
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         RCache rCache = new RCache();
@@ -37,27 +43,14 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
         rCache.loadCatConfig();
 
         server.start();
-        CatXml catXml = new CatXml();
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            public void run() {
 
-                BRiches bRiches = new BRiches();
-                System.out.println("准备执行任务......");
-                if (!bRiches.isRuning()) {
-                    System.out.println("开始执行任务......");
-                    bRiches.calculate(null,null);
-                    System.out.println("结束执行任务......");
-                }
+        EXECUTORS.scheduleAtFixedRate(() -> {
+            BRiches bRiches = new BRiches();
+            if (!bRiches.isRuning()) {
+                bRiches.calculate(null,null);
             }
-        }, 60 * 1000, 2 * 60 * 60 * 1000);
+        },1800,12 * 3600,TimeUnit.SECONDS);
 
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                dataEventHandler.pushMsg();
-            }
-        }, 30 * 60 * 1000, 5 * 1000);
         this.sendMessage();
     }
 
@@ -65,21 +58,18 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
      * 发送通知
      */
     private void sendMessage(){
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                receiveRiches.sendScheduleData();
-            }
-        }, 30 * 60 * 1000, 30 * 60 * 1000);
-
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                receiveRiches.receiveRichesData(BRiches.get());
-            }
-        }, 30 * 60 * 1000, 12 * 60 * 60 * 1000);
-
+        //推送数据给web前端
+        EXECUTORS.scheduleAtFixedRate(() -> {
+            dataEventHandler.pushMsg();
+        },60,60,TimeUnit.SECONDS);
+        //每一个小时发送监控数据
+        EXECUTORS.scheduleAtFixedRate(() -> {
+            receiveRiches.sendScheduleData();
+        },1800,3600,TimeUnit.SECONDS);
+        //每12个小时进行发送邮件数据
+        EXECUTORS.scheduleAtFixedRate(() -> {
+            receiveRiches.receiveRichesData(BRiches.get());
+        },1800,12 * 3600,TimeUnit.SECONDS);
     }
 
 }
