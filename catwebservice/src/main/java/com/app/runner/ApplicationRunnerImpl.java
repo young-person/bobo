@@ -47,7 +47,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
         EXECUTORS.scheduleAtFixedRate(() -> {
             BRiches bRiches = new BRiches();
             if (!bRiches.isRuning()) {
-                bRiches.calculate(null,null);
+                bRiches.start();
             }
         },1800,12 * 3600,TimeUnit.SECONDS);
 
