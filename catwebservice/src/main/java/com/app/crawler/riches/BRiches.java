@@ -157,9 +157,6 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 			/**
 			 * 支持东方财富数据今日获取 适用于增量数据
 			 */
-//			List<HistoryBean> datas = new ArrayList<>();
-//			List<RicheBean> list = new ArrayList<>();
-//			parseContentData(datas, list, handResult);
 			this.getHistoryDataByWy(handResult.getResults());//每次都全量
 		} catch (IOException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
 			LOGGER.error("抓取出现错误", e);
@@ -170,21 +167,6 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 
 	}
 
-	public static void main(String[] args) {
-		List<Integer> na =new ArrayList<>();
-		na.add(2);
-		na.add(12);
-		na.add(22);
-		na.add(21);
-		na.add(20);
-		na.add(11);
-		Collections.sort(na, new Comparator<Integer>() {
-			public int compare(Integer o1, Integer o2) {
-				return o1 - o2;
-			};
-		});
-System.out.println(na);
-	}
 	/**
 	 * 通过网易抓取历史数据
 	 *
@@ -212,7 +194,9 @@ System.out.println(na);
 			List<HistoryBean> beans = new ArrayList<>();
 			if (file.exists()){
 				today = this.writeData(richeBean,list,index,Integer.valueOf(year),quarter,beans,today);
-
+				if (beans.size()>0){
+					beans = beans.subList(0, 1);
+				}
 			}else{
 				for (int k = start; k <= end; k++) {
 					for (int j = 1; j <= 4; j++) {
@@ -220,11 +204,7 @@ System.out.println(na);
 					}
 				}
 			}
-			Collections.sort(beans, new Comparator<HistoryBean>() {
-				public int compare(HistoryBean o1, HistoryBean o2) {
-					return Integer.valueOf(o1.getDate()) - Integer.valueOf(o2.getDate());
-				};
-			});
+			Collections.sort(beans, Comparator.comparingInt(o -> Integer.parseInt(o.getDate())));
 			persist.writeHistoryDataToFile(richeBean, beans);
 		}
 		this.writeAllTipData(today);
