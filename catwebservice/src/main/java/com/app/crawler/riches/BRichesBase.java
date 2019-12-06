@@ -63,6 +63,10 @@ public class BRichesBase {
      */
     protected static Map<String,String> codeTypeMap = new ConcurrentHashMap<>();
 
+    /**
+     * 东方财富简易得K线图每日历史数据
+     */
+    protected String simpleUrl ="http://pdfm.eastmoney.com/EM_UBG_PDTI_Fast/api/js?rtntype=5&cb=jQuery11240405187617414106_1575556914407&id=%s&type=t";
 
     static {
         RestRequest restRequest = new RestRequest();
@@ -104,7 +108,6 @@ public class BRichesBase {
         }
 
         builder.append(type);
-//        File file = new File(catXml.getDataPath());
         File file = null;
         try {
             file = ResourceUtils.getFile(catXml.getDataPath());

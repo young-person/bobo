@@ -167,6 +167,20 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 
 	}
 
+	private void loadStartToEnd(List<RicheBean> list){
+		Map<String,File> map = this.sureMkdirFolder();
+		for(RicheBean bean:list){
+			String url = String.format(simpleUrl, bean.getCode());
+			String result = this.trimJquery(request.doGet(url)).toString();
+
+			DFData data = JSONObject.parseObject(result,DFData.class);
+			String start = data.getStart();
+			String end = data.getEnd();
+
+		}
+
+	}
+
 	/**
 	 * 通过网易抓取历史数据
 	 *

@@ -1,18 +1,63 @@
 package com.app.crawler.riches.pojo;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.bobo.base.CatException;
+
+import java.util.*;
 
 /**
  * 东方财富网日数据
  */
 public class DFData {
 
-    //http://pdfm.eastmoney.com/EM_UBG_PDTI_Fast/api/js?rtntype=5&cb=jQuery11240405187617414106_1575556914407&id=%s&type=t
     private String name;
     private String code;
     private DFInfo info;
     private List<String> data = new ArrayList<>();
+
+    /**
+     * 获取开始时间
+     */
+    private String start;
+
+    /**
+     * 获取结束时间
+     */
+    private String end;
+
+    public String getStart() {
+        Collections.sort(data, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                String[] s1 = o1.split(",");
+                String[] s2 = o2.split(",");
+                String s = s1[0].replace("-", "");
+                String e = s2[0].replace("-", "");
+                return Integer.valueOf(s) - Integer.valueOf(e);
+            }
+        });
+        start = data.get(0).split(",")[0].replace("-", "");
+        if (data.size() == 1){
+            end = start;
+        }else{
+            end = data.get(data.size() - 1).split(",")[0].replace("-", "");
+        }
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public String getEnd() {
+        if (Objects.isNull(end)){
+            throw new CatException("结束时间不能为null");
+        }
+        return end;
+    }
+
+    public void setEnd(String end) {
+        this.end = end;
+    }
 
     public String getName() {
         return name;
