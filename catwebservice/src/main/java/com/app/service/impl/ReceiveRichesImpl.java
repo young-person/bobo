@@ -48,7 +48,7 @@ public class ReceiveRichesImpl extends BaseClass implements ReceiveRiches {
     @Override
     public void receiveRichesData(CopyOnWriteArraySet<RicheTarget> datas) {
 		List<ExcelUser> users = this.getAllUsers();
-		if (Objects.isNull(datas))
+		if (Objects.isNull(datas) || datas.size() == 0)
 			return;
 		for (ExcelUser user : users) {
 			try {
@@ -144,7 +144,7 @@ public class ReceiveRichesImpl extends BaseClass implements ReceiveRiches {
 					builder.append("-");
 					builder.append(catXml.getSendEmailSubject());
 					helper.setSubject(builder.toString());
-					if (Objects.isNull(data.getBeans()))
+					if (Objects.isNull(data.getBeans()) || data.getBeans().size() == 0)
 						continue;
 					StringBuilder stringBuilder = new StringBuilder();
 					boolean flag = false;
