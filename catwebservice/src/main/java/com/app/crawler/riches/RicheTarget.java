@@ -14,7 +14,7 @@ public class RicheTarget implements Serializable{
 	 */
 	private static final long serialVersionUID = 650682697475506235L;
 
-	private float l;
+	private float l = 0f;
 
 	private String hand = "0";
 
@@ -106,4 +106,15 @@ public class RicheTarget implements Serializable{
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "RicheTarget{" +
+				"l=" + l +
+				", hand='" + hand + '\'' +
+				", stockName='" + stockName + '\'' +
+				", code='" + code + '\'' +
+				", risePrice='" + risePrice + '\'' +
+				", detailUrl='" + detailUrl + '\'' +
+				'}';
+	}
 }

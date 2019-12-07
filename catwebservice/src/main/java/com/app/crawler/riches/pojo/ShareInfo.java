@@ -1,5 +1,7 @@
 package com.app.crawler.riches.pojo;
 
+import java.util.Objects;
+
 /**
  * @Description: TODO
  * @date 2019年11月3日 下午5:05:01
@@ -63,7 +65,11 @@ public class ShareInfo {
 	}
 
 	public String getHand() {
-		return hand;
+		if (Objects.nonNull(hand)){
+			return hand.replace(",","");
+		}else{
+			return "0";
+		}
 	}
 
 	public void setHand(String hand) {
@@ -71,7 +77,11 @@ public class ShareInfo {
 	}
 
 	public String getRisePrice() {
-		return risePrice;
+		if (Objects.nonNull(risePrice)){
+			return risePrice.replace(",","");
+		}else{
+			return "0";
+		}
 	}
 
 	public void setRisePrice(String risePrice) {
@@ -79,7 +89,11 @@ public class ShareInfo {
 	}
 
 	public String getOpenPrice() {
-		return openPrice;
+		if (Objects.nonNull(openPrice)){
+			return openPrice.replace(",","");
+		}else{
+			return "0";
+		}
 	}
 
 	public void setOpenPrice(String openPrice) {
@@ -87,7 +101,11 @@ public class ShareInfo {
 	}
 
 	public String getClosePrice() {
-		return closePrice;
+		if (Objects.nonNull(closePrice)){
+			return closePrice.replace(",","");
+		}else{
+			return "0";
+		}
 	}
 
 	public void setClosePrice(String closePrice) {
@@ -95,7 +113,11 @@ public class ShareInfo {
 	}
 
 	public String getPrevClose() {
-		return prevClose;
+		if (Objects.nonNull(prevClose)){
+			return prevClose.replace(",","");
+		}else{
+			return "0";
+		}
 	}
 
 	public void setPrevClose(String prevClose) {
@@ -103,7 +125,11 @@ public class ShareInfo {
 	}
 
 	public String getMaxPrice() {
-		return maxPrice;
+		if (Objects.nonNull(maxPrice)){
+			return maxPrice.replace(",","");
+		}else{
+			return "0";
+		}
 	}
 
 	public void setMaxPrice(String maxPrice) {
@@ -111,7 +137,11 @@ public class ShareInfo {
 	}
 
 	public String getMinPrice() {
-		return minPrice;
+		if (Objects.nonNull(minPrice)){
+			return minPrice.replace(",","");
+		}else{
+			return "0";
+		}
 	}
 
 	public void setMinPrice(String minPrice) {
@@ -119,7 +149,11 @@ public class ShareInfo {
 	}
 
 	public String getTotal() {
-		return total;
+		if (Objects.nonNull(total)){
+			return total.replace(",","");
+		}else{
+			return "0";
+		}
 	}
 
 	public void setTotal(String total) {
@@ -127,7 +161,11 @@ public class ShareInfo {
 	}
 
 	public String getMoney() {
-		return money;
+		if (Objects.nonNull(money)){
+			return money.replace(",","");
+		}else{
+			return "0";
+		}
 	}
 
 	public void setMoney(String money) {

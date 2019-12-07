@@ -12,6 +12,8 @@ public class CatXml {
     private String sendEmailSubject;
     private String emailSubjectTemplate;
 
+    private String dataRoot;
+
     private String archive = "archive.json";
 
     private String usersPath = "users.json";
@@ -53,5 +55,9 @@ public class CatXml {
 
     public String getUsersPath() {
         return usersPath;
+    }
+
+    public String getDataRoot() {
+        return RCache.CAT_CACHE.get("dataRoot").getValue();
     }
 }

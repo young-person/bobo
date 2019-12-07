@@ -1,5 +1,7 @@
 package com.app.crawler.riches.pojo;
 
+import java.util.Objects;
+
 public class RShareInfo {
 	/**
 	 * 日期
@@ -42,7 +44,7 @@ public class RShareInfo {
 	/**
 	 * 成交总量
 	 */
-	private int total;
+	private float total;
 	/**
 	 * 总金额
 	 */
@@ -95,10 +97,10 @@ public class RShareInfo {
 	public void setMinPrice(float minPrice) {
 		this.minPrice = minPrice;
 	}
-	public int getTotal() {
+	public float getTotal() {
 		return total;
 	}
-	public void setTotal(int total) {
+	public void setTotal(float total) {
 		this.total = total;
 	}
 	public double getMoney() {
@@ -107,24 +109,12 @@ public class RShareInfo {
 	public void setMoney(double money) {
 		this.money = money;
 	}
+
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Float.floatToIntBits(closePrice);
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + Float.floatToIntBits(hand);
-		result = prime * result + Float.floatToIntBits(maxPrice);
-		result = prime * result + Float.floatToIntBits(minPrice);
-		long temp;
-		temp = Double.doubleToLongBits(money);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + Float.floatToIntBits(openPrice);
-		result = prime * result + Float.floatToIntBits(prevClose);
-		result = prime * result + Float.floatToIntBits(risePrice);
-		result = prime * result + total;
-		return result;
+		return Objects.hash(date, hand, risePrice, openPrice, closePrice, prevClose, maxPrice, minPrice, total, money);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -166,7 +156,7 @@ public class RShareInfo {
 				+ minPrice + ", total=" + total + ", money=" + money + "]";
 	}
 	public RShareInfo(String date, float hand, float risePrice, float openPrice, float closePrice, float prevClose,
-			float maxPrice, float minPrice, int total, double money) {
+			float maxPrice, float minPrice, float total, double money) {
 		super();
 		this.date = date;
 		this.hand = hand;

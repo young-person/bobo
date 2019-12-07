@@ -1,3 +1,299 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <data scan="true" scanPeriod="60">
+    <bean name="*ST荣联" mark="10-70" code="002642">
+        <property name="f1" value="2"/>
+        <property name="f2" value="5.57" mark="昨收"/>
+        <property name="f3" value="2.77" mark="涨跌比例"/>
+        <property name="f4" value="0.15" mark="涨跌金额"/>
+        <property name="f5" value="127254" mark="成交量"/>
+        <property name="f6" value="70644184.0" mark="成交额"/>
+        <property name="f7" value="4.61" mark="振幅"/>
+        <property name="f8" value="2.44" mark="换手率"/>
+        <property name="f9" value="130.13" mark="量比"/>
+        <property name="f10" value="1.77"/>
+        <property name="f11" value="-0.36"/>
+        <property name="f12" value="002642" mark="代码"/>
+        <property name="f13" value="0"/>
+        <property name="f14" value="*ST荣联" mark="名称"/>
+        <property name="f15" value="5.65"/>
+        <property name="f16" value="5.4"/>
+        <property name="f17" value="5.44"/>
+        <property name="f18" value="5.42"/>
+        <property name="f19" value="13"/>
+        <property name="f20" value="3685002343" mark="总市值"/>
+        <property name="f21" value="2899961603" mark="流通市值"/>
+        <property name="f22" value="-0.18"/>
+        <property name="f23" value="1.31" mark="市净率"/>
+        <property name="f24" value="3.15"/>
+        <property name="f25" value="-13.51"/>
+        <property name="f26" value="20111220"/>
+        <property name="f27" value="0"/>
+        <property name="f28" value="-"/>
+        <property name="f29" value="1"/>
+        <property name="f30" value="1400"/>
+        <property name="f31" value="5.56"/>
+        <property name="f32" value="5.57"/>
+        <property name="f33" value="-43.34"/>
+        <property name="f34" value="70043"/>
+        <property name="f35" value="57211"/>
+        <property name="f36" value="12376.72766604859"/>
+        <property name="f37" value="0.76" mark="净资产收益率"/>
+        <property name="f38" value="661580313.0" mark="总股本"/>
+        <property name="f39" value="520639426.0" mark="流通股本"/>
+        <property name="f40" value="1804384661.26" mark="营业收入"/>
+        <property name="f41" value="6.0049" mark="营收同比"/>
+        <property name="f42" value="27102312.53"/>
+        <property name="f43" value="9698448.32"/>
+        <property name="f44" value="29854223.16"/>
+        <property name="f45" value="21238941.45" mark="净利润"/>
+        <property name="f46" value="401.97450000000006" mark="净利润同比"/>
+        <property name="f47" value="-825377339.55"/>
+        <property name="f48" value="-1.247584493267713"/>
+        <property name="f49" value="19.9912" mark="毛利率"/>
+        <property name="f50" value="4077110611.24"/>
+        <property name="f51" value="2460916782.13"/>
+        <property name="f52" value="493394529.67"/>
+        <property name="f53" value="121150327.56"/>
+        <property name="f54" value="1258973709.9"/>
+        <property name="f55" value="1154670783.87"/>
+        <property name="f56" value="104302926.03"/>
+        <property name="f57" value="30.879066818280405"/>
+        <property name="f58" value="2818136901.34"/>
+        <property name="f59" value="69.12093318171961"/>
+        <property name="f60" value="2899144400.98"/>
+        <property name="f61" value="4.3821503512302979"/>
+        <property name="f62" value="2873863.0"/>
+        <property name="f63" value="872280.0"/>
+        <property name="f64" value="-"/>
+        <property name="f65" value="-"/>
+        <property name="f66" value="0.0"/>
+        <property name="f67" value="-"/>
+        <property name="f68" value="-"/>
+        <property name="f69" value="0.0"/>
+        <property name="f70" value="16239796.0"/>
+        <property name="f71" value="13365933.0"/>
+        <property name="f72" value="2873863.0"/>
+        <property name="f73" value="22.99"/>
+        <property name="f74" value="18.92"/>
+        <property name="f75" value="4.07"/>
+        <property name="f76" value="31441194.0"/>
+        <property name="f77" value="33048595.0"/>
+        <property name="f78" value="-1607401.0"/>
+        <property name="f79" value="44.51"/>
+        <property name="f80" value="46.78"/>
+        <property name="f81" value="-2.28"/>
+        <property name="f82" value="22090913.0"/>
+        <property name="f83" value="23357375.0"/>
+        <property name="f84" value="-1266462.0"/>
+        <property name="f85" value="31.27"/>
+        <property name="f86" value="33.06"/>
+        <property name="f87" value="-1.79"/>
+        <property name="f88" value="0.099"/>
+        <property name="f89" value="0.139"/>
+        <property name="f90" value="5.59"/>
+        <property name="f91" value="-0.039"/>
+        <property name="f92" value="-0.279"/>
+        <property name="f93" value=""/>
+        <property name="f94" value="-2.665"/>
+        <property name="f95" value="-3.659"/>
+        <property name="f96" value=""/>
+        <property name="f97" value="1"/>
+        <property name="f98" value="2"/>
+        <property name="f99" value="4"/>
+        <property name="f100" value="软件服务" mark="行业类型"/>
+        <property name="f101" value="天夏智慧" mark="名称"/>
+        <property name="f102" value="北京板块" mark="所属板块地区"/>
+        <property name="f103" value="车联网,独角兽,区块链,精准医疗,基因测序,大数据,云计算,物联网,ST概念" mark="关联板块"/>
+        <property name="f104" value="-" mark="代码"/>
+        <property name="f105" value="-"/>
+        <property name="f106" value="-"/>
+        <property name="f107" value="5"/>
+        <property name="f108" value="0"/>
+        <property name="f109" value="3.53"/>
+        <property name="f110" value="-7.01"/>
+        <property name="f111" value="0"/>
+        <property name="f112" value="0.032103346" mark="每股权益"/>
+        <property name="f113" value="4.2597049" mark="每股净资产"/>
+        <property name="f114" value="-2.71"/>
+        <property name="f115" value="-2.74"/>
+        <property name="f116" value="-"/>
+        <property name="f117" value="-"/>
+        <property name="f118" value="-"/>
+        <property name="f119" value="-"/>
+        <property name="f120" value="0"/>
+        <property name="f121" value="-"/>
+        <property name="f122" value="0"/>
+        <property name="f123" value="-"/>
+        <property name="f124" value="1574407863"/>
+        <property name="f125" value="0"/>
+        <property name="f126" value="0"/>
+        <property name="f127" value="2.2"/>
+        <property name="f128" value="-"/>
+        <property name="f129" value="1.1287" mark="净利率"/>
+        <property name="f130" value="1.2991739511489869"/>
+        <property name="f131" value="21.135717391967775"/>
+        <property name="f132" value="2836419410.71"/>
+        <property name="f133" value="-"/>
+        <property name="f134" value="-"/>
+        <property name="f135" value="2818136901.3399999"/>
+        <property name="f136" value="-"/>
+        <property name="f137" value="0.0"/>
+        <property name="f138" value="0.0"/>
+        <property name="f139" value="4"/>
+        <property name="f140" value="-"/>
+        <property name="f141" value="-"/>
+        <property name="f142" value="5.55"/>
+        <property name="f143" value="5.58"/>
+        <property name="f144" value="5.57"/>
+        <property name="f145" value="-"/>
+        <property name="f146" value="000662"/>
+        <property name="f147" value="0"/>
+        <property name="f148" value="4"/>
+        <property name="f149" value="3.92"/>
+        <property name="f150" value=""/>
+        <property name="f151" value=""/>
+        <property name="f152" value="2"/>
+        <property name="f153" value="3"/>
+        <property name="f154" value="4"/>
+        <property name="f155" value=""/>
+        <property name="f156" value=""/>
+        <property name="f157" value=""/>
+        <property name="f158" value=""/>
+        <property name="f159" value=""/>
+        <property name="f160" value="-6.07"/>
+        <property name="f161" value="-"/>
+        <property name="f162" value="-"/>
+        <property name="f163" value="0"/>
+        <property name="f164" value="-949768.0"/>
+        <property name="f165" value="-0.45"/>
+        <property name="f166" value="-261361.0"/>
+        <property name="f167" value="-0.12"/>
+        <property name="f168" value="-688407.0"/>
+        <property name="f169" value="-0.32"/>
+        <property name="f170" value="-2042600.0"/>
+        <property name="f171" value="-0.96"/>
+        <property name="f172" value="2992366.0"/>
+        <property name="f173" value="1.41"/>
+        <property name="f174" value="-74817377.0"/>
+        <property name="f175" value="-11.84"/>
+        <property name="f176" value="-37435341.0"/>
+        <property name="f177" value="-5.93"/>
+        <property name="f178" value="-37382036.0"/>
+        <property name="f179" value="-5.92"/>
+        <property name="f180" value="20749253.0"/>
+        <property name="f181" value="3.28"/>
+        <property name="f182" value="54068123.0"/>
+        <property name="f183" value="8.56"/>
+        <property name="f184" value="4.07"/>
+        <property name="f185" value="-"/>
+        <property name="f186" value="-"/>
+        <property name="f187" value="-"/>
+        <property name="f188" value="-"/>
+        <property name="f189" value="-"/>
+        <property name="f190" value="0"/>
+        <property name="f191" value="-"/>
+        <property name="f192" value="0"/>
+        <property name="f193" value="-"/>
+        <property name="f194" value="0"/>
+        <property name="f195" value="-"/>
+        <property name="f196" value="-"/>
+        <property name="f197" value="-"/>
+        <property name="f198" value=""/>
+        <property name="f199" value="-"/>
+        <property name="f200" value="0"/>
+        <property name="f201" value="-"/>
+        <property name="f202" value="0"/>
+        <property name="f203" value="-"/>
+        <property name="f204" value="-"/>
+        <property name="f205" value="-"/>
+        <property name="f206" value="-"/>
+        <property name="f207" value="-"/>
+        <property name="f208" value="-"/>
+        <property name="f209" value="-"/>
+        <property name="f210" value="0"/>
+        <property name="f211" value="145"/>
+        <property name="f212" value="123"/>
+        <property name="f213" value="-"/>
+        <property name="f214" value="0"/>
+        <property name="f215" value="-"/>
+        <property name="f216" value="0"/>
+        <property name="f217" value="-"/>
+        <property name="f218" value="-"/>
+        <property name="f219" value="-"/>
+        <property name="f220" value="-"/>
+        <property name="f221" value="20190930"/>
+        <property name="f222" value="-"/>
+        <property name="f223" value="134"/>
+        <property name="f224" value="0.02"/>
+        <property name="f225" value="457"/>
+        <property name="f226" value="-"/>
+        <property name="f227" value="-"/>
+        <property name="f228" value="-"/>
+        <property name="f229" value="-"/>
+        <property name="f230" value="-"/>
+        <property name="f231" value="0"/>
+        <property name="f232" value="-"/>
+        <property name="f233" value="0"/>
+        <property name="f234" value="-"/>
+        <property name="f235" value="-"/>
+        <property name="f236" value="-"/>
+        <property name="f237" value="-"/>
+        <property name="f238" value="-"/>
+        <property name="f239" value="-"/>
+        <property name="f240" value="-"/>
+        <property name="f241" value="-"/>
+        <property name="f242" value="-"/>
+        <property name="f243" value="-"/>
+        <property name="f244" value="-"/>
+        <property name="f245" value="-"/>
+        <property name="f246" value="-"/>
+        <property name="f247" value="-"/>
+        <property name="f248" value="-"/>
+        <property name="f249" value="-"/>
+        <property name="f250" value="-"/>
+        <property name="f251" value="-"/>
+        <property name="f252" value="-123259744.0"/>
+        <property name="f253" value="-43927958.0"/>
+        <property name="f254" value="-79331786.0"/>
+        <property name="f255" value="27758583.0"/>
+        <property name="f256" value="95501158.0"/>
+        <property name="f257" value="-"/>
+        <property name="f258" value="-"/>
+        <property name="f259" value="-"/>
+        <property name="f260" value="-"/>
+        <property name="f261" value="-"/>
+        <property name="f262" value="-"/>
+        <property name="f263" value="1244"/>
+        <property name="f264" value="3783"/>
+        <property name="f265" value="BK0737"/>
+        <property name="f266" value="90"/>
+        <property name="f267" value="-862407.0"/>
+        <property name="f268" value="-0.58"/>
+        <property name="f269" value="-264346.0"/>
+        <property name="f270" value="-0.18"/>
+        <property name="f271" value="-598061.0"/>
+        <property name="f272" value="-0.41"/>
+        <property name="f273" value="-764954.0"/>
+        <property name="f274" value="-0.52"/>
+        <property name="f275" value="1627360.0"/>
+        <property name="f276" value="1.1"/>
+        <property name="f277" value="5.57"/>
+        <property name="f278" value="-949768.0"/>
+        <property name="f279" value="-261361.0"/>
+        <property name="f280" value="-688407.0"/>
+        <property name="f281" value="-2042600.0"/>
+        <property name="f282" value="2992366.0"/>
+        <property name="f283" value=""/>
+        <property name="f284" value=""/>
+        <property name="f285" value=""/>
+        <property name="f286" value=""/>
+        <property name="f287" value=""/>
+        <property name="f288" value=""/>
+        <property name="f289" value=""/>
+        <property name="f290" value=""/>
+        <property name="f291" value=""/>
+        <property name="f292" value="5"/>
+        <property name="f293" value="25.0"/>
+    </bean>
 </data>
+

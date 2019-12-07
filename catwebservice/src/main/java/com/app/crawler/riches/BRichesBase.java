@@ -16,8 +16,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class BRichesBase {
-
-
     /**
      * 实时数据
      */
@@ -66,7 +64,7 @@ public class BRichesBase {
     /**
      * 东方财富简易得K线图每日历史数据
      */
-    protected String simpleUrl ="http://pdfm.eastmoney.com/EM_UBG_PDTI_Fast/api/js?rtntype=5&cb=jQuery11240405187617414106_1575556914407&id=%s&type=t";
+    protected String simpleUrl ="http://pdfm.eastmoney.com/EM_UBG_PDTI_Fast/api/js?rtntype=5&token=4f1862fc3b5e77c150a2b985b12db0fd&cb=jQuery11240405187617414106_1575556914415&id=%s&type=k&authorityType=&_=1575556914433";
 
     static {
         RestRequest restRequest = new RestRequest();

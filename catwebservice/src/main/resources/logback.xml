@@ -36,10 +36,10 @@
 		<append>true</append>
 	</appender>
 
-	<logger name="com.app" level="INFO" >
+<!--	<logger name="com.app" level="INFO" >
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="INFO-file" />
-	</logger>
+	</logger>-->
 
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />

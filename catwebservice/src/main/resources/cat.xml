@@ -5,6 +5,7 @@
 	<!--nohup java -jar catcrawler.jar -Xmx=256m -Xms=64m -XX:PermSize=64m -XX:MaxPermSize=256m -Xss=256k &-->
 
 	<property name="dataPath" mark="数据模板位置" value="classpath:datas/share/"/>
+	<property name="dataRoot" mark="数据存储位置" value="classpath:datas/"/>
 	<property name="tipsDataPath" mark="所有指标数据存储位置" value="classpath:datas/tips/"/>
 
 	<property name="periodTime" mark="调度执行时间一天" value="86400000" />

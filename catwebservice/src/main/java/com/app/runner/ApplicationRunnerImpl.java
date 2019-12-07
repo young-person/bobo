@@ -14,9 +14,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 @Component
 public class ApplicationRunnerImpl implements ApplicationRunner {
@@ -34,7 +32,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
     /**
      * 定时刷新调度线程池
      */
-    private static final ScheduledExecutorService EXECUTORS = new ScheduledThreadPoolExecutor(4, new ThreadFactoryBuilder().setNameFormat("showdata-refresh-pool-%d").build());
+    private static final ScheduledExecutorService EXECUTORS = new ScheduledThreadPoolExecutor(8, new ThreadFactoryBuilder().setNameFormat("showdata-refresh-pool-%d").build(), new ThreadPoolExecutor.CallerRunsPolicy());
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -46,10 +44,15 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
 
         EXECUTORS.scheduleAtFixedRate(() -> {
             BRiches bRiches = new BRiches();
-            if (!bRiches.isRuning()) {
-                bRiches.start();
+            try {
+                if (!bRiches.isRuning()) {
+                    bRiches.start();
+                }
+            }catch (Exception e){
+                LOGGER.error("开始抓取失败",e);
             }
-        },1800,12 * 3600,TimeUnit.SECONDS);
+
+        },30,12 * 3600,TimeUnit.SECONDS);
 
         this.sendMessage();
     }
@@ -60,16 +63,28 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
     private void sendMessage(){
         //推送数据给web前端
         EXECUTORS.scheduleAtFixedRate(() -> {
-            dataEventHandler.pushMsg();
+            try {
+                dataEventHandler.pushMsg();
+            }catch (Exception e){
+                LOGGER.error("发送实时数据失败",e);
+            }
         },60,60,TimeUnit.SECONDS);
         //每一个小时发送监控数据
         EXECUTORS.scheduleAtFixedRate(() -> {
-            receiveRiches.sendScheduleData();
-        },1800,3600,TimeUnit.SECONDS);
+            try {
+                receiveRiches.sendScheduleData();
+            }catch (Exception e){
+                LOGGER.error("发送监控数据失败",e);
+            }
+        },60,3600,TimeUnit.SECONDS);
         //每12个小时进行发送邮件数据
         EXECUTORS.scheduleAtFixedRate(() -> {
-            receiveRiches.receiveRichesData(BRiches.get());
-        },1800,12 * 3600,TimeUnit.SECONDS);
+            try {
+                receiveRiches.receiveRichesData(BRiches.get());
+            }catch (Exception e){
+                LOGGER.error("每12个小时进行发送邮件数据失败",e);
+            }
+        },600,12 * 3600,TimeUnit.SECONDS);
     }
 
 }

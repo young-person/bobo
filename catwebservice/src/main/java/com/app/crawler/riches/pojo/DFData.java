@@ -38,6 +38,9 @@ public class DFData {
         start = data.get(0).split(",")[0].replace("-", "");
         if (data.size() == 1){
             end = start;
+        }else if(data.size() == 0){
+         start = "1990";
+         end = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
         }else{
             end = data.get(data.size() - 1).split(",")[0].replace("-", "");
         }
