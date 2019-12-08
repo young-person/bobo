@@ -9,7 +9,6 @@ import com.app.crawler.pojo.RichesData;
 import com.app.crawler.request.RestRequest;
 import com.app.crawler.riches.pojo.*;
 import com.app.crawler.riches.producer.Persist;
-import com.app.crawler.riches.producer.PersistExcel;
 import com.app.crawler.riches.producer.PersistTxt;
 import org.apache.poi.util.IOUtils;
 import org.jsoup.Jsoup;
@@ -329,97 +328,6 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 		}
 		return builder;
 	}
-	private StringBuilder trimJquery(String result,int cnt) {
-		StringBuilder builder = new StringBuilder();
-		boolean flag = false;
-		for (int k = 0; k < result.length() - cnt; k++) {
-			char v = result.charAt(k);
-			char _v = '(';
-			if (flag) {
-				builder.append(v);
-			}
-			if (_v == v && !flag) {
-				flag = true;
-			}
-		}
-		return builder;
-	}
-	/**
-	 * 通过东方财富网获取今日数据指标
-	 *
-	 * @param datas
-	 * @param list
-	 * @param handResult
-	 */
-	private void parseContentData(List<HistoryBean> datas, List<RicheBean> list, RicheResult handResult){
-		Map<String, RicheBean> map = new HashMap<>();
-		for (RicheBean bean : handResult.getResults()) {
-			map.put(bean.getCode(), bean);
-		}
-		LOGGER.info("通过东方财富网获取今日数据指标：[{}]",dfUrl);
-		String result = request.doGet(dfUrl);
-
-		JSONObject object = JSONObject.parseObject(this.trimJquery(result).toString());
-		JSONObject dataObject = object.getJSONObject("data");
-		JSONArray array = dataObject.getJSONArray("diff");
-
-		for (int index = 0; index < array.size(); index++) {
-			JSONObject obj = array.getJSONObject(index);
-			String hand = obj.getString("f8");
-			String risePrice = obj.getString("f24");
-			String openPrice = obj.getString("f17");
-			String closePrice = obj.getString("f2");
-			String riseMoney = obj.getString("f4");
-			String maxPrice = obj.getString("f15");
-			String minPrice = obj.getString("f16");
-			String total = obj.getString("f5");
-			String money = obj.getString("f6");
-
-			String name = obj.getString("f14");
-			String code = obj.getString("f12");
-
-			String date = obj.getString("f26");
-
-			HistoryBean historyBean = new HistoryBean();
-			historyBean.setDate(date);
-			historyBean.setHand(hand);
-			historyBean.setRisePrice(risePrice);
-			historyBean.setOpenPrice(openPrice);
-			historyBean.setClosePrice(closePrice);
-			historyBean.setMaxPrice(maxPrice);
-			historyBean.setMinPrice(minPrice);
-			historyBean.setTotal(total);
-			historyBean.setMoney(money);
-			historyBean.setRiseMoney(riseMoney);
-
-			if (Objects.nonNull(map.get(code))) {
-				RicheBean bean = new RicheBean();
-				bean.setHand(hand);
-				bean.setCode(code);
-				bean.setStockName(name);
-				bean.setCodeType(map.get(code).getCodeType());
-				bean.setNewPrice(closePrice);
-				bean.setTotalAmount(total);
-				bean.setRisePrice(risePrice);
-				datas.add(historyBean);
-				list.add(bean);
-			}
-		}
-	}
-
-	/**
-	 * 平安银行数据历史数据全部写入
-	 *
-	 * @param bean
-	 */
-	private void writeHistoryData(RicheBean bean) throws IOException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-		String url = String.format(dayUrl, bean.getCode(), bean.getCodeType(), 18000);
-		LOGGER.info("股票：【{}】,获取历史数据URL：【{}】", bean.getStockName(), url);
-		String content = request.doGet(url);
-		HistoryResult historyResult = JSONObject.parseObject(content, HistoryResult.class);
-		Persist persist = new PersistExcel();
-		persist.writeHistoryDataToFile(bean, historyResult.getResults());
-	}
 
 	/**
 	 * 将所有指标数据写入excel
@@ -429,11 +337,8 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	 */
 	private void writeAllTipData() throws IOException {
 		JSONArray array = this.getAllTips();
-
-		File f = ResourceUtils.getFile(catXml.getTipsDataPath());
-		if (!f.exists()){
-			f.mkdirs();
-		}
+		String path = catXml.getTipsDataPath();
+		File f = ResourceUtils.getFile(path);
 		String day = new StringBuilder(Calendar.getInstance().get(Calendar.DATE)).append(".json").toString();
 		File file = new File(f,day);
 		if (file.exists()) {
