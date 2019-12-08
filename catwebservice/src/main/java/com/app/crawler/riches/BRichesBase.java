@@ -34,7 +34,9 @@ public class BRichesBase {
     /**
      * 跳转到平安证券详情页面
      */
-    protected String detailUrl = "https://m.stock.pingan.com/html/h5security/quote/detail.html?stock_code=%s&code_type=%s&type=shsz";
+//    protected String detailUrl = "https://m.stock.pingan.com/html/h5security/quote/detail.html?stock_code=%s&code_type=%s&type=shsz";
+
+    protected String detailUrl ="http://stockpage.10jqka.com.cn/%s/#xwgg";
 
     /**
      * 东方财富今日数据
