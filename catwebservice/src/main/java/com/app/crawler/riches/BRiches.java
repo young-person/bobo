@@ -5,12 +5,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.app.crawler.base.CrawlerDown;
+import com.app.crawler.pojo.RichesData;
 import com.app.crawler.request.RestRequest;
 import com.app.crawler.riches.pojo.*;
 import com.app.crawler.riches.producer.Persist;
 import com.app.crawler.riches.producer.PersistExcel;
 import com.app.crawler.riches.producer.PersistTxt;
-import com.google.gson.JsonArray;
 import org.apache.poi.util.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -23,6 +23,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -32,7 +33,10 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 
 	private static AtomicBoolean ISRUN = new AtomicBoolean(false);
 	private static AtomicBoolean ISCALCULATE = new AtomicBoolean(false);
-
+	/**
+	 * 存放所有指标数据
+	 */
+	public static final Map<String, RichesData> TIPMAP = new ConcurrentHashMap<>();
 	/**
 	 * 通用请求参数数据
 	 */
@@ -163,6 +167,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 		LOGGER.info("开始抓取股市数据");
 		ISRUN.set(true);
 		try {
+			this.writeAllTipData();
 			this.sureMkdirFolder();
 			RicheResult handResult = getAllRicheBeans();
 
@@ -189,8 +194,14 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 		if(!allTime.exists()){
 			allTime.createNewFile();
 		}
+		byte[] b = IOUtils.toByteArray(new FileInputStream(allTime));
+		JSONArray array = null;
+		if (Objects.nonNull(b) && b.length > 0){
+			array = JSONArray.parseArray(new String(b));
+		}else{
+			array = new JSONArray();
+		}
 
-		JSONArray array = JSON.parseObject(new FileInputStream(allTime), JsonArray.class);
 		Map<String,JSONObject> dataMap = new HashMap<>();
 		if (Objects.nonNull(array)){
 			for(int index = 0; index < array.size();index ++){
@@ -205,20 +216,8 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 
 			if (dataMap.containsKey(bean.getCode()))
 				continue;
-			String url = String.format(simpleUrl, bean.getCode());
-			LOGGER.info("获取每日K线图数据:【{}】",url);
-			String result = this.trimJquery(request.doGet(url),1).toString();
-			String start = null;
-			String end = null;
-			if (result.startsWith("{stats:false")){
-				start = "1990";
-				end = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-			}else{
-				DFData data = JSONObject.parseObject(result,DFData.class);
-				start = data.getStart();
-				end = data.getEnd();
-			}
-
+			String start = "1990";
+			String end = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
 			JSONObject object = new JSONObject();
 			object.put("code",bean.getCode());
 			object.put("start",start);
@@ -240,7 +239,6 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 		Map<String,JSONObject> dataMap = this.loadStartToEnd(list);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
 		String year = dateFormat.format(new Date());
-		String today = "0";
 
 		Date date = new Date();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMM");
@@ -255,28 +253,27 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 			File file = this.getExcelPath(richeBean,".txt");
 			List<HistoryBean> beans = new ArrayList<>();
 			if (file.exists()){
-				today = this.writeData(richeBean,list,index,Integer.valueOf(year),quarter,beans,today);
+				this.writeData(richeBean,list,index,Integer.valueOf(year),quarter,beans);
 				if (beans.size()>0){
 					beans = beans.subList(0, 1);
 				}
 			}else{
 				JSONObject object = dataMap.get(richeBean.getCode());
-				int start = Integer.valueOf(object.getString("start").substring(0,4));
-				int end  =  Integer.valueOf(object.getString("end").substring(0,4));
+				int start = Integer.valueOf(object.getString("start"));
+				int end  =  Integer.valueOf(object.getString("end"));
 
 				for (int k = start; k <= end; k++) {
 					for (int j = 1; j <= 4; j++) {
-						today = this.writeData(richeBean,list,index,k,j,beans,today);
+						this.writeData(richeBean,list,index,k,j,beans);
 					}
 				}
 			}
 			Collections.sort(beans, Comparator.comparingInt(o -> Integer.parseInt(o.getDate())));
 			persist.writeHistoryDataToFile(richeBean, beans);
 		}
-		this.writeAllTipData(today);
 	}
 
-	private String writeData(RicheBean richeBean,List<RicheBean> list,int index,int k, int j,List<HistoryBean> beans,String today){
+	private void writeData(RicheBean richeBean,List<RicheBean> list,int index,int k, int j,List<HistoryBean> beans){
 		String url = String.format(wyUrl, richeBean.getCode(), k, j);
 		LOGGER.info("股票代码：【{}】,获取历史数据URL：【{}】，总共有【{}】行，已经抓取到第【{}】行", richeBean.getCode(), url,list.size(),index);
 		String content = request.doGet(url);
@@ -288,9 +285,6 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 				Elements tds = element.select("td");
 				HistoryBean historyBean = new HistoryBean();
 				historyBean.setDate(tds.get(0).text().replace("-", ""));
-				if (Integer.valueOf(historyBean.getDate()) > Integer.valueOf(today)){
-					today = historyBean.getDate();
-				}
 				historyBean.setOpenPrice(tds.get(1).text());
 				historyBean.setMaxPrice(tds.get(2).text());
 				historyBean.setMinPrice(tds.get(3).text());
@@ -303,7 +297,6 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 				beans.add(historyBean);
 			}
 		}
-		return today;
 	}
 
 	public OnlineBean reloadOnlineData(String code){
@@ -434,15 +427,15 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 	 * @Description: writeAllTipData
 	 * @date 2019年11月16日 上午11:27:49
 	 */
-	private void writeAllTipData(String today) throws IOException {
+	private void writeAllTipData() throws IOException {
 		JSONArray array = this.getAllTips();
 
 		File f = ResourceUtils.getFile(catXml.getTipsDataPath());
 		if (!f.exists()){
 			f.mkdirs();
 		}
-
-		File file = new File(f, today+ ".json");
+		String day = new StringBuilder(Calendar.getInstance().get(Calendar.DATE)).append(".json").toString();
+		File file = new File(f,day);
 		if (file.exists()) {
 			file.delete();
 		}
@@ -452,9 +445,24 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 
 	public JSONArray getAllTips(){
 		LOGGER.info("获取【{}】今日所有指标数据：【{}】",Calendar.getInstance().get(Calendar.DATE),allUrl);
-		String allResult = request.doGet(allUrl);
+		String allResult = null;
+		for(int index = 1; index < 10; index ++){
+			if (Objects.nonNull(allResult))
+				break;
+			try {
+				allResult = request.doGet(allUrl);
+			}catch (Exception e){
+				LOGGER.error("第{}次获取全部指标失败",index,e);
+			}
+		}
 
 		JSONObject object = JSONObject.parseObject(this.trimJquery(allResult).toString());
+
+		JSONArray array = object.getJSONObject("data").getJSONArray("diff");
+		List<RichesData> datas = JSON.parseArray(array.toJSONString(), RichesData.class);
+		for(RichesData r :datas){
+			TIPMAP.put(r.getF12(),r);
+		}
 
 		return object.getJSONObject("data").getJSONArray("diff");
 	}

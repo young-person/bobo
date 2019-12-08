@@ -149,51 +149,102 @@ public class ReceiveRichesImpl extends BaseClass implements ReceiveRiches {
 					StringBuilder stringBuilder = new StringBuilder();
 					boolean flag = false;
 					for(Bean bean :data.getBeans()){
+
 						OnlineBean onlineBean = bRiches.reloadOnlineData(bean.getCode());
 						String price = onlineBean.getNewPrice();
 						String minV = bean.getMark().split("-")[0];
 						String maxV = bean.getMark().split("-")[1];
 
-
-						if (Float.valueOf(price) > Float.valueOf(minV) && Float.valueOf(price) <= Float.valueOf(maxV)){
-							stringBuilder.append("【");
-							stringBuilder.append(bean.getName());
-							stringBuilder.append("-");
-							stringBuilder.append("代码为：");
-							stringBuilder.append(bean.getCode());
-							stringBuilder.append("】");
-							stringBuilder.append("已经符合您的预期【");
-							stringBuilder.append(bean.getMark());
-							stringBuilder.append("】,");
-							stringBuilder.append("您可以查看此条数据详细情况！");
-							stringBuilder.append("\n");
-							flag = true;
-						}else if(Float.valueOf(price) > Float.valueOf(maxV)){
-							stringBuilder.append("【");
-							stringBuilder.append(bean.getName());
-							stringBuilder.append("-");
-							stringBuilder.append("代码为：");
-							stringBuilder.append(bean.getCode());
-							stringBuilder.append("】");
-							stringBuilder.append("此数据已经超过您设定的预期【");
-							stringBuilder.append(bean.getMark());
-							stringBuilder.append("】,");
-							stringBuilder.append("请及时关注操作！");
-							stringBuilder.append("\n");
-							flag = true;
-						}else if(Float.valueOf(price)*1.1 > Float.valueOf(minV) ){
-							stringBuilder.append("【");
-							stringBuilder.append(bean.getName());
-							stringBuilder.append("-");
-							stringBuilder.append("代码为：");
-							stringBuilder.append(bean.getCode());
-							stringBuilder.append("】");
-							stringBuilder.append("此数据还有不到10%的增长就达到您的预期【");
-							stringBuilder.append(bean.getMark());
-							stringBuilder.append("】,");
-							stringBuilder.append("请您近期注意观察！");
-							stringBuilder.append("\n");
-							flag = true;
+						switch (bean.getMark()) {
+							/**
+							 * 抄底 如果当前价格接近设置最大值的1至1.05倍 通知 当前价格在 最小值至最大值之间通知 如果当前值小于最小值 通知
+							 */
+							case "0":
+								if (Float.valueOf(price) > Float.valueOf(minV) && Float.valueOf(price) <= Float.valueOf(maxV)){
+									stringBuilder.append("【");
+									stringBuilder.append(bean.getName());
+									stringBuilder.append("-");
+									stringBuilder.append("代码为：");
+									stringBuilder.append(bean.getCode());
+									stringBuilder.append("】");
+									stringBuilder.append("已经符合您的买入预期【");
+									stringBuilder.append(bean.getMark());
+									stringBuilder.append("】,");
+									stringBuilder.append("您可以查看此条数据详细情况！");
+									stringBuilder.append("\n");
+									flag = true;
+								}else if(Float.valueOf(price) < Float.valueOf(minV)){
+									stringBuilder.append("【");
+									stringBuilder.append(bean.getName());
+									stringBuilder.append("-");
+									stringBuilder.append("代码为：");
+									stringBuilder.append(bean.getCode());
+									stringBuilder.append("】");
+									stringBuilder.append("此数据已经超过您设定的买入预期【");
+									stringBuilder.append(bean.getMark());
+									stringBuilder.append("】,");
+									stringBuilder.append("请及时关注操作！");
+									stringBuilder.append("\n");
+									flag = true;
+								}else if(Float.valueOf(price) > Float.valueOf(maxV) && Float.valueOf(price) < Float.valueOf(maxV) *1.05){
+									stringBuilder.append("【");
+									stringBuilder.append(bean.getName());
+									stringBuilder.append("-");
+									stringBuilder.append("代码为：");
+									stringBuilder.append(bean.getCode());
+									stringBuilder.append("】");
+									stringBuilder.append("此数据还有不到10%的增长就达到您的买入预期【");
+									stringBuilder.append(bean.getMark());
+									stringBuilder.append("】,");
+									stringBuilder.append("请您近期注意观察！");
+									stringBuilder.append("\n");
+									flag = true;
+								}
+								break;
+							case "1":
+								if (Float.valueOf(price) > Float.valueOf(minV) && Float.valueOf(price) <= Float.valueOf(maxV)){
+									stringBuilder.append("【");
+									stringBuilder.append(bean.getName());
+									stringBuilder.append("-");
+									stringBuilder.append("代码为：");
+									stringBuilder.append(bean.getCode());
+									stringBuilder.append("】");
+									stringBuilder.append("已经符合您的卖出预期【");
+									stringBuilder.append(bean.getMark());
+									stringBuilder.append("】,");
+									stringBuilder.append("您可以查看此条数据详细情况！");
+									stringBuilder.append("\n");
+									flag = true;
+								}else if(Float.valueOf(price) > Float.valueOf(maxV)){
+									stringBuilder.append("【");
+									stringBuilder.append(bean.getName());
+									stringBuilder.append("-");
+									stringBuilder.append("代码为：");
+									stringBuilder.append(bean.getCode());
+									stringBuilder.append("】");
+									stringBuilder.append("此数据已经超过您设定的卖出预期【");
+									stringBuilder.append(bean.getMark());
+									stringBuilder.append("】,");
+									stringBuilder.append("请及时关注操作！");
+									stringBuilder.append("\n");
+									flag = true;
+								}else if(Float.valueOf(price)*1.1 > Float.valueOf(minV) ){
+									stringBuilder.append("【");
+									stringBuilder.append(bean.getName());
+									stringBuilder.append("-");
+									stringBuilder.append("代码为：");
+									stringBuilder.append(bean.getCode());
+									stringBuilder.append("】");
+									stringBuilder.append("此数据还有不到10%的增长就达到您的卖出预期【");
+									stringBuilder.append(bean.getMark());
+									stringBuilder.append("】,");
+									stringBuilder.append("请您近期注意观察！");
+									stringBuilder.append("\n");
+									flag = true;
+								}
+								break;
+							default:
+								break;
 						}
 
 					}

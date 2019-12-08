@@ -27,16 +27,12 @@ import org.crazycake.shiro.RedisSessionDAO;
 import org.crazycake.shiro.SerializeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
-import org.springframework.data.redis.connection.RedisClusterConfiguration;
-import org.springframework.data.redis.connection.RedisNode;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
-import redis.clients.jedis.JedisPoolConfig;
 
 import javax.servlet.Filter;
 import java.io.Serializable;
@@ -44,84 +40,13 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
+@AutoConfigureAfter(RedisConfig.class)
 public class AppConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AppConfig.class);
 
-    private String clusterNodes = "129.28.191.240:6379,129.28.191.240:6380,129.28.191.240:6381,129.28.191.240:6382,129.28.191.240:6383,129.28.191.240:6384";
-    private int database = 8;
-
-
-    @Bean
-    public JedisPoolConfig getJedisPoolConfig() {
-        JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
-        return jedisPoolConfig;
-    }
-
-    /**
-     * Redis集群的配置
-     * @return RedisClusterConfiguration
-     * @throws
-     */
-    @Bean
-    public RedisClusterConfiguration redisClusterConfiguration(){
-        RedisClusterConfiguration redisClusterConfiguration = new RedisClusterConfiguration();
-        String[] serverArray = clusterNodes.split(",");
-        Set<RedisNode> nodes = new HashSet<RedisNode>();
-        for(String ipPort:serverArray){
-            String[] ipAndPort = ipPort.split(":");
-            nodes.add(new RedisNode(ipAndPort[0].trim(),Integer.valueOf(ipAndPort[1])));
-        }
-        redisClusterConfiguration.setClusterNodes(nodes);
-        redisClusterConfiguration.setMaxRedirects(3);
-        return redisClusterConfiguration;
-    }
-
-    /**
-     * @param
-     * @return
-     * @Description:redis连接工厂类
-     * @date 2018/10/25 19:45
-     */
-    @Bean
-    public JedisConnectionFactory jedisConnectionFactory() {
-        //集群模式
-        JedisConnectionFactory  factory = new JedisConnectionFactory(redisClusterConfiguration(),getJedisPoolConfig());
-        factory.setDatabase(database);
-        factory.setUsePool(true);
-        factory.afterPropertiesSet();
-        return factory;
-    }
-
-    /**
-     * 实例化 RedisTemplate 对象
-     *
-     * @return
-     */
-    @Bean
-    public RedisTemplate<String, Object> redisTemplate() {
-        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
-        initDomainRedisTemplate(redisTemplate);
-        redisTemplate.afterPropertiesSet();
-        return redisTemplate;
-    }
-
-    /**
-     * 设置数据存入 redis 的序列化方式,并开启事务
-     *
-     */
-    private void initDomainRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
-        //如果不配置Serializer，那么存储的时候缺省使用String，如果用User类型存储，那么会提示错误User can't cast to String！
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        //这个地方有一个问题，这种序列化器会将value序列化成对象存储进redis中，如果
-        //你想取出value，然后进行自增的话，这种序列化器是不可以的，因为对象不能自增；
-        //需要改成StringRedisSerializer序列化器。
-        redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
-        redisTemplate.setEnableTransactionSupport(false);
-        redisTemplate.setConnectionFactory(jedisConnectionFactory());
-    }
-
-
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Bean
     public ShiroFilterFactoryBean shiroFilter() {
@@ -187,7 +112,7 @@ public class AppConfig {
 
     public RedisManager redisManager() {
         ShiroRedisManager shiroRedisManager = new ShiroRedisManager();
-        shiroRedisManager.setRedisTemplate(redisTemplate());
+        shiroRedisManager.setRedisTemplate(redisTemplate);
         return shiroRedisManager;
     }
 

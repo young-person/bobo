@@ -10,7 +10,10 @@ public class Measure {
      * 请求头 token
      */
     public static final String head_Authorization = "Authorization";
-
+    /**
+     * 请求头 token
+     */
+    public static final String CAT_head_Authorization = "CAT_Authorization";
     /**
      * 表达字符
      */

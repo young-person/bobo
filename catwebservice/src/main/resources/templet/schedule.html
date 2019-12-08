@@ -18,8 +18,8 @@
             <button type="button" data-toggle="modal" class="btn btn-default" data-target="#myModal">添加代码</button>
         </div>
         <div class="col-xs-12">
-            <h3 class="header smaller lighter blue">数据面板</h3>
-            <div>
+            <h3 class="header smaller lighter blue">监控数据面板</h3>
+            <div style="height: calc(100vh - 45px);max-height: calc(100vh - 45px);overflow-y: auto;">
                 <table id="dataTable" class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
@@ -28,17 +28,19 @@
                                 <td class="center">${head.name}</td>
                             </#list>
                             <td class="center">删除</td>
+                            <td class="center">详情</td>
                         </tr>
                     </thead>
                     <tbody>
                         <#list datas as item>
-                            <tr class="${item.status}">
+                            <tr style="background-color: ${item.status};">
                                 <td class="center">${item.mark}</td>
                                 <#assign  keys=item.bean?keys/>
                                 <#list headers as key>
                                     <td class="center">${item.bean["${key.field}"]!''}</td>
                                 </#list>
                                 <td class="center"><a href="/riche/deleteStock/${item.code}">删除</a></td>
+                                <td class="center"><a target="_blank" href="http://stockpage.10jqka.com.cn/${item.code}/#xwgg">详情</a></td>
                             </tr>
                         </#list>
                     </tbody>
@@ -59,6 +61,15 @@
                         </tr>
                         <tr>
                             <th>参考值</th><td><input type="text" class="form-control" name="value" value=""/></td>
+                        </tr>
+                        <tr>
+                            <th>类型</th>
+                            <td>
+                                <select name="macd" class="form-control">
+                                    <option selected="selected" value="0">抄底</option>
+                                    <option value="1">待涨</option>
+                                </select>
+                            </td>
                         </tr>
                     </table>
                 </div>

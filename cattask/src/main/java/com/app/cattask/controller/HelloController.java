@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 @Controller
@@ -20,10 +23,11 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/dologin",method = RequestMethod.POST)
-    public String dologin(String username,String password){
+    public String dologin(String username, String password, HttpServletRequest request, HttpServletResponse response){
         Session session = SecurityUtils.getSubject().getSession();
         UserToken userToken = new UserToken( username, password);
         SecurityUtils.getSubject().login(userToken);
+        response.addCookie(new Cookie("bobo","123456"));
         return "index";
     }
 

@@ -12,19 +12,26 @@ public class CatWebServiceProperty {
     @Value("${catwebservice.cat.collocation}")
     private String collocation;
 
-    public String getCollocation() {
-        return collocation;
-    }
+    @Value("${catwebservice.userName}")
+    private String userName;
 
-    public void setCollocation(String collocation) {
-        this.collocation = collocation;
-    }
+    @Value("${catwebservice.password}")
+    private String password;
+
 
     public String getCrawlerPath() {
         return crawlerPath;
     }
 
-    public void setCrawlerPath(String crawlerPath) {
-        this.crawlerPath = crawlerPath;
+    public String getCollocation() {
+        return collocation;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

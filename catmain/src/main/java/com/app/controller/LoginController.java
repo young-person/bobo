@@ -28,7 +28,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -140,7 +139,6 @@ public class LoginController implements LoginActionFeign {
 
 
         ResultMeta meta = new ResultMeta();
-        Map<String,Object> map = new HashMap<String,Object>();
         if(StringUtils.isEmpty(user.getUsername())){
             meta.failure("用户名不能为空");
             return new ResponseEntity<ResultMeta>(meta, HttpStatus.OK);

@@ -16,6 +16,12 @@ public class Bean {
 	private String mark;
 	@XmlAttribute(name = "code")
 	private String code;
+	/**
+	 * 是抄底  还是待涨  默认为0 抄底  1为待涨
+	 */
+	@XmlAttribute(name = "macd")
+	private String macd = "0";
+
 	@XmlElement(name = "property")
 	private List<Property> properties;
 	public String getName() {
@@ -45,4 +51,11 @@ public class Bean {
 		this.code = code;
 	}
 
+	public String getMacd() {
+		return macd;
+	}
+
+	public void setMacd(String macd) {
+		this.macd = macd;
+	}
 }

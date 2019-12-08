@@ -31,12 +31,14 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
+import static com.app.crawler.riches.BRiches.TIPMAP;
+
 @Controller
 @RequestMapping(value = "riche")
 public class RicheController extends BaseClass{
 
 	private CatXml catXml = new CatXml();
-	
+
 	@RequestMapping(value = "view")
 	public ModelAndView initView() {
 		ModelAndView view = new ModelAndView("datashow");
@@ -74,10 +76,15 @@ public class RicheController extends BaseClass{
 		RLoadXml loadXml = new RLoadXml();
 		try{
 			Data data = loadXml.getDataFromXml(catXml.getDataPath());
-			for(Bean bean1 :data.getBeans()){
-				if (bean1.getCode().equals(code)){
-					data.getBeans().remove(bean1);
-					break;
+			if (Objects.nonNull(data.getBeans())){
+				Iterator<Bean> iterator = data.getBeans().iterator();
+
+				while(iterator.hasNext()){
+					Bean bean1 = iterator.next();
+					if (bean1.getCode().equals(code)){
+						iterator.remove();
+						break;
+					}
 				}
 			}
 			loadXml.convertToXml(data,catXml.getDataPath());
@@ -88,13 +95,14 @@ public class RicheController extends BaseClass{
 	}
 
 	/**
-	 * 添加一个需要监听得数据指标
+	 * 添加一个需要监听得数据指标  根据代码或者名称进行添加
 	 * @param code
 	 * @param value
+	 * @param macd 是否为等待抄底
 	 * @return
 	 */
 	@PostMapping(value = "addStock")
-	public ModelAndView addListenerStock(String code,String value){
+	public ModelAndView addListenerStock(String code,String value,@RequestParam(defaultValue = "0") String macd){
 		RichesData bean = getChooice(code);
 		RLoadXml loadXml = new RLoadXml();
 		ModelAndView view = new ModelAndView("redirect:/riche/findStock");
@@ -105,12 +113,15 @@ public class RicheController extends BaseClass{
 			b.setMark(value);//监听值
 			b.setProperties(list);
 			b.setCode(bean.getF12());
+			b.setMacd(macd);
 			Data data = loadXml.getDataFromXml(catXml.getDataPath());
 			boolean flag = true;
 			if (Objects.nonNull(data.getBeans())){
-				for(Bean bean1 :data.getBeans()){
+				for(int index = 0; index < data.getBeans().size(); index ++){
+					Bean bean1 = data.getBeans().get(index);
 					if (bean1.getCode().equals(code)){
 						flag = false;
+						data.getBeans().set(index,b);
 						break;
 					}
 				}
@@ -162,11 +173,11 @@ public class RicheController extends BaseClass{
 					Float preV = Float.valueOf(richesData.getF1());
 					Float minV = Float.valueOf(mark[0]);
 					Float maxV = Float.valueOf(mark[1]);
-					String status = "#dcdcdc";
+					String status = "#f9f9f9";
 					if (preV >= minV && preV <= maxV){
-						status = "#e0f21ccc";
+						status = "#b3b967";
 					}else if(preV > maxV){
-						status = "#f21c34cc";
+						status = "#dea4a4";
 					}
 					object.put("code", b.getCode());
 					object.put("name",b.getName());
@@ -267,13 +278,17 @@ public class RicheController extends BaseClass{
 	}
 
 	private RichesData getChooice(String code){
+		for(RichesData bean : TIPMAP.values()){
+			if (bean.getF12().equals(code) || bean.getF14().equals(code)){
+				return bean;
+			}
+		}
 		BRiches bRiches = new BRiches();
 		JSONArray array = bRiches.getAllTips();
-
 		List<RichesData> datas = JSON.parseArray(array.toJSONString(), RichesData.class);
 		RichesData result = null;
 		for(RichesData bean:datas){
-			if (bean.getF12().equals(code)){
+			if (bean.getF12().equals(code) || bean.getF14().equals(code)){
 				return bean;
 			}
 		}

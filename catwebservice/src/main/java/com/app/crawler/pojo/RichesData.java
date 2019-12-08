@@ -1,5 +1,9 @@
 package com.app.crawler.pojo;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.text.DecimalFormat;
+
 /**
  * @Description: TODO
  * @date 2019年11月12日 下午10:39:58
@@ -14,15 +18,15 @@ public class RichesData {
 	private String f3;
 	@RName(value="涨跌金额")
 	private String f4;
-	@RName(value="成交量")
+//	@RName(value="成交量")
 	private String f5;
-	@RName(value="成交额")
+//	@RName(value="成交额")
 	private String f6;
 	@RName(value="振幅")
 	private String f7;
 	@RName(value="换手率")
 	private String f8;
-	@RName(value="量比")
+//	@RName(value="量比")
 	private String f9;
 	private String f10;
 	private String f11;
@@ -36,9 +40,9 @@ public class RichesData {
 	private String f17;
 	private String f18;
 	private String f19;
-	@RName(value="总市值")
+//	@RName(value="总市值")
 	private String f20;
-	@RName(value="流通市值")
+//	@RName(value="流通市值")
 	private String f21;
 	private String f22;
 	@RName(value="市净率")
@@ -58,9 +62,9 @@ public class RichesData {
 	private String f36;
 	@RName(value="净资产收益率")
 	private String f37;
-	@RName(value="总股本")
+//	@RName(value="总股本")
 	private String f38;
-	@RName(value="流通股本")
+//	@RName(value="流通股本")
 	private String f39;
 	@RName(value="营业收入")
 	private String f40;
@@ -129,13 +133,13 @@ public class RichesData {
 	private String f99;
 	@RName(value="行业类型")
 	private String f100;
-	@RName(value="名称")
+//	@RName(value="关联名称")
 	private String f101;
-	@RName(value="所属板块地区")
+//	@RName(value="所属板块地区")
 	private String f102;
 	@RName(value="关联板块")
 	private String f103;
-	@RName(value="代码")
+//	@RName(value="代码")
 	private String f104;
 	private String f105;
 	private String f106;
@@ -570,10 +574,19 @@ public class RichesData {
 		this.f40 = f40;
 	}
 	public String getF41() {
+		if (StringUtils.isNotBlank(f41) && !"-".equals(f41)){
+			DecimalFormat decimalFormat = new DecimalFormat("#.00");
+			return decimalFormat.format(Double.valueOf(f41));
+		}
 		return f41;
 	}
 	public void setF41(String f41) {
-		this.f41 = f41;
+		if (StringUtils.isNotBlank(f41) && !"-".equals(f41)){
+			DecimalFormat decimalFormat = new DecimalFormat("#.00");
+			this.f41 = decimalFormat.format(Double.valueOf(f41));
+		}else{
+			this.f41 = f41;
+		}
 	}
 	public String getF42() {
 		return f42;
@@ -600,10 +613,19 @@ public class RichesData {
 		this.f45 = f45;
 	}
 	public String getF46() {
+		if (StringUtils.isNotBlank(f46) && !"-".equals(f46)){
+			DecimalFormat decimalFormat = new DecimalFormat("#.00");
+			return decimalFormat.format(Double.valueOf(f46));
+		}
 		return f46;
 	}
 	public void setF46(String f46) {
-		this.f46 = f46;
+		if (StringUtils.isNotBlank(f46) && !"-".equals(f46)){
+			DecimalFormat decimalFormat = new DecimalFormat("#.00");
+			this.f46 = decimalFormat.format(Double.valueOf(f46));
+		}else{
+			this.f46 = f46;
+		}
 	}
 	public String getF47() {
 		return f47;
@@ -618,10 +640,19 @@ public class RichesData {
 		this.f48 = f48;
 	}
 	public String getF49() {
+		if (StringUtils.isNotBlank(f49) && !"-".equals(f49)){
+			DecimalFormat decimalFormat = new DecimalFormat("#.00");
+			return decimalFormat.format(Double.valueOf(f49));
+		}
 		return f49;
 	}
 	public void setF49(String f49) {
-		this.f49 = f49;
+		if (StringUtils.isNotBlank(f49) && !"-".equals(f49)){
+			DecimalFormat decimalFormat = new DecimalFormat("#.00");
+			this.f49 = decimalFormat.format(Double.valueOf(f49));
+		}else{
+			this.f49 = f49;
+		}
 	}
 	public String getF50() {
 		return f50;
@@ -996,16 +1027,34 @@ public class RichesData {
 		this.f111 = f111;
 	}
 	public String getF112() {
+		if (StringUtils.isNotBlank(f112) && !"-".equals(f112)){
+			DecimalFormat decimalFormat = new DecimalFormat("#.0000");
+			return decimalFormat.format(Double.valueOf(f112));
+		}
 		return f112;
 	}
 	public void setF112(String f112) {
-		this.f112 = f112;
+		if (StringUtils.isNotBlank(f112) && !"-".equals(f112)){
+			DecimalFormat decimalFormat = new DecimalFormat("#.0000");
+			this.f112 = decimalFormat.format(Double.valueOf(f112));
+		}else{
+			this.f112 = f112;
+		}
 	}
 	public String getF113() {
+		if (StringUtils.isNotBlank(f113) && !"-".equals(f113)){
+			DecimalFormat decimalFormat = new DecimalFormat("#.000");
+			return decimalFormat.format(Double.valueOf(f113));
+		}
 		return f113;
 	}
 	public void setF113(String f113) {
-		this.f113 = f113;
+		if (StringUtils.isNotBlank(f113) && !"-".equals(f113)){
+			DecimalFormat decimalFormat = new DecimalFormat("#.000");
+			this.f113 = decimalFormat.format(Double.valueOf(f113));
+		}else{
+			this.f113 = f113;
+		}
 	}
 	public String getF114() {
 		return f114;
@@ -1098,10 +1147,19 @@ public class RichesData {
 		this.f128 = f128;
 	}
 	public String getF129() {
+		if (StringUtils.isNotBlank(f129) && !"-".equals(f129)){
+			DecimalFormat decimalFormat = new DecimalFormat("#.000");
+			return decimalFormat.format(Double.valueOf(f129));
+		}
 		return f129;
 	}
 	public void setF129(String f129) {
-		this.f129 = f129;
+		if (StringUtils.isNotBlank(f129) && !"-".equals(f129)){
+			DecimalFormat decimalFormat = new DecimalFormat("#.000");
+			this.f129 = decimalFormat.format(Double.valueOf(f129));
+		}else{
+			this.f129 = f129;
+		}
 	}
 	public String getF130() {
 		return f130;

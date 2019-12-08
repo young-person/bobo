@@ -7,10 +7,10 @@ import java.io.File;
 public class FtpTest {
 
     public static void main(String[] args) {
-        FTPConfig config = new FTPConfig("129.28.191.240",21,"bobo","czb199345");
+        FTPConfig config = new FTPConfig("129.28.191.240",21,"ftpuser1","ftpuser1");
         IFTPClient client = new DefaultFTPClient(config,true);
         client.login();
-        boolean s = client.uploadFileByLocalFile("/nginx-1.12.2.zip",new File("D:\\env\\nginx-1.12.2.zip"));
+        boolean s = client.uploadFileByLocalFile("nginx-1.12.2.zip",new File("D:\\env\\nginx-1.12.2.zip"));
         System.out.println(s);
         client.logout();
     }

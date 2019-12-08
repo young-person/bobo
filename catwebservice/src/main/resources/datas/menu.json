@@ -1,0 +1,41 @@
+[
+  {
+    "id": "1",
+    "parentid": "0",
+    "name": "数据推荐",
+    "urlkey": "",
+    "url": "/riche/view",
+    "status": "",
+    "type": "",
+    "sort": "1",
+    "icon": "",
+    "create_time": "",
+    "create_id": ""
+  },
+  {
+    "id": "2",
+    "parentid": "0",
+    "name": "数据监控",
+    "urlkey": "",
+    "url": "/riche/findStock",
+    "status": "",
+    "type": "",
+    "sort": "2",
+    "icon": "",
+    "create_time": "",
+    "create_id": ""
+  },
+  {
+    "id": "3",
+    "parentid": "0",
+    "name": "用户管理",
+    "urlkey": "",
+    "url": "/riche/findUser",
+    "status": "",
+    "type": "",
+    "sort": "3",
+    "icon": "",
+    "create_time": "",
+    "create_id": ""
+  }
+]
