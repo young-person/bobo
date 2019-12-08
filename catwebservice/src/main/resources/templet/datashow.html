@@ -26,7 +26,7 @@
     	</div>
         <div class="col-xs-12">
             <h3 class="header smaller lighter blue">数据面板</h3>
-            <div>
+            <div style="height: calc(100vh - 45px);max-height: calc(100vh - 45px);overflow-y: auto;">
                 <table id="dataTable" class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
@@ -73,7 +73,6 @@
     socket.on('disconnect', function(){});
     //监听服务器端发送消息事件
     socket.on('refreshData', function(data) {
-        console.log("服务器发送的消息是："+data);
         var html = [];
         for(var k = 0; k < data.length; k++){
             var e = data[k];

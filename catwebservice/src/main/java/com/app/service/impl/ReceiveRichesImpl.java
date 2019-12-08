@@ -63,7 +63,19 @@ public class ReceiveRichesImpl extends BaseClass implements ReceiveRiches {
 				helper.setSubject(builder.toString());
 
 				Map<String, Object> model = new HashMap<>();
-				model.put("datas", datas);
+
+				List<Map<String,String>> list = new ArrayList<>();
+				for(RicheTarget target :datas){
+					Map<String,String> m = new HashMap<>();
+					m.put("l",String.valueOf(target.getL()));
+					m.put("hand",target.getHand());
+					m.put("stockName",target.getStockName());
+					m.put("code",target.getCode());
+					m.put("detailUrl",target.getDetailUrl());
+					m.put("risePrice",target.getRisePrice());
+					list.add(m);
+				}
+				model.put("datas", list);
 				model.put("title",catXml.getSendEmailSubject());
 				Template template = templateEngine.getConfiguration().getTemplate(catXml.getEmailSubjectTemplate());
 				String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
