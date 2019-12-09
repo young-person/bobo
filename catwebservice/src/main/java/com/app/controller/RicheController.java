@@ -167,9 +167,9 @@ public class RicheController extends BaseClass{
 
 					StringBuilder builder = new StringBuilder();
 					if (Float.valueOf(s1.replace(",","")) >= Float.valueOf(s2.replace(",",""))){
-						builder.append(s2).append("-").append(s1);
+						builder.append(s2.replace(",","")).append("-").append(s1.replace(",",""));
 					}else{
-						builder.append(s1).append("-").append(s2);
+						builder.append(s1.replace(",","")).append("-").append(s2.replace(",",""));
 					}
 					String name = e.getName();
 					String[] arr = name.replace(".txt", "").split("_");
