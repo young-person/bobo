@@ -120,8 +120,14 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 					target.setDetailUrl(String.format(detailUrl, arr[0], code_type));
 					target.setCode(arr[0]);
 					target.setStockName(arr[1]);
-					target.setPrice(TIPMAP.get(arr[0]).getF1());
-					target.setType(TIPMAP.get(arr[0]).getF100());
+					if (Objects.nonNull(TIPMAP.get(arr[0]))){
+						target.setPrice(TIPMAP.get(arr[0]).getF1());
+						target.setType(TIPMAP.get(arr[0]).getF100());
+					}else{
+						LOGGER.error("{}不存在于TIPMAP里面，可能此数据集已被下架不需要再被显示",arr[0]);
+						continue;
+					}
+
 					LOGGER.info("完成计算{}文件里面的数据，结果集为：【{}】",name,target);
 					if (!"创业".equals(f.getName())) {
 						if (Float.valueOf(target.getHand()) >= hand && !target.getStockName().contains("ST") && target.getL() > avg) {
@@ -266,7 +272,9 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 			for (File e : f.listFiles()) {
 				try{
 					List<HistoryBean> datas = persist.readHistoryFromFile(e);
-
+					if (Objects.isNull(datas) || datas.size() == 0){
+						continue;
+					}
 					Collections.sort(datas, (o1, o2) -> o2.getDate().compareTo(o1.getDate()));
 					List<HistoryBean> list1 = null;
 					List<HistoryBean> list2 = null;
@@ -479,10 +487,11 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 
 		JSONArray array = object.getJSONObject("data").getJSONArray("diff");
 		List<RichesData> datas = JSON.parseArray(array.toJSONString(), RichesData.class);
+		LOGGER.info("开始写入数据到TIPMAP");
 		for(RichesData r :datas){
 			TIPMAP.put(r.getF12(),r);
 		}
-
+		LOGGER.info("结束写入数据到TIPMAP：写入数据个数:【{}】",datas.size());
 		return object.getJSONObject("data").getJSONArray("diff");
 	}
 
