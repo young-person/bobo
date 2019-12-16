@@ -45,6 +45,14 @@ public class OnlineBean {
         return codeType;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     public void setCodeType(String codeType) {
         this.codeType = codeType;
     }

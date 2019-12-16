@@ -2,7 +2,7 @@ package com.app.crawler.request;
 
 import com.app.crawler.base.BaseClass;
 import com.app.crawler.request.client.DefaultHttpRequestRetryHandler;
-import org.apache.commons.compress.utils.IOUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;

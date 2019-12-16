@@ -3,10 +3,8 @@ package com.app.crawler.riches;
 import com.alibaba.fastjson.JSON;
 import com.app.crawler.base.CatXml;
 import com.app.crawler.request.RestRequest;
-import com.app.crawler.riches.pojo.HistoryBean;
 import com.app.crawler.riches.pojo.RicheBean;
 import com.app.crawler.riches.pojo.RicheResult;
-import org.apache.poi.ss.usermodel.Row;
 
 import java.io.File;
 import java.util.HashMap;
@@ -110,19 +108,5 @@ public class BRichesBase {
         }
         File f2 = new File(f1, builder.toString());
         return f2;
-    }
-
-    protected void writeValueToCell(Row row, HistoryBean historyBean, String prePrivce) {
-        row.createCell(0).setCellValue(historyBean.getDate());
-        row.createCell(1).setCellValue(historyBean.getHand());
-        row.createCell(2).setCellValue(historyBean.getRisePrice());
-        row.createCell(3).setCellValue(historyBean.getOpenPrice());
-        row.createCell(4).setCellValue(historyBean.getClosePrice());
-        row.createCell(5).setCellValue(prePrivce);
-        row.createCell(6).setCellValue(historyBean.getMaxPrice());
-        row.createCell(7).setCellValue(historyBean.getMinPrice());
-        row.createCell(8).setCellValue(historyBean.getTotal());
-        row.createCell(9).setCellValue(historyBean.getMoney());
-        row.createCell(10).setCellValue(historyBean.getRiseMoney());
     }
 }

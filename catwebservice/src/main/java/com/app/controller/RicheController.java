@@ -12,9 +12,6 @@ import com.app.crawler.riches.BRiches;
 import com.app.crawler.riches.pojo.Bean;
 import com.app.crawler.riches.pojo.Data;
 import com.app.crawler.riches.pojo.ExcelUser;
-import com.app.crawler.riches.pojo.HistoryBean;
-import com.app.crawler.riches.producer.Persist;
-import com.app.crawler.riches.producer.PersistTxt;
 import com.app.crawler.riches.producer.RLoadXml;
 import com.app.service.impl.ReceiveRichesImpl;
 import com.bobo.base.BaseClass;
@@ -33,8 +30,6 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
-
-import static com.app.crawler.riches.BRiches.TIPMAP;
 
 @Controller
 @RequestMapping(value = "riche")
@@ -103,95 +98,8 @@ public class RicheController extends BaseClass{
 	@GetMapping(value = "initStock")
 	@ResponseBody
 	public void initList(){
-		int d = 50;//关于天的间隔
-		int w = 380;//关于周的间隔
-
-		File file = null;
-		try {
-			file = ResourceUtils.getFile(catXml.getDataPath());
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		List<String> filter = new ArrayList<>();
-
-		Persist persist= new PersistTxt();
-		RLoadXml loadXml = new RLoadXml();
-
-		Data data = loadXml.getDataFromXml(catXml.getDataPath());
-		if (Objects.nonNull(data.getBeans())){
-			for(int index = 0; index < data.getBeans().size(); index ++){
-				Bean bean1 = data.getBeans().get(index);
-				filter.add(bean1.getCode());
-			}
-		}
-		Map<String, String> typeName = new HashMap<String, String>() {
-			private static final long serialVersionUID = 6893069965305064089L;
-
-			{
-				put("4621", "创业");
-				put("4614", "深证");
-				put("4353", "沪A");
-				put("4609", "深A");
-			}
-		};
-		String s1 = null, s2 = null;
-		for (File f : file.listFiles()) {
-			if (!f.isDirectory() || !typeName.containsValue(f.getName())) {
-				continue;
-			}
-			for (File e : f.listFiles()) {
-				try{
-					List<HistoryBean> datas = persist.readHistoryFromFile(e);
-
-					Collections.sort(datas, (o1, o2) -> o2.getDate().compareTo(o1.getDate()));
-					List<HistoryBean> list1 = null;
-					List<HistoryBean> list2 = null;
-					if(datas.size() <= d){
-						list1 = datas.subList(0,datas.size());
-					}else if((datas.size() > d && datas.size() <= w)){
-						list1 = datas.subList(0,d);
-						list2 = datas.subList(0,datas.size());
-					}else if(datas.size() > w){
-						list1 = datas.subList(0,d);
-						list2 = datas.subList(0,w);
-					}
-					Collections.sort(list1, Comparator.comparing(HistoryBean::getClosePrice));
-					s1 = list1.get(0).getClosePrice().replace(",","");
-
-					if (Objects.isNull(list2)){
-						s2 = String.valueOf(Float.valueOf(s1.replace(",","")) * 1.05);
-					}else{
-						Collections.sort(list2, Comparator.comparing(HistoryBean::getClosePrice));
-						s2 = list2.get(0).getClosePrice();
-					}
-
-					StringBuilder builder = new StringBuilder();
-					if (Float.valueOf(s1.replace(",","")) >= Float.valueOf(s2.replace(",",""))){
-						builder.append(s2.replace(",","")).append("-").append(s1.replace(",",""));
-					}else{
-						builder.append(s1.replace(",","")).append("-").append(s2.replace(",",""));
-					}
-					String name = e.getName();
-					String[] arr = name.replace(".txt", "").split("_");
-					if (filter.contains(arr[0]) || "创业".equals(f.getName())){
-						continue;
-					}
-					RichesData bean = getChooice(arr[0]);
-					List<Property> list = loadXml.converClassToModel(bean);
-					Bean b = new Bean();
-					b.setName(bean.getF14());
-					b.setMark(builder.toString());//监听值
-					b.setProperties(list);
-					b.setCode(bean.getF12());
-					b.setMacd("0");
-					data.getBeans().add(b);
-
-				} catch (IllegalAccessException | IOException | InvocationTargetException | NoSuchMethodException ex) {
-					LOGGER.error("进行初始化监控数据失败,文件:{}",f.getName(),e);
-				}
-			}
-		}
-		loadXml.convertToXml(data,catXml.getDataPath());
+		BRiches briches = new BRiches();
+		briches.initList();
 	}
 	/**
 	 * 添加一个需要监听得数据指标  根据代码或者名称进行添加
@@ -202,7 +110,8 @@ public class RicheController extends BaseClass{
 	 */
 	@PostMapping(value = "addStock")
 	public ModelAndView addListenerStock(String code,String value,@RequestParam(defaultValue = "0") String macd){
-		RichesData bean = getChooice(code);
+		BRiches briches = new BRiches();
+		RichesData bean = briches.getChooice(code);
 		RLoadXml loadXml = new RLoadXml();
 		ModelAndView view = new ModelAndView("redirect:/riche/findStock");
 		try {
@@ -376,22 +285,6 @@ public class RicheController extends BaseClass{
 		return new ResponseEntity("成功", HttpStatus.OK);
 	}
 
-	private RichesData getChooice(String code){
-		for(RichesData bean : TIPMAP.values()){
-			if (bean.getF12().equals(code) || bean.getF14().equals(code)){
-				return bean;
-			}
-		}
-		BRiches bRiches = new BRiches();
-		JSONArray array = bRiches.getAllTips();
-		List<RichesData> datas = JSON.parseArray(array.toJSONString(), RichesData.class);
-		RichesData result = null;
-		for(RichesData bean:datas){
-			if (bean.getF12().equals(code) || bean.getF14().equals(code)){
-				return bean;
-			}
-		}
-		return result;
-	}
+
 
 }

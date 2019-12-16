@@ -155,7 +155,7 @@ public class ReceiveRichesImpl extends BaseClass implements ReceiveRiches {
 						String minV = bean.getMark().split("-")[0];
 						String maxV = bean.getMark().split("-")[1];
 
-						switch (bean.getMark()) {
+						switch (bean.getMacd()) {
 							/**
 							 * 抄底 如果当前价格接近设置最大值的1至1.05倍 通知 当前价格在 最小值至最大值之间通知 如果当前值小于最小值 通知
 							 */

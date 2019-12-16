@@ -5,11 +5,13 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.app.crawler.base.CrawlerDown;
+import com.app.crawler.pojo.Property;
 import com.app.crawler.pojo.RichesData;
 import com.app.crawler.request.RestRequest;
 import com.app.crawler.riches.pojo.*;
 import com.app.crawler.riches.producer.Persist;
 import com.app.crawler.riches.producer.PersistTxt;
+import com.app.crawler.riches.producer.RLoadXml;
 import org.apache.poi.util.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -95,6 +97,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		RICHETARGET.clear();
 		for (File f : file.listFiles()) {
 			if (!f.isDirectory() || !typeName.containsValue(f.getName())) {
 				continue;
@@ -117,6 +120,8 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 					target.setDetailUrl(String.format(detailUrl, arr[0], code_type));
 					target.setCode(arr[0]);
 					target.setStockName(arr[1]);
+					target.setPrice(TIPMAP.get(arr[0]).getF1());
+					target.setType(TIPMAP.get(arr[0]).getF100());
 					LOGGER.info("完成计算{}文件里面的数据，结果集为：【{}】",name,target);
 					if (!"创业".equals(f.getName())) {
 						if (Float.valueOf(target.getHand()) >= hand && !target.getStockName().contains("ST") && target.getL() > avg) {
@@ -180,6 +185,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 		LOGGER.info("结束此次抓取股市数据任务");
 		ISRUN.set(false);
 		this.calculate(null,null);
+		initList();
 
 	}
 
@@ -228,6 +234,113 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 		return dataMap;
 	}
 
+	/**
+	 * 进行监听数据初始化
+	 */
+	public void initList(){
+		int d = 50;//关于天的间隔
+		int w = 380;//关于周的间隔
+
+		File file = null;
+		try {
+			file = ResourceUtils.getFile(catXml.getDataPath());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		List<String> filter = new ArrayList<>();
+
+		RLoadXml loadXml = new RLoadXml();
+
+		Data data = loadXml.getDataFromXml(catXml.getDataPath());
+		if (Objects.nonNull(data.getBeans())){
+			for(int index = 0; index < data.getBeans().size(); index ++){
+				Bean bean1 = data.getBeans().get(index);
+				filter.add(bean1.getCode());
+			}
+		}
+		String s1 = null, s2 = null;
+		for (File f : file.listFiles()) {
+			if (!f.isDirectory() || !typeName.containsValue(f.getName())) {
+				continue;
+			}
+			for (File e : f.listFiles()) {
+				try{
+					List<HistoryBean> datas = persist.readHistoryFromFile(e);
+
+					Collections.sort(datas, (o1, o2) -> o2.getDate().compareTo(o1.getDate()));
+					List<HistoryBean> list1 = null;
+					List<HistoryBean> list2 = null;
+					if(datas.size() <= d){
+						list1 = datas.subList(0,datas.size());
+					}else if((datas.size() > d && datas.size() <= w)){
+						list1 = datas.subList(0,d);
+						list2 = datas.subList(0,datas.size());
+					}else if(datas.size() > w){
+						list1 = datas.subList(0,d);
+						list2 = datas.subList(0,w);
+					}
+
+					Collections.sort(list1, Comparator.comparing(HistoryBean::getClosePrice));
+					s1 = list1.get(0).getClosePrice().replace(",","");
+
+					if (Objects.isNull(list2)){
+						s2 = String.valueOf(Float.valueOf(s1.replace(",","")) * 1.05);
+					}else{
+						Collections.sort(list2, Comparator.comparing(HistoryBean::getClosePrice));
+						s2 = list2.get(0).getClosePrice();
+					}
+
+					StringBuilder builder = new StringBuilder();
+					if (Float.valueOf(s1.replace(",","")) >= Float.valueOf(s2.replace(",",""))){
+						builder.append(s2.replace(",","")).append("-").append(s1.replace(",",""));
+					}else{
+						builder.append(s1.replace(",","")).append("-").append(s2.replace(",",""));
+					}
+					String name = e.getName();
+					String[] arr = name.replace(".txt", "").split("_");
+					//将最新的数据写入到xml中
+					RichesData bean = getChooice(arr[0]);
+					List<Property> list = loadXml.converClassToModel(bean);
+					if (filter.contains(arr[0]) || "创业".equals(f.getName())){
+						if (!"创业".equals(f.getName())){
+							for(Bean b :data.getBeans()){
+								b.setProperties(list);
+							}
+						}
+						continue;
+					}
+
+					Bean b = new Bean();
+					b.setName(bean.getF14());
+					b.setMark(builder.toString());//监听值
+					b.setProperties(list);
+					b.setCode(bean.getF12());
+					b.setMacd("0");
+					data.getBeans().add(b);
+
+				} catch (IllegalAccessException | IOException | InvocationTargetException | NoSuchMethodException ex) {
+					LOGGER.error("进行初始化监控数据失败,文件:{}",f.getName(),e);
+				}
+			}
+		}
+		loadXml.convertToXml(data,catXml.getDataPath());
+	}
+	public RichesData getChooice(String code){
+		for(RichesData bean : TIPMAP.values()){
+			if (bean.getF12().equals(code) || bean.getF14().equals(code)){
+				return bean;
+			}
+		}
+		JSONArray array = this.getAllTips();
+		List<RichesData> datas = JSON.parseArray(array.toJSONString(), RichesData.class);
+		RichesData result = null;
+		for(RichesData bean:datas){
+			if (bean.getF12().equals(code) || bean.getF14().equals(code)){
+				return bean;
+			}
+		}
+		return result;
+	}
 	/**
 	 * 通过网易抓取历史数据
 	 *
@@ -302,6 +415,7 @@ public class BRiches extends BRichesBase implements CrawlerDown {
 		LOGGER.info("加载当前实时数据地址：[{}]",String.format(onlineUrl,code,codeTypeMap.get(code)));
 		String content = request.doGet(String.format(onlineUrl,code,codeTypeMap.get(code)));
 		OnlineResult result = JSONObject.parseObject(content,OnlineResult.class);
+		result.getResults().setCode(code);
 		return result.getResults();
 	}
 

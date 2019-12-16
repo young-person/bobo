@@ -2,7 +2,7 @@ package com.app.ftp.impl;
 
 import com.app.ftp.FTPConfig;
 import com.app.ftp.IFTPClient;
-import org.apache.commons.compress.utils.IOUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.net.ProtocolCommandListener;
 import org.apache.commons.net.ftp.*;
 import org.slf4j.Logger;
@@ -23,8 +23,8 @@ public class DefaultFTPClient implements IFTPClient {
 	
 	protected final FTPConfig ftpconfig ;
 	protected final FTPClient ftpClient;
-	protected String SERVER_CHARSET = "ISO-8859-1";
-	protected String LOCAL_CHARSET = "GBK";
+	protected String SERVER_CHARSET = "UTF-8";
+	protected String LOCAL_CHARSET = "UTF-8";
 	protected String FTPEnvironment = null;//服务器类型 
 	protected boolean debugListener = false;
 	protected final ProtocolCommandListener  default_listener = new FTPCommandListener();

@@ -16,28 +16,21 @@ public class RicheComputeAbstract {
 
 	private int limit = 7;
 
-
-	public int getLimit() {
-		return limit;
-	}
-
-
 	public void setLimit(int limit) {
 		this.limit = limit;
 	}
-
-
-	public int getNum() {
-		return num;
-	}
-
 
 	public void setNum(int num) {
 		this.num = num;
 	}
 
 
-	public RicheTarget compute(List<ShareInfo> datas,String name) {
+	/**
+	 * 计算 num 天数 且当前价格比开始日期都低的股票数 且最近连续几天limit天数据都是下跌趋势，找出理想数据进行抄底
+	 * @param datas
+	 * @return
+	 */
+	public RicheTarget compute(List<ShareInfo> datas) {
 		RicheTarget target = new RicheTarget();
 		if (datas.size() > num) {
 			if (limit <= num){
@@ -51,8 +44,26 @@ public class RicheComputeAbstract {
 			});
 
 			List<ShareInfo> tmpList = datas.subList(datas.size() - num, datas.size());
-			float l = this.getRippleValue(tmpList, limit);
-			target.setL(l);
+			ShareInfo first = tmpList.get(0);
+			int[] s = new int[tmpList.size()-1];
+			for(int index = 1; index < tmpList.size(); index ++){
+				if (Float.valueOf(tmpList.get(index).getClosePrice()) > Float.valueOf(first.getClosePrice())){
+					s[index - 1] = 1;
+				}else{
+					s[index - 1] =0;
+				}
+			}
+			int t = 0;
+			for(int index = 0;index < s.length;index++){
+				t += s[index];
+			}
+			//TODO 后续需要加入当前时段没有利空消息的条件 如果近期有利空消息则不需要给看
+			if (t == 0){
+				float l = this.getRippleValue(tmpList, limit);
+				target.setL(l);
+				target.setHand(datas.get(datas.size() - 1).getHand());
+				target.setRisePrice(datas.get(datas.size() - 1).getRisePrice());
+			}
 		}
 		return target;
 	}
@@ -70,7 +81,7 @@ public class RicheComputeAbstract {
 	 * 设置 斜率区间值 且 连续斜率总和大于一定值这 出现峰回路转 之势
 	 */
 
-	private void compute(List<ShareInfo> datas) {
+	private void computeByRake(List<ShareInfo> datas) {
 		float min = 0f;
 		float max = 0f;
 		String day1 = null;
@@ -113,41 +124,35 @@ public class RicheComputeAbstract {
 	private float getRippleValue(List<ShareInfo> datas,int n) {
 		float l = 0f;
 		int m = 1;
-		int rn = 0;
 		boolean[] b1 = new boolean[datas.size()];
 		boolean[] b2 = new boolean[datas.size()];
 		boolean[] b3 = new boolean[datas.size()];
-		boolean[] b4 = new boolean[datas.size()];
-		boolean[] b5 = new boolean[datas.size()];
 
 		for(int k = datas.size() -1; k > 0 ; k --) {
 			RShareInfo bean1 = this.conveRShareInfo(datas.get(k));
-			if(m > n) {
+			if(m > n) {//如果已经计算了后面N 个数据直接跳出不在计算
 				break;
 			}
 			m ++;
 
-			if (bean1.getRisePrice() >= 0) {
-				rn += 1;
-			}else {
-				rn -= 1;
-			}
 			b1[k] = bean1.getRisePrice() <= 5f;
 			b2[k] = bean1.getRisePrice() >= 5f && bean1.getRisePrice() <= 7f;
 			b3[k] = bean1.getRisePrice() >= 7f;
 
-			List<Integer> results = new ArrayList<Integer>();
+			float result = 0f;
+			int len = 0;
 			for(int j = 0; j < datas.size(); j++) {
-				if ((datas.size() - j - 1) > n) {
+				if ((datas.size() - j - 1) > n) {//选择数组里面使用排除后面N个元素的数据和后面N个元素进行比较
 					RShareInfo bean2 = this.conveRShareInfo(datas.get(j));
-					int r = 0;
 					if (bean2.getClosePrice() > bean1.getClosePrice()) {
-						r = 1;
+						result += 1f;
+					}else{
+						result += 0f;
 					}
-					results.add(r);
+					len ++;
 				}
 			}
-			l += this.getTrendValue(results);//如果不等于1就说明有有大于之前的数据
+			l += len == 0 ? 0f : result / len;//如果不等于1就说明有有大于之前的数据
 		}
 
 
@@ -164,26 +169,10 @@ public class RicheComputeAbstract {
 				Float.valueOf(shareInfo.getPrevClose()).floatValue(),
 				Float.valueOf(shareInfo.getMaxPrice()).floatValue(),
 				Float.valueOf(shareInfo.getMinPrice()).floatValue(),
-				Integer.valueOf(shareInfo.getTotal()).intValue(),
-				Double.valueOf(shareInfo.getMoney()).intValue());
+				Float.valueOf(shareInfo.getTotal()).floatValue(),
+				Double.valueOf(shareInfo.getMoney()).doubleValue());
 
 		return r;
-	}
-	/**
-	 * 0 - 1 值越大 则持续下跌
-	 *  @param results
-	 *  @return
-	 *  @Description: getTrend
-	 *  @date 2019年11月2日 下午5:16:18
-	 */
-	private float getTrendValue(List<Integer> results) {
-		int sum = 0;
-		if (Objects.isNull(results))
-			return 0f;
-		for(Integer v : results) {
-			sum += v;
-		}
-		return (float)sum/results.size();
 	}
 
 }

@@ -4,7 +4,7 @@ import com.app.crawler.pojo.Property;
 import com.app.crawler.pojo.RName;
 import com.app.crawler.riches.pojo.Data;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.compress.utils.IOUtils;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

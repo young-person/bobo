@@ -4,7 +4,7 @@ import com.app.crawler.riches.BRichesBase;
 import com.app.crawler.riches.pojo.HistoryBean;
 import com.app.crawler.riches.pojo.RicheBean;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.compress.utils.IOUtils;
+import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.lang.reflect.Field;

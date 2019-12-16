@@ -1,18 +1,11 @@
 package com.app.crawler.riches;
 
-import java.io.Serializable;
-
 /**
  * @Description: TODO
  * @date 2019年11月2日 下午8:00:16 
  * @ClassName: RicheTarget
  */
-public class RicheTarget implements Serializable{
-
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 650682697475506235L;
+public class RicheTarget{
 
 	private float l = 0f;
 
@@ -22,9 +15,19 @@ public class RicheTarget implements Serializable{
 
 	private String code;
 
-	private String risePrice;
+	private String price;
 
 	private String detailUrl;
+
+	private String type;
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public String getDetailUrl() {
 		return detailUrl;
@@ -34,15 +37,13 @@ public class RicheTarget implements Serializable{
 		this.detailUrl = detailUrl;
 	}
 
-	public String getRisePrice() {
-		return risePrice;
+	public String getPrice() {
+		return price;
 	}
 
-	public void setRisePrice(String risePrice) {
-		this.risePrice = risePrice;
+	public void setPrice(String price) {
+		this.price = price;
 	}
-
-
 
 	public String getStockName() {
 		return stockName;
@@ -106,15 +107,4 @@ public class RicheTarget implements Serializable{
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "RicheTarget{" +
-				"l=" + l +
-				", hand='" + hand + '\'' +
-				", stockName='" + stockName + '\'' +
-				", code='" + code + '\'' +
-				", risePrice='" + risePrice + '\'' +
-				", detailUrl='" + detailUrl + '\'' +
-				'}';
-	}
 }

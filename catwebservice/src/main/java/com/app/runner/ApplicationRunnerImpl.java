@@ -68,7 +68,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
             }catch (Exception e){
                 LOGGER.error("发送实时数据失败",e);
             }
-        },60,60,TimeUnit.SECONDS);
+        },60,2400,TimeUnit.SECONDS);
         //每一个小时发送监控数据
         EXECUTORS.scheduleAtFixedRate(() -> {
             try {
@@ -84,7 +84,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
             }catch (Exception e){
                 LOGGER.error("每12个小时进行发送邮件数据失败",e);
             }
-        },600,12 * 3600,TimeUnit.SECONDS);
+        },30,12 * 3600,TimeUnit.SECONDS);
     }
 
 }

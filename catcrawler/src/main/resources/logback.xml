@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds"
-	debug="true">
-	<!-- 模块名称， 影响日志配置名，日志文件名 -->
-	<property name="appName" value="catwebservice" />
-	<!--rootPath 日志路径，这里是相对路径，web项目eclipse下会输出到eclipse的安装目录下，如果部署到linux上的tomcat下，会输出到tomcat/bin目录 
-		下 -->
-	<property name="rootPath" value="/app/cat/logs" />
-	<contextName>${appName}</contextName>
+               debug="true">
+    <!-- 模块名称， 影响日志配置名，日志文件名 -->
+    <property name="appName" value="catwebservice"/>
+    <!--rootPath 日志路径，这里是相对路径，web项目eclipse下会输出到eclipse的安装目录下，如果部署到linux上的tomcat下，会输出到tomcat/bin目录
+        下 -->
+    <property name="rootPath" value="/app/cat/logs"/>
+    <contextName>${appName}</contextName>
 
-	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss}|%t|%p| %m |%logger:%L%n</pattern>
-			<charset>UTF-8</charset>
-		</encoder>
-	</appender>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss}|%t|%p| %m |%logger:%L%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
 
-	<appender name="INFO-file"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<rollingPolicy
-			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${rootPath}/${appName}/%d{yyyy-MM-dd}/info.%i.log
-			</fileNamePattern>
-			<maxHistory>30</maxHistory>
-			<timeBasedFileNamingAndTriggeringPolicy
-				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-				<maxFileSize>100MB</maxFileSize>
-			</timeBasedFileNamingAndTriggeringPolicy>
-		</rollingPolicy>
-		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss}|%t|%p| %m |%logger:%L%n</pattern>
-			<charset>UTF-8</charset>
-		</encoder>
-		<append>true</append>
-	</appender>
+    <appender name="INFO-file"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${rootPath}/${appName}/%d{yyyy-MM-dd}/info.%i.log
+            </fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss}|%t|%p| %m |%logger:%L%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <append>true</append>
+    </appender>
 
-	<logger name="com.app" level="INFO" >
-		<appender-ref ref="STDOUT" />
-		<appender-ref ref="INFO-file" />
-	</logger>
+    <logger name="com.app" level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="INFO-file"/>
+    </logger>
 
-	<root level="INFO">
-		<appender-ref ref="STDOUT" />
-		<appender-ref ref="INFO-file" />
-	</root>
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="INFO-file"/>
+    </root>
 </configuration>

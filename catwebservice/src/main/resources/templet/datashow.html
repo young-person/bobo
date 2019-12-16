@@ -31,10 +31,10 @@
                     <thead>
                         <tr>
                             <th class="center">名称</th>
-                            <th class="center">涨幅</th>
+                            <th class="center">价格</th>
                             <th class="center">换手率</th>
                             <th class="center">推荐指数</th>
-                            <th class="center">操作</th>
+                            <th class="center">所属行业</th>
                             <th class="center">详情</th>
                         </tr>
                     </thead>
@@ -90,10 +90,10 @@
             html.push(e['l']);
             html.push("</td>");
             html.push("<td class=\"center\">");
-            html.push("<a target=\"_blank\" class='btn btn-outline-success btn-sm' href='"+e["detailUrl"]+"'>查看详情</a>");
+            html.push(e['stockName']);
             html.push("</td>");
             html.push("<td class=\"center\">");
-            html.push(e['stockName']);
+            html.push("<a target=\"_blank\" class='btn btn-outline-success btn-sm' href='"+e["detailUrl"]+"'>查看详情</a>");
             html.push("</td>");
             html.push("</tr>");
         }

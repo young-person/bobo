@@ -62,7 +62,6 @@ public class RicheComputeAbstract {
 				float l = this.getRippleValue(tmpList, limit);
 				target.setL(l);
 				target.setHand(datas.get(datas.size() - 1).getHand());
-				target.setRisePrice(datas.get(datas.size() - 1).getRisePrice());
 			}
 		}
 		return target;

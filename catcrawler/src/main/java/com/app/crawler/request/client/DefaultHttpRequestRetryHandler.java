@@ -1,12 +1,5 @@
 package com.app.crawler.request.client;
 
-import java.io.IOException;
-import java.io.InterruptedIOException;
-import java.net.UnknownHostException;
-
-import javax.net.ssl.SSLException;
-import javax.net.ssl.SSLHandshakeException;
-
 import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpRequest;
 import org.apache.http.NoHttpResponseException;
@@ -14,6 +7,12 @@ import org.apache.http.client.HttpRequestRetryHandler;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.protocol.HttpContext;
+
+import javax.net.ssl.SSLException;
+import javax.net.ssl.SSLHandshakeException;
+import java.io.IOException;
+import java.io.InterruptedIOException;
+import java.net.UnknownHostException;
 
 /**
  * 请求重试
@@ -60,7 +59,7 @@ public class DefaultHttpRequestRetryHandler implements HttpRequestRetryHandler{
         if (exception instanceof SSLException) {
             return false;
         }
-        HttpClientContext clientContext = HttpClientContext .adapt(context);
+        HttpClientContext clientContext = HttpClientContext.adapt(context);
         HttpRequest request = clientContext.getRequest();
         // 如果请求是幂等的，就再次尝试
         if (!(request instanceof HttpEntityEnclosingRequest)) {
