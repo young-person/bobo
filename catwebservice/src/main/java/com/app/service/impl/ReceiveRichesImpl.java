@@ -151,9 +151,9 @@ public class ReceiveRichesImpl extends BaseClass implements ReceiveRiches {
 					for(Bean bean :data.getBeans()){
 
 						OnlineBean onlineBean = bRiches.reloadOnlineData(bean.getCode());
-						String price = onlineBean.getNewPrice();
-						String minV = bean.getMark().split("-")[0];
-						String maxV = bean.getMark().split("-")[1];
+						String price = onlineBean.getNewPrice().replace(",","");
+						String minV = bean.getMark().split("-")[0].replace(",","");
+						String maxV = bean.getMark().split("-")[1].replace(",","");
 
 						switch (bean.getMacd()) {
 							/**
