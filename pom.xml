@@ -107,7 +107,7 @@
 		<jedis.clients.version>2.9.0</jedis.clients.version>
 		<flyway.version>5.0.3</flyway.version>
 		<zkclient.version>0.1</zkclient.version>
-		<bcpg-jdk15on.version>1.60</bcpg-jdk15on.version>
+		<bcpg-jdk15on.version>1.67</bcpg-jdk15on.version>
 		<jna.version>4.2.1</jna.version>
 		<selenium.version>3.4.0</selenium.version>
 		<slf4j.version>1.7.25</slf4j.version>
