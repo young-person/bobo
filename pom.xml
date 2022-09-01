@@ -103,7 +103,7 @@
 		<mapper.version>3.4.0</mapper.version>
 		<catinterface.version>1.0-SNAPSHOT</catinterface.version>
 		<javax.mail.version>1.4</javax.mail.version>
-		<jsoup.version>1.8.3</jsoup.version>
+		<jsoup.version>1.15.3</jsoup.version>
 		<jedis.clients.version>2.9.0</jedis.clients.version>
 		<flyway.version>5.0.3</flyway.version>
 		<zkclient.version>0.1</zkclient.version>
